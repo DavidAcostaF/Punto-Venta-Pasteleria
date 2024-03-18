@@ -4,6 +4,15 @@
  */
 package gui;
 
+import java.awt.Component;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+
 /**
  *
  * @author abelc
@@ -15,6 +24,7 @@ public class VentanaSeleccionarProductos extends javax.swing.JFrame {
      */
     public VentanaSeleccionarProductos() {
         initComponents();
+        llenarTabla();
     }
 
     /**
@@ -36,7 +46,7 @@ public class VentanaSeleccionarProductos extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableProductos = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -49,32 +59,32 @@ public class VentanaSeleccionarProductos extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        jLabel1.setText("Total a pagar:");
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Total a pagar:");
 
+        jLabel3.setText("Fecha de entrega:");
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Fecha de entrega:");
 
+        jButton1.setText("+");
         jButton1.setBackground(new java.awt.Color(140, 220, 254));
         jButton1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("+");
 
+        jButton2.setText("-");
         jButton2.setBackground(new java.awt.Color(140, 220, 254));
         jButton2.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("-");
 
+        jLabel2.setText("Detalles de la venta");
         jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Detalles de la venta");
 
+        jButton3.setText("Agregar producto");
         jButton3.setBackground(new java.awt.Color(140, 220, 254));
         jButton3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("Agregar producto");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -121,44 +131,32 @@ public class VentanaSeleccionarProductos extends javax.swing.JFrame {
                 .addContainerGap(96, Short.MAX_VALUE))
         );
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setForeground(new java.awt.Color(204, 204, 204));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Nombre", "Especificacion", "Cantidad", "Precio"
+                "Nombre", "Especificacion", "Cantidad", "Precio", "+", "-"
             }
         ));
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(jTable1);
+        tableProductos.setBackground(new java.awt.Color(255, 255, 255));
+        tableProductos.setForeground(new java.awt.Color(204, 204, 204));
+        tableProductos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(tableProductos);
 
+        jLabel4.setText("Lista de productos seleccionados");
         jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Lista de productos seleccionados");
 
+        jButton4.setText("Siguiente");
         jButton4.setBackground(new java.awt.Color(140, 220, 254));
         jButton4.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setText("Siguiente");
 
+        jButton5.setText("Cancelar");
         jButton5.setBackground(new java.awt.Color(140, 220, 254));
         jButton5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jButton5.setForeground(new java.awt.Color(0, 0, 0));
-        jButton5.setText("Cancelar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -250,6 +248,105 @@ public class VentanaSeleccionarProductos extends javax.swing.JFrame {
         });
     }
 
+    private void llenarTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel();
+        Object[][] datosPasteles = {
+            {"Pastel de Chocolate", "Cubierto con ganache de chocolate y decorado con virutas de chocolate.", 1, 25},
+            {"Tarta de Fresa", "Rellena con crema de fresa y cubierta con glaseado de fresa.", 1, 30},
+            {"Pastel de Zanahoria", "Lleno de nueces y especias, cubierto con frosting de queso crema.", 1, 28},
+            {"Tarta de Limón", "Bizcocho esponjoso de limón cubierto con crema de limón y ralladura de limón.", 1, 26},
+            {"Pastel Red Velvet", "Bizcocho de terciopelo rojo con capas de frosting de queso crema.", 1, 32}
+        };
+        for (Object[] pastel : datosPasteles) {
+            System.out.println(pastel[0]);
+            modelo.addRow(pastel);
+
+        }
+        tableProductos.getColumnModel().getColumn(4).setCellRenderer(new BotonRenderer("+"));
+        tableProductos.getColumnModel().getColumn(4).setCellEditor(new BotonEditor(new JCheckBox(), modelo, 2, 1));
+
+        tableProductos.getColumnModel().getColumn(5).setCellRenderer(new BotonRenderer("-"));
+        tableProductos.getColumnModel().getColumn(5).setCellEditor(new BotonEditor(new JCheckBox(), modelo, 2, -1));
+
+    }
+
+    // Renderer para los botones
+    class BotonRenderer extends JButton implements TableCellRenderer {
+
+        public BotonRenderer(String texto) {
+            setOpaque(true);
+            setText(texto);
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            return this;
+        }
+    }
+
+    // Editor para los botones
+    class BotonEditor extends DefaultCellEditor {
+
+        private JButton button;
+        private String label;
+        private boolean isPushed;
+        private DefaultTableModel modelo;
+        private int colCantidad;
+        private int incremento;
+
+        public BotonEditor(JCheckBox checkBox, DefaultTableModel modelo, int colCantidad, int incremento) {
+            super(checkBox);
+            button = new JButton();
+            button.setOpaque(true);
+            button.addActionListener(e -> fireEditingStopped());
+            this.modelo = modelo;
+            this.colCantidad = colCantidad;
+            this.incremento = incremento;
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            if (isSelected) {
+                button.setForeground(table.getSelectionForeground());
+                button.setBackground(table.getSelectionBackground());
+            } else {
+                button.setForeground(table.getForeground());
+                button.setBackground(table.getBackground());
+            }
+
+            label = (value == null) ? "" : value.toString();
+            button.setText(label);
+            isPushed = true;
+            return button;
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            if (isPushed) {
+                int cantidad = (int) modelo.getValueAt(tableProductos.getSelectedRow(), colCantidad);
+                cantidad += incremento;
+                if (cantidad < 0) {
+                    cantidad = 0;
+                }
+                modelo.setValueAt(cantidad, tableProductos.getSelectedRow(), colCantidad);
+                tableProductos.repaint();
+            }
+            isPushed = false;
+            return label;
+        }
+
+        @Override
+        public boolean stopCellEditing() {
+            isPushed = false;
+            return super.stopCellEditing();
+        }
+
+        @Override
+        protected void fireEditingStopped() {
+            super.fireEditingStopped();
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.github.lgooddatepicker.components.DatePicker datePicker1;
     private javax.swing.JButton jButton1;
@@ -264,6 +361,6 @@ public class VentanaSeleccionarProductos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableProductos;
     // End of variables declaration//GEN-END:variables
 }
