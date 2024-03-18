@@ -11,7 +11,7 @@ import javax.swing.JFrame;
  *
  * @author af_da
  */
-public class ControlRegistrarVenta {
+public class ControlRegistrarVenta implements IControlRegistrarVenta {
 
     public VentanaSeleccionarProductos ventanaSeleccionarProducto() {
 

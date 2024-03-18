@@ -5,14 +5,15 @@
 package gui;
 
 import com.mycompany.pastelerianegocio.ControlRegistrarVenta;
+import com.mycompany.pastelerianegocio.IControlRegistrarVenta;
 
 /**
  *
  * @author abelc
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-    
-    private ControlRegistrarVenta controlRegistrarVenta;
+
+    private IControlRegistrarVenta controlRegistrarVenta;
 
     /**
      * Creates new form MenuPrincipal
@@ -208,7 +209,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void btnRegistrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarVentaActionPerformed
         controlRegistrarVenta.ventanaSeleccionarProducto().setVisible(true);
         this.dispose();
-        
+
     }//GEN-LAST:event_btnRegistrarVentaActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
