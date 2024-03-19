@@ -48,7 +48,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(232, 232, 232));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Gestor de ventas y compras");
 
         btnRegistrarVenta.setBackground(new java.awt.Color(140, 220, 254));
