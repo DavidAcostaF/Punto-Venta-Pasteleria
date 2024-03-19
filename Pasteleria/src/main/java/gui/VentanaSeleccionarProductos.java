@@ -59,20 +59,17 @@ public class VentanaSeleccionarProductos extends javax.swing.JFrame {
 
         jLabel1.setText("Total a pagar:");
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel3.setText("Fecha de entrega:");
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
 
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Detalles de la venta");
         jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
 
         jButton3.setText("Agregar producto");
         jButton3.setBackground(new java.awt.Color(140, 220, 254));
         jButton3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -118,24 +115,19 @@ public class VentanaSeleccionarProductos extends javax.swing.JFrame {
                 "Nombre", "Especificacion", "Cantidad", "Precio", "+", "-"
             }
         ));
-        tableProductos.setBackground(new java.awt.Color(255, 255, 255));
-        tableProductos.setForeground(new java.awt.Color(0, 0, 0));
         tableProductos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tableProductos);
 
         jLabel4.setText("Lista de productos seleccionados");
         jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
 
         jButton4.setText("Siguiente");
         jButton4.setBackground(new java.awt.Color(140, 220, 254));
         jButton4.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
 
         jButton5.setText("Cancelar");
         jButton5.setBackground(new java.awt.Color(140, 220, 254));
         jButton5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

@@ -4,18 +4,30 @@
  */
 package gui;
 
+import com.mycompany.pastelerianegocio.dtos.ProductoDTO;
+import extras.PastelComboBoxModel;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author abelc
  */
 public class DlgAgregarPastel extends javax.swing.JDialog {
 
+    private List<ProductoDTO> pasteles;
+    
     /**
      * Creates new form DlgAgregarPastel
      */
     public DlgAgregarPastel(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        pasteles = new ArrayList<>();
+        agregarPasteles();
+        desplegarPasteles(pasteles);
     }
 
     /**
@@ -44,37 +56,33 @@ public class DlgAgregarPastel extends javax.swing.JDialog {
 
         jLabel1.setText("Seleccione un pastel");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel2.setText("Nombre del pastel:");
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setBackground(new java.awt.Color(232, 232, 232));
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Tamaño:");
 
         jComboBox2.setBackground(new java.awt.Color(232, 232, 232));
-        jComboBox2.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chico", "Mediano", "Grande" }));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Especificacion(opcional)");
 
         jTextField1.setBackground(new java.awt.Color(232, 232, 232));
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
 
         jButton1.setBackground(new java.awt.Color(140, 220, 254));
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Agregar");
 
         jButton2.setBackground(new java.awt.Color(140, 220, 254));
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Cancelar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -144,6 +152,23 @@ public class DlgAgregarPastel extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    
+    private void desplegarPasteles(List<ProductoDTO> lista){
+        jComboBox1.setModel(new PastelComboBoxModel(lista));
+    }
+
+    private void agregarPasteles(){
+        pasteles.add(new ProductoDTO(300, "Pastel de Chocolate", "Cubierto con ganache de chocolate y decorado con virutas de chocolate.", "Grande"));
+        pasteles.add(new ProductoDTO(200, "Tarta de Fresa", "Rellena con crema de fresa y cubierta con glaseado de fresa.", "Mediano"));
+        pasteles.add(new ProductoDTO(150, "Pastel de Zanahoria", "Lleno de nueces y especias, cubierto con frosting de queso crema.", "Chico"));
+        pasteles.add(new ProductoDTO(300, "Tarta de Limón", "Bizcocho esponjoso de limón cubierto con crema de limón y ralladura de limón.", "Grande"));
+        pasteles.add(new ProductoDTO(400, "Pastel Red Velvet", "Bizcocho de terciopelo rojo con capas de frosting de queso crema.", "Grande"));
+    }
+    
     /**
      * @param args the command line arguments
      */
