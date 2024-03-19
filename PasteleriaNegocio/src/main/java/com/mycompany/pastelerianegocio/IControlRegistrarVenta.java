@@ -4,12 +4,12 @@
  */
 package com.mycompany.pastelerianegocio;
 
-import gui.VentanaSeleccionarProductos;
+
 
 /**
  *
  * @author af_da
  */
 public interface IControlRegistrarVenta {
-    public VentanaSeleccionarProductos ventanaSeleccionarProducto();
+    public void ventanaSeleccionarProducto();
 }

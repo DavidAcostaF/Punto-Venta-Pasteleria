@@ -207,7 +207,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarVentaActionPerformed
-        controlRegistrarVenta.ventanaSeleccionarProducto().setVisible(true);
+        
         this.dispose();
 
     }//GEN-LAST:event_btnRegistrarVentaActionPerformed

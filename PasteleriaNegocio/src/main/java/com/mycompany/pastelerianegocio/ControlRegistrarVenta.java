@@ -4,7 +4,7 @@
  */
 package com.mycompany.pastelerianegocio;
 
-import gui.VentanaSeleccionarProductos;
+
 import javax.swing.JFrame;
 
 /**
@@ -13,8 +13,8 @@ import javax.swing.JFrame;
  */
 public class ControlRegistrarVenta implements IControlRegistrarVenta {
 
-    public VentanaSeleccionarProductos ventanaSeleccionarProducto() {
+    public void ventanaSeleccionarProducto() {
 
-        return new VentanaSeleccionarProductos();
+        
     }
 }
