@@ -14,7 +14,6 @@ public class ProductoDTO {
     public String nombre;
     public String descripcion;
     public String tamaño;
-
     public ProductoDTO() {
     }
 

@@ -19,13 +19,14 @@ public class DlgAgregarPastel extends javax.swing.JDialog {
 
     private List<ProductoDTO> pasteles;
     ProductoDTO producto;
-
+     String especificacion;
     /**
      * Creates new form DlgAgregarPastel
      */
     public DlgAgregarPastel(java.awt.Frame parent, boolean modal, ProductoDTO producto) {
         super(parent, modal);
         this.producto = producto;
+        this.especificacion=especificacion;
         initComponents();
         pasteles = new ArrayList<>();
         agregarPasteles();
@@ -167,6 +168,7 @@ public class DlgAgregarPastel extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         producto.setNombre((String) jComboBox1.getSelectedItem());
         producto.setTamaño((String) jComboBox2.getSelectedItem());
+        producto.setDescripcion(jTextField1.getText());
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
