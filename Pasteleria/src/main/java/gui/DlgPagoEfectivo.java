@@ -4,6 +4,7 @@
  */
 package gui;
 
+import control.ControlAgregarVenta;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,12 +12,13 @@ import javax.swing.JOptionPane;
  * @author af_da
  */
 public class DlgPagoEfectivo extends javax.swing.JDialog {
-
+ControlAgregarVenta control;
     /**
      * Creates new form DlgPagoEfectivo
      */
     public DlgPagoEfectivo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+         control = new ControlAgregarVenta();
         initComponents();
         txtCliente.setText("Chema");
         txtCosto.setText("500");
@@ -193,6 +195,7 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -204,7 +207,8 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
 
         // Mostrar el mensaje utilizando JOptionPane
         JOptionPane.showMessageDialog(null, mensaje, "Registro de Venta Exitoso", JOptionPane.INFORMATION_MESSAGE);
-        dispose();
+        this.dispose();
+        control.mostrarMenu();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void txtCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoActionPerformed

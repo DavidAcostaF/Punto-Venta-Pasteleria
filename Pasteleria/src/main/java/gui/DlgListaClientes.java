@@ -166,10 +166,10 @@ public class DlgListaClientes extends javax.swing.JDialog {
 
         if (respuesta == JOptionPane.YES_OPTION) {
             control.listaDirecciones();
-            dispose();
+          this.dispose();
         } else {
             control.CobrarVenta();
-            dispose();
+            this.dispose();
         }
         
     }//GEN-LAST:event_jButton2ActionPerformed

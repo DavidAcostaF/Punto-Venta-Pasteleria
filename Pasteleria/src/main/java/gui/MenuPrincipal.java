@@ -6,13 +6,14 @@ package gui;
 
 import com.mycompany.pastelerianegocio.ControlRegistrarVenta;
 import com.mycompany.pastelerianegocio.IControlRegistrarVenta;
+import control.ControlAgregarVenta;
 
 /**
  *
  * @author abelc
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-
+    ControlAgregarVenta control;
     private IControlRegistrarVenta controlRegistrarVenta;
 
     /**
@@ -20,7 +21,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
-        controlRegistrarVenta = new ControlRegistrarVenta();
+        control = new ControlAgregarVenta();
     }
 
     /**
@@ -207,8 +208,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarVentaActionPerformed
-        
-        this.dispose();
+        control.mostrarProductosVenta();
 
     }//GEN-LAST:event_btnRegistrarVentaActionPerformed
 

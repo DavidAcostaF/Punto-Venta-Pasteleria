@@ -13,6 +13,8 @@ import gui.DlgDatosCliente;
 import gui.DlgDirecciones;
 import gui.DlgListaClientes;
 import gui.DlgPagoEfectivo;
+import gui.MenuPrincipal;
+import gui.ProductosVenta;
 import javax.swing.JFrame;
 
 /**
@@ -46,7 +48,14 @@ public class ControlAgregarVenta {
     public void listaDirecciones() {
         DlgDirecciones dlgdireccion = new DlgDirecciones(null, true);
     }
-
+public void mostrarProductosVenta(){
+ProductosVenta p= new ProductosVenta();
+p.setVisible(true);
+}
+public void mostrarMenu(){
+MenuPrincipal m= new MenuPrincipal();
+m.setVisible(true);
+}
     public void CobrarVenta(){
     DlgCobrarVenta dlgcobrarventa=new DlgCobrarVenta(null,true);
     }

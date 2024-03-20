@@ -222,8 +222,10 @@ public class ProductosVenta extends javax.swing.JFrame {
 
         if (respuesta == JOptionPane.YES_OPTION) {
             control.listaClientes(this);
+            dispose();
         } else {
             control.agregarCliente(this);
+            dispose();
         }
 
     }//GEN-LAST:event_SiguientebtnActionPerformed
