@@ -363,10 +363,10 @@ public class ProductosVenta extends javax.swing.JFrame {
                 int cantidad = (int) modelo.getValueAt(tableProductos.getSelectedRow(), colCantidad);
                 cantidad += incremento;
 
-                if (cantidad < 0) {
-                    cantidad = 0;
+                if (cantidad == 0) {
+                    modelo.removeRow(tableProductos.getSelectedRow());
                 }
-                modelo.setValueAt(cantidad, tableProductos.getSelectedRow(), colCantidad);
+
                 tableProductos.repaint();
             }
             isPushed = false;

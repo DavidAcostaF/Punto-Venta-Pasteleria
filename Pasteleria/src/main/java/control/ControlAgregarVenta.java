@@ -7,6 +7,7 @@ package control;
 import com.mycompany.pastelerianegocio.dtos.ClienteDTO;
 import com.mycompany.pastelerianegocio.dtos.DireccionDTO;
 import com.mycompany.pastelerianegocio.dtos.ProductoDTO;
+import gui.DlgAgregarDireccion;
 import gui.DlgAgregarPastel;
 import gui.DlgCobrarVenta;
 import gui.DlgDatosCliente;
@@ -26,6 +27,7 @@ public class ControlAgregarVenta {
     private static ClienteDTO cliente;
 
     public ControlAgregarVenta() {
+
     }
 
     public ProductoDTO agregarPastel(JFrame frame) {
@@ -35,6 +37,17 @@ public class ControlAgregarVenta {
         return producto;
     }
 
+    public DireccionDTO AgregarDireccion() {
+        DireccionDTO direccion = new DireccionDTO();
+        DlgAgregarDireccion dir = new DlgAgregarDireccion(null, true);
+        return direccion;
+    }
+
+    public DireccionDTO seleccionarDireccion(){
+     DireccionDTO direccion = new DireccionDTO();
+        DlgDirecciones dir = new DlgDirecciones(null, true);
+        return direccion;
+    }
     public ClienteDTO agregarCliente(JFrame frame) {
         ClienteDTO cliente = new ClienteDTO();
         DlgDatosCliente dlgcliente = new DlgDatosCliente(frame, true);
@@ -48,20 +61,25 @@ public class ControlAgregarVenta {
     public void listaDirecciones() {
         DlgDirecciones dlgdireccion = new DlgDirecciones(null, true);
     }
-public void mostrarProductosVenta(){
-ProductosVenta p= new ProductosVenta();
-p.setVisible(true);
-}
-public void mostrarMenu(){
-MenuPrincipal m= new MenuPrincipal();
-m.setVisible(true);
-}
-    public void CobrarVenta(){
-    DlgCobrarVenta dlgcobrarventa=new DlgCobrarVenta(null,true);
+
+    public void mostrarProductosVenta() {
+        ProductosVenta p = new ProductosVenta();
+        p.setVisible(true);
     }
-    public void MostrarDatosVenta(){
-    DlgPagoEfectivo dlgPagoEfectivo=new DlgPagoEfectivo(null,true);
+
+    public void mostrarMenu() {
+        MenuPrincipal m = new MenuPrincipal();
+        m.setVisible(true);
     }
+
+    public void CobrarVenta() {
+        DlgCobrarVenta dlgcobrarventa = new DlgCobrarVenta(null, true);
+    }
+
+    public void MostrarDatosVenta() {
+        DlgPagoEfectivo dlgPagoEfectivo = new DlgPagoEfectivo(null, true);
+    }
+
     public static ClienteDTO getCliente() {
         return cliente;
     }

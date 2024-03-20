@@ -20,10 +20,11 @@ public class DlgAgregarDireccion extends javax.swing.JDialog {
      */
     public DlgAgregarDireccion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        initComponents();
         txtCalle.setText("Enrique Segoviano");
         txtColonia.setText("Machi López");
         txtNumExt.setText("1323");
-        initComponents();
+        setVisible(true);
     }
 
     /**
@@ -164,7 +165,7 @@ public class DlgAgregarDireccion extends javax.swing.JDialog {
         IAgregarDireccion agregarDireccion = new AgregarDireccion();
         DireccionDTO dir = new DireccionDTO(txtCalle.getText(), txtColonia.getText(), txtNumExt.getText(), ControlAgregarVenta.getCliente());
         agregarDireccion.agregarDireccion(dir);
-        this.dispose();
+       dispose();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
 

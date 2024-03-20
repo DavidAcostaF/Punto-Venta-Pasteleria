@@ -8,19 +8,21 @@ import com.mycompany.pastelerianegocio.AgregarCliente;
 import com.mycompany.pastelerianegocio.IAgregarCliente;
 import com.mycompany.pastelerianegocio.dtos.ClienteDTO;
 import control.ControlAgregarVenta;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author abelc
  */
 public class DlgDatosCliente extends javax.swing.JDialog {
-    
+    ControlAgregarVenta control;
     /**
      * Creates new form DlgDatosCliente
      */
     public DlgDatosCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        control=new ControlAgregarVenta();
         this.campoTextoNombre.setText("David");
         this.campoTextoApellidoP.setText("Acosta");
         this.campoTextoApellidoM.setText("Fajardo");
@@ -88,6 +90,11 @@ public class DlgDatosCliente extends javax.swing.JDialog {
         jButton2.setBackground(new java.awt.Color(140, 220, 254));
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Regresar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Correo:");
@@ -176,9 +183,23 @@ public class DlgDatosCliente extends javax.swing.JDialog {
         ,this.campoTextoApellidoM.getText(),this.campoTextoTelefono.getText(),this.campoTextoCorreo.getText());
         ControlAgregarVenta.setCliente(cliente);
         agregar.agregarCliente(cliente);
-        this.dispose();
+          int respuesta = JOptionPane.showOptionDialog(null, "¿Realizara envio a domicilio?", "Tipo de envio", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+           this.dispose(); 
+           control.AgregarDireccion();
+          
+        } else {
+           this.dispose(); 
+           control.CobrarVenta();
+        }
+        
         
     }//GEN-LAST:event_botonSiguienteActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
 

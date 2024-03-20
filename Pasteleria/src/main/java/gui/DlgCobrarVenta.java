@@ -40,8 +40,8 @@ public class DlgCobrarVenta extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        aceptarbtn = new javax.swing.JButton();
+        cancelarBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -110,18 +110,23 @@ public class DlgCobrarVenta extends javax.swing.JDialog {
         jComboBox2.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Anticipo del 50%", "Pago completo" }));
 
-        jButton1.setBackground(new java.awt.Color(140, 220, 254));
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Aceptar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        aceptarbtn.setBackground(new java.awt.Color(140, 220, 254));
+        aceptarbtn.setForeground(new java.awt.Color(0, 0, 0));
+        aceptarbtn.setText("Aceptar");
+        aceptarbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                aceptarbtnActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(140, 220, 254));
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Cancelar pedido");
+        cancelarBtn.setBackground(new java.awt.Color(140, 220, 254));
+        cancelarBtn.setForeground(new java.awt.Color(0, 0, 0));
+        cancelarBtn.setText("Cancelar pedido");
+        cancelarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -129,9 +134,9 @@ public class DlgCobrarVenta extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(51, 51, 51)
-                .addComponent(jButton2)
+                .addComponent(cancelarBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(aceptarbtn)
                 .addGap(48, 48, 48))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(49, 81, Short.MAX_VALUE)
@@ -173,8 +178,8 @@ public class DlgCobrarVenta extends javax.swing.JDialog {
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(aceptarbtn)
+                    .addComponent(cancelarBtn))
                 .addGap(38, 38, 38))
         );
 
@@ -193,15 +198,20 @@ public class DlgCobrarVenta extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void aceptarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarbtnActionPerformed
+        this.dispose(); 
         control.MostrarDatosVenta();
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+       
+    }//GEN-LAST:event_aceptarbtnActionPerformed
+
+    private void cancelarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBtnActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_cancelarBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton aceptarbtn;
+    private javax.swing.JButton cancelarBtn;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;

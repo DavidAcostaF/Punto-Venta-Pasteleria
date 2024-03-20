@@ -199,7 +199,7 @@ ControlAgregarVenta control;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
@@ -207,8 +207,8 @@ ControlAgregarVenta control;
 
         // Mostrar el mensaje utilizando JOptionPane
         JOptionPane.showMessageDialog(null, mensaje, "Registro de Venta Exitoso", JOptionPane.INFORMATION_MESSAGE);
-        this.dispose();
-        control.mostrarMenu();
+       this.dispose();
+        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void txtCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoActionPerformed

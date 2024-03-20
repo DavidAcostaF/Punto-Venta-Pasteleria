@@ -100,6 +100,11 @@ public class DlgListaClientes extends javax.swing.JDialog {
         jButton3.setBackground(new java.awt.Color(140, 220, 254));
         jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Regresar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -165,14 +170,20 @@ public class DlgListaClientes extends javax.swing.JDialog {
         int respuesta = JOptionPane.showOptionDialog(null, "¿Realizara envio a domicilio?", "Tipo de envio", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
 
         if (respuesta == JOptionPane.YES_OPTION) {
-            control.listaDirecciones();
-          this.dispose();
+           this.dispose(); 
+           control.listaDirecciones();
+          
         } else {
-            control.CobrarVenta();
-            this.dispose();
+           this.dispose(); 
+           control.CobrarVenta();
+            
         }
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
