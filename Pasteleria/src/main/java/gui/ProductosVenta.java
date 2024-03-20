@@ -59,7 +59,7 @@ public class ProductosVenta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProductos = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        Siguientebtn = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -83,6 +83,7 @@ public class ProductosVenta extends javax.swing.JFrame {
         jButton3.setText("Agregar producto");
         jButton3.setBackground(new java.awt.Color(140, 220, 254));
         jButton3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -139,13 +140,20 @@ public class ProductosVenta extends javax.swing.JFrame {
         jLabel4.setText("Lista de productos seleccionados");
         jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
 
-        jButton4.setText("Siguiente");
-        jButton4.setBackground(new java.awt.Color(140, 220, 254));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        Siguientebtn.setText("Siguiente");
+        Siguientebtn.setBackground(new java.awt.Color(140, 220, 254));
+        Siguientebtn.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        Siguientebtn.setForeground(new java.awt.Color(0, 0, 0));
+        Siguientebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SiguientebtnActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Cancelar");
         jButton5.setBackground(new java.awt.Color(140, 220, 254));
         jButton5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -167,7 +175,7 @@ public class ProductosVenta extends javax.swing.JFrame {
                         .addGap(54, 54, 54)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Siguientebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(52, 52, 52))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -184,7 +192,7 @@ public class ProductosVenta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Siguientebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47))
         );
 
@@ -200,6 +208,7 @@ public class ProductosVenta extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -207,6 +216,17 @@ public class ProductosVenta extends javax.swing.JFrame {
         ProductoDTO p = control.agregarPastel(this);
         modelo.addRow(new Object[]{p.getNombre(), p.getDescripcion(), 1, 100});
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void SiguientebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SiguientebtnActionPerformed
+        int respuesta = JOptionPane.showOptionDialog(null, "¿El cliente ya ha comprado aqui?", "Bienvenido", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+
+        } else {
+            control.agregarCliente(this);
+        }
+
+    }//GEN-LAST:event_SiguientebtnActionPerformed
     public void ponerTotal() {
         float total = calcularTotal();
 
@@ -365,9 +385,9 @@ public class ProductosVenta extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Siguientebtn;
     private com.github.lgooddatepicker.components.DatePicker datePicker1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

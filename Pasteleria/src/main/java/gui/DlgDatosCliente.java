@@ -20,14 +20,15 @@ public class DlgDatosCliente extends javax.swing.JDialog {
      */
     public DlgDatosCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        initComponents();
         this.campoTextoNombre.setText("David");
         this.campoTextoApellidoP.setText("Acosta");
         this.campoTextoApellidoM.setText("Fajardo");
         this.campoTextoTelefono.setText("6441526874");
         this.campoTextoCorreo.setText("davidaf@gmail.com");
+        setVisible(true);
         
         
-        initComponents();
         
     }
 

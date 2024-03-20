@@ -59,28 +59,28 @@ public class DlgAgregarPastel extends javax.swing.JDialog {
 
         jPanel2.setBackground(new java.awt.Color(232, 232, 232));
 
-        jLabel1.setText("Seleccione un pastel");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel1.setText("Seleccione un pastel");
 
-        jLabel2.setText("Nombre del pastel:");
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Nombre del pastel:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setBackground(new java.awt.Color(232, 232, 232));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Tamaño:");
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("Tamaño:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chico", "Mediano", "Grande" }));
         jComboBox2.setBackground(new java.awt.Color(232, 232, 232));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chico", "Mediano", "Grande" }));
 
-        jLabel4.setText("Especificacion(opcional)");
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setText("Especificacion(opcional)");
 
         jTextField1.setBackground(new java.awt.Color(232, 232, 232));
 
@@ -92,8 +92,8 @@ public class DlgAgregarPastel extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setText("Cancelar");
         jButton2.setBackground(new java.awt.Color(140, 220, 254));
+        jButton2.setText("Cancelar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -160,6 +160,7 @@ public class DlgAgregarPastel extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
