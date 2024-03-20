@@ -221,7 +221,7 @@ public class ProductosVenta extends javax.swing.JFrame {
         int respuesta = JOptionPane.showOptionDialog(null, "¿El cliente ya ha comprado aqui?", "Bienvenido", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
 
         if (respuesta == JOptionPane.YES_OPTION) {
-
+            control.listaClientes(this);
         } else {
             control.agregarCliente(this);
         }

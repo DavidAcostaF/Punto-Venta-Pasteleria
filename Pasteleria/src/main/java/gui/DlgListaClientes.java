@@ -4,11 +4,21 @@
  */
 package gui;
 
+import com.mycompany.pastelerianegocio.ConsultarClientes;
+import com.mycompany.pastelerianegocio.IConsultarClientes;
+import com.mycompany.pastelerianegocio.dtos.ClienteDTO;
+
+import java.util.List;
+import javax.swing.JCheckBox;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author abelc
  */
 public class DlgListaClientes extends javax.swing.JDialog {
+
+    private IConsultarClientes consultarClientes;
 
     /**
      * Creates new form DlgListaClientes
@@ -16,6 +26,21 @@ public class DlgListaClientes extends javax.swing.JDialog {
     public DlgListaClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        consultarClientes = new ConsultarClientes();
+        llenarTabla();
+        setVisible(true);
+        
+        
+    }
+
+    private void llenarTabla() {
+        System.out.println("hola");
+        DefaultTableModel modelo = (DefaultTableModel) tablaClientes.getModel();
+
+        List<ClienteDTO> clientes = this.consultarClientes.consultarClientes();
+
+        clientes.forEach(p -> modelo.addRow(new Object[]{p.getNombre()+" " + p.getApellidoP() +" "+ p.getApellidoM(), p.getTelefono()}));
+        System.out.println("hola");
     }
 
     /**
@@ -32,7 +57,7 @@ public class DlgListaClientes extends javax.swing.JDialog {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaClientes = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -41,11 +66,8 @@ public class DlgListaClientes extends javax.swing.JDialog {
         jPanel1.setBackground(new java.awt.Color(232, 232, 232));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Seleccione un cliente");
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -53,32 +75,24 @@ public class DlgListaClientes extends javax.swing.JDialog {
         });
 
         jButton1.setBackground(new java.awt.Color(140, 220, 254));
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Buscar");
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setForeground(new java.awt.Color(0, 0, 0));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Cliente", "Telefono"
             }
         ));
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(jTable1);
+        tablaClientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaClientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(tablaClientes);
 
         jButton2.setBackground(new java.awt.Color(140, 220, 254));
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Continuar");
 
         jButton3.setBackground(new java.awt.Color(140, 220, 254));
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Regresar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -149,7 +163,7 @@ public class DlgListaClientes extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tablaClientes;
     // End of variables declaration//GEN-END:variables
 }

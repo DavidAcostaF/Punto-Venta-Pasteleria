@@ -9,6 +9,7 @@ import com.mycompany.pastelerianegocio.dtos.DireccionDTO;
 import com.mycompany.pastelerianegocio.dtos.ProductoDTO;
 import gui.DlgAgregarPastel;
 import gui.DlgDatosCliente;
+import gui.DlgListaClientes;
 import javax.swing.JFrame;
 
 /**
@@ -16,23 +17,29 @@ import javax.swing.JFrame;
  * @author abelc
  */
 public class ControlAgregarVenta {
-    
+
     private static ClienteDTO cliente;
-    
+
     public ControlAgregarVenta() {
     }
-   
-    public ProductoDTO agregarPastel(JFrame frame){
-    ProductoDTO producto=new ProductoDTO();
-   
-    DlgAgregarPastel dlgpastel= new DlgAgregarPastel(frame,true,producto);
-    return producto;
+
+    public ProductoDTO agregarPastel(JFrame frame) {
+        ProductoDTO producto = new ProductoDTO();
+
+        DlgAgregarPastel dlgpastel = new DlgAgregarPastel(frame, true, producto);
+        return producto;
     }
-public ClienteDTO agregarCliente(JFrame frame){
-ClienteDTO cliente=new ClienteDTO();
-DlgDatosCliente dlgcliente=new DlgDatosCliente(frame,true);
-return cliente;
-}
+
+    public ClienteDTO agregarCliente(JFrame frame) {
+        ClienteDTO cliente = new ClienteDTO();
+        DlgDatosCliente dlgcliente = new DlgDatosCliente(frame, true);
+        return cliente;
+    }
+
+    public void listaClientes(JFrame frame) {
+        DlgListaClientes dlgListaClientes = new DlgListaClientes(frame, true);
+    }
+
     public static ClienteDTO getCliente() {
         return cliente;
     }
