@@ -4,7 +4,12 @@
  */
 package gui;
 
+import com.mycompany.pastelerianegocio.ConsultarProductosVenta;
+import com.mycompany.pastelerianegocio.IConsultarProductosVenta;
+import com.mycompany.pastelerianegocio.dtos.ProductoDTO;
 import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -17,13 +22,17 @@ import javax.swing.table.TableCellRenderer;
  *
  * @author abelc
  */
-public class VentanaSeleccionarProductos extends javax.swing.JFrame {
+public class ProductosVenta extends javax.swing.JFrame {
+
+    private IConsultarProductosVenta consultarProductosVenta;
 
     /**
      * Creates new form VentanaSeleccionarProductos
      */
-    public VentanaSeleccionarProductos() {
+    public ProductosVenta() {
         initComponents();
+        consultarProductosVenta = new ConsultarProductosVenta();
+
         llenarTabla();
     }
 
@@ -70,6 +79,11 @@ public class VentanaSeleccionarProductos extends javax.swing.JFrame {
         jButton3.setText("Agregar producto");
         jButton3.setBackground(new java.awt.Color(140, 220, 254));
         jButton3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -184,6 +198,10 @@ public class VentanaSeleccionarProductos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -201,38 +219,32 @@ public class VentanaSeleccionarProductos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaSeleccionarProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductosVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaSeleccionarProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductosVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaSeleccionarProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductosVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaSeleccionarProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductosVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaSeleccionarProductos().setVisible(true);
+                new ProductosVenta().setVisible(true);
             }
         });
     }
 
     private void llenarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel();
-        Object[][] datosPasteles = {
-            {"Pastel de Chocolate", "Cubierto con ganache de chocolate y decorado con virutas de chocolate.", 1, 25},
-            {"Tarta de Fresa", "Rellena con crema de fresa y cubierta con glaseado de fresa.", 1, 30},
-            {"Pastel de Zanahoria", "Lleno de nueces y especias, cubierto con frosting de queso crema.", 1, 28},
-            {"Tarta de Limón", "Bizcocho esponjoso de limón cubierto con crema de limón y ralladura de limón.", 1, 26},
-            {"Pastel Red Velvet", "Bizcocho de terciopelo rojo con capas de frosting de queso crema.", 1, 32}
-        };
-        for (Object[] pastel : datosPasteles) {
-            System.out.println(pastel[0]);
-            modelo.addRow(pastel);
 
-        }
+        List<ProductoDTO> pasteles = this.consultarProductosVenta.consultarProductosVenta();
+
+        pasteles.forEach(p -> modelo.addRow(new Object[]{p.getNombre(), p.getDescripcion(), 1, p.getPrecio()}));
+
         tableProductos.getColumnModel().getColumn(4).setCellRenderer(new BotonRenderer("+"));
         tableProductos.getColumnModel().getColumn(4).setCellEditor(new BotonEditor(new JCheckBox(), modelo, 2, 1));
 
