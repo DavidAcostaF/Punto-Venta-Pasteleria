@@ -4,6 +4,8 @@
  */
 package gui;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author af_da
@@ -20,6 +22,7 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
         txtCosto.setText("500");
         txtFechaEntrega.setText("20/03/2024");
         txtUbicacionEntrega.setText("En tienda");
+        setVisible(true);
         
     }
 
@@ -34,8 +37,8 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnNuevaDireccion = new javax.swing.JButton();
-        Regresar = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -52,19 +55,21 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel1.setText("Pago en efectivo");
 
-        btnNuevaDireccion.setBackground(new java.awt.Color(140, 220, 254));
-        btnNuevaDireccion.setText("Registrar");
-        btnNuevaDireccion.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrar.setBackground(new java.awt.Color(140, 220, 254));
+        btnRegistrar.setForeground(new java.awt.Color(0, 0, 0));
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevaDireccionActionPerformed(evt);
+                btnRegistrarActionPerformed(evt);
             }
         });
 
-        Regresar.setBackground(new java.awt.Color(140, 220, 254));
-        Regresar.setText("Regresar");
-        Regresar.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setBackground(new java.awt.Color(140, 220, 254));
+        btnRegresar.setForeground(new java.awt.Color(0, 0, 0));
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegresarActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
 
@@ -76,24 +81,36 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
 
         jLabel10.setText("Ubicacion Entrega:");
 
+        txtCosto.setEditable(false);
+        txtCosto.setBackground(new java.awt.Color(255, 255, 255));
+        txtCosto.setForeground(new java.awt.Color(0, 0, 0));
         txtCosto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCostoActionPerformed(evt);
             }
         });
 
+        txtFechaEntrega.setEditable(false);
+        txtFechaEntrega.setBackground(new java.awt.Color(255, 255, 255));
+        txtFechaEntrega.setForeground(new java.awt.Color(0, 0, 0));
         txtFechaEntrega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFechaEntregaActionPerformed(evt);
             }
         });
 
+        txtUbicacionEntrega.setEditable(false);
+        txtUbicacionEntrega.setBackground(new java.awt.Color(255, 255, 255));
+        txtUbicacionEntrega.setForeground(new java.awt.Color(0, 0, 0));
         txtUbicacionEntrega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUbicacionEntregaActionPerformed(evt);
             }
         });
 
+        txtCliente.setEditable(false);
+        txtCliente.setBackground(new java.awt.Color(255, 255, 255));
+        txtCliente.setForeground(new java.awt.Color(0, 0, 0));
         txtCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtClienteActionPerformed(evt);
@@ -108,9 +125,9 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
                 .addGap(104, 104, 104)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnNuevaDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(81, 81, 81))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -159,8 +176,8 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
                     .addComponent(txtUbicacionEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Regresar)
-                    .addComponent(btnNuevaDireccion))
+                    .addComponent(btnRegresar)
+                    .addComponent(btnRegistrar))
                 .addGap(25, 25, 25))
         );
 
@@ -178,13 +195,17 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarActionPerformed
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_RegresarActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void btnNuevaDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaDireccionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevaDireccionActionPerformed
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        String mensaje = "¡La venta ha sido registrada exitosamente!";
+
+        // Mostrar el mensaje utilizando JOptionPane
+        JOptionPane.showMessageDialog(null, mensaje, "Registro de Venta Exitoso", JOptionPane.INFORMATION_MESSAGE);
+        dispose();
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void txtCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoActionPerformed
         // TODO add your handling code here:
@@ -205,8 +226,8 @@ public class DlgPagoEfectivo extends javax.swing.JDialog {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Regresar;
-    private javax.swing.JButton btnNuevaDireccion;
+    private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;

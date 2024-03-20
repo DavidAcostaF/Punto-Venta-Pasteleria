@@ -77,6 +77,7 @@ public class DlgDatosCliente extends javax.swing.JDialog {
         jLabel5.setText("Telefono:");
 
         botonSiguiente.setBackground(new java.awt.Color(140, 220, 254));
+        botonSiguiente.setForeground(new java.awt.Color(0, 0, 0));
         botonSiguiente.setText("Siguiente");
         botonSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +86,7 @@ public class DlgDatosCliente extends javax.swing.JDialog {
         });
 
         jButton2.setBackground(new java.awt.Color(140, 220, 254));
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Regresar");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -174,7 +176,7 @@ public class DlgDatosCliente extends javax.swing.JDialog {
         ,this.campoTextoApellidoM.getText(),this.campoTextoTelefono.getText(),this.campoTextoCorreo.getText());
         ControlAgregarVenta.setCliente(cliente);
         agregar.agregarCliente(cliente);
-        
+        this.dispose();
         
     }//GEN-LAST:event_botonSiguienteActionPerformed
 

@@ -164,6 +164,7 @@ public class DlgAgregarDireccion extends javax.swing.JDialog {
         IAgregarDireccion agregarDireccion = new AgregarDireccion();
         DireccionDTO dir = new DireccionDTO(txtCalle.getText(), txtColonia.getText(), txtNumExt.getText(), ControlAgregarVenta.getCliente());
         agregarDireccion.agregarDireccion(dir);
+        this.dispose();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
 

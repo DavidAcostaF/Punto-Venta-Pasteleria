@@ -8,8 +8,11 @@ import com.mycompany.pastelerianegocio.dtos.ClienteDTO;
 import com.mycompany.pastelerianegocio.dtos.DireccionDTO;
 import com.mycompany.pastelerianegocio.dtos.ProductoDTO;
 import gui.DlgAgregarPastel;
+import gui.DlgCobrarVenta;
 import gui.DlgDatosCliente;
+import gui.DlgDirecciones;
 import gui.DlgListaClientes;
+import gui.DlgPagoEfectivo;
 import javax.swing.JFrame;
 
 /**
@@ -40,6 +43,16 @@ public class ControlAgregarVenta {
         DlgListaClientes dlgListaClientes = new DlgListaClientes(frame, true);
     }
 
+    public void listaDirecciones() {
+        DlgDirecciones dlgdireccion = new DlgDirecciones(null, true);
+    }
+
+    public void CobrarVenta(){
+    DlgCobrarVenta dlgcobrarventa=new DlgCobrarVenta(null,true);
+    }
+    public void MostrarDatosVenta(){
+    DlgPagoEfectivo dlgPagoEfectivo=new DlgPagoEfectivo(null,true);
+    }
     public static ClienteDTO getCliente() {
         return cliente;
     }

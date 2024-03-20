@@ -4,18 +4,22 @@
  */
 package gui;
 
+import control.ControlAgregarVenta;
+
 /**
  *
  * @author af_da
  */
 public class DlgCobrarVenta extends javax.swing.JDialog {
-
+ ControlAgregarVenta control;
     /**
      * Creates new form DlgCobrarVenta
      */
     public DlgCobrarVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        control = new ControlAgregarVenta();
         initComponents();
+        setVisible(true);
     }
 
     /**
@@ -109,6 +113,11 @@ public class DlgCobrarVenta extends javax.swing.JDialog {
         jButton1.setBackground(new java.awt.Color(140, 220, 254));
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Aceptar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(140, 220, 254));
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
@@ -184,47 +193,11 @@ public class DlgCobrarVenta extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DlgCobrarVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DlgCobrarVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DlgCobrarVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DlgCobrarVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        control.MostrarDatosVenta();
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                DlgCobrarVenta dialog = new DlgCobrarVenta(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -85,6 +85,7 @@ public class DlgAgregarPastel extends javax.swing.JDialog {
         jTextField1.setBackground(new java.awt.Color(232, 232, 232));
 
         jButton1.setBackground(new java.awt.Color(140, 220, 254));
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +94,7 @@ public class DlgAgregarPastel extends javax.swing.JDialog {
         });
 
         jButton2.setBackground(new java.awt.Color(140, 220, 254));
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Cancelar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

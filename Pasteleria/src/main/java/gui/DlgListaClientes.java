@@ -7,9 +7,11 @@ package gui;
 import com.mycompany.pastelerianegocio.ConsultarClientes;
 import com.mycompany.pastelerianegocio.IConsultarClientes;
 import com.mycompany.pastelerianegocio.dtos.ClienteDTO;
+import control.ControlAgregarVenta;
 
 import java.util.List;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  * @author abelc
  */
 public class DlgListaClientes extends javax.swing.JDialog {
-
+ ControlAgregarVenta control;
     private IConsultarClientes consultarClientes;
 
     /**
@@ -25,6 +27,7 @@ public class DlgListaClientes extends javax.swing.JDialog {
      */
     public DlgListaClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        control = new ControlAgregarVenta();
         initComponents();
         consultarClientes = new ConsultarClientes();
         llenarTabla();
@@ -86,9 +89,16 @@ public class DlgListaClientes extends javax.swing.JDialog {
         jScrollPane1.setViewportView(tablaClientes);
 
         jButton2.setBackground(new java.awt.Color(140, 220, 254));
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Continuar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(140, 220, 254));
+        jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Regresar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -150,6 +160,19 @@ public class DlgListaClientes extends javax.swing.JDialog {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int respuesta = JOptionPane.showOptionDialog(null, "¿Realizara envio a domicilio?", "Tipo de envio", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+            control.listaDirecciones();
+            dispose();
+        } else {
+            control.CobrarVenta();
+            dispose();
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

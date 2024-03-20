@@ -73,9 +73,11 @@ public class DlgDirecciones extends javax.swing.JDialog {
         jScrollPane1.setViewportView(tablaDirecciones);
 
         btnNuevaDireccion.setBackground(new java.awt.Color(140, 220, 254));
+        btnNuevaDireccion.setForeground(new java.awt.Color(0, 0, 0));
         btnNuevaDireccion.setText("Agregar nueva dirección");
 
         btnRegresar.setBackground(new java.awt.Color(140, 220, 254));
+        btnRegresar.setForeground(new java.awt.Color(0, 0, 0));
         btnRegresar.setText("Regresar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
