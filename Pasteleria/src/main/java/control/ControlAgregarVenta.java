@@ -19,6 +19,7 @@ public class ControlAgregarVenta {
    
     public ProductoDTO agregarPastel(JFrame frame){
     ProductoDTO producto=new ProductoDTO();
+    String especificacion=null;
     DlgAgregarPastel dlgpastel= new DlgAgregarPastel(frame,true,producto);
     return producto;
     }
