@@ -4,6 +4,11 @@
  */
 package gui;
 
+import com.mycompany.pastelerianegocio.AgregarDireccion;
+import com.mycompany.pastelerianegocio.IAgregarDireccion;
+import com.mycompany.pastelerianegocio.dtos.DireccionDTO;
+import control.ControlAgregarVenta;
+
 /**
  *
  * @author abelc
@@ -15,6 +20,9 @@ public class DlgAgregarDireccion extends javax.swing.JDialog {
      */
     public DlgAgregarDireccion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        txtCalle.setText("Enrique Segoviano");
+        txtColonia.setText("Machi López");
+        txtNumExt.setText("1323");
         initComponents();
     }
 
@@ -60,8 +68,19 @@ public class DlgAgregarDireccion extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Numero exterior:");
 
+        txtNumExt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumExtActionPerformed(evt);
+            }
+        });
+
         btnAgregar.setBackground(new java.awt.Color(140, 220, 254));
         btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         btnRegresar.setBackground(new java.awt.Color(140, 220, 254));
         btnRegresar.setText("Regresar");
@@ -103,15 +122,15 @@ public class DlgAgregarDireccion extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtCalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtColonia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(txtColonia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtNumExt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegresar)
                     .addComponent(btnAgregar))
@@ -135,6 +154,16 @@ public class DlgAgregarDireccion extends javax.swing.JDialog {
     private void txtCalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCalleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCalleActionPerformed
+
+    private void txtNumExtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumExtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumExtActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        IAgregarDireccion agregarDireccion = new AgregarDireccion();
+        DireccionDTO dir = new DireccionDTO(txtCalle.getText(), txtColonia.getText(), txtNumExt.getText(), ControlAgregarVenta.getCliente());
+        agregarDireccion.agregarDireccion(dir);
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

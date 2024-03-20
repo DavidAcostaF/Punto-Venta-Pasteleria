@@ -85,17 +85,17 @@
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtCalle" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtColonia" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtColonia" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtNumExt" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="42" max="32767" attributes="0"/>
+                  <EmptySpace pref="54" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnRegresar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnAgregar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -146,6 +146,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNumExt">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNumExtActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnAgregar">
           <Properties>
@@ -154,6 +157,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Agregar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnRegresar">
           <Properties>

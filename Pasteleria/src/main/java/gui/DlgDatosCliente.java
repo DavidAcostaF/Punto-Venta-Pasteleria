@@ -7,13 +7,14 @@ package gui;
 import com.mycompany.pastelerianegocio.AgregarCliente;
 import com.mycompany.pastelerianegocio.IAgregarCliente;
 import com.mycompany.pastelerianegocio.dtos.ClienteDTO;
+import control.ControlAgregarVenta;
 
 /**
  *
  * @author abelc
  */
 public class DlgDatosCliente extends javax.swing.JDialog {
-
+    
     /**
      * Creates new form DlgDatosCliente
      */
@@ -170,7 +171,7 @@ public class DlgDatosCliente extends javax.swing.JDialog {
         IAgregarCliente agregar = new AgregarCliente();
         ClienteDTO cliente = new ClienteDTO(this.campoTextoNombre.getText(),this.campoTextoApellidoP.getText()
         ,this.campoTextoApellidoM.getText(),this.campoTextoTelefono.getText(),this.campoTextoCorreo.getText());
-        
+        ControlAgregarVenta.setCliente(cliente);
         agregar.agregarCliente(cliente);
         
         
