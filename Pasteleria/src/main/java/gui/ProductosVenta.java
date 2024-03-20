@@ -24,6 +24,7 @@ import javax.swing.table.TableCellRenderer;
  * @author abelc
  */
 public class ProductosVenta extends javax.swing.JFrame {
+
     ControlAgregarVenta control;
     private IConsultarProductosVenta consultarProductosVenta;
 
@@ -31,11 +32,12 @@ public class ProductosVenta extends javax.swing.JFrame {
      * Creates new form VentanaSeleccionarProductos
      */
     public ProductosVenta() {
-       control = new ControlAgregarVenta();
+        control = new ControlAgregarVenta();
         initComponents();
         consultarProductosVenta = new ConsultarProductosVenta();
 
         llenarTabla();
+        ponerTotal();
     }
 
     /**
@@ -49,7 +51,7 @@ public class ProductosVenta extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        labelTotal = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
         jLabel2 = new javax.swing.JLabel();
@@ -68,8 +70,8 @@ public class ProductosVenta extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jLabel1.setText("Total a pagar:");
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        labelTotal.setText("Total a pagar:");
+        labelTotal.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel3.setText("Fecha de entrega:");
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
@@ -99,9 +101,9 @@ public class ProductosVenta extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jButton3)))
@@ -113,7 +115,7 @@ public class ProductosVenta extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel2)
                 .addGap(39, 39, 39)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -201,10 +203,15 @@ public class ProductosVenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel();
         ProductoDTO p = control.agregarPastel(this);
-        modelo.addRow(new Object[]{p.getNombre(), p.getDescripcion(),1,100});
+        modelo.addRow(new Object[]{p.getNombre(), p.getDescripcion(), 1, 100});
     }//GEN-LAST:event_jButton3ActionPerformed
+    public void ponerTotal() {
+        float total = calcularTotal();
+
+        labelTotal.setText("Total a pagar " + total);
+    }
 
     /**
      * @param args the command line arguments
@@ -257,6 +264,23 @@ public class ProductosVenta extends javax.swing.JFrame {
 
     }
 
+    private float calcularTotal() {
+        int total = 0;
+        for (int row = 0; row < tableProductos.getRowCount(); row++) {
+            // Recorrer cada columna de la fila actual
+            for (int col = 2; col < tableProductos.getColumnCount() - 2; col++) {
+                // Obtener el valor en la celda actual
+
+            }
+            Object cantidad = tableProductos.getValueAt(row, 2);
+            Object precio = tableProductos.getValueAt(row, 3);
+            float multiplicacion = Float.parseFloat(String.valueOf(cantidad)) * Float.parseFloat(String.valueOf(precio));
+            total += multiplicacion;
+
+        }
+        return total;
+    }
+
     // Renderer para los botones
     class BotonRenderer extends JButton implements TableCellRenderer {
 
@@ -267,6 +291,8 @@ public class ProductosVenta extends javax.swing.JFrame {
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            ponerTotal();
+
             return this;
         }
     }
@@ -289,6 +315,7 @@ public class ProductosVenta extends javax.swing.JFrame {
             this.modelo = modelo;
             this.colCantidad = colCantidad;
             this.incremento = incremento;
+
         }
 
         @Override
@@ -304,6 +331,7 @@ public class ProductosVenta extends javax.swing.JFrame {
             label = (value == null) ? "" : value.toString();
             button.setText(label);
             isPushed = true;
+
             return button;
         }
 
@@ -312,6 +340,7 @@ public class ProductosVenta extends javax.swing.JFrame {
             if (isPushed) {
                 int cantidad = (int) modelo.getValueAt(tableProductos.getSelectedRow(), colCantidad);
                 cantidad += incremento;
+
                 if (cantidad < 0) {
                     cantidad = 0;
                 }
@@ -334,18 +363,19 @@ public class ProductosVenta extends javax.swing.JFrame {
         }
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.github.lgooddatepicker.components.DatePicker datePicker1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelTotal;
     private javax.swing.JTable tableProductos;
     // End of variables declaration//GEN-END:variables
 }

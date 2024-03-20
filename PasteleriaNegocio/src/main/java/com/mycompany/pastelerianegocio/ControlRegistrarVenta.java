@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 public class ControlRegistrarVenta implements IControlRegistrarVenta {
 
     public void ventanaSeleccionarProducto() {
-
+        
         
     }
 }
