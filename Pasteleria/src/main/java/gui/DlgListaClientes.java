@@ -34,13 +34,11 @@ public class DlgListaClientes extends javax.swing.JDialog {
     }
 
     private void llenarTabla() {
-        System.out.println("hola");
         DefaultTableModel modelo = (DefaultTableModel) tablaClientes.getModel();
 
         List<ClienteDTO> clientes = this.consultarClientes.consultarClientes();
 
         clientes.forEach(p -> modelo.addRow(new Object[]{p.getNombre()+" " + p.getApellidoP() +" "+ p.getApellidoM(), p.getTelefono()}));
-        System.out.println("hola");
     }
 
     /**
