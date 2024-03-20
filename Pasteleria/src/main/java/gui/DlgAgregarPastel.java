@@ -19,15 +19,20 @@ public class DlgAgregarPastel extends javax.swing.JDialog {
 
     private List<ProductoDTO> pasteles;
 
+    ProductoDTO producto;
+     String especificacion;
     /**
      * Creates new form DlgAgregarPastel
      */
-    public DlgAgregarPastel(java.awt.Frame parent, boolean modal) {
+    public DlgAgregarPastel(java.awt.Frame parent, boolean modal, ProductoDTO producto) {
         super(parent, modal);
+        this.producto = producto;
+        this.especificacion=especificacion;
         initComponents();
         pasteles = new ArrayList<>();
         agregarPasteles();
         desplegarPasteles(pasteles);
+         setVisible(true);
     }
 
     /**
@@ -68,22 +73,27 @@ public class DlgAgregarPastel extends javax.swing.JDialog {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Tamaño:");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jComboBox2.setBackground(new java.awt.Color(232, 232, 232));
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chico", "Mediano", "Grande" }));
+        jComboBox2.setBackground(new java.awt.Color(232, 232, 232));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Especificacion(opcional)");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jTextField1.setBackground(new java.awt.Color(232, 232, 232));
 
         jButton1.setBackground(new java.awt.Color(140, 220, 254));
         jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jButton2.setBackground(new java.awt.Color(140, 220, 254));
         jButton2.setText("Cancelar");
+        jButton2.setBackground(new java.awt.Color(140, 220, 254));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -156,6 +166,14 @@ public class DlgAgregarPastel extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        producto.setNombre((String) jComboBox1.getSelectedItem());
+        producto.setTamaño((String) jComboBox2.getSelectedItem());
+        producto.setDescripcion(jTextField1.getText());
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void desplegarPasteles(List<ProductoDTO> lista) {
         jComboBox1.setModel(new PastelComboBoxModel(lista));
     }
@@ -168,47 +186,8 @@ public class DlgAgregarPastel extends javax.swing.JDialog {
         pasteles.add(new ProductoDTO(400, "Pastel Red Velvet", "Bizcocho de terciopelo rojo con capas de frosting de queso crema.", "Grande"));
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DlgAgregarPastel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DlgAgregarPastel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DlgAgregarPastel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DlgAgregarPastel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                DlgAgregarPastel dialog = new DlgAgregarPastel(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

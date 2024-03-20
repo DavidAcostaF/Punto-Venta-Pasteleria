@@ -9,11 +9,15 @@ package com.mycompany.pastelerianegocio.dtos;
  * @author PC
  */
 public class ProductoDTO {
+
     public float precio;
     public String nombre;
     public String descripcion;
     public String tamaño;
+    public ProductoDTO() {
+    }
 
+    
     public ProductoDTO(float precio, String nombre, String descripcion, String tamaño) {
         this.precio = precio;
         this.nombre = nombre;
@@ -57,6 +61,5 @@ public class ProductoDTO {
     public String toString() {
         return "ProductoDTO{" + "precio=" + precio + ", nombre=" + nombre + ", descripcion=" + descripcion + ", tama\u00f1o=" + tamaño + '}';
     }
-    
-    
+
 }
