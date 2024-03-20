@@ -182,11 +182,6 @@ public class DlgAgregarPastel extends javax.swing.JDialog {
         pasteles.add(new ProductoDTO(400, "Pastel Red Velvet", "Bizcocho de terciopelo rojo con capas de frosting de queso crema.", "Grande"));
     }
 
-    /**
-     * @param args the command line arguments
-     */
-   
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

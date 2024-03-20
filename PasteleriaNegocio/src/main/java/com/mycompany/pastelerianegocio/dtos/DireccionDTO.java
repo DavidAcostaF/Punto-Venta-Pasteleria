@@ -8,16 +8,16 @@ package com.mycompany.pastelerianegocio.dtos;
  *
  * @author PC
  */
-public class Direccion {
+public class DireccionDTO {
     public String calle;
     public String colonia;
     public String numExterior;
     public ClienteDTO cliente;
 
-    public Direccion() {
+    public DireccionDTO() {
     }
 
-    public Direccion(String calle, String colonia, String numExterior, ClienteDTO cliente) {
+    public DireccionDTO(String calle, String colonia, String numExterior, ClienteDTO cliente) {
         this.calle = calle;
         this.colonia = colonia;
         this.numExterior = numExterior;
