@@ -7,6 +7,7 @@ package gui;
 import com.mycompany.pastelerianegocio.ConsultarProductosVenta;
 import com.mycompany.pastelerianegocio.IConsultarProductosVenta;
 import com.mycompany.pastelerianegocio.dtos.ProductoDTO;
+import control.ControlAgregarVenta;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +24,14 @@ import javax.swing.table.TableCellRenderer;
  * @author abelc
  */
 public class ProductosVenta extends javax.swing.JFrame {
-
+    ControlAgregarVenta control;
     private IConsultarProductosVenta consultarProductosVenta;
 
     /**
      * Creates new form VentanaSeleccionarProductos
      */
     public ProductosVenta() {
+       control = new ControlAgregarVenta();
         initComponents();
         consultarProductosVenta = new ConsultarProductosVenta();
 
@@ -199,7 +201,9 @@ public class ProductosVenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+       DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel();
+        ProductoDTO p = control.agregarPastel(this);
+        modelo.addRow(new Object[]{p.getNombre(), p.getDescripcion(),1,100});
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
