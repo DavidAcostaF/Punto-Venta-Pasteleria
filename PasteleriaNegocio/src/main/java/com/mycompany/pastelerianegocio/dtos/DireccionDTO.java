@@ -58,7 +58,7 @@ public class DireccionDTO {
 
     @Override
     public String toString() {
-        return "Direccion{" + "calle=" + calle + ", colonia=" + colonia + ", numExterior=" + numExterior + ", cliente=" + cliente + '}';
+        return "Direccion{" + "calle=" + calle + ", colonia=" + colonia + ", numExterior=" + numExterior + '}';
     }
     
 }

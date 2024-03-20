@@ -4,18 +4,37 @@
  */
 package gui;
 
+import com.mycompany.pastelerianegocio.ConsultarDirecciones;
+import com.mycompany.pastelerianegocio.IConsultarDirecciones;
+import com.mycompany.pastelerianegocio.dtos.DireccionDTO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author abelc
  */
 public class DlgDirecciones extends javax.swing.JDialog {
 
+    private IConsultarDirecciones direcciones;
+    
     /**
      * Creates new form DlgDirecciones
      */
     public DlgDirecciones(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        direcciones = new ConsultarDirecciones();
+        llenarTabla();
+        setVisible(true);
+    }
+    
+    private void llenarTabla(){
+        DefaultTableModel modelo = (DefaultTableModel) tablaDirecciones.getModel();
+        
+        List<DireccionDTO> dirs = direcciones.consultarDirecciones();
+        
+        dirs.forEach(p -> modelo.addRow(new Object[]{p.getCalle() + "", p.getColonia() + "", p.getNumExterior()}) );
     }
 
     /**
@@ -30,7 +49,7 @@ public class DlgDirecciones extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaDirecciones = new javax.swing.JTable();
         btnNuevaDireccion = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
 
@@ -41,20 +60,17 @@ public class DlgDirecciones extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel1.setText("Seleccione una dirección");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaDirecciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Calle", "Avenida", "Numero"
+                "Calle", "Colonia", "Numero"
             }
         ));
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(jTable1);
+        tablaDirecciones.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaDirecciones.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(tablaDirecciones);
 
         btnNuevaDireccion.setBackground(new java.awt.Color(140, 220, 254));
         btnNuevaDireccion.setText("Agregar nueva dirección");
@@ -116,6 +132,6 @@ public class DlgDirecciones extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaDirecciones;
     // End of variables declaration//GEN-END:variables
 }

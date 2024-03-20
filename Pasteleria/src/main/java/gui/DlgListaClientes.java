@@ -29,8 +29,6 @@ public class DlgListaClientes extends javax.swing.JDialog {
         consultarClientes = new ConsultarClientes();
         llenarTabla();
         setVisible(true);
-        
-        
     }
 
     private void llenarTabla() {
