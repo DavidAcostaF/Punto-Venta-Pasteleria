@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FuncionalidadClientes implements IFuncionalidadClientes{
-
+    //esta clase tendra todas las operaciones del cliente necesarias
     @Override
     public List<ClienteDTO> consultarClientes() {
         List<ClienteDTO> clientes;

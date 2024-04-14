@@ -13,7 +13,8 @@ import java.util.List;
  * @author f_aco
  */
 public class FuncionalidadDirecciones implements IFuncionalidadDirecciones {
-    
+        //esta clase tendra todas las operaciones de direcciones necesarias 
+
     
     @Override
     public DireccionDTO agregarDireccion (DireccionDTO direccion){

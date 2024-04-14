@@ -13,7 +13,9 @@ import java.util.List;
  * @author f_aco
  */
 public class FuncionalidadProductosVenta implements IFuncionalidadProductosVenta {
-        @Override
+    //esta clase tendra todas las operaciones de ventas necesarias 
+
+    @Override
     public List<ProductoDTO> consultarProductosVenta() {
         List<ProductoDTO> pasteles;
 
