@@ -7,6 +7,7 @@ package com.mycompany.clientes;
 import com.mycompany.pastelerianegocio.dtos.ClienteDTO;
 import java.util.ArrayList;
 import java.util.List;
+//Esta clase funciona de que se manda la informacion al negocio o se obtiene mediante dtos y el negocio se encargara de devolver la info o mandarlas a las daos de ser necesarias
 
 public class FuncionalidadClientes implements IFuncionalidadClientes{
     //esta clase tendra todas las operaciones del cliente necesarias
