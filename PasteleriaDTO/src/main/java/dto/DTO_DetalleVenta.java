@@ -14,16 +14,20 @@ public class DTO_DetalleVenta {
     public float precio;
     public float importe;
     public int cantidad;
-    public List<DTO_Producto> productos;
+    public DTO_Producto productos;
+    public DTO_Venta venta;
 
     public DTO_DetalleVenta() {
     }
 
-    public DTO_DetalleVenta(float precio, float importe, int cantidad, List<DTO_Producto> productos) {
+    
+    
+    public DTO_DetalleVenta(float precio, float importe, int cantidad, DTO_Producto productos, DTO_Venta venta) {
         this.precio = precio;
         this.importe = importe;
         this.cantidad = cantidad;
         this.productos = productos;
+        this.venta = venta;
     }
 
     public float getPrecio() {
@@ -50,18 +54,24 @@ public class DTO_DetalleVenta {
         this.cantidad = cantidad;
     }
 
-    public List<DTO_Producto> getProductos() {
+    public DTO_Producto getProductos() {
         return productos;
     }
 
-    public void setProductos(List<DTO_Producto> productos) {
+    public void setProductos(DTO_Producto productos) {
         this.productos = productos;
     }
 
-    @Override
-    public String toString() {
-        return "DetalleVentaDTO{" + "precio=" + precio + ", importe=" + importe + ", cantidad=" + cantidad + ", productos=" + productos + '}';
+    public DTO_Venta getVenta() {
+        return venta;
     }
+
+    public void setVenta(DTO_Venta venta) {
+        this.venta = venta;
+    }
+
+    
+    
     
     
 }

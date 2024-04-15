@@ -12,7 +12,6 @@ import dto.DTO_Producto;
  * @author PC
  */
 public class DTO_Venta {
-    public DTO_Producto producto;
     public float montoTotal;
     public String fechaEntrega;
     public String fechaRegistro;
@@ -22,21 +21,12 @@ public class DTO_Venta {
     public DTO_Venta() {
     }
 
-    public DTO_Venta(DTO_Producto producto, float montoTotal, String fechaEntrega, String fechaRegistro, DTO_Cliente cliente, String detallesCliente) {
-        this.producto = producto;
+    public DTO_Venta(float montoTotal, String fechaEntrega, String fechaRegistro, DTO_Cliente cliente, String detallesCliente) {
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
         this.fechaRegistro = fechaRegistro;
         this.cliente = cliente;
         this.detallesCliente = detallesCliente;
-    }
-
-    public DTO_Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(DTO_Producto producto) {
-        this.producto = producto;
     }
 
     public float getMontoTotal() {
@@ -79,10 +69,6 @@ public class DTO_Venta {
         this.detallesCliente = detallesCliente;
     }
 
-    @Override
-    public String toString() {
-        return "VentaDTO{" + "producto=" + producto + ", montoTotal=" + montoTotal + ", fechaEntrega=" + fechaEntrega + ", fechaRegistro=" + fechaRegistro + ", cliente=" + cliente + ", detallesCliente=" + detallesCliente + '}';
-    }
-    
+
     
 }

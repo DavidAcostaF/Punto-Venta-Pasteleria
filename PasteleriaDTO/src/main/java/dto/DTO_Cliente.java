@@ -17,6 +17,7 @@ public class DTO_Cliente {
     public String correo;
 
     public DTO_Cliente() {
+        
     }
 
     public DTO_Cliente(String nombre, String apellidoP, String apellidoM, String telefono, String correo) {

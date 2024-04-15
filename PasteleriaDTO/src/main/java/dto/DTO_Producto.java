@@ -14,6 +14,8 @@ public class DTO_Producto {
     public String nombre;
     public String descripcion;
     public String tamaño;
+    
+    
     public DTO_Producto() {
     }
 
