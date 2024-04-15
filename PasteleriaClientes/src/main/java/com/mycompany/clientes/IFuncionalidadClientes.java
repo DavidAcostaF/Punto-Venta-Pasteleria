@@ -10,7 +10,7 @@ import java.util.List;
 public interface IFuncionalidadClientes {
 
 
-    public DTO_Cliente agregarCliente(DTO_Cliente cliente);
+    public void agregarCliente();
     public List<DTO_Cliente> consultarClientes();
 
 }

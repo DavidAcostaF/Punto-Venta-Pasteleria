@@ -6,11 +6,12 @@ package presentacion;
 
 //import com.mycompany.pastelerianegocio.ConsultarClientes;
 //import com.mycompany.pastelerianegocio.IConsultarClientes;
-import dto.DTO_Cliente;
+import com.mycompany.clientes.FuncionalidadClientes;
+import com.mycompany.clientes.IFuncionalidadClientes;
 import control.ControlAgregarVenta;
-
+import dto.DTO_Cliente;
 import java.util.List;
-import javax.swing.JCheckBox;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,7 +20,10 @@ import javax.swing.table.DefaultTableModel;
  * @author abelc
  */
 public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
- ControlAgregarVenta control;
+
+    private ControlAgregarVenta control;
+    private IFuncionalidadClientes funcionalidadesClientes;
+    private List<DTO_Cliente> listaClientes;
 //    private IConsultarClientes consultarClientes;
 
     /**
@@ -28,8 +32,13 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
     public Presentacion_DlgListaClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         control = new ControlAgregarVenta();
+        this.funcionalidadesClientes = new FuncionalidadClientes();
+        funcionalidadesClientes.agregarCliente();
+
+        listaClientes = funcionalidadesClientes.consultarClientes();
+        System.out.println(listaClientes);
         initComponents();
-//        consultarClientes = new ConsultarClientes();
+
         llenarTabla();
         setVisible(true);
     }
@@ -37,9 +46,7 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
     private void llenarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tablaClientes.getModel();
 
-//        List<ClienteDTO> clientes = this.consultarClientes.consultarClientes();
-
-//        clientes.forEach(p -> modelo.addRow(new Object[]{p.getNombre()+" " + p.getApellidoP() +" "+ p.getApellidoM(), p.getTelefono()}));
+        listaClientes.forEach(p -> modelo.addRow(new Object[]{p.getNombre() + " " + p.getApellidoP() + " " + p.getApellidoM(), p.getTelefono()}));
     }
 
     /**
@@ -168,19 +175,19 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
         int respuesta = JOptionPane.showOptionDialog(null, "¿Realizara envio a domicilio?", "Tipo de envio", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
 
         if (respuesta == JOptionPane.YES_OPTION) {
-           this.dispose(); 
-           control.listaDirecciones();
-          
+            this.dispose();
+            control.listaDirecciones();
+
         } else {
-           this.dispose(); 
-           control.CobrarVenta();
-            
+            this.dispose();
+            control.CobrarVenta();
+
         }
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
 

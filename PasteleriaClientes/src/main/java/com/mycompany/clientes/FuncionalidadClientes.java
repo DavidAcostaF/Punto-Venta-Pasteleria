@@ -32,11 +32,10 @@ public class FuncionalidadClientes implements IFuncionalidadClientes{
     }
 
     @Override
-    public DTO_Cliente agregarCliente(DTO_Cliente cliente) {
+    public void agregarCliente() {
         List<DTO_Cliente> clientes;
         clientes = agregarClientes.agregarClientes();
         this.ventaBO.agregarClientes(clientes);
-        
-        return cliente;
     }
+    
 }
