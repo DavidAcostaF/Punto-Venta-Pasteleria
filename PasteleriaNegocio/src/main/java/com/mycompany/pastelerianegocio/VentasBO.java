@@ -21,6 +21,7 @@ import java.util.List;
  */
 public class VentasBO implements IVentasBO {
 
+
     private IClienteDAO clienteDAO;
     private IProductoDAO productoDAO;
 
@@ -28,6 +29,8 @@ public class VentasBO implements IVentasBO {
         this.clienteDAO = new ClienteDAO();
         this.productoDAO = new ProductoDAO();
     }
+
+
 
     @Override
     public List<DTO_Cliente> consultarClientes() {
@@ -66,6 +69,7 @@ public class VentasBO implements IVentasBO {
 
     }
 
+
     @Override
     public List<DTO_Producto> consultarProductos() {
         List<Producto> listaProductos = productoDAO.consultarProductos();
@@ -80,5 +84,6 @@ public class VentasBO implements IVentasBO {
         }
         return listaProductoDTO;
     }
+
 
 }
