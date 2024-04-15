@@ -4,10 +4,14 @@
  */
 package com.mycompany.pasteleriadaos;
 
+import com.mycompany.pasteleriadominios.Direccion;
+
 /**
  *
  * @author f_aco
  */
 public interface IDireccionDAO {
+     public Direccion agregarDireccion(Direccion direccion);
     
+    public void eliminarDireccion(Direccion direccion);
 }

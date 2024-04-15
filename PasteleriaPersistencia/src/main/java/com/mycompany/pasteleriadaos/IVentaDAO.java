@@ -4,10 +4,14 @@
  */
 package com.mycompany.pasteleriadaos;
 
+import com.mycompany.pasteleriadominios.Venta;
+
 /**
  *
  * @author f_aco
  */
 public interface IVentaDAO {
+     public Venta agregarVenta(Venta venta);
     
+    public void eliminarCliente(Venta venta);
 }

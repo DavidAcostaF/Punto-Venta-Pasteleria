@@ -4,10 +4,34 @@
  */
 package com.mycompany.pasteleriadaos;
 
+import com.mycompany.pasteleriadominios.Cliente;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author f_aco
  */
-public class ClienteDAO {
+public class ClienteDAO implements IClienteDAO {
+    List<Cliente> listaClientes;
+
+    public ClienteDAO() {
+        this.listaClientes = new ArrayList<>();
+    }
+    
+    
+
+    @Override
+    public Cliente agregarCliente(Cliente cliente) {
+        this.listaClientes.add(cliente); 
+        return cliente;
+    }
+
+    @Override
+    public void eliminarCliente(Cliente cliente) {
+        this.listaClientes.remove(cliente);
+    }
+    
+    
     
 }
