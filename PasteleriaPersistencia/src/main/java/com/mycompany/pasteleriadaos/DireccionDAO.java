@@ -29,5 +29,11 @@ public class DireccionDAO implements IDireccionDAO {
     public void eliminarDireccion(Direccion direccion) {
         this.listaDirecciones.remove(direccion);
     }
+
+    @Override
+    public List<Direccion> consultarDirecciones() {
+        return this.listaDirecciones;
+    }
+    
     
 }

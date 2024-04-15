@@ -5,6 +5,7 @@
 package com.mycompany.pasteleriadaos;
 
 import com.mycompany.pasteleriadominios.Direccion;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,6 @@ public interface IDireccionDAO {
      public Direccion agregarDireccion(Direccion direccion);
     
     public void eliminarDireccion(Direccion direccion);
+    
+    public List<Direccion>consultarDirecciones();
 }

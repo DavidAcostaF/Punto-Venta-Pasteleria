@@ -12,7 +12,7 @@ import java.util.List;
  * @author f_aco
  */
 public interface IFuncionalidadDirecciones {
-    public DTO_Direccion agregarDireccion (DTO_Direccion direccion);
+    public void agregarDireccion ();
     public List<DTO_Direccion> consultarDirecciones();
 
 }
