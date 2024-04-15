@@ -14,6 +14,7 @@ public class DTO_DetalleVenta {
     public float precio;
     public float importe;
     public int cantidad;
+    public String especificacion;
     public DTO_Producto productos;
     public DTO_Venta venta;
 
@@ -40,6 +41,14 @@ public class DTO_DetalleVenta {
 
     public float getImporte() {
         return importe;
+    }
+
+    public String getEspecificacion() {
+        return especificacion;
+    }
+
+    public void setEspecificacion(String especificacion) {
+        this.especificacion = especificacion;
     }
 
     public void setImporte(float importe) {

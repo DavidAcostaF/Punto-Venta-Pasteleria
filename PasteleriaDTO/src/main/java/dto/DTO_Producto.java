@@ -14,13 +14,22 @@ public class DTO_Producto {
     public String nombre;
     public String descripcion;
     public String tamaño;
-    
-    
+
     public DTO_Producto() {
     }
 
-    
-    public DTO_Producto(float precio, String nombre, String descripcion,String tamaño) {
+    public DTO_Producto(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public DTO_Producto(String nombre, String tamaño) {
+        this.nombre = nombre;
+        this.tamaño = tamaño;
+    }
+
+   
+
+    public DTO_Producto(float precio, String nombre, String descripcion, String tamaño) {
         this.precio = precio;
         this.nombre = nombre;
         this.descripcion = descripcion;

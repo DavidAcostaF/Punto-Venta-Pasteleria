@@ -6,6 +6,7 @@ package dto;
 
 import dto.DTO_Cliente;
 import dto.DTO_Producto;
+import java.util.List;
 
 /**
  *
@@ -17,6 +18,7 @@ public class DTO_Venta {
     public String fechaRegistro;
     public DTO_Cliente cliente;
     public String detallesCliente;
+    public List<DTO_DetalleVenta> detallesVenta;  
 
     public DTO_Venta() {
     }

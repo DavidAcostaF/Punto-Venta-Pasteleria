@@ -119,7 +119,7 @@
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="datePicker1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fechaEntrega" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel3" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
                                   <Component id="labelTotal" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
                               </Group>
@@ -143,7 +143,7 @@
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" pref="24" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="datePicker1" min="-2" max="-2" attributes="0"/>
+                      <Component id="fechaEntrega" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       <Component id="jButton3" min="-2" pref="37" max="-2" attributes="0"/>
                       <EmptySpace pref="146" max="32767" attributes="0"/>
@@ -168,7 +168,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="com.github.lgooddatepicker.components.DatePicker" name="datePicker1">
+            <Component class="com.github.lgooddatepicker.components.DatePicker" name="fechaEntrega">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
