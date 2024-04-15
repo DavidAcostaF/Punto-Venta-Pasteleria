@@ -10,6 +10,7 @@ import com.mycompany.clientes.FuncionalidadClientes;
 import com.mycompany.clientes.IFuncionalidadClientes;
 import control.ControlAgregarVenta;
 import dto.DTO_Cliente;
+import dto.DTO_Venta;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -24,13 +25,15 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
     private ControlAgregarVenta control;
     private IFuncionalidadClientes funcionalidadesClientes;
     private List<DTO_Cliente> listaClientes;
+    private DTO_Venta venta;
 //    private IConsultarClientes consultarClientes;
 
     /**
      * Creates new form DlgListaClientes
      */
-    public Presentacion_DlgListaClientes(java.awt.Frame parent, boolean modal) {
+    public Presentacion_DlgListaClientes(java.awt.Frame parent, boolean modal, DTO_Venta venta) {
         super(parent, modal);
+        this.venta = venta;
         control = new ControlAgregarVenta();
         this.funcionalidadesClientes = new FuncionalidadClientes();
         funcionalidadesClientes.agregarCliente();
@@ -46,7 +49,7 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
     private void llenarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tablaClientes.getModel();
 
-        listaClientes.forEach(p -> modelo.addRow(new Object[]{p.getNombre() + " " + p.getApellidoP() + " " + p.getApellidoM(), p.getTelefono()}));
+        listaClientes.forEach(p -> modelo.addRow(new Object[]{p.getNombre(), p.getApellidoP(), p.getApellidoM(), p.getTelefono()}));
     }
 
     /**
@@ -88,7 +91,7 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Cliente", "Telefono"
+                "Nombres", "Apellido Paterno", "Apellido Materno", "Telefono"
             }
         ));
         tablaClientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -173,16 +176,26 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int respuesta = JOptionPane.showOptionDialog(null, "¿Realizara envio a domicilio?", "Tipo de envio", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
+         int filaSeleccionada = tablaClientes.getSelectedRow();
+         if (filaSeleccionada != -1) {
+             DTO_Cliente cliente = new DTO_Cliente();
+             cliente.setNombre(tablaClientes.getValueAt(filaSeleccionada, 0).toString());
+             cliente.setApellidoP(tablaClientes.getValueAt(filaSeleccionada, 1).toString());
+             cliente.setApellidoM(tablaClientes.getValueAt(filaSeleccionada, 2).toString());
+             cliente.setTelefono(tablaClientes.getValueAt(filaSeleccionada, 3).toString());
+             venta.setCliente(cliente);
 
         if (respuesta == JOptionPane.YES_OPTION) {
             this.dispose();
-            control.listaDirecciones();
+            control.CobrarVenta(venta);
 
         } else {
             this.dispose();
-            control.CobrarVenta();
+            control.CobrarVenta(venta);
 
+        }  
         }
+     
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

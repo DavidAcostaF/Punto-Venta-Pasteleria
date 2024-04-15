@@ -17,18 +17,16 @@ public class DTO_Venta {
     public String fechaEntrega;
     public String fechaRegistro;
     public DTO_Cliente cliente;
-    public String detallesCliente;
     public List<DTO_DetalleVenta> detallesVenta;  
 
     public DTO_Venta() {
     }
 
-    public DTO_Venta(float montoTotal, String fechaEntrega, String fechaRegistro, DTO_Cliente cliente, String detallesCliente) {
+    public DTO_Venta(float montoTotal, String fechaEntrega, String fechaRegistro, DTO_Cliente cliente) {
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
         this.fechaRegistro = fechaRegistro;
         this.cliente = cliente;
-        this.detallesCliente = detallesCliente;
     }
 
     public float getMontoTotal() {
@@ -63,12 +61,25 @@ public class DTO_Venta {
         this.cliente = cliente;
     }
 
-    public String getDetallesCliente() {
-        return detallesCliente;
+    public List<DTO_DetalleVenta> getDetallesVenta() {
+        return detallesVenta;
     }
 
-    public void setDetallesCliente(String detallesCliente) {
-        this.detallesCliente = detallesCliente;
+    public void setDetallesVenta(List<DTO_DetalleVenta> detallesVenta) {
+        this.detallesVenta = detallesVenta;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("DTO_Venta{");
+        sb.append("montoTotal=").append(montoTotal);
+        sb.append(", fechaEntrega=").append(fechaEntrega);
+        sb.append(", fechaRegistro=").append(fechaRegistro);
+        sb.append(", cliente=").append(cliente);
+        sb.append(", detallesVenta=").append(detallesVenta);
+        sb.append('}');
+        return sb.toString();
     }
 
 
