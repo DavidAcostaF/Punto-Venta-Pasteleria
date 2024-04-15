@@ -18,6 +18,16 @@ public class Producto {
     public String tamaño;
      public List<DetalleVenta> detallesVenta;
 
+    public Producto() {
+    }
+
+    public Producto(float precio, String nombre, String descripcion, String tamaño) {
+        this.precio = precio;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.tamaño = tamaño;
+    }
+
     public float getPrecio() {
         return precio;
     }

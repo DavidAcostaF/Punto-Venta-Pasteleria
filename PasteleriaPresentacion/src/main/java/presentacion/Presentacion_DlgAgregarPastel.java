@@ -4,6 +4,8 @@
  */
 package presentacion;
 
+import com.mycompany.pasteleriaproductosventa.FuncionalidadProductos;
+import com.mycompany.pasteleriaproductosventa.IFuncionalidadProductos;
 import dto.DTO_Producto;
 import extras.PastelComboBoxModel;
 import java.util.List;
@@ -16,7 +18,7 @@ import javax.swing.DefaultComboBoxModel;
  * @author abelc
  */
 public class Presentacion_DlgAgregarPastel extends javax.swing.JDialog {
-
+   private IFuncionalidadProductos funcionalidadesProductos;
     private List<DTO_Producto> pasteles;
 
     DTO_Producto producto;
@@ -26,11 +28,11 @@ public class Presentacion_DlgAgregarPastel extends javax.swing.JDialog {
      */
     public Presentacion_DlgAgregarPastel(java.awt.Frame parent, boolean modal, DTO_Producto producto) {
         super(parent, modal);
+        this.funcionalidadesProductos=new FuncionalidadProductos();
         this.producto = producto;
         this.especificacion=especificacion;
         initComponents();
-        pasteles = new ArrayList<>();
-        agregarPasteles();
+        pasteles = funcionalidadesProductos.consultarProductosVenta();
         desplegarPasteles(pasteles);
          setVisible(true);
     }
@@ -179,13 +181,7 @@ public class Presentacion_DlgAgregarPastel extends javax.swing.JDialog {
         jComboBox1.setModel(new PastelComboBoxModel(lista));
     }
 
-    private void agregarPasteles() {
-        pasteles.add(new DTO_Producto(300, "Pastel de Chocolate", "Cubierto con ganache de chocolate y decorado con virutas de chocolate.", "Grande"));
-        pasteles.add(new DTO_Producto(200, "Tarta de Fresa", "Rellena con crema de fresa y cubierta con glaseado de fresa.", "Mediano"));
-        pasteles.add(new DTO_Producto(150, "Pastel de Zanahoria", "Lleno de nueces y especias, cubierto con frosting de queso crema.", "Chico"));
-        pasteles.add(new DTO_Producto(300, "Tarta de Limón", "Bizcocho esponjoso de limón cubierto con crema de limón y ralladura de limón.", "Grande"));
-        pasteles.add(new DTO_Producto(400, "Pastel Red Velvet", "Bizcocho de terciopelo rojo con capas de frosting de queso crema.", "Grande"));
-    }
+  
 
 
 

@@ -14,8 +14,13 @@ import java.util.List;
 public class FuncionalidadClientes implements IFuncionalidadClientes{
     //esta clase tendra todas las operaciones del cliente necesarias
     
-    private IVentasBO ventaBO = new VentasBO();
-    private OperacionesClientes agregarClientes = new OperacionesClientes();
+    private IVentasBO ventaBO;
+    private OperacionesClientes agregarClientes;
+
+    public FuncionalidadClientes() {
+        this.ventaBO= new VentasBO();
+        this.agregarClientes= new OperacionesClientes();
+    }
     
     @Override
     public List<DTO_Cliente> consultarClientes() {

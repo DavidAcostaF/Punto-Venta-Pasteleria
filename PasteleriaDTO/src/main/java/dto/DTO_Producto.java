@@ -20,7 +20,7 @@ public class DTO_Producto {
     }
 
     
-    public DTO_Producto(float precio, String nombre, String descripcion, String tamaño) {
+    public DTO_Producto(float precio, String nombre, String descripcion,String tamaño) {
         this.precio = precio;
         this.nombre = nombre;
         this.descripcion = descripcion;
