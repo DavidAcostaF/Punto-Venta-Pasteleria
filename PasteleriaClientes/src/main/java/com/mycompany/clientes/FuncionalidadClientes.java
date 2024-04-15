@@ -4,6 +4,8 @@
  */
 package com.mycompany.clientes;
 
+import com.mycompany.pastelerianegocio.IVentasBO;
+import com.mycompany.pastelerianegocio.VentasBO;
 import dto.DTO_Cliente;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,21 +13,25 @@ import java.util.List;
 
 public class FuncionalidadClientes implements IFuncionalidadClientes{
     //esta clase tendra todas las operaciones del cliente necesarias
+    
+    private IVentasBO ventaBO = new VentasBO();
+    private OperacionesClientes agregarClientes = new OperacionesClientes();
+    
     @Override
     public List<DTO_Cliente> consultarClientes() {
         List<DTO_Cliente> clientes;
 
-        clientes = new ArrayList<>();
+        clientes = this.ventaBO.consultarClientes();
 
-        clientes.add(new DTO_Cliente("David", "Acosta", "Fajardo", "6441223569", "davidaf@gmail.com"));
-        clientes.add(new DTO_Cliente("Jose", "Armenta", "Baca", "6441228598", "chemaab@gmail.com"));
-        clientes.add(new DTO_Cliente("Abel", "Corona", "Quintero", "6441274963", "abelCQ@gmail.com"));
-        clientes.add(new DTO_Cliente("Hector", "Baez", "Luque", "6441578963", "PacoBL@gmail.com"));
         return clientes;
     }
 
     @Override
     public DTO_Cliente agregarCliente(DTO_Cliente cliente) {
+        List<DTO_Cliente> clientes;
+        clientes = agregarClientes.agregarClientes();
+        this.ventaBO.agregarClientes(clientes);
+        
         return cliente;
     }
 }

@@ -5,6 +5,7 @@
 package com.mycompany.pasteleriadaos;
 
 import com.mycompany.pasteleriadominios.Cliente;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,6 @@ public interface IClienteDAO {
     public Cliente agregarCliente(Cliente cliente);
     
     public void eliminarCliente(Cliente cliente);
+    
+    public List<Cliente> consultarClientes();
 }

@@ -19,7 +19,6 @@ public class ClienteDAO implements IClienteDAO {
         this.listaClientes = new ArrayList<>();
     }
     
-    
 
     @Override
     public Cliente agregarCliente(Cliente cliente) {
@@ -30,6 +29,11 @@ public class ClienteDAO implements IClienteDAO {
     @Override
     public void eliminarCliente(Cliente cliente) {
         this.listaClientes.remove(cliente);
+    }
+
+    @Override
+    public List<Cliente> consultarClientes() {
+       return this.listaClientes;
     }
     
     
