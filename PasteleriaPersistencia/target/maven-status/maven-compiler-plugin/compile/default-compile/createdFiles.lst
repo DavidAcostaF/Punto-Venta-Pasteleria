@@ -1,0 +1,11 @@
+com\mycompany\pasteleriadominios\Producto.class
+com\mycompany\pasteleriadominios\Direccion.class
+com\mycompany\pasteleriadaos\ClienteDAO.class
+com\mycompany\pasteleriadominios\Venta.class
+com\mycompany\pasteleriadaos\IDireccionDAO.class
+com\mycompany\pasteleriadominios\Cliente.class
+com\mycompany\pasteleriadaos\VentaDAO.class
+com\mycompany\pasteleriadaos\IClienteDAO.class
+com\mycompany\pasteleriadaos\IVentaDAO.class
+com\mycompany\pasteleriadominios\DetalleVenta.class
+com\mycompany\pasteleriadaos\DireccionDAO.class
