@@ -12,20 +12,14 @@ import java.util.List;
  */
 public class Venta {
 
-    public Producto producto;
+   
     public float montoTotal;
     public String fechaEntrega;
     public String fechaRegistro;
     public Cliente cliente;
     public List<DetalleVenta> detallesVenta;
 
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
+ 
 
     public float getMontoTotal() {
         return montoTotal;
@@ -57,6 +51,14 @@ public class Venta {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public List<DetalleVenta> getDetallesVenta() {
+        return detallesVenta;
+    }
+
+    public void setDetallesVenta(List<DetalleVenta> detallesVenta) {
+        this.detallesVenta = detallesVenta;
     }
 
 }

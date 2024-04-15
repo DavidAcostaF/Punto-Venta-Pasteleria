@@ -8,6 +8,7 @@ import com.mycompany.pasteleriadominios.Cliente;
 import dto.DTO_Cliente;
 import dto.DTO_Direccion;
 import dto.DTO_Producto;
+import dto.DTO_Venta;
 import java.util.List;
 
 /**
@@ -23,4 +24,6 @@ public interface IVentasBO {
     public void agregarDirecciones(List<DTO_Direccion> direcciones);
     
     public List<DTO_Direccion>consultarDirecciones();
+    
+    public void agregarVenta(DTO_Venta venta);
 }

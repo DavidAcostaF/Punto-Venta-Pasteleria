@@ -201,6 +201,7 @@ public class Presentacion_DlgCobrarVenta extends javax.swing.JDialog {
 
     private void cancelarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBtnActionPerformed
        this.dispose();
+       control.mostrarProductosVenta();
     }//GEN-LAST:event_cancelarBtnActionPerformed
 
 

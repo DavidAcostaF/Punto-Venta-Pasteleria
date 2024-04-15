@@ -4,10 +4,12 @@
  */
 package com.mycompany.pasteleriaventa;
 
+import dto.DTO_Venta;
+
 /**
  *
  * @author f_aco
  */
 public interface IFuncionalidadesVenta {
-    
+    public void agregarVenta(DTO_Venta venta);
 }

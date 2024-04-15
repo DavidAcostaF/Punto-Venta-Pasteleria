@@ -4,6 +4,8 @@
  */
 package presentacion;
 
+import com.mycompany.pasteleriaventa.FuncionalidadesVenta;
+import com.mycompany.pasteleriaventa.IFuncionalidadesVenta;
 import control.ControlAgregarVenta;
 import dto.DTO_Venta;
 import javax.swing.JOptionPane;
@@ -15,6 +17,7 @@ import javax.swing.JOptionPane;
 public class Presentacion_DlgPagoEfectivo extends javax.swing.JDialog {
 ControlAgregarVenta control;
 DTO_Venta venta;
+IFuncionalidadesVenta ventas;
     /**
      * Creates new form DlgPagoEfectivo
      */
@@ -22,6 +25,7 @@ DTO_Venta venta;
         super(parent, modal);
          control = new ControlAgregarVenta();
          this.venta=venta;
+         this.ventas=new FuncionalidadesVenta();
         initComponents();
         txtCliente.setText(venta.getCliente().getNombre());
         txtCosto.setText(Float.toString(venta.getMontoTotal()));
@@ -57,19 +61,19 @@ DTO_Venta venta;
 
         jPanel1.setBackground(new java.awt.Color(232, 232, 232));
 
-        jLabel1.setText("Pago en efectivo");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
+        jLabel1.setText("Confirmación de Pago");
 
-        btnRegistrar.setText("Registrar");
         btnRegistrar.setBackground(new java.awt.Color(140, 220, 254));
+        btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarActionPerformed(evt);
             }
         });
 
-        btnRegresar.setText("Regresar");
         btnRegresar.setBackground(new java.awt.Color(140, 220, 254));
+        btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
@@ -124,6 +128,9 @@ DTO_Venta venta;
                 .addGap(104, 104, 104)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -147,17 +154,12 @@ DTO_Venta venta;
                                     .addComponent(txtCliente)
                                     .addComponent(txtCosto))))
                         .addGap(194, 194, 194))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(160, 160, 160))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(52, 52, 52)
+                .addGap(58, 58, 58)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -200,6 +202,7 @@ DTO_Venta venta;
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+         ventas.agregarVenta(venta);
         String mensaje = "¡La venta ha sido registrada exitosamente!";
 
         // Mostrar el mensaje utilizando JOptionPane

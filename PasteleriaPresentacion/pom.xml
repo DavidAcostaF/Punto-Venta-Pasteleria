@@ -42,6 +42,11 @@
             <artifactId>PasteleriaDTO</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>PasteleriaVenta</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <name>PasteleriaPresentacion</name>
 </project>

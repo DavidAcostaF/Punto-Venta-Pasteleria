@@ -157,6 +157,11 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
         jButton5.setText("Cancelar");
         jButton5.setBackground(new java.awt.Color(140, 220, 254));
         jButton5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -238,6 +243,11 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_SiguientebtnActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        this.dispose();
+        control.mostrarMenu();
+    }//GEN-LAST:event_jButton5ActionPerformed
     public void ponerTotal() {
         total = calcularTotal();
 

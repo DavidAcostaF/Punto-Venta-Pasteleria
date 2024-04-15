@@ -63,4 +63,20 @@ public class DetalleVenta {
         this.producto = producto;
     }
 
+    public String getDetallesCliente() {
+        return detallesCliente;
+    }
+
+    public void setDetallesCliente(String detallesCliente) {
+        this.detallesCliente = detallesCliente;
+    }
+
+    public Venta getVenta() {
+        return venta;
+    }
+
+    public void setVenta(Venta venta) {
+        this.venta = venta;
+    }
+
 }

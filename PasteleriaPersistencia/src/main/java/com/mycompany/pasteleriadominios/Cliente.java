@@ -11,7 +11,7 @@ import java.util.List;
  * @author f_aco
  */
 public class Cliente {
-    
+
     public String nombre;
     public String apellidoP;
     public String apellidoM;
@@ -20,6 +20,13 @@ public class Cliente {
     public List<Direccion> direcciones;
 
     public Cliente() {
+    }
+
+    public Cliente(String nombre, String apellidoP, String apellidoM, String telefono) {
+        this.nombre = nombre;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.telefono = telefono;
     }
 
     public Cliente(String nombre, String apellidoP, String apellidoM, String telefono, String correo) {

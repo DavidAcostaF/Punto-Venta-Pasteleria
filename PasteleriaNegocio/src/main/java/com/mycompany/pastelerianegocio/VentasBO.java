@@ -11,11 +11,15 @@ import com.mycompany.pasteleriadaos.IDireccionDAO;
 import com.mycompany.pasteleriadaos.IProductoDAO;
 import com.mycompany.pasteleriadaos.ProductoDAO;
 import com.mycompany.pasteleriadominios.Cliente;
+import com.mycompany.pasteleriadominios.DetalleVenta;
 import com.mycompany.pasteleriadominios.Direccion;
 import com.mycompany.pasteleriadominios.Producto;
+import com.mycompany.pasteleriadominios.Venta;
 import dto.DTO_Cliente;
+import dto.DTO_DetalleVenta;
 import dto.DTO_Direccion;
 import dto.DTO_Producto;
+import dto.DTO_Venta;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
@@ -132,5 +136,27 @@ public class VentasBO implements IVentasBO {
             listaDireccionesDTO.add(direccionDTO);
         }
         return listaDireccionesDTO;
+    }
+
+    @Override
+    public void agregarVenta(DTO_Venta ventaDTO) {
+    Venta venta= new Venta();
+     Cliente cliente = new Cliente(
+                    ventaDTO.getCliente().getNombre(),
+                    ventaDTO.getCliente().getApellidoP(),
+                    ventaDTO.getCliente().getApellidoM(),
+                    ventaDTO.getCliente().getTelefono()
+                    );
+    venta.setCliente(cliente);
+    venta.setFechaEntrega(ventaDTO.getFechaEntrega());
+    venta.setMontoTotal(ventaDTO.getMontoTotal());
+    List<DTO_DetalleVenta> detallesVenta=ventaDTO.getDetallesVenta();
+    List<DetalleVenta> detalleVentaLista=new ArrayList<>(); 
+        for (DTO_DetalleVenta dv:detallesVenta) {
+            DetalleVenta detalleVenta=new DetalleVenta();
+            detalleVenta.setCantidad(dv.getCantidad());
+            detalleVenta.setImporte(dv.getImporte());
+            
+        }
     }
 }
