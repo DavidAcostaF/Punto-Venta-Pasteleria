@@ -4,7 +4,7 @@
  */
 package com.mycompany.pasteleriaproductosventa;
 
-import com.mycompany.pastelerianegocio.dtos.ProductoDTO;
+import dto.DTO_Producto;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,16 +18,16 @@ public class FuncionalidadProductosVenta implements IFuncionalidadProductosVenta
     //esta clase tendra todas las operaciones de ventas necesarias 
 
     @Override
-    public List<ProductoDTO> consultarProductosVenta() {
-        List<ProductoDTO> pasteles;
+    public List<DTO_Producto> consultarProductosVenta() {
+        List<DTO_Producto> pasteles;
 
         pasteles = new ArrayList<>();
 
-        pasteles.add(new ProductoDTO(300, "Pastel de Chocolate", "Cubierto con ganache de chocolate y decorado con virutas de chocolate.", "Grande"));
-        pasteles.add(new ProductoDTO(200, "Tarta de Fresa", "Rellena con crema de fresa y cubierta con glaseado de fresa.", "Mediano"));
-        pasteles.add(new ProductoDTO(150, "Pastel de Zanahoria", "Lleno de nueces y especias, cubierto con frosting de queso crema.", "Chico"));
-        pasteles.add(new ProductoDTO(300, "Tarta de Limón", "Bizcocho esponjoso de limón cubierto con crema de limón y ralladura de limón.", "Grande"));
-        pasteles.add(new ProductoDTO(400, "Pastel Red Velvet", "Bizcocho de terciopelo rojo con capas de frosting de queso crema.", "Grande"));
+        pasteles.add(new DTO_Producto(300, "Pastel de Chocolate", "Cubierto con ganache de chocolate y decorado con virutas de chocolate.", "Grande"));
+        pasteles.add(new DTO_Producto(200, "Tarta de Fresa", "Rellena con crema de fresa y cubierta con glaseado de fresa.", "Mediano"));
+        pasteles.add(new DTO_Producto(150, "Pastel de Zanahoria", "Lleno de nueces y especias, cubierto con frosting de queso crema.", "Chico"));
+        pasteles.add(new DTO_Producto(300, "Tarta de Limón", "Bizcocho esponjoso de limón cubierto con crema de limón y ralladura de limón.", "Grande"));
+        pasteles.add(new DTO_Producto(400, "Pastel Red Velvet", "Bizcocho de terciopelo rojo con capas de frosting de queso crema.", "Grande"));
 
         return pasteles;
     }

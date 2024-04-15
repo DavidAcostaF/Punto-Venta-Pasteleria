@@ -4,13 +4,13 @@
  */
 package com.mycompany.clientes;
 
-import com.mycompany.pastelerianegocio.dtos.ClienteDTO;
+import dto.DTO_Cliente;
 import java.util.List;
 
 public interface IFuncionalidadClientes {
 
 
-    public ClienteDTO agregarCliente(ClienteDTO cliente);
-    public List<ClienteDTO> consultarClientes();
+    public DTO_Cliente agregarCliente(DTO_Cliente cliente);
+    public List<DTO_Cliente> consultarClientes();
 
 }

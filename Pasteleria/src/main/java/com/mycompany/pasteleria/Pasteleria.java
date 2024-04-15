@@ -3,7 +3,7 @@
  */
 package com.mycompany.pasteleria;
 
-import gui.MenuPrincipal;
+import presentacion.Presentacion_MenuPrincipal;
 
 /**
  *
@@ -12,7 +12,7 @@ import gui.MenuPrincipal;
 public class Pasteleria {
     
     public static void main(String[] args) {
-        MenuPrincipal mp = new MenuPrincipal();
+        Presentacion_MenuPrincipal mp = new Presentacion_MenuPrincipal();
         mp.setVisible(true);
     }
 }

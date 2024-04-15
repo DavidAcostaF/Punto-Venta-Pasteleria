@@ -4,7 +4,7 @@
  */
 package extras;
 
-import com.mycompany.pastelerianegocio.dtos.ProductoDTO;
+import dto.DTO_Producto;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
@@ -14,9 +14,9 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class PastelComboBoxModel extends DefaultComboBoxModel {
    
-    public PastelComboBoxModel(List<ProductoDTO> lista) {
+    public PastelComboBoxModel(List<DTO_Producto> lista) {
         super();
-        for (ProductoDTO producto : lista) {
+        for (DTO_Producto producto : lista) {
             addElement(producto.getNombre());
         }
     }

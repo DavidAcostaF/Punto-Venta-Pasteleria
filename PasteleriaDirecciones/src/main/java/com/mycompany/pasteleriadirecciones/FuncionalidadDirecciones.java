@@ -4,7 +4,7 @@
  */
 package com.mycompany.pasteleriadirecciones;
 
-import com.mycompany.pastelerianegocio.dtos.DireccionDTO;
+import dto.DTO_Direccion;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,15 +19,15 @@ public class FuncionalidadDirecciones implements IFuncionalidadDirecciones {
 
     
     @Override
-    public DireccionDTO agregarDireccion (DireccionDTO direccion){
+    public DTO_Direccion agregarDireccion (DTO_Direccion direccion){
         return direccion;
     }
     //TODO: Aqui debe de llamar a los clientes desde la clase negocio
     //ConsultarClientes cc = new ConsultarClientes();
     
     @Override
-    public List<DireccionDTO> consultarDirecciones() {
-        List<DireccionDTO> direcciones;
+    public List<DTO_Direccion> consultarDirecciones() {
+        List<DTO_Direccion> direcciones;
         direcciones = new ArrayList<>();
         //Clientes obtenidos de la clase negocio que la clase negocio los obtiene de persistencia
 //        direcciones.add(new DireccionDTO("Calle 1", "Colonia A", "123", cc.consultarClientes().get(0)));

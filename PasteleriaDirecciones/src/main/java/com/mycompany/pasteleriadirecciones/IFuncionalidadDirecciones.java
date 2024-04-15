@@ -4,7 +4,7 @@
  */
 package com.mycompany.pasteleriadirecciones;
 
-import com.mycompany.pastelerianegocio.dtos.DireccionDTO;
+import dto.DTO_Direccion;
 import java.util.List;
 
 /**
@@ -12,7 +12,7 @@ import java.util.List;
  * @author f_aco
  */
 public interface IFuncionalidadDirecciones {
-    public DireccionDTO agregarDireccion (DireccionDTO direccion);
-    public List<DireccionDTO> consultarDirecciones();
+    public DTO_Direccion agregarDireccion (DTO_Direccion direccion);
+    public List<DTO_Direccion> consultarDirecciones();
 
 }

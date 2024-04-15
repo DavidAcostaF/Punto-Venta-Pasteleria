@@ -4,18 +4,18 @@
  */
 package control;
 
-import com.mycompany.pastelerianegocio.dtos.ClienteDTO;
-import com.mycompany.pastelerianegocio.dtos.DireccionDTO;
-import com.mycompany.pastelerianegocio.dtos.ProductoDTO;
-import gui.DlgAgregarDireccion;
-import gui.DlgAgregarPastel;
-import gui.DlgCobrarVenta;
-import gui.DlgDatosCliente;
-import gui.DlgDirecciones;
-import gui.DlgListaClientes;
-import gui.DlgPagoEfectivo;
-import gui.MenuPrincipal;
-import gui.ProductosVenta;
+import dto.DTO_Cliente;
+import dto.DTO_Direccion;
+import dto.DTO_Producto;
+import presentacion.Presentacion_DlgAgregarDireccion;
+import presentacion.Presentacion_DlgAgregarPastel;
+import presentacion.Presentacion_DlgCobrarVenta;
+import presentacion.Presentacion_DlgDatosCliente;
+import presentacion.Presentacion_DlgDirecciones;
+import presentacion.Presentacion_DlgListaClientes;
+import presentacion.Presentacion_DlgPagoEfectivo;
+import presentacion.Presentacion_MenuPrincipal;
+import presentacion.Presentacion_ProductosVenta;
 import javax.swing.JFrame;
 
 /**
@@ -24,67 +24,67 @@ import javax.swing.JFrame;
  */
 public class ControlAgregarVenta {
 
-    private static ClienteDTO cliente;
+    private static DTO_Cliente cliente;
 
     public ControlAgregarVenta() {
 
     }
 
-    public ProductoDTO agregarPastel(JFrame frame) {
-        ProductoDTO producto = new ProductoDTO();
+    public DTO_Producto agregarPastel(JFrame frame) {
+        DTO_Producto producto = new DTO_Producto();
 
-        DlgAgregarPastel dlgpastel = new DlgAgregarPastel(frame, true, producto);
+        Presentacion_DlgAgregarPastel dlgpastel = new Presentacion_DlgAgregarPastel(frame, true, producto);
         return producto;
     }
 
-    public DireccionDTO AgregarDireccion() {
-        DireccionDTO direccion = new DireccionDTO();
-        DlgAgregarDireccion dir = new DlgAgregarDireccion(null, true);
+    public DTO_Direccion AgregarDireccion() {
+        DTO_Direccion direccion = new DTO_Direccion();
+        Presentacion_DlgAgregarDireccion dir = new Presentacion_DlgAgregarDireccion(null, true);
         return direccion;
     }
 
-    public DireccionDTO seleccionarDireccion(){
-     DireccionDTO direccion = new DireccionDTO();
-        DlgDirecciones dir = new DlgDirecciones(null, true);
+    public DTO_Direccion seleccionarDireccion(){
+     DTO_Direccion direccion = new DTO_Direccion();
+        Presentacion_DlgDirecciones dir = new Presentacion_DlgDirecciones(null, true);
         return direccion;
     }
-    public ClienteDTO agregarCliente(JFrame frame) {
-        ClienteDTO cliente = new ClienteDTO();
-        DlgDatosCliente dlgcliente = new DlgDatosCliente(frame, true);
+    public DTO_Cliente agregarCliente(JFrame frame) {
+        DTO_Cliente cliente = new DTO_Cliente();
+        Presentacion_DlgDatosCliente dlgcliente = new Presentacion_DlgDatosCliente(frame, true);
         return cliente;
     }
 
     public void listaClientes(JFrame frame) {
-        DlgListaClientes dlgListaClientes = new DlgListaClientes(frame, true);
+        Presentacion_DlgListaClientes dlgListaClientes = new Presentacion_DlgListaClientes(frame, true);
     }
 
     public void listaDirecciones() {
-        DlgDirecciones dlgdireccion = new DlgDirecciones(null, true);
+        Presentacion_DlgDirecciones dlgdireccion = new Presentacion_DlgDirecciones(null, true);
     }
 
     public void mostrarProductosVenta() {
-        ProductosVenta p = new ProductosVenta();
+        Presentacion_ProductosVenta p = new Presentacion_ProductosVenta();
         p.setVisible(true);
     }
 
     public void mostrarMenu() {
-        MenuPrincipal m = new MenuPrincipal();
+        Presentacion_MenuPrincipal m = new Presentacion_MenuPrincipal();
         m.setVisible(true);
     }
 
     public void CobrarVenta() {
-        DlgCobrarVenta dlgcobrarventa = new DlgCobrarVenta(null, true);
+        Presentacion_DlgCobrarVenta dlgcobrarventa = new Presentacion_DlgCobrarVenta(null, true);
     }
 
     public void MostrarDatosVenta() {
-        DlgPagoEfectivo dlgPagoEfectivo = new DlgPagoEfectivo(null, true);
+        Presentacion_DlgPagoEfectivo dlgPagoEfectivo = new Presentacion_DlgPagoEfectivo(null, true);
     }
 
-    public static ClienteDTO getCliente() {
+    public static DTO_Cliente getCliente() {
         return cliente;
     }
 
-    public static void setCliente(ClienteDTO cliente) {
+    public static void setCliente(DTO_Cliente cliente) {
         ControlAgregarVenta.cliente = cliente;
     }
 }

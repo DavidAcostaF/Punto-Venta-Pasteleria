@@ -4,7 +4,7 @@
  */
 package com.mycompany.pasteleriaproductosventa;
 
-import com.mycompany.pastelerianegocio.dtos.ProductoDTO;
+import dto.DTO_Producto;
 import java.util.List;
 
 /**
@@ -12,6 +12,6 @@ import java.util.List;
  * @author f_aco
  */
 public interface IFuncionalidadProductosVenta {
-        public List<ProductoDTO> consultarProductosVenta();
+        public List<DTO_Producto> consultarProductosVenta();
 
 }
