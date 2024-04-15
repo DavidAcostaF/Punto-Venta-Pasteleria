@@ -229,13 +229,12 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
             venta.setMontoTotal(total);
             obtenerDatosTabla();
             dispose();
-            control.listaClientes(this,venta);
-           
+            control.listaClientes(this, venta);
 
         } else {
-             dispose();
-             control.agregarCliente(this);
-           
+            dispose();
+            control.agregarCliente(this);
+
         }
 
     }//GEN-LAST:event_SiguientebtnActionPerformed
@@ -297,23 +296,23 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
     }
 
     private float calcularTotal() {
-        int total = 0;
-        for (int row = 0; row < tableProductos.getRowCount(); row++) {
-            // Recorrer cada columna de la fila actual
-            for (int col = 2; col < tableProductos.getColumnCount() - 2; col++) {
-                // Obtener el valor en la celda actual
-
+        float total = 0;
+        System.out.println(tableProductos.getRowCount());
+        if (tableProductos.getRowCount() > 0) {
+            for (int row = tableProductos.getRowCount() - 1; row >= 0; row--) {
+                Object cantidad = tableProductos.getValueAt(row, 2);
+                Object precio = tableProductos.getValueAt(row, 3);
+                if (cantidad != null && precio != null) {
+                    float multiplicacion = Float.parseFloat(cantidad.toString()) * Float.parseFloat(precio.toString());
+                    total += multiplicacion;
+                }
             }
-            Object cantidad = tableProductos.getValueAt(row, 2);
-            Object precio = tableProductos.getValueAt(row, 3);
-            float multiplicacion = Float.parseFloat(String.valueOf(cantidad)) * Float.parseFloat(String.valueOf(precio));
-            total += multiplicacion;
-
         }
+
         return total;
     }
 
-    // Renderer para los botones
+// Renderer para los botones
     class BotonRenderer extends JButton implements TableCellRenderer {
 
         public BotonRenderer(String texto) {
@@ -324,12 +323,11 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             ponerTotal();
-
             return this;
         }
     }
 
-    // Editor para los botones
+// Editor para los botones
     class BotonEditor extends DefaultCellEditor {
 
         private JButton button;
@@ -338,6 +336,7 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
         private DefaultTableModel modelo;
         private int colCantidad;
         private int incremento;
+        private int row; // Agregué una variable para almacenar el índice de fila
 
         public BotonEditor(JCheckBox checkBox, DefaultTableModel modelo, int colCantidad, int incremento) {
             super(checkBox);
@@ -347,11 +346,11 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
             this.modelo = modelo;
             this.colCantidad = colCantidad;
             this.incremento = incremento;
-
         }
 
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            this.row = row; // Almaceno el índice de fila
             if (isSelected) {
                 button.setForeground(table.getSelectionForeground());
                 button.setBackground(table.getSelectionBackground());
@@ -359,25 +358,23 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
                 button.setForeground(table.getForeground());
                 button.setBackground(table.getBackground());
             }
-
             label = (value == null) ? "" : value.toString();
             button.setText(label);
             isPushed = true;
-
             return button;
         }
 
         @Override
         public Object getCellEditorValue() {
             if (isPushed) {
-                int cantidad = (int) modelo.getValueAt(tableProductos.getSelectedRow(), colCantidad);
+                int cantidad = (int) modelo.getValueAt(row, colCantidad);
                 cantidad += incremento;
-
                 if (cantidad == 0) {
-                    modelo.removeRow(tableProductos.getSelectedRow());
+                    modelo.removeRow(row);
+                } else {
+                    modelo.setValueAt(cantidad, row, colCantidad);
                 }
-
-                tableProductos.repaint();
+                modelo.fireTableDataChanged();
             }
             isPushed = false;
             return label;
@@ -397,20 +394,20 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
     }
 
     private void obtenerDatosTabla() {
-        List<DTO_DetalleVenta> detallesVenta=new ArrayList<>();
+        List<DTO_DetalleVenta> detallesVenta = new ArrayList<>();
         for (int i = 0; i < tableProductos.getRowCount(); i++) {
-         DTO_DetalleVenta detalleVenta=new DTO_DetalleVenta();
-         DTO_Producto producto=new DTO_Producto(tableProductos.getValueAt(i, 0).toString());
-         detalleVenta.setProductos(producto);
-         detalleVenta.setEspecificacion(tableProductos.getValueAt(i, 1).toString());
-         int cantidad = Integer.parseInt(tableProductos.getValueAt(i, 2).toString());
-         detalleVenta.setCantidad(cantidad);
-         float total = Float.parseFloat(tableProductos.getValueAt(i, 2).toString());
-         detalleVenta.setImporte(total*cantidad);
-         detalleVenta.setVenta(venta);
-         detalleVenta.setPrecio(total);
-         detallesVenta.add(detalleVenta);
-        
+            DTO_DetalleVenta detalleVenta = new DTO_DetalleVenta();
+            DTO_Producto producto = new DTO_Producto(tableProductos.getValueAt(i, 0).toString());
+            detalleVenta.setProductos(producto);
+            detalleVenta.setEspecificacion(tableProductos.getValueAt(i, 1).toString());
+            int cantidad = Integer.parseInt(tableProductos.getValueAt(i, 2).toString());
+            detalleVenta.setCantidad(cantidad);
+            float total = Float.parseFloat(tableProductos.getValueAt(i, 2).toString());
+            detalleVenta.setImporte(total * cantidad);
+            detalleVenta.setVenta(venta);
+            detalleVenta.setPrecio(total);
+            detallesVenta.add(detalleVenta);
+
         }
         System.out.println(detallesVenta.toString());
         venta.setDetallesVenta(detallesVenta);
