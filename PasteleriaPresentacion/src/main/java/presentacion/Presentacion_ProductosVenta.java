@@ -227,12 +227,15 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
             String fechaEn = fechaEntrega.getDate().toString();
             venta.setFechaEntrega(fechaEn);
             venta.setMontoTotal(total);
-            control.listaClientes(this);
+            obtenerDatosTabla();
             dispose();
+            control.listaClientes(this,venta);
+           
 
         } else {
-            control.agregarCliente(this);
-            dispose();
+             dispose();
+             control.agregarCliente(this);
+           
         }
 
     }//GEN-LAST:event_SiguientebtnActionPerformed
@@ -396,11 +399,21 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
     private void obtenerDatosTabla() {
         List<DTO_DetalleVenta> detallesVenta=new ArrayList<>();
         for (int i = 0; i < tableProductos.getRowCount(); i++) {
-          DTO_DetalleVenta detalleVenta=new DTO_DetalleVenta();
-          DTO_Producto producto=new DTO_Producto(tableProductos.getValueAt(i, 0).toString());
-          detalleVenta.setProductos(producto);
-          
+         DTO_DetalleVenta detalleVenta=new DTO_DetalleVenta();
+         DTO_Producto producto=new DTO_Producto(tableProductos.getValueAt(i, 0).toString());
+         detalleVenta.setProductos(producto);
+         detalleVenta.setEspecificacion(tableProductos.getValueAt(i, 1).toString());
+         int cantidad = Integer.parseInt(tableProductos.getValueAt(i, 2).toString());
+         detalleVenta.setCantidad(cantidad);
+         float total = Float.parseFloat(tableProductos.getValueAt(i, 2).toString());
+         detalleVenta.setImporte(total*cantidad);
+         detalleVenta.setVenta(venta);
+         detalleVenta.setPrecio(total);
+         detallesVenta.add(detalleVenta);
+        
         }
+        System.out.println(detallesVenta.toString());
+        venta.setDetallesVenta(detallesVenta);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -189,7 +189,7 @@ public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
           
         } else {
            this.dispose(); 
-           control.CobrarVenta();
+          
         }
         
         

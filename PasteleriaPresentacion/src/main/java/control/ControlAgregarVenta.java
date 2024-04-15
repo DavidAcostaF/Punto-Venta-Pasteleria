@@ -7,6 +7,7 @@ package control;
 import dto.DTO_Cliente;
 import dto.DTO_Direccion;
 import dto.DTO_Producto;
+import dto.DTO_Venta;
 import presentacion.Presentacion_DlgAgregarDireccion;
 import presentacion.Presentacion_DlgAgregarPastel;
 import presentacion.Presentacion_DlgCobrarVenta;
@@ -54,8 +55,8 @@ public class ControlAgregarVenta {
         return cliente;
     }
 
-    public void listaClientes(JFrame frame) {
-        Presentacion_DlgListaClientes dlgListaClientes = new Presentacion_DlgListaClientes(frame, true);
+    public void listaClientes(JFrame frame,DTO_Venta venta) {
+        Presentacion_DlgListaClientes dlgListaClientes = new Presentacion_DlgListaClientes(frame, true,venta);
     }
 
     public void listaDirecciones() {
@@ -72,12 +73,12 @@ public class ControlAgregarVenta {
         m.setVisible(true);
     }
 
-    public void CobrarVenta() {
-        Presentacion_DlgCobrarVenta dlgcobrarventa = new Presentacion_DlgCobrarVenta(null, true);
+    public void CobrarVenta(DTO_Venta venta) {
+        Presentacion_DlgCobrarVenta dlgcobrarventa = new Presentacion_DlgCobrarVenta(null, true,venta);
     }
 
-    public void MostrarDatosVenta() {
-        Presentacion_DlgPagoEfectivo dlgPagoEfectivo = new Presentacion_DlgPagoEfectivo(null, true);
+    public void MostrarDatosVenta(DTO_Venta venta) {
+        Presentacion_DlgPagoEfectivo dlgPagoEfectivo = new Presentacion_DlgPagoEfectivo(null, true,venta);
     }
 
     public static DTO_Cliente getCliente() {

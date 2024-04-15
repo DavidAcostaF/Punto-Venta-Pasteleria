@@ -28,6 +28,13 @@ public class DTO_Cliente {
         this.correo = correo;
     }
 
+    public DTO_Cliente(String nombre, String apellidoP, String apellidoM, String telefono) {
+        this.nombre = nombre;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.telefono = telefono;
+    }
+
     public String getNombre() {
         return nombre;
     }

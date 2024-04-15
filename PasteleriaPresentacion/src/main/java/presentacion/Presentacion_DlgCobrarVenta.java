@@ -5,6 +5,7 @@
 package presentacion;
 
 import control.ControlAgregarVenta;
+import dto.DTO_Venta;
 
 /**
  *
@@ -12,11 +13,13 @@ import control.ControlAgregarVenta;
  */
 public class Presentacion_DlgCobrarVenta extends javax.swing.JDialog {
  ControlAgregarVenta control;
+ DTO_Venta venta;
     /**
      * Creates new form DlgCobrarVenta
      */
-    public Presentacion_DlgCobrarVenta(java.awt.Frame parent, boolean modal) {
+    public Presentacion_DlgCobrarVenta(java.awt.Frame parent, boolean modal,DTO_Venta venta) {
         super(parent, modal);
+        this.venta=venta;
         control = new ControlAgregarVenta();
         initComponents();
         setVisible(true);
@@ -192,7 +195,7 @@ public class Presentacion_DlgCobrarVenta extends javax.swing.JDialog {
 
     private void aceptarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarbtnActionPerformed
         this.dispose(); 
-        control.MostrarDatosVenta();
+        control.MostrarDatosVenta(venta);
        
     }//GEN-LAST:event_aceptarbtnActionPerformed
 

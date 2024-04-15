@@ -5,6 +5,7 @@
 package presentacion;
 
 import control.ControlAgregarVenta;
+import dto.DTO_Venta;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,16 +14,18 @@ import javax.swing.JOptionPane;
  */
 public class Presentacion_DlgPagoEfectivo extends javax.swing.JDialog {
 ControlAgregarVenta control;
+DTO_Venta venta;
     /**
      * Creates new form DlgPagoEfectivo
      */
-    public Presentacion_DlgPagoEfectivo(java.awt.Frame parent, boolean modal) {
+    public Presentacion_DlgPagoEfectivo(java.awt.Frame parent, boolean modal,DTO_Venta venta) {
         super(parent, modal);
          control = new ControlAgregarVenta();
+         this.venta=venta;
         initComponents();
-        txtCliente.setText("Chema");
-        txtCosto.setText("500");
-        txtFechaEntrega.setText("20/03/2024");
+        txtCliente.setText(venta.getCliente().getNombre());
+        txtCosto.setText(Float.toString(venta.getMontoTotal()));
+        txtFechaEntrega.setText(venta.getFechaEntrega());
         txtUbicacionEntrega.setText("En tienda");
         setVisible(true);
         
