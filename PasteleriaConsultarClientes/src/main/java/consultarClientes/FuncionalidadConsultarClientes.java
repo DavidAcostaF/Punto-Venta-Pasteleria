@@ -2,22 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.clientes;
+package consultarClientes;
 
 import com.mycompany.pastelerianegocio.IVentasBO;
 import com.mycompany.pastelerianegocio.VentasBO;
 import dto.DTO_Cliente;
-import java.util.ArrayList;
 import java.util.List;
-//Esta clase funciona de que se manda la informacion al negocio o se obtiene mediante dtos y el negocio se encargara de devolver la info o mandarlas a las daos de ser necesarias
 
-public class FuncionalidadClientes implements IFuncionalidadClientes{
-    //esta clase tendra todas las operaciones del cliente necesarias
+/**
+ *
+ * @author Paco
+ */
+public class FuncionalidadConsultarClientes implements IFuncionalidadConsultarClientes{
     
     private IVentasBO ventaBO;
 
-    public FuncionalidadClientes() {
-        this.ventaBO= new VentasBO();
+    public FuncionalidadConsultarClientes() {
+        this.ventaBO = new VentasBO();
     }
     
     @Override
@@ -28,10 +29,4 @@ public class FuncionalidadClientes implements IFuncionalidadClientes{
 
         return clientes;
     }
-
-    @Override
-    public void agregarCliente(DTO_Cliente cliente) {
-       ventaBO.agregarCliente(cliente);
-    }
-    
 }

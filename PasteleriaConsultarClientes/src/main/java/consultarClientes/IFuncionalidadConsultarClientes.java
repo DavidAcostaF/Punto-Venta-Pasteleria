@@ -2,15 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package com.mycompany.clientes;
+package consultarClientes;
 
 import dto.DTO_Cliente;
 import java.util.List;
 
-public interface IFuncionalidadClientes {
-
-
-    public void agregarCliente(DTO_Cliente cliente);
+/**
+ *
+ * @author Paco
+ */
+public interface IFuncionalidadConsultarClientes {
     public List<DTO_Cliente> consultarClientes();
-
 }
