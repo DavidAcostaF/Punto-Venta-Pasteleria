@@ -18,8 +18,12 @@ public class Venta {
     public String fechaRegistro;
     public Cliente cliente;
     public List<DetalleVenta> detallesVenta;
+    private Direccion direccionEntrega;
 
- 
+    public Venta() {
+    }
+
+    
 
     public float getMontoTotal() {
         return montoTotal;
