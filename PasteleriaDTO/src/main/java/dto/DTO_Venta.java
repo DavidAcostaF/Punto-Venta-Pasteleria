@@ -13,20 +13,24 @@ import java.util.List;
  * @author PC
  */
 public class DTO_Venta {
+    
     public float montoTotal;
     public String fechaEntrega;
     public String fechaRegistro;
     public DTO_Cliente cliente;
     public List<DTO_DetalleVenta> detallesVenta;  
+    public DTO_Direccion dieccionEntrega;
 
     public DTO_Venta() {
     }
 
-    public DTO_Venta(float montoTotal, String fechaEntrega, String fechaRegistro, DTO_Cliente cliente) {
+    public DTO_Venta(float montoTotal, String fechaEntrega, String fechaRegistro, DTO_Cliente cliente, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion dieccionEntrega) {
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
         this.fechaRegistro = fechaRegistro;
         this.cliente = cliente;
+        this.detallesVenta = detallesVenta;
+        this.dieccionEntrega = dieccionEntrega;
     }
 
     public float getMontoTotal() {
@@ -69,18 +73,15 @@ public class DTO_Venta {
         this.detallesVenta = detallesVenta;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("DTO_Venta{");
-        sb.append("montoTotal=").append(montoTotal);
-        sb.append(", fechaEntrega=").append(fechaEntrega);
-        sb.append(", fechaRegistro=").append(fechaRegistro);
-        sb.append(", cliente=").append(cliente);
-        sb.append(", detallesVenta=").append(detallesVenta);
-        sb.append('}');
-        return sb.toString();
+    public DTO_Direccion getDieccionEntrega() {
+        return dieccionEntrega;
     }
+
+    public void setDieccionEntrega(DTO_Direccion dieccionEntrega) {
+        this.dieccionEntrega = dieccionEntrega;
+    }
+
+   
 
 
     
