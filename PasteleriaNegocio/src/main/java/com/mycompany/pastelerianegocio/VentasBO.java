@@ -114,16 +114,16 @@ public class VentasBO implements IVentasBO {
         List<Direccion> listaDirecciones = this.direccionDAO.consultarDirecciones();
         List<DTO_Direccion> listaDireccionesDTO = new ArrayList<>();
         for (Direccion direccion : listaDirecciones) {
-            DTO_Cliente clienteDTO = new DTO_Cliente(direccion.getCliente().getNombre(),
+            /**DTO_Cliente clienteDTO = new DTO_Cliente(direccion.getCliente().getNombre(),
                     direccion.getCliente().getApellidoP(),
                     direccion.getCliente().getApellidoM(),
                     direccion.getCliente().getTelefono(),
-                    direccion.getCliente().getCorreo());
+                    direccion.getCliente().getCorreo());*/
             DTO_Direccion direccionDTO = new DTO_Direccion(
                     direccion.getCalle(),
                     direccion.getColonia(),
-                    direccion.getNumExterior(),
-                    clienteDTO);
+                    direccion.getNumExterior()
+                    );
             listaDireccionesDTO.add(direccionDTO);
         }
         return listaDireccionesDTO;

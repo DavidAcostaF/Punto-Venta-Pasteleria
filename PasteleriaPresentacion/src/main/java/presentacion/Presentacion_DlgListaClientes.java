@@ -187,7 +187,7 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
 
         if (respuesta == JOptionPane.YES_OPTION) {
             this.dispose();
-            control.CobrarVenta(venta);
+            control.listaDirecciones();
 
         } else {
             this.dispose();

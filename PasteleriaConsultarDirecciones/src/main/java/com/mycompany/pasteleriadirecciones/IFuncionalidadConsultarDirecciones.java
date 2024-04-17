@@ -11,8 +11,8 @@ import java.util.List;
  *
  * @author f_aco
  */
-public interface IFuncionalidadDirecciones {
-    public void agregarDireccion ();
+public interface IFuncionalidadConsultarDirecciones {
+    
     public List<DTO_Direccion> consultarDirecciones();
 
 }

@@ -65,4 +65,12 @@ public class Venta {
         this.detallesVenta = detallesVenta;
     }
 
+    public Direccion getDireccionEntrega() {
+        return direccionEntrega;
+    }
+
+    public void setDireccionEntrega(Direccion direccionEntrega) {
+        this.direccionEntrega = direccionEntrega;
+    }
+
 }

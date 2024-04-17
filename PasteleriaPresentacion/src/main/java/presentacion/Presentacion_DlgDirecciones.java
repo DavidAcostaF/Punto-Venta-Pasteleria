@@ -4,8 +4,8 @@
  */
 package presentacion;
 
-//import com.mycompany.pastelerianegocio.ConsultarDirecciones;
-//import com.mycompany.pastelerianegocio.IConsultarDirecciones;
+import com.mycompany.pasteleriadirecciones.FuncionalidadConsultarDirecciones;
+import com.mycompany.pasteleriadirecciones.IFuncionalidadConsultarDirecciones;
 import dto.DTO_Direccion;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -16,25 +16,27 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Presentacion_DlgDirecciones extends javax.swing.JDialog {
 
-//    private IConsultarDirecciones direcciones;
-    
+    private IFuncionalidadConsultarDirecciones direcciones;
+    private List<DTO_Direccion> direccionesLista;
+
     /**
      * Creates new form DlgDirecciones
      */
     public Presentacion_DlgDirecciones(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        direcciones = new FuncionalidadConsultarDirecciones();
+        direccionesLista = direcciones.consultarDirecciones();
+        System.out.println(direccionesLista);
         initComponents();
-//        direcciones = new ConsultarDirecciones();
+
         llenarTabla();
         setVisible(true);
     }
-    
-    private void llenarTabla(){
+
+    private void llenarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tablaDirecciones.getModel();
         
-//        List<DireccionDTO> dirs = direcciones.consultarDirecciones();
-        
-//        dirs.forEach(p -> modelo.addRow(new Object[]{p.getCalle() + "", p.getColonia() + "", p.getNumExterior()}) );
+        direccionesLista.forEach(p -> modelo.addRow(new Object[]{p.getCalle() + "", p.getColonia() + "", p.getNumExterior()}));
     }
 
     /**
@@ -132,7 +134,7 @@ public class Presentacion_DlgDirecciones extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

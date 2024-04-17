@@ -24,6 +24,12 @@ public class DTO_Direccion {
         this.cliente = cliente;
     }
 
+    public DTO_Direccion(String calle, String colonia, String numExterior) {
+        this.calle = calle;
+        this.colonia = colonia;
+        this.numExterior = numExterior;
+    }
+
     public String getCalle() {
         return calle;
     }

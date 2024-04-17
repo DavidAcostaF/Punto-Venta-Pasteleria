@@ -26,6 +26,12 @@ public class Direccion {
         this.numExterior = numExterior;
         this.cliente = cliente;
     }
+
+    public Direccion(String calle, String colonia, String numExterior) {
+        this.calle = calle;
+        this.colonia = colonia;
+        this.numExterior = numExterior;
+    }
     
     
 

@@ -17,6 +17,9 @@ public class DireccionDAO implements IDireccionDAO {
     
      public DireccionDAO() {
         this.listaDirecciones = new ArrayList<>();
+        listaDirecciones.add(new Direccion("Machi lopez","Nose","#69"));
+        listaDirecciones.add(new Direccion("Benito Juarez","Rey misterio","#619"));
+        listaDirecciones.add(new Direccion("Cristiano Ronaldo","Prados","#7"));
     }
 
     @Override
