@@ -230,18 +230,19 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
             return;
         }
         int respuesta = JOptionPane.showOptionDialog(null, "¿El cliente ya ha comprado aqui?", "Bienvenido", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
-
+        String fechaEn = fechaEntrega.getDate().toString();
+        venta.setFechaEntrega(fechaEn);
+        venta.setMontoTotal(total);
         if (respuesta == JOptionPane.YES_OPTION) {
-            String fechaEn = fechaEntrega.getDate().toString();
-            venta.setFechaEntrega(fechaEn);
-            venta.setMontoTotal(total);
+
             obtenerDatosTabla();
             dispose();
             control.listaClientes(this, venta);
 
         } else {
+            obtenerDatosTabla();
             dispose();
-            control.agregarCliente(this);
+            control.agregarCliente(this, venta);
 
         }
 

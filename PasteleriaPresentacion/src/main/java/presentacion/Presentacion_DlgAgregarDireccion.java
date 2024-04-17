@@ -8,22 +8,25 @@ package presentacion;
 //import com.mycompany.pastelerianegocio.IAgregarDireccion;
 import dto.DTO_Direccion;
 import control.ControlAgregarVenta;
+import dto.DTO_Venta;
+import java.util.ResourceBundle.Control;
 
 /**
  *
  * @author abelc
  */
 public class Presentacion_DlgAgregarDireccion extends javax.swing.JDialog {
-
+  DTO_Venta venta;
+  ControlAgregarVenta control;
     /**
      * Creates new form DlgAgregarDireccion
      */
-    public Presentacion_DlgAgregarDireccion(java.awt.Frame parent, boolean modal) {
+    public Presentacion_DlgAgregarDireccion(java.awt.Frame parent, boolean modal,DTO_Venta venta) {
         super(parent, modal);
+        this.venta=venta;
+        this.control=new ControlAgregarVenta();
         initComponents();
-        txtCalle.setText("Enrique Segoviano");
-        txtColonia.setText("Machi López");
-        txtNumExt.setText("1323");
+      ;
         setVisible(true);
     }
 
@@ -162,10 +165,12 @@ public class Presentacion_DlgAgregarDireccion extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNumExtActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-//        IAgregarDireccion agregarDireccion = new AgregarDireccion();
-        DTO_Direccion dir = new DTO_Direccion(txtCalle.getText(), txtColonia.getText(), txtNumExt.getText(), ControlAgregarVenta.getCliente());
-//        agregarDireccion.agregarDireccion(dir);
-       dispose();
+
+        DTO_Direccion dir = new DTO_Direccion(txtCalle.getText());
+        venta.setDieccionEntrega(dir);
+        this.dispose();
+        control.CobrarVenta(venta);
+      
     }//GEN-LAST:event_btnAgregarActionPerformed
 
 

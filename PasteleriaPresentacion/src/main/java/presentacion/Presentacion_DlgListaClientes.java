@@ -10,6 +10,7 @@ import com.mycompany.clientes.FuncionalidadClientes;
 import com.mycompany.clientes.IFuncionalidadClientes;
 import control.ControlAgregarVenta;
 import dto.DTO_Cliente;
+import dto.DTO_Direccion;
 import dto.DTO_Venta;
 import java.util.List;
 
@@ -41,7 +42,8 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
         listaClientes = funcionalidadesClientes.consultarClientes();
         System.out.println(listaClientes);
         initComponents();
-
+        jTextField1.setVisible(false);
+        jButton1.setVisible(false);
         llenarTabla();
         setVisible(true);
     }
@@ -187,9 +189,12 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
 
         if (respuesta == JOptionPane.YES_OPTION) {
             this.dispose();
-            control.listaDirecciones();
+            control.listaDirecciones(venta);
 
         } else {
+            DTO_Direccion direccion=new DTO_Direccion();
+            direccion.setCalle("En tienda");
+            venta.setDieccionEntrega(direccion);
             this.dispose();
             control.CobrarVenta(venta);
 

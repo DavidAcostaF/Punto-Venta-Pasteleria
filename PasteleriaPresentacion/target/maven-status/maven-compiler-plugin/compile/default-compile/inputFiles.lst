@@ -1,22 +1,8 @@
-<<<<<<< Updated upstream
-C:\Users\f_aco\Downloads\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgPagoEfectivo.java
-C:\Users\f_aco\Downloads\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\com\mycompany\pasteleria\Pasteleria.java
-C:\Users\f_aco\Downloads\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgDirecciones.java
-C:\Users\f_aco\Downloads\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgAgregarDireccion.java
-C:\Users\f_aco\Downloads\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_MenuPrincipal.java
-C:\Users\f_aco\Downloads\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgDatosCliente.java
-C:\Users\f_aco\Downloads\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgListaClientes.java
-C:\Users\f_aco\Downloads\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_ProductosVenta.java
-C:\Users\f_aco\Downloads\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\extras\PastelComboBoxModel.java
-C:\Users\f_aco\Downloads\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\control\ControlAgregarVenta.java
-C:\Users\f_aco\Downloads\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgAgregarPastel.java
-C:\Users\f_aco\Downloads\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgCobrarVenta.java
-=======
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\control\ControlAgregarVenta.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgDirecciones.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgAgregarDireccion.java
+C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgConfirmacionPago.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\com\mycompany\pasteleria\Pasteleria.java
-C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgPagoEfectivo.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_ProductosVenta.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\extras\PastelComboBoxModel.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgListaClientes.java
@@ -24,4 +10,3 @@ C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPrese
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgCobrarVenta.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgDatosCliente.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_MenuPrincipal.java
->>>>>>> Stashed changes

@@ -24,6 +24,10 @@ public class DTO_Direccion {
         this.cliente = cliente;
     }
 
+    public DTO_Direccion(String calle) {
+        this.calle = calle;
+    }
+
     public DTO_Direccion(String calle, String colonia, String numExterior) {
         this.calle = calle;
         this.colonia = colonia;

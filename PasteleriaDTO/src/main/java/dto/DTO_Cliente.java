@@ -20,6 +20,10 @@ public class DTO_Cliente {
         
     }
 
+    public DTO_Cliente(String nombre) {
+        this.nombre = nombre;
+    }
+
     public DTO_Cliente(String nombre, String apellidoP, String apellidoM, String telefono, String correo) {
         this.nombre = nombre;
         this.apellidoP = apellidoP;

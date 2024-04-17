@@ -8,6 +8,8 @@ package presentacion;
 //import com.mycompany.pastelerianegocio.IAgregarCliente;
 import dto.DTO_Cliente;
 import control.ControlAgregarVenta;
+import dto.DTO_Direccion;
+import dto.DTO_Venta;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,18 +18,15 @@ import javax.swing.JOptionPane;
  */
 public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
     ControlAgregarVenta control;
+    DTO_Venta venta;
     /**
      * Creates new form DlgDatosCliente
      */
-    public Presentacion_DlgDatosCliente(java.awt.Frame parent, boolean modal) {
+    public Presentacion_DlgDatosCliente(java.awt.Frame parent, boolean modal,DTO_Venta venta) {
         super(parent, modal);
+        this.venta=venta;
         initComponents();
         control=new ControlAgregarVenta();
-        this.campoTextoNombre.setText("David");
-        this.campoTextoApellidoP.setText("Acosta");
-        this.campoTextoApellidoM.setText("Fajardo");
-        this.campoTextoTelefono.setText("6441526874");
-        this.campoTextoCorreo.setText("davidaf@gmail.com");
         setVisible(true);
         
         
@@ -177,18 +176,23 @@ public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
 
     private void botonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSiguienteActionPerformed
 //        IAgregarCliente agregar = new AgregarCliente();
-        DTO_Cliente cliente = new DTO_Cliente(this.campoTextoNombre.getText(),this.campoTextoApellidoP.getText()
-        ,this.campoTextoApellidoM.getText(),this.campoTextoTelefono.getText(),this.campoTextoCorreo.getText());
-        ControlAgregarVenta.setCliente(cliente);
-//        agregar.agregarCliente(cliente);
+        DTO_Cliente cliente = new DTO_Cliente(this.campoTextoNombre.getText());
+        
+        venta.setCliente(cliente);
+        
           int respuesta = JOptionPane.showOptionDialog(null, "¿Realizara envio a domicilio?", "Tipo de envio", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
 
         if (respuesta == JOptionPane.YES_OPTION) {
            this.dispose(); 
-           control.AgregarDireccion();
+           control.AgregarDireccion(venta);
           
         } else {
-           this.dispose(); 
+            DTO_Direccion direccion=new DTO_Direccion();
+            direccion.setCalle("En tienda");
+            venta.setDieccionEntrega(direccion);
+            this.dispose();
+            control.CobrarVenta(venta);
+           
           
         }
         

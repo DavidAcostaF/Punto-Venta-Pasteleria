@@ -14,14 +14,14 @@ import javax.swing.JOptionPane;
  *
  * @author af_da
  */
-public class Presentacion_DlgPagoEfectivo extends javax.swing.JDialog {
+public class Presentacion_DlgConfirmacionPago extends javax.swing.JDialog {
 ControlAgregarVenta control;
 DTO_Venta venta;
 IFuncionalidadesVenta ventas;
     /**
      * Creates new form DlgPagoEfectivo
      */
-    public Presentacion_DlgPagoEfectivo(java.awt.Frame parent, boolean modal,DTO_Venta venta) {
+    public Presentacion_DlgConfirmacionPago(java.awt.Frame parent, boolean modal,DTO_Venta venta) {
         super(parent, modal);
          control = new ControlAgregarVenta();
          this.venta=venta;
@@ -30,7 +30,7 @@ IFuncionalidadesVenta ventas;
         txtCliente.setText(venta.getCliente().getNombre());
         txtCosto.setText(Float.toString(venta.getMontoTotal()));
         txtFechaEntrega.setText(venta.getFechaEntrega());
-        txtUbicacionEntrega.setText("En tienda");
+        txtUbicacionEntrega.setText(venta.getDieccionEntrega().calle);
         setVisible(true);
         
     }
@@ -208,6 +208,18 @@ IFuncionalidadesVenta ventas;
         // Mostrar el mensaje utilizando JOptionPane
         JOptionPane.showMessageDialog(null, mensaje, "Registro de Venta Exitoso", JOptionPane.INFORMATION_MESSAGE);
        this.dispose();
+        int respuesta = JOptionPane.showOptionDialog(null, "¿Quiere registrar otra venta?", "Hola", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+           this.dispose(); 
+           control.mostrarProductosVenta();
+          
+        } else {
+            this.dispose();
+          control.mostrarMenu();
+           
+          
+        }
         
     }//GEN-LAST:event_btnRegistrarActionPerformed
 

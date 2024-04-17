@@ -114,16 +114,19 @@ public class VentasBO implements IVentasBO {
         List<Direccion> listaDirecciones = this.direccionDAO.consultarDirecciones();
         List<DTO_Direccion> listaDireccionesDTO = new ArrayList<>();
         for (Direccion direccion : listaDirecciones) {
-            /**DTO_Cliente clienteDTO = new DTO_Cliente(direccion.getCliente().getNombre(),
-                    direccion.getCliente().getApellidoP(),
-                    direccion.getCliente().getApellidoM(),
-                    direccion.getCliente().getTelefono(),
-                    direccion.getCliente().getCorreo());*/
+            /**
+             * DTO_Cliente clienteDTO = new
+             * DTO_Cliente(direccion.getCliente().getNombre(),
+             * direccion.getCliente().getApellidoP(),
+             * direccion.getCliente().getApellidoM(),
+             * direccion.getCliente().getTelefono(),
+                    direccion.getCliente().getCorreo());
+             */
             DTO_Direccion direccionDTO = new DTO_Direccion(
                     direccion.getCalle(),
                     direccion.getColonia(),
                     direccion.getNumExterior()
-                    );
+            );
             listaDireccionesDTO.add(direccionDTO);
         }
         return listaDireccionesDTO;
@@ -141,13 +144,13 @@ public class VentasBO implements IVentasBO {
         venta.setCliente(cliente);
         venta.setFechaEntrega(ventaDTO.getFechaEntrega());
         venta.setMontoTotal(ventaDTO.getMontoTotal());
-        List<DTO_DetalleVenta> detallesVenta = ventaDTO.getDetallesVenta();
+         List<DTO_DetalleVenta> detallesVenta = ventaDTO.getDetallesVenta();
         List<DetalleVenta> detalleVentaLista = new ArrayList<>();
         for (DTO_DetalleVenta dv : detallesVenta) {
             DetalleVenta detalleVenta = new DetalleVenta();
             detalleVenta.setCantidad(dv.getCantidad());
             detalleVenta.setImporte(dv.getImporte());
 
-        }
     }
+}
 }

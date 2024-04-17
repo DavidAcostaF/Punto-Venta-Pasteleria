@@ -200,7 +200,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarVentaActionPerformed
-
+        this.dispose();
         control.mostrarProductosVenta();
     }//GEN-LAST:event_btnRegistrarVentaActionPerformed
 

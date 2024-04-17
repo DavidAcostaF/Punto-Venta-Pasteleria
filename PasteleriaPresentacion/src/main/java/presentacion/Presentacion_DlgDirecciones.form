@@ -48,8 +48,8 @@
                       <Group type="102" attributes="0">
                           <EmptySpace min="104" pref="104" max="-2" attributes="0"/>
                           <Component id="btnRegresar" min="-2" pref="97" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="btnNuevaDireccion" min="-2" pref="177" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="btnSeleccionarDireccion" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
@@ -62,6 +62,11 @@
                   </Group>
                   <EmptySpace pref="60" max="32767" attributes="0"/>
               </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="229" max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -71,10 +76,12 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="198" max="-2" attributes="0"/>
-                  <EmptySpace pref="35" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="30" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnRegresar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnNuevaDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnSeleccionarDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
@@ -84,10 +91,10 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Seleccione una direcci&#xf3;n"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="24" style="3"/>
             </Property>
+            <Property name="text" type="java.lang.String" value="Seleccione una direcci&#xf3;n"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -136,23 +143,37 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="btnNuevaDireccion">
+        <Component class="javax.swing.JButton" name="btnSeleccionarDireccion">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Agregar nueva direcci&#xf3;n"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fe" green="dc" red="8c" type="rgb"/>
             </Property>
+            <Property name="text" type="java.lang.String" value="Seleccionar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSeleccionarDireccionActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnRegresar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Regresar"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fe" green="dc" red="8c" type="rgb"/>
             </Property>
+            <Property name="text" type="java.lang.String" value="Regresar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegresarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Agregar direcci&#xf3;n"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel2MouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
