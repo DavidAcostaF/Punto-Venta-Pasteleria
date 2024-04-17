@@ -30,7 +30,6 @@ import java.util.List;
  */
 public class VentasBO implements IVentasBO {
 
-
     private IClienteDAO clienteDAO;
     private IProductoDAO productoDAO;
     private IDireccionDAO direccionDAO;
@@ -40,8 +39,6 @@ public class VentasBO implements IVentasBO {
         this.productoDAO = new ProductoDAO();
         this.direccionDAO = new DireccionDAO();
     }
-
-
 
     @Override
     public List<DTO_Cliente> consultarClientes() {
@@ -64,22 +61,16 @@ public class VentasBO implements IVentasBO {
     // En esta clase iran todos los metodos encargados de para agregar una venta 
 
     @Override
-    public void agregarClientes(List<DTO_Cliente> clientes) {
-        List<DTO_Cliente> listaClientesDTO = clientes;
+    public void agregarCliente(DTO_Cliente clienteDTO) {
 
-        for (DTO_Cliente clienteDTO : listaClientesDTO) {
-            Cliente cliente = new Cliente(
-                    clienteDTO.getNombre(),
-                    clienteDTO.getApellidoP(),
-                    clienteDTO.getApellidoM(),
-                    clienteDTO.getTelefono(),
-                    clienteDTO.getCorreo());
-
-            this.clienteDAO.agregarCliente(cliente);
-        }
-
+        Cliente cliente = new Cliente(
+                clienteDTO.getNombre(),
+                clienteDTO.getApellidoP(),
+                clienteDTO.getApellidoM(),
+                clienteDTO.getTelefono(),
+                clienteDTO.getCorreo());
+        clienteDAO.agregarCliente(cliente);
     }
-
 
     @Override
     public List<DTO_Producto> consultarProductos() {
@@ -95,25 +86,25 @@ public class VentasBO implements IVentasBO {
         }
         return listaProductoDTO;
     }
-    
+
     @Override
     public void agregarDirecciones(List<DTO_Direccion> direcciones) {
         List<DTO_Direccion> listaDireccionesDTO = direcciones;
-        
+
         for (DTO_Direccion direccionDTO : listaDireccionesDTO) {
             Cliente cliente = new Cliente(
-                    direccionDTO.getCliente().getNombre(), 
-                    direccionDTO.getCliente().getApellidoP(), 
-                    direccionDTO.getCliente().getApellidoM(), 
-                    direccionDTO.getCliente().getTelefono(), 
+                    direccionDTO.getCliente().getNombre(),
+                    direccionDTO.getCliente().getApellidoP(),
+                    direccionDTO.getCliente().getApellidoM(),
+                    direccionDTO.getCliente().getTelefono(),
                     direccionDTO.getCliente().getCorreo());
-            
+
             Direccion direccion = new Direccion(
-                    direccionDTO.getCalle(), 
-                    direccionDTO.getColonia(), 
-                    direccionDTO.getNumExterior(), 
+                    direccionDTO.getCalle(),
+                    direccionDTO.getColonia(),
+                    direccionDTO.getNumExterior(),
                     cliente);
-            
+
             this.direccionDAO.agregarDireccion(direccion);
         }
     }
@@ -121,17 +112,17 @@ public class VentasBO implements IVentasBO {
     @Override
     public List<DTO_Direccion> consultarDirecciones() {
         List<Direccion> listaDirecciones = this.direccionDAO.consultarDirecciones();
-        List<DTO_Direccion>listaDireccionesDTO = new ArrayList<>();
+        List<DTO_Direccion> listaDireccionesDTO = new ArrayList<>();
         for (Direccion direccion : listaDirecciones) {
-            DTO_Cliente clienteDTO = new DTO_Cliente(direccion.getCliente().getNombre(), 
-                    direccion.getCliente().getApellidoP(), 
-                    direccion.getCliente().getApellidoM(), 
-                    direccion.getCliente().getTelefono(), 
+            DTO_Cliente clienteDTO = new DTO_Cliente(direccion.getCliente().getNombre(),
+                    direccion.getCliente().getApellidoP(),
+                    direccion.getCliente().getApellidoM(),
+                    direccion.getCliente().getTelefono(),
                     direccion.getCliente().getCorreo());
             DTO_Direccion direccionDTO = new DTO_Direccion(
-                    direccion.getCalle(), 
-                    direccion.getColonia(), 
-                    direccion.getNumExterior(), 
+                    direccion.getCalle(),
+                    direccion.getColonia(),
+                    direccion.getNumExterior(),
                     clienteDTO);
             listaDireccionesDTO.add(direccionDTO);
         }
@@ -140,23 +131,23 @@ public class VentasBO implements IVentasBO {
 
     @Override
     public void agregarVenta(DTO_Venta ventaDTO) {
-    Venta venta= new Venta();
-     Cliente cliente = new Cliente(
-                    ventaDTO.getCliente().getNombre(),
-                    ventaDTO.getCliente().getApellidoP(),
-                    ventaDTO.getCliente().getApellidoM(),
-                    ventaDTO.getCliente().getTelefono()
-                    );
-    venta.setCliente(cliente);
-    venta.setFechaEntrega(ventaDTO.getFechaEntrega());
-    venta.setMontoTotal(ventaDTO.getMontoTotal());
-    List<DTO_DetalleVenta> detallesVenta=ventaDTO.getDetallesVenta();
-    List<DetalleVenta> detalleVentaLista=new ArrayList<>(); 
-        for (DTO_DetalleVenta dv:detallesVenta) {
-            DetalleVenta detalleVenta=new DetalleVenta();
+        Venta venta = new Venta();
+        Cliente cliente = new Cliente(
+                ventaDTO.getCliente().getNombre(),
+                ventaDTO.getCliente().getApellidoP(),
+                ventaDTO.getCliente().getApellidoM(),
+                ventaDTO.getCliente().getTelefono()
+        );
+        venta.setCliente(cliente);
+        venta.setFechaEntrega(ventaDTO.getFechaEntrega());
+        venta.setMontoTotal(ventaDTO.getMontoTotal());
+        List<DTO_DetalleVenta> detallesVenta = ventaDTO.getDetallesVenta();
+        List<DetalleVenta> detalleVentaLista = new ArrayList<>();
+        for (DTO_DetalleVenta dv : detallesVenta) {
+            DetalleVenta detalleVenta = new DetalleVenta();
             detalleVenta.setCantidad(dv.getCantidad());
             detalleVenta.setImporte(dv.getImporte());
-            
+
         }
     }
 }

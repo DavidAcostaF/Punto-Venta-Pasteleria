@@ -15,11 +15,9 @@ public class FuncionalidadClientes implements IFuncionalidadClientes{
     //esta clase tendra todas las operaciones del cliente necesarias
     
     private IVentasBO ventaBO;
-    private OperacionesClientes agregarClientes;
 
     public FuncionalidadClientes() {
         this.ventaBO= new VentasBO();
-        this.agregarClientes= new OperacionesClientes();
     }
     
     @Override
@@ -32,10 +30,8 @@ public class FuncionalidadClientes implements IFuncionalidadClientes{
     }
 
     @Override
-    public void agregarCliente() {
-        List<DTO_Cliente> clientes;
-        clientes = agregarClientes.agregarClientes();
-        this.ventaBO.agregarClientes(clientes);
+    public void agregarCliente(DTO_Cliente cliente) {
+       ventaBO.agregarCliente(cliente);
     }
     
 }

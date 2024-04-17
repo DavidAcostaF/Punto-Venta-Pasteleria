@@ -36,7 +36,7 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
         this.venta = venta;
         control = new ControlAgregarVenta();
         this.funcionalidadesClientes = new FuncionalidadClientes();
-        funcionalidadesClientes.agregarCliente();
+        funcionalidadesClientes.consultarClientes();
 
         listaClientes = funcionalidadesClientes.consultarClientes();
         System.out.println(listaClientes);

@@ -16,14 +16,17 @@ import java.util.List;
  * @author f_aco
  */
 public interface IVentasBO {
+
     // En esta clase iran todos los metodos encargados de para agregar una venta 
     public List<DTO_Cliente> consultarClientes();
-    public void agregarClientes(List<DTO_Cliente> clientes); 
+
+    public void agregarCliente(DTO_Cliente clientes);
+
     public List<DTO_Producto> consultarProductos();
-    
+
     public void agregarDirecciones(List<DTO_Direccion> direcciones);
-    
-    public List<DTO_Direccion>consultarDirecciones();
-    
+
+    public List<DTO_Direccion> consultarDirecciones();
+
     public void agregarVenta(DTO_Venta venta);
 }
