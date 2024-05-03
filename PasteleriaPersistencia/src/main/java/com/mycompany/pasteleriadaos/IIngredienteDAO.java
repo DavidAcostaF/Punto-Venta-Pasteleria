@@ -5,12 +5,18 @@
 package com.mycompany.pasteleriadaos;
 
 import com.mycompany.pasteleriadominios.Ingrediente;
+import java.util.List;
 
 /**
  *
  * @author af_da
  */
 public interface IIngredienteDAO {
+
     public Boolean agregar(Ingrediente ingrediente);
+
     public Boolean actualizar();
+
+    public List<Ingrediente> consultar();
+    public Ingrediente consultar(String nombre);
 }

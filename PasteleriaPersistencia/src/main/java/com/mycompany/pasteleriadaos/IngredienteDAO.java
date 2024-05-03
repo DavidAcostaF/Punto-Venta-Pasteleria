@@ -4,9 +4,12 @@
  */
 package com.mycompany.pasteleriadaos;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mycompany.pasteleriadominios.Ingrediente;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -29,6 +32,21 @@ public class IngredienteDAO implements IIngredienteDAO {
 
     @Override
     public Boolean actualizar() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Ingrediente> consultar() {
+        MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
+            FindIterable<Ingrediente> resultados = coleccion.find();
+    
+        List<Ingrediente> listaIngredientes = new LinkedList<>();
+        resultados.into(listaIngredientes);
+        return listaIngredientes;
+    }
+
+    @Override
+    public Ingrediente consultar(String nombre) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
