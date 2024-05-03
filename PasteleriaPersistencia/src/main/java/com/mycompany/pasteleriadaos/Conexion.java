@@ -8,6 +8,7 @@ import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
@@ -18,19 +19,21 @@ import org.bson.codecs.pojo.PojoCodecProvider;
  *
  * @author af_da
  */
-public class Conexion implements IConexion {
+public class Conexion<V, T> implements IConexion {
 
-    String nombreBaseDatos;
-    String cadenaConexion;
+    private String nombreBaseDatos  = "pasteleria";
+    private String cadenaConexion  = "mongodb://127.0.0.1:27017";
+    private final String nombreColeccion;
+    private final Class<T> tipoBase;
 
-    public Conexion() {
-        nombreBaseDatos = "maquila10am";
-        cadenaConexion = "mongodb://127.0.0.1:27017";
+    public Conexion(String nombreColeccion, Class<T> tipoBase) {
 
+        this.nombreColeccion = nombreColeccion;
+        this.tipoBase = tipoBase;
     }
 
     @Override
-    public MongoDatabase obtenerConexion() {
+    public MongoCollection<T> obtenerColeccion() {
         CodecRegistry pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
                 fromProviders(PojoCodecProvider.builder().automatic(true).build()));
         MongoClientSettings settings = MongoClientSettings.builder()
@@ -39,7 +42,8 @@ public class Conexion implements IConexion {
         MongoClient cliente = MongoClients.create(settings);
 
         MongoDatabase baseDatos = cliente.getDatabase(nombreBaseDatos);
-        return baseDatos;
-    }
+        MongoCollection<T> coleccion = baseDatos.getCollection(nombreColeccion, tipoBase);
 
+        return coleccion;
+    }
 }

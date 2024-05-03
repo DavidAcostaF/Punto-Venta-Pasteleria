@@ -4,24 +4,42 @@
  */
 package com.mycompany.pasteleriadominios;
 
+import org.bson.types.ObjectId;
+
 /**
  *
  * @author af_da
  */
 public class Ingrediente {
+    private ObjectId id;
     private String nombre;
-    private Double cantidad;
+    private Integer cantidad;
     private String unidadDeMedida;
     private Float precio;
-    
-    
 
-    public Ingrediente(String nombre, Double cantidad, String unidadDeMedida, Float precio) {
+    public Ingrediente(ObjectId id, String nombre, Integer cantidad, String unidadDeMedida, Float precio) {
+        this.id = id;
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.unidadDeMedida = unidadDeMedida;
         this.precio = precio;
     }
+
+    public Ingrediente(String nombre, Integer cantidad, String unidadDeMedida, Float precio) {
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+        this.unidadDeMedida = unidadDeMedida;
+        this.precio = precio;
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+    
 
     public String getNombre() {
         return nombre;
@@ -31,11 +49,11 @@ public class Ingrediente {
         this.nombre = nombre;
     }
 
-    public Double getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(Double cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
 

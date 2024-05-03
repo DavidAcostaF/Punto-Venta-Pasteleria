@@ -1,13 +1,15 @@
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IClienteDAO.java
+C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\Conexion.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IProductoDAO.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadominios\Direccion.java
+C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\pruebas\Pruebas.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IDireccionDAO.java
-C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\ConexionDAO.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\DireccionDAO.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadominios\Producto.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IDetalleVentaDAO.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadominios\Ingrediente.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadominios\Venta.java
+C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IConexion.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\ProductoDAO.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\DetalleVentaDAO.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IVentaDAO.java
@@ -15,6 +17,5 @@ C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\Pasteleri
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\ClienteDAO.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IngredienteDAO.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IIngredienteDAO.java
-C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IConexionDAO.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadominios\DetalleVenta.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\VentaDAO.java

@@ -4,20 +4,32 @@
  */
 package com.mycompany.pasteleriadaos;
 
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mycompany.pasteleriadominios.Ingrediente;
+
 /**
  *
  * @author af_da
  */
-public class IngredienteDAO implements IIngredienteDAO{
+public class IngredienteDAO implements IIngredienteDAO {
+
+    private IConexion conexion;
+
+    public IngredienteDAO() {
+        conexion = new Conexion("ingredientes", Ingrediente.class);
+    }
 
     @Override
-    public Boolean agregar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Boolean agregar(Ingrediente ingrediente) {
+        MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
+        coleccion.insertOne(ingrediente);
+        return true;
     }
 
     @Override
     public Boolean actualizar() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }

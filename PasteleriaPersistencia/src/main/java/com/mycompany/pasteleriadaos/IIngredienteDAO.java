@@ -4,11 +4,13 @@
  */
 package com.mycompany.pasteleriadaos;
 
+import com.mycompany.pasteleriadominios.Ingrediente;
+
 /**
  *
  * @author af_da
  */
 public interface IIngredienteDAO {
-    public Boolean agregar();
+    public Boolean agregar(Ingrediente ingrediente);
     public Boolean actualizar();
 }

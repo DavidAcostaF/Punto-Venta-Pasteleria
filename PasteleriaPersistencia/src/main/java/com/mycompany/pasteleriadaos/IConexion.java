@@ -4,13 +4,14 @@
  */
 package com.mycompany.pasteleriadaos;
 
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
 /**
  *
  * @author af_da
  */
-public interface IConexion {
+public interface IConexion<T>{
  
-    public MongoDatabase obtenerConexion();
+    public MongoCollection<T> obtenerColeccion();
 }
