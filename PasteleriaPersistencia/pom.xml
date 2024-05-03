@@ -11,4 +11,12 @@
         <maven.compiler.target>20</maven.compiler.target>
         <exec.mainClass>com.mycompany.pasteleriapersistencia.PasteleriaPersistencia</exec.mainClass>
     </properties>
+    
+        <dependencies>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver</artifactId>
+            <version>3.10.2</version>
+        </dependency>
+    </dependencies>
 </project>
