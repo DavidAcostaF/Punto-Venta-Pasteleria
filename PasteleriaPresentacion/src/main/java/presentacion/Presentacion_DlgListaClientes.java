@@ -6,8 +6,8 @@ package presentacion;
 
 //import com.mycompany.pastelerianegocio.ConsultarClientes;
 //import com.mycompany.pastelerianegocio.IConsultarClientes;
-import com.mycompany.clientes.FuncionalidadClientes;
-import com.mycompany.clientes.IFuncionalidadClientes;
+import consultarClientes.FuncionalidadConsultarClientes;
+import consultarClientes.IFuncionalidadConsultarClientes;
 import control.ControlAgregarVenta;
 import dto.DTO_Cliente;
 import dto.DTO_Direccion;
@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
 
     private ControlAgregarVenta control;
-    private IFuncionalidadClientes funcionalidadesClientes;
+    private IFuncionalidadConsultarClientes funcionalidadesClientes;
     private List<DTO_Cliente> listaClientes;
     private DTO_Venta venta;
 //    private IConsultarClientes consultarClientes;
@@ -36,7 +36,7 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
         super(parent, modal);
         this.venta = venta;
         control = new ControlAgregarVenta();
-        this.funcionalidadesClientes = new FuncionalidadClientes();
+        this.funcionalidadesClientes = new FuncionalidadConsultarClientes();
         funcionalidadesClientes.consultarClientes();
 
         listaClientes = funcionalidadesClientes.consultarClientes();

@@ -24,22 +24,12 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>PasteleriaNegocio</artifactId>
+            <artifactId>PasteleriaConsultarClientes</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>PasteleriaProductos</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>PasteleriaClientes</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>PasteleriaDTO</artifactId>
+            <artifactId>PasteleriaConsultarDirecciones</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -49,7 +39,17 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>PasteleriaConsultarDirecciones</artifactId>
+            <artifactId>PasteleriaConsultarProductos</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>PasteleriaAgregarClientes</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>PasteleriaDTO</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
