@@ -4,17 +4,27 @@
  */
 package presentacion;
 
+import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
+import com.mycompany.pasteleriaconsultaringredientes.IFuncionalidadConsultarIngredientes;
+import dto.DTO_Ingrediente;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author af_da
  */
 public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
 
+    private IFuncionalidadConsultarIngredientes funcionalidadConsultarIngrediente;
+
     /**
      * Creates new form Presentacion_DlgInventarioIngredientes
      */
     public Presentacion_DlgInventarioIngredientes() {
         initComponents();
+        funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngredientes();
+        llenarTabla(funcionalidadConsultarIngrediente.consultarIngredientes());
     }
 
     /**
@@ -61,8 +71,21 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
             new String [] {
                 "Nombre", "Cantidad", "Unidad", "Precio"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tableIngredientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tableIngredientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableIngredientesMouseClicked(evt);
+            }
+        });
         scrollPane.setViewportView(tableIngredientes);
 
         comboUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -172,10 +195,9 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 18, Short.MAX_VALUE)
+                        .addGap(0, 30, Short.MAX_VALUE)
                         .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(79, 79, 79))
                     .addGroup(layout.createSequentialGroup()
@@ -203,6 +225,14 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
+    private void llenarTabla(List<DTO_Ingrediente> listaIngredientes) {
+        DefaultTableModel modelo = (DefaultTableModel) tableIngredientes.getModel();
+
+        if (listaIngredientes != null) {
+            listaIngredientes.forEach(t -> modelo.addRow(new Object[]{t.getNombre(), t.getCantidad(), t.getUnidadDeMedida(), t.getPrecio()}));
+        }
+    }
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 //        DefaultTableModel modelo = (DefaultTableModel) tableIngredientes.getModel();
 //        DTO_Producto p = control.agregarPastel(this);
@@ -224,6 +254,16 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVolver1ActionPerformed
+
+    private void tableIngredientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableIngredientesMouseClicked
+        int fila = tableIngredientes.rowAtPoint(evt.getPoint());
+        txtNombre.setText(tableIngredientes.getValueAt(fila, 0).toString());
+        txtCantidad.setText(tableIngredientes.getValueAt(fila, 1).toString());
+        //comboUnidad.se(tableIngredientes.getValueAt(fila, 0).toString());
+        txtPrecio.setText(tableIngredientes.getValueAt(fila, 3).toString());
+
+
+    }//GEN-LAST:event_tableIngredientesMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

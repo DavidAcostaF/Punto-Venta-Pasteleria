@@ -3,3 +3,4 @@ dto\DTO_Direccion.class
 dto\DTO_DetalleVenta.class
 dto\DTO_Producto.class
 dto\DTO_Venta.class
+dto\DTO_Ingrediente.class
