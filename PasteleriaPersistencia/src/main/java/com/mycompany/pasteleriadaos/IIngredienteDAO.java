@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface IIngredienteDAO {
 
-    public Boolean agregar(Ingrediente ingrediente);
+    public Ingrediente agregar(Ingrediente ingrediente);
 
     public Boolean actualizar();
 

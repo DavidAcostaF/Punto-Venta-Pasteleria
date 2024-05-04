@@ -24,6 +24,15 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
     }
 
     @Override
+    public DTO_Ingrediente agregarIngrediente(DTO_Ingrediente ingrediente) {
+        //VALIDAR QUE EL INGREDIENTE NO ESTE AGREGADO
+        //Happy path primero
+
+        Ingrediente ingredienteNueva = ingredienteDAO.agregar(ConvertirDTOAIngrediente(ingrediente));
+        return convertirIngredienteADTO(ingredienteNueva);
+    }
+
+    @Override
     public List<DTO_Ingrediente> consultarIngredientes() {
         List<Ingrediente> ingredientes = ingredienteDAO.consultar();
         List<DTO_Ingrediente> ingredientesDTO = new LinkedList<>();
@@ -46,7 +55,7 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
     @Override
     public DTO_Ingrediente convertirIngredienteADTO(Ingrediente ingrediente) {
         DTO_Ingrediente dtoIngrediente = new DTO_Ingrediente();
-//    dtoIngrediente.setId(ingrediente.get);
+        dtoIngrediente.setId(ingrediente.getId().toString());
 
         dtoIngrediente.setCantidad(ingrediente.getCantidad());
         dtoIngrediente.setNombre(ingrediente.getNombre());

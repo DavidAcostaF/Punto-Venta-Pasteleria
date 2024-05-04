@@ -4,10 +4,14 @@
  */
 package com.mycompany.pasteleriaagregaringrediente;
 
+import dto.DTO_Ingrediente;
+
 /**
  *
  * @author af_da
  */
-public interface IFuncionalidadesAgregarIngrediente {
-    
+public interface IFuncionalidadAgregarIngrediente {
+
+    public DTO_Ingrediente agregarIngrediente(DTO_Ingrediente ingrediente);
+
 }

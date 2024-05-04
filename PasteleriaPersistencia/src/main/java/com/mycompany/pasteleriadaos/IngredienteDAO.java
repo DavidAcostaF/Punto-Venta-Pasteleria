@@ -24,10 +24,10 @@ public class IngredienteDAO implements IIngredienteDAO {
     }
 
     @Override
-    public Boolean agregar(Ingrediente ingrediente) {
+    public Ingrediente agregar(Ingrediente ingrediente) {
         MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
         coleccion.insertOne(ingrediente);
-        return true;
+        return ingrediente;
     }
 
     @Override
