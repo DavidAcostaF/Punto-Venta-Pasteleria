@@ -19,9 +19,9 @@ public class Pruebas {
      */
     public static void main(String[] args) {
         IIngredienteDAO ingredienteDAO = new IngredienteDAO();
-        //ingredienteDAO.agregar(new Ingrediente("Azucar",15,"pz",150.00F));
-        
-        System.out.println(ingredienteDAO.consultar());
+        Ingrediente ingrediento = new Ingrediente();
+        ingrediento.setNombre("a");        
+        System.out.println(ingredienteDAO.consultar(ingrediento));
     }
     
 }

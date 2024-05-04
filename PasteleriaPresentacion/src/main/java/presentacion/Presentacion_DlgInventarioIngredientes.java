@@ -6,6 +6,8 @@ package presentacion;
 
 import com.mycompany.pasteleriaagregaringrediente.FuncionalidadAgregarIngrediente;
 import com.mycompany.pasteleriaagregaringrediente.IFuncionalidadAgregarIngrediente;
+import com.mycompany.pasteleriaconsultaringrediente.FuncionalidadConsultarIngrediente;
+import com.mycompany.pasteleriaconsultaringrediente.IFuncionalidadConsultarIngrediente;
 import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
 import com.mycompany.pasteleriaconsultaringredientes.IFuncionalidadConsultarIngredientes;
 import dto.DTO_Ingrediente;
@@ -18,17 +20,21 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
 
-    private IFuncionalidadConsultarIngredientes funcionalidadConsultarIngrediente;
+    private IFuncionalidadConsultarIngredientes funcionalidadConsultarIngredientes;
     private IFuncionalidadAgregarIngrediente funcionalidadAgregarIngrediente;
+    private IFuncionalidadConsultarIngrediente funcionalidadConsultarIngrediente;
+    // private List<DTO_Ingrediente> listaIngredientes;
 
     /**
      * Creates new form Presentacion_DlgInventarioIngredientes
      */
     public Presentacion_DlgInventarioIngredientes() {
         initComponents();
-        funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngredientes();
+        funcionalidadConsultarIngredientes = new FuncionalidadConsultarIngredientes();
         funcionalidadAgregarIngrediente = new FuncionalidadAgregarIngrediente();
-        llenarTabla(funcionalidadConsultarIngrediente.consultarIngredientes());
+        funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngrediente();
+        //listaIngredientes = funcionalidadConsultarIngredientes.consultarIngredientes();
+        llenarTabla();
     }
 
     /**
@@ -119,6 +125,15 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
             }
         });
 
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyTyped(evt);
+            }
+        });
+
         btnVolver1.setBackground(new java.awt.Color(140, 220, 254));
         btnVolver1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         btnVolver1.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +203,6 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 36, Short.MAX_VALUE)
@@ -218,15 +232,16 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void llenarTabla(List<DTO_Ingrediente> listaIngredientes) {
+    private void llenarTabla() {
+        List<DTO_Ingrediente> listaIngredientes = funcionalidadConsultarIngredientes.consultarIngredientes();
         DefaultTableModel modelo = (DefaultTableModel) tableIngredientes.getModel();
 
         if (listaIngredientes != null) {
             listaIngredientes.forEach(t -> modelo.addRow(new Object[]{t.getNombre(), t.getCantidad(), t.getUnidadDeMedida(), t.getPrecio()}));
         }
     }
-    
-        /**
+
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -263,6 +278,13 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
         });
     }
 
+    private void limpiarTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) tableIngredientes.getModel();
+
+        modelo.setRowCount(0);
+
+        tableIngredientes.setModel(modelo);
+    }
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         DefaultTableModel modelo = (DefaultTableModel) tableIngredientes.getModel();
         DTO_Ingrediente ingredientoDTO = new DTO_Ingrediente();
@@ -295,6 +317,31 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_tableIngredientesMouseClicked
+
+    private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
+
+
+    }//GEN-LAST:event_txtBuscarKeyTyped
+
+    private void txtBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyPressed
+        limpiarTabla();
+
+        if (txtBuscar.getText().isEmpty()) {
+            llenarTabla();
+            return;
+        }
+        DefaultTableModel modelo = (DefaultTableModel) tableIngredientes.getModel();
+        DTO_Ingrediente ingredientoDTO = new DTO_Ingrediente();
+        ingredientoDTO.setNombre(txtBuscar.getText());
+//        ingredientoDTO.setPrecio(Float.parseFloat(txtPrecio.getText()));
+//        ingredientoDTO.setUnidadDeMedida(comboUnidad.getSelectedItem().toString());
+//        ingredientoDTO.setCantidad(Integer.parseInt(txtCantidad.getText()));
+        List<DTO_Ingrediente> ingredienteConsultado = funcionalidadConsultarIngrediente.consultarIngrediente(ingredientoDTO);
+        if (ingredienteConsultado != null) {
+            ingredienteConsultado.forEach(t -> modelo.addRow(new Object[]{t.getNombre(), t.getCantidad(), t.getUnidadDeMedida(), t.getPrecio()}));
+        }
+        tableIngredientes.setModel(modelo);
+    }//GEN-LAST:event_txtBuscarKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;

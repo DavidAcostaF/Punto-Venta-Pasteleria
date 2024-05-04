@@ -18,5 +18,5 @@ public interface IIngredienteDAO {
     public Boolean actualizar();
 
     public List<Ingrediente> consultar();
-    public Ingrediente consultar(String nombre);
+    public List<Ingrediente> consultar(Ingrediente ingrediente);
 }

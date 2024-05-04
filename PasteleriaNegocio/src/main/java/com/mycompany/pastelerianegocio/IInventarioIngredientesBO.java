@@ -14,8 +14,9 @@ import java.util.List;
  * @author af_da
  */
 public interface IInventarioIngredientesBO {
-    List<DTO_Ingrediente>consultarIngredientes();
+    public List<DTO_Ingrediente>consultarIngredientes();
     public DTO_Ingrediente agregarIngrediente(DTO_Ingrediente ingrediente);
+    public List<DTO_Ingrediente> consultarIngrediente(DTO_Ingrediente ingrediente);
     Ingrediente ConvertirDTOAIngrediente(DTO_Ingrediente ingrediente);
     public DTO_Ingrediente convertirIngredienteADTO(Ingrediente ingrediente);
 
