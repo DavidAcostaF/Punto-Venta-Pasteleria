@@ -21,7 +21,11 @@ public class FuncionalidadAgregarIngrediente implements IFuncionalidadAgregarIng
     }
 
     @Override
-    public DTO_Ingrediente agregarIngrediente(DTO_Ingrediente ingrediente) {
+    public DTO_Ingrediente agregarIngrediente(DTO_Ingrediente ingrediente) throws Exception {
+
+        if (inventarioIngredientesBO.validarExistencia(ingrediente) != null) {
+            throw new Exception("El ingrediente ya se encuentra agregado");
+        }
         DTO_Ingrediente ingredienteNuevo = inventarioIngredientesBO.agregarIngrediente(ingrediente);
         return ingredienteNuevo;
     }

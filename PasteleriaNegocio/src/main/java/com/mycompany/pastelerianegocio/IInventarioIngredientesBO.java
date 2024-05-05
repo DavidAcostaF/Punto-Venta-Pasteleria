@@ -19,5 +19,5 @@ public interface IInventarioIngredientesBO {
     public List<DTO_Ingrediente> consultarIngrediente(DTO_Ingrediente ingrediente);
     Ingrediente ConvertirDTOAIngrediente(DTO_Ingrediente ingrediente);
     public DTO_Ingrediente convertirIngredienteADTO(Ingrediente ingrediente);
-
+    public DTO_Ingrediente validarExistencia(DTO_Ingrediente ingrediente);
 }

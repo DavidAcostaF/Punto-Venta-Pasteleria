@@ -50,11 +50,18 @@ public class IngredienteDAO implements IIngredienteDAO {
     @Override
     public List<Ingrediente> consultar(Ingrediente ingrediente) {
         MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
-        FindIterable<Ingrediente> resultados = coleccion.find(regex("nombre", "^"+ingrediente.getNombre(),"i"));
+        FindIterable<Ingrediente> resultados = coleccion.find(regex("nombre", "^" + ingrediente.getNombre(), "i"));
 
         List<Ingrediente> listaIngredientes = new LinkedList<>();
         resultados.into(listaIngredientes);
         return listaIngredientes;
+    }
+
+    @Override
+    public Ingrediente consultarPorNombre(String nombre) {
+        MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
+        Ingrediente resultado = coleccion.find(eq("nombre",nombre)).first();
+        return resultado;
     }
 
 }

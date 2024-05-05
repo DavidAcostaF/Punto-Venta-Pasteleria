@@ -19,4 +19,5 @@ public interface IIngredienteDAO {
 
     public List<Ingrediente> consultar();
     public List<Ingrediente> consultar(Ingrediente ingrediente);
+    public Ingrediente consultarPorNombre(String nombre);
 }

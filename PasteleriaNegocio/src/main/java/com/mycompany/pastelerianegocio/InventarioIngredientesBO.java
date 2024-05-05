@@ -73,4 +73,14 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
         return ingredientesDTO;
     }
 
+    @Override
+    public DTO_Ingrediente validarExistencia(DTO_Ingrediente ingrediente) {
+        Ingrediente ingredienteConsultado = ingredienteDAO.consultarPorNombre(ingrediente.getNombre());
+
+        if (ingredienteConsultado != null) {
+            return convertirIngredienteADTO(ingredienteConsultado);
+        }
+        return null;
+    }
+
 }

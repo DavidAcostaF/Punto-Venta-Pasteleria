@@ -12,6 +12,6 @@ import dto.DTO_Ingrediente;
  */
 public interface IFuncionalidadAgregarIngrediente {
 
-    public DTO_Ingrediente agregarIngrediente(DTO_Ingrediente ingrediente);
+    public DTO_Ingrediente agregarIngrediente(DTO_Ingrediente ingrediente) throws Exception;
 
 }

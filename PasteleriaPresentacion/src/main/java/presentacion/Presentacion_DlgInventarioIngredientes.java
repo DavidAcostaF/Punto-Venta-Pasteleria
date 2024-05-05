@@ -12,6 +12,9 @@ import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngre
 import com.mycompany.pasteleriaconsultaringredientes.IFuncionalidadConsultarIngredientes;
 import dto.DTO_Ingrediente;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -63,6 +66,7 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
         txtBuscar = new javax.swing.JTextField();
         btnVolver1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -149,6 +153,15 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
 
         jLabel5.setText("Nombre:");
 
+        btnEliminar.setBackground(new java.awt.Color(140, 220, 254));
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -183,9 +196,11 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
                                 .addGap(155, 155, 155))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnAgregar)
-                                .addGap(77, 77, 77)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnActualizar)
-                                .addGap(98, 98, 98)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnEliminar)
+                                .addGap(56, 56, 56)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel5)
@@ -233,7 +248,8 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnAgregar)
-                            .addComponent(btnActualizar))
+                            .addComponent(btnActualizar)
+                            .addComponent(btnEliminar))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnVolver)
                         .addGap(23, 23, 23))))
@@ -296,19 +312,37 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
         tableIngredientes.setModel(modelo);
     }
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        if (txtNombre.getText().isEmpty() || txtPrecio.getText().isEmpty() || comboUnidad.getSelectedItem().toString().isEmpty() || txtCantidad.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos deben estar llenos.");
+            return;
+        }
         DefaultTableModel modelo = (DefaultTableModel) tableIngredientes.getModel();
         DTO_Ingrediente ingredientoDTO = new DTO_Ingrediente();
         ingredientoDTO.setNombre(txtNombre.getText());
         ingredientoDTO.setPrecio(Float.parseFloat(txtPrecio.getText()));
         ingredientoDTO.setUnidadDeMedida(comboUnidad.getSelectedItem().toString());
         ingredientoDTO.setCantidad(Integer.parseInt(txtCantidad.getText()));
-        DTO_Ingrediente ingredienteNuevo = funcionalidadAgregarIngrediente.agregarIngrediente(ingredientoDTO);
-        modelo.addRow(new Object[]{ingredienteNuevo.getNombre(), ingredienteNuevo.getCantidad(), ingredienteNuevo.getUnidadDeMedida(), ingredienteNuevo.getPrecio()});
-    }//GEN-LAST:event_btnAgregarActionPerformed
+        DTO_Ingrediente ingredienteNuevo = null;
+        try {
+            ingredienteNuevo = funcionalidadAgregarIngrediente.agregarIngrediente(ingredientoDTO);
+            modelo.addRow(new Object[]{ingredienteNuevo.getNombre(), ingredienteNuevo.getCantidad(), ingredienteNuevo.getUnidadDeMedida(), ingredienteNuevo.getPrecio()});
+            this.limpiarCampos();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
 
+    }//GEN-LAST:event_btnAgregarActionPerformed
+    private void limpiarCampos() {
+        txtNombre.setText("");
+        txtPrecio.setText("");
+        comboUnidad.setSelectedItem(0);
+        txtCantidad.setText("");
+    }
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         btnActualizar.setEnabled(false);
         btnAgregar.setEnabled(true);
+        this.limpiarCampos();
+
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
@@ -358,9 +392,14 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtBuscarKeyReleased
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnVolver;
     private javax.swing.JButton btnVolver1;
     private javax.swing.JComboBox<String> comboUnidad;
