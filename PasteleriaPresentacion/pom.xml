@@ -67,6 +67,39 @@
             <artifactId>PasteleriaConsultarIngrediente</artifactId>
             <version>${project.version}</version>
         </dependency>
+                <dependency>
+            <groupId>io.github.bweng20</groupId>
+            <artifactId>jSVG</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.miglayout</groupId>
+            <artifactId>miglayout-swing</artifactId>
+            <version>11.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.miglayout</groupId>
+            <artifactId>miglayout-core</artifactId>
+            <version>11.3</version>
+        </dependency>
+<dependency>
+    <groupId>com.formdev</groupId>
+    <artifactId>flatlaf-extras</artifactId>
+    <version>3.4.1</version>
+    <type>jar</type>
+</dependency>
+<dependency>
+    <groupId>com.formdev</groupId>
+    <artifactId>flatlaf-fonts-roboto</artifactId>
+    <version>2.137</version>
+</dependency>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.4.1</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <name>PasteleriaPresentacion</name>
 </project>
