@@ -12,6 +12,8 @@ import com.mycompany.pasteleriaconsultaringrediente.FuncionalidadConsultarIngred
 import com.mycompany.pasteleriaconsultaringrediente.IFuncionalidadConsultarIngrediente;
 import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
 import com.mycompany.pasteleriaconsultaringredientes.IFuncionalidadConsultarIngredientes;
+import com.mycompany.pasteleriaeliminaringrediente.FuncionalidadEliminarIngrediente;
+import com.mycompany.pasteleriaeliminaringrediente.IFuncionalidadEliminarIngrediente;
 import dto.DTO_Ingrediente;
 import java.awt.GridLayout;
 import java.util.List;
@@ -33,6 +35,7 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
     private IFuncionalidadAgregarIngrediente funcionalidadAgregarIngrediente;
     private IFuncionalidadConsultarIngrediente funcionalidadConsultarIngrediente;
     private IFuncionalidadActualizarIngrediente funcionalidadActualizarIngrediente;
+    private IFuncionalidadEliminarIngrediente funcionalidadEliminarIngrediente;
     // private List<DTO_Ingrediente> listaIngredientes;
 
     /**
@@ -44,6 +47,7 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
         funcionalidadAgregarIngrediente = new FuncionalidadAgregarIngrediente();
         funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngrediente();
         funcionalidadActualizarIngrediente = new FuncionalidadActualizarIngrediente();
+        funcionalidadEliminarIngrediente = new FuncionalidadEliminarIngrediente();
         //listaIngredientes = funcionalidadConsultarIngredientes.consultarIngredientes();
         llenarTabla();
         btnActualizar.setEnabled(false);
@@ -287,12 +291,14 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void llenarTabla() {
+        limpiarTabla();
         List<DTO_Ingrediente> listaIngredientes = funcionalidadConsultarIngredientes.consultarIngredientes();
         DefaultTableModel modelo = (DefaultTableModel) tableIngredientes.getModel();
 
         if (listaIngredientes != null) {
             listaIngredientes.forEach(t -> modelo.addRow(new Object[]{t.getNombre(), t.getCantidad(), t.getUnidadDeMedida(), t.getPrecio()}));
         }
+
     }
 
     /**
@@ -371,7 +377,7 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
         comboUnidad.setSelectedItem(0);
         txtCantidad.setText("");
     }
-    
+
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         btnActualizar.setEnabled(false);
         btnAgregar.setEnabled(true);
@@ -379,6 +385,7 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
             DTO_Ingrediente ingrediente = funcionalidadActualizarIngrediente.actualizarIngrediente(obtenerIngredienteDTO());
             if (ingrediente != null) {
                 JOptionPane.showMessageDialog(this, "Se he actulizado el ingrediente.");
+                llenarTabla();
             }
             valoresPorDefecto();
 
@@ -401,7 +408,7 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
         txtCantidad.setText(tableIngredientes.getValueAt(fila, 1).toString());
         comboUnidad.setSelectedItem(tableIngredientes.getValueAt(fila, 0).toString());
         txtPrecio.setText(tableIngredientes.getValueAt(fila, 3).toString());
-    
+
         btnActualizar.setEnabled(true);
         btnModificarCantidad.setEnabled(true);
         btnAgregar.setEnabled(false);
@@ -443,16 +450,28 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+        int respuesta = JOptionPane.showConfirmDialog(this, "¿Seguro que deseas eliminar el ingrediente " + txtNombre.getText() + " ?");
+        if (respuesta == JOptionPane.YES_OPTION) {
+            Boolean eliminado = funcionalidadEliminarIngrediente.eliminarIngrediente(obtenerIngredienteDTO());
+            if (eliminado) {
+                JOptionPane.showMessageDialog(this, "Se he eliminado con exito.");
+                llenarTabla();
+
+            } else {
+                JOptionPane.showMessageDialog(this, "No se he eliminado con exito.");
+
+            }
+        }
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnModificarCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCantidadActionPerformed
         String respuestaCantidad = JOptionPane.showInputDialog(this, "Ingrese la cantidad que desea aumentar, actual: " + txtCantidad.getText());
         try {
             int cantidad = Integer.parseInt(respuestaCantidad);
-            if(cantidad<0){
+            if (cantidad < 0) {
                 JOptionPane.showMessageDialog(this, "No se pueden ingresar valores negativos.");
-                return; 
+                return;
             }
             int respuesta = JOptionPane.showConfirmDialog(this, "Estas seguro que deseas la cantidad a " + (cantidad + Integer.parseInt(txtCantidad.getText())));
             if (respuesta == JOptionPane.YES_OPTION) {
