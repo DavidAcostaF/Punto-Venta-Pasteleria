@@ -487,6 +487,7 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarActionPerformed
     private void valoresPorDefecto() {
         txtCantidad.setEnabled(true);
+        txtNombre.setEnabled(true);
         btnModificarCantidad.setVisible(false);
         btnModificarCantidad.setEnabled(false);
         btnAgregar.setEnabled(true);
