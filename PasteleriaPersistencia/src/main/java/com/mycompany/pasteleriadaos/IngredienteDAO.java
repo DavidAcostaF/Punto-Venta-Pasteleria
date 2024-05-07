@@ -9,6 +9,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
+import com.mongodb.client.result.DeleteResult;
 import com.mycompany.pasteleriadominios.Ingrediente;
 import java.util.LinkedList;
 import java.util.List;
@@ -64,6 +65,17 @@ public class IngredienteDAO implements IIngredienteDAO {
         MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
         Ingrediente resultado = coleccion.find(eq("nombre", nombre)).first();
         return resultado;
+    }
+
+    @Override
+    public Boolean eliminar(Ingrediente ingrediente) {
+        MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
+        DeleteResult result = coleccion.deleteOne(eq("nombre", ingrediente.getNombre()));
+        if (result.getDeletedCount() == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

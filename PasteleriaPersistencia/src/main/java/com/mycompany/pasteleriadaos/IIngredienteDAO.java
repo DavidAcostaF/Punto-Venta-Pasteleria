@@ -22,4 +22,6 @@ public interface IIngredienteDAO {
     public List<Ingrediente> consultar(Ingrediente ingrediente);
 
     public Ingrediente consultarPorNombre(String nombre);
+
+    public Boolean eliminar(Ingrediente ingrediente);
 }
