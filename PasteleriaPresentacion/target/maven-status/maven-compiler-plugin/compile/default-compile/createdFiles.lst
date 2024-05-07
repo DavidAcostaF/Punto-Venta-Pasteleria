@@ -40,6 +40,7 @@ presentacion\Presentacion_DlgAgregarDireccion.class
 control\ControlAgregarVenta.class
 com\mycompany\pasteleria\Pasteleria.class
 presentacion\Presentacion_DlgAgregarPastel$2.class
+presentacion\Presentacion_DlgInventarioIngredientes$9.class
 presentacion\Presentacion_DlgInventarioIngredientes$2.class
 presentacion\Presentacion_MenuPrincipal$4.class
 presentacion\Presentacion_ProductosVenta$4.class

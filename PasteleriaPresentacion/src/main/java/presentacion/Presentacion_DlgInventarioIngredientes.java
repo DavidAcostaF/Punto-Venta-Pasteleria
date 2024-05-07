@@ -11,10 +11,12 @@ import com.mycompany.pasteleriaconsultaringrediente.IFuncionalidadConsultarIngre
 import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
 import com.mycompany.pasteleriaconsultaringredientes.IFuncionalidadConsultarIngredientes;
 import dto.DTO_Ingrediente;
+import java.awt.GridLayout;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
