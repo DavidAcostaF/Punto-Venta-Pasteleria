@@ -33,8 +33,10 @@ public class IngredienteDAO implements IIngredienteDAO {
     }
 
     @Override
-    public Boolean actualizar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Ingrediente actualizar(Ingrediente ingrediente) {
+        MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
+        Ingrediente ingredienteActualizado = coleccion.findOneAndReplace(eq("nombre", ingrediente.getNombre()), ingrediente);
+        return ingredienteActualizado;
     }
 
     @Override
@@ -60,7 +62,7 @@ public class IngredienteDAO implements IIngredienteDAO {
     @Override
     public Ingrediente consultarPorNombre(String nombre) {
         MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
-        Ingrediente resultado = coleccion.find(eq("nombre",nombre)).first();
+        Ingrediente resultado = coleccion.find(eq("nombre", nombre)).first();
         return resultado;
     }
 

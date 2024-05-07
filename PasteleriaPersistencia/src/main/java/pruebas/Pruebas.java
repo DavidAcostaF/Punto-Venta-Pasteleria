@@ -20,8 +20,11 @@ public class Pruebas {
     public static void main(String[] args) {
         IIngredienteDAO ingredienteDAO = new IngredienteDAO();
         Ingrediente ingrediento = new Ingrediente();
-        ingrediento.setNombre("a");        
-        System.out.println(ingredienteDAO.consultar(ingrediento));
+        ingrediento.setNombre("Azucar");
+        ingrediento.setCantidad(2);
+        ingrediento.setPrecio(123F);
+        ingrediento.setUnidadDeMedida("gramos");
+        System.out.println(ingredienteDAO.actualizar(ingrediento));
     }
     
 }

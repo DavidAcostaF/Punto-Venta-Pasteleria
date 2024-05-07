@@ -15,9 +15,11 @@ public interface IIngredienteDAO {
 
     public Ingrediente agregar(Ingrediente ingrediente);
 
-    public Boolean actualizar();
+    public Ingrediente actualizar(Ingrediente ingrediente);
 
     public List<Ingrediente> consultar();
+
     public List<Ingrediente> consultar(Ingrediente ingrediente);
+
     public Ingrediente consultarPorNombre(String nombre);
 }

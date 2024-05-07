@@ -9,6 +9,7 @@ presentacion\Presentacion_DlgHistorialReportes$2.class
 presentacion\Presentacion_ProductosVenta$3.class
 presentacion\Presentacion_DlgListaClientes$2.class
 presentacion\Presentacion_DlgAgregarDireccion$3.class
+presentacion\Presentacion_DlgInventarioIngredientes$10.class
 extras\TableActionCellRender.class
 presentacion\Presentacion_MenuPrincipal$7.class
 presentacion\Presentacion_ProductosVenta$BotonEditor.class
@@ -72,6 +73,7 @@ presentacion\Presentacion_ProductosVenta$2.class
 extras\ComboBoxMultiSeleccion.class
 presentacion\Presentacion_DlgAgregarDireccion$2.class
 extras\ComboBoxMultiSeleccion$EditorComboMultiple.class
+presentacion\Presentacion_DlgInventarioIngredientes$11.class
 presentacion\Presentacion_DlgListaClientes$1.class
 presentacion\Presentacion_MenuPrincipal$3.class
 presentacion\Presentacion_MenuPrincipal$5.class
