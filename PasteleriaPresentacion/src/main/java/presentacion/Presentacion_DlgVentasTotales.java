@@ -4,6 +4,9 @@
  */
 package presentacion;
 
+import dto.DTO_Producto;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author PC
@@ -196,9 +199,9 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel();
-        DTO_Producto p = control.agregarPastel(this);
-        modelo.addRow(new Object[]{p.getNombre(), p.getDescripcion(), 1, 100});
+//        DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel();
+//        DTO_Producto p = control.agregarPastel(this);
+//        modelo.addRow(new Object[]{p.getNombre(), p.getDescripcion(), 1, 100});
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
