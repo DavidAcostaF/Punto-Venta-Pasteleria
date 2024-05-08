@@ -4,39 +4,52 @@
  */
 package dto;
 
+import java.util.List;
+
 /**
  *
  * @author PC
  */
 public class DTO_Cliente {
-
-    public String nombre;
-    public String apellidoP;
-    public String apellidoM;
-    public String telefono;
-    public String correo;
-
-    public DTO_Cliente() {
+    private String ID;
+    private String nombre;
+    private String apellidoP;
+    private String apellidoM;
+    private String telefono;
+    private String correo;
+   private List<DTO_Direccion> direcciones;
+    
+   public DTO_Cliente() {
         
     }
 
-    public DTO_Cliente(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public DTO_Cliente(String nombre, String apellidoP, String apellidoM, String telefono, String correo) {
+    public DTO_Cliente(String ID, String nombre, String apellidoP, String apellidoM, String telefono, String correo, List<DTO_Direccion> direcciones) {
+        this.ID = ID;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
         this.telefono = telefono;
         this.correo = correo;
+        this.direcciones = direcciones;
     }
 
-    public DTO_Cliente(String nombre, String apellidoP, String apellidoM, String telefono) {
+   
+   
+    public DTO_Cliente(String nombre, String apellidoP, String apellidoM, String telefono, String correo, List<DTO_Direccion> direcciones) {
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
         this.telefono = telefono;
+        this.correo = correo;
+        this.direcciones = direcciones;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public String getNombre() {
@@ -79,9 +92,18 @@ public class DTO_Cliente {
         this.correo = correo;
     }
 
-    @Override
-    public String toString() {
-        return "ClienteDTO{" + "nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", telefono=" + telefono + ", correo=" + correo + '}';
+    public List<DTO_Direccion> getDirecciones() {
+        return direcciones;
     }
 
+    public void setDirecciones(List<DTO_Direccion> direcciones) {
+        this.direcciones = direcciones;
+    }
+
+    @Override
+    public String toString() {
+        return "DTO_Cliente{" + "ID=" + ID + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", telefono=" + telefono + ", correo=" + correo + ", direcciones=" + direcciones + '}';
+    }
+
+    
 }

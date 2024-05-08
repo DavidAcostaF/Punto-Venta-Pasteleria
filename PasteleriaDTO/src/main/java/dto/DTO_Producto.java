@@ -9,11 +9,11 @@ package dto;
  * @author PC
  */
 public class DTO_Producto {
-
-    public float precio;
-    public String nombre;
-    public String descripcion;
-    public String tamaño;
+    private String Id;
+    private float precio;
+    private String nombre;
+    private String descripcion;
+    private String tamaño;
 
     public DTO_Producto() {
     }
@@ -22,18 +22,27 @@ public class DTO_Producto {
         this.nombre = nombre;
     }
 
-    public DTO_Producto(String nombre, String tamaño) {
+    public DTO_Producto(String Id, float precio, String nombre, String descripcion, String tamaño) {
+        this.Id = Id;
+        this.precio = precio;
         this.nombre = nombre;
+        this.descripcion = descripcion;
         this.tamaño = tamaño;
     }
-
-   
 
     public DTO_Producto(float precio, String nombre, String descripcion, String tamaño) {
         this.precio = precio;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.tamaño = tamaño;
+    }
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String Id) {
+        this.Id = Id;
     }
 
     public float getPrecio() {
@@ -70,7 +79,8 @@ public class DTO_Producto {
 
     @Override
     public String toString() {
-        return "ProductoDTO{" + "precio=" + precio + ", nombre=" + nombre + ", descripcion=" + descripcion + ", tama\u00f1o=" + tamaño + '}';
+        return "DTO_Producto{" + "Id=" + Id + ", precio=" + precio + ", nombre=" + nombre + ", descripcion=" + descripcion + ", tama\u00f1o=" + tamaño + '}';
     }
 
+    
 }

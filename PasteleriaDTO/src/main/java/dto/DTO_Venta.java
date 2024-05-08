@@ -13,15 +13,25 @@ import java.util.List;
  * @author PC
  */
 public class DTO_Venta {
-    
-    public float montoTotal;
-    public String fechaEntrega;
-    public String fechaRegistro;
-    public DTO_Cliente cliente;
-    public List<DTO_DetalleVenta> detallesVenta;  
-    public DTO_Direccion dieccionEntrega;
+    private String ID;
+    private float montoTotal;
+    private String fechaEntrega;
+    private String fechaRegistro;
+    private DTO_Cliente cliente;
+    private List<DTO_DetalleVenta> detallesVenta;  
+    private DTO_Direccion dieccionEntrega;
 
     public DTO_Venta() {
+    }
+
+    public DTO_Venta(String ID, float montoTotal, String fechaEntrega, String fechaRegistro, DTO_Cliente cliente, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion dieccionEntrega) {
+        this.ID = ID;
+        this.montoTotal = montoTotal;
+        this.fechaEntrega = fechaEntrega;
+        this.fechaRegistro = fechaRegistro;
+        this.cliente = cliente;
+        this.detallesVenta = detallesVenta;
+        this.dieccionEntrega = dieccionEntrega;
     }
 
     public DTO_Venta(float montoTotal, String fechaEntrega, String fechaRegistro, DTO_Cliente cliente, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion dieccionEntrega) {
