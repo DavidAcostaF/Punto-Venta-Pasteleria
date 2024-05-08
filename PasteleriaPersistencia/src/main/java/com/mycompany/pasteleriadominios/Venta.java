@@ -5,6 +5,7 @@
 package com.mycompany.pasteleriadominios;
 
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -12,15 +13,34 @@ import java.util.List;
  */
 public class Venta {
 
-   
-    public float montoTotal;
-    public String fechaEntrega;
-    public String fechaRegistro;
-    public Cliente cliente;
-    public List<DetalleVenta> detallesVenta;
+    private ObjectId id;
+    private float montoTotal;
+    private String fechaEntrega;
+    private String fechaRegistro;
+    private Cliente cliente;
+    private List<DetalleVenta> detallesVenta;
     private Direccion direccionEntrega;
 
     public Venta() {
+    }
+
+    public Venta(ObjectId id, float montoTotal, String fechaEntrega, String fechaRegistro, Cliente cliente, List<DetalleVenta> detallesVenta, Direccion direccionEntrega) {
+        this.id = id;
+        this.montoTotal = montoTotal;
+        this.fechaEntrega = fechaEntrega;
+        this.fechaRegistro = fechaRegistro;
+        this.cliente = cliente;
+        this.detallesVenta = detallesVenta;
+        this.direccionEntrega = direccionEntrega;
+    }
+
+    public Venta(float montoTotal, String fechaEntrega, String fechaRegistro, Cliente cliente, List<DetalleVenta> detallesVenta, Direccion direccionEntrega) {
+        this.montoTotal = montoTotal;
+        this.fechaEntrega = fechaEntrega;
+        this.fechaRegistro = fechaRegistro;
+        this.cliente = cliente;
+        this.detallesVenta = detallesVenta;
+        this.direccionEntrega = direccionEntrega;
     }
 
     
@@ -73,4 +93,10 @@ public class Venta {
         this.direccionEntrega = direccionEntrega;
     }
 
+    @Override
+    public String toString() {
+        return "Venta{" + "id=" + id + ", montoTotal=" + montoTotal + ", fechaEntrega=" + fechaEntrega + ", fechaRegistro=" + fechaRegistro + ", cliente=" + cliente + ", detallesVenta=" + detallesVenta + ", direccionEntrega=" + direccionEntrega + '}';
+    }
+
+    
 }
