@@ -25,6 +25,14 @@ private ObjectId id;
         this.id = id;
     }
 
+    public Producto(ObjectId id, float precio, String nombre, String descripcion, String tamaño) {
+        this.id = id;
+        this.precio = precio;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.tamaño = tamaño;
+    }
+
     public Producto(float precio, String nombre, String descripcion, String tamaño) {
         this.precio = precio;
         this.nombre = nombre;
