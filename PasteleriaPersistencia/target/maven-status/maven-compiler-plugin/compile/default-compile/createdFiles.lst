@@ -2,6 +2,7 @@ com\mycompany\pasteleriadominios\Producto.class
 com\mycompany\pasteleriadominios\Direccion.class
 com\mycompany\pasteleriadaos\ClienteDAO.class
 com\mycompany\pasteleriadaos\DetalleVentaDAO.class
+pruebas\pruebaCliente.class
 com\mycompany\pasteleriadaos\IProductoDAO.class
 com\mycompany\pasteleriadaos\Conexion.class
 com\mycompany\pasteleriadominios\Venta.class

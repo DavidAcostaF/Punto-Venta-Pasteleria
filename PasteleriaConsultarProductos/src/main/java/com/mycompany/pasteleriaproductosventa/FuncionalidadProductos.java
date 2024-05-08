@@ -21,7 +21,7 @@ public class FuncionalidadProductos implements IFuncionalidadProductos {
     private IVentasBO ventaBO;
 
     public FuncionalidadProductos() {
-        this.ventaBO = new VentasBO();
+       this.ventaBO = new VentasBO();
     }
 
     @Override

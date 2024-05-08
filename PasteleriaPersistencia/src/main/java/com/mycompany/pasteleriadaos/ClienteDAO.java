@@ -4,8 +4,11 @@
  */
 package com.mycompany.pasteleriadaos;
 
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
 import com.mycompany.pasteleriadominios.Cliente;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -14,28 +17,31 @@ import java.util.List;
  */
 public class ClienteDAO implements IClienteDAO {
 
-    List<Cliente> listaClientes;
+    private IConexion conexion;
 
     public ClienteDAO() {
-        this.listaClientes = new ArrayList<>();
-
+        conexion = new Conexion("clientes", Cliente.class);
 
     }
 
     @Override
     public Cliente agregarCliente(Cliente cliente) {
-        this.listaClientes.add(cliente);
+        MongoCollection<Cliente> coleccion = conexion.obtenerColeccion();
+        coleccion.insertOne(cliente);
         return cliente;
     }
 
     @Override
-    public void eliminarCliente(Cliente cliente) {
-        this.listaClientes.remove(cliente);
-    }
-
-    @Override
     public List<Cliente> consultarClientes() {
-        return this.listaClientes;
+        MongoCollection<Cliente> coleccion = conexion.obtenerColeccion();
+        FindIterable<Cliente> clientesConsulta = coleccion.find();
+        List<Cliente> listaCliente = new LinkedList<>();
+
+        for (Cliente cliente : clientesConsulta) {
+            listaCliente.add(cliente);
+        }
+
+        return listaCliente;
     }
 
 }
