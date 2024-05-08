@@ -9,10 +9,10 @@ package dto;
  * @author PC
  */
 public class DTO_Direccion {
-    public String calle;
-    public String colonia;
-    public String numExterior;
-    public DTO_Cliente cliente;
+    private String calle;
+    private String colonia;
+    private String numExterior;
+
 
     public DTO_Direccion() {
     }
@@ -21,7 +21,6 @@ public class DTO_Direccion {
         this.calle = calle;
         this.colonia = colonia;
         this.numExterior = numExterior;
-        this.cliente = cliente;
     }
 
     public DTO_Direccion(String calle) {
@@ -58,13 +57,6 @@ public class DTO_Direccion {
         this.numExterior = numExterior;
     }
 
-    public DTO_Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(DTO_Cliente cliente) {
-        this.cliente = cliente;
-    }
 
     @Override
     public String toString() {

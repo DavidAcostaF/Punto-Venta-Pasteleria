@@ -16,7 +16,6 @@ public class DTO_DetalleVenta {
     public int cantidad;
     public String especificacion;
     public DTO_Producto productos;
-    public DTO_Venta venta;
 
     public DTO_DetalleVenta() {
     }
@@ -28,7 +27,7 @@ public class DTO_DetalleVenta {
         this.importe = importe;
         this.cantidad = cantidad;
         this.productos = productos;
-        this.venta = venta;
+        
     }
 
     public float getPrecio() {
@@ -71,14 +70,7 @@ public class DTO_DetalleVenta {
         this.productos = productos;
     }
 
-    public DTO_Venta getVenta() {
-        return venta;
-    }
-
-    public void setVenta(DTO_Venta venta) {
-        this.venta = venta;
-    }
-
+ 
     
     
     
