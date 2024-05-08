@@ -4,19 +4,23 @@
  */
 package presentacion;
 
+import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
+import com.mycompany.pasteleriaconsultaringredientes.IFuncionalidadConsultarIngredientes;
+import dto.DTO_Ingrediente;
+import extras.Render;
 import java.awt.Component;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 
 /**
  *
@@ -24,88 +28,51 @@ import javax.swing.table.TableColumn;
  */
 public class Presentacion_DlgSeleccionarIngredientesProducto extends javax.swing.JFrame {
 
+    private IFuncionalidadConsultarIngredientes funcionalidadConsultarIngrediente;
+
     /**
      * Creates new form Presentacion_DlgSeleccionarIngredientesProducto
      */
     public Presentacion_DlgSeleccionarIngredientesProducto() {
         initComponents();
+        funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngredientes();
         cargaTabla();
     }
 
     private void cargaTabla() {
-        // Datos de ejemplo para la tabla
-        Object[][] data = {
-            {"Ingredient 1"},
-            {"Ingredient 2"},
-            {"Ingredient 3"}
-        };
+        tableIngredientes.setDefaultRenderer(Object.class, new Render());
+        String[] columnas = {"Nombre", "Selección"};
+        boolean[] editable = {false, true};
+        Class[] tipos = new Class[]{java.lang.Object.class, java.lang.Boolean.class};
 
-        // Nombres de las columnas
-        String[] columnNames = {"Nombre", "Seleccionar"};
+        DefaultTableModel model = new DefaultTableModel(columnas, 0) {
+            public Class getColumnClass(int i) {
+                return tipos[i];
+            }
 
-        // Crear modelo de tabla
-        DefaultTableModel model = new DefaultTableModel(data, columnNames) {
-            @Override
             public boolean isCellEditable(int row, int column) {
-                // Permitir editar solo la columna "Seleccionar"
-                return column == 1;
+                return editable[column];
             }
         };
 
-        // Asignar modelo de tabla a la tablaIngredientes
+        limipiarTabla(tableIngredientes, model);
+
+        Object datos = new Object[columnas.length];
+        List<DTO_Ingrediente> ingredientes = funcionalidadConsultarIngrediente.consultarIngredientes();
+        for (DTO_Ingrediente ingrediente : ingredientes) {
+
+            model.addRow(new Object[]{ingrediente.getNombre(), false});
+        }
+        
         tableIngredientes.setModel(model);
-
-        // Asignar editor personalizado a la columna "Seleccionar"
-        tableIngredientes.getColumnModel().getColumn(1).setCellEditor(new CheckBoxEditor());
-
-        // Asignar renderizador de celda personalizado para la columna "Seleccionar"
-        tableIngredientes.getColumnModel().getColumn(1).setCellRenderer(new CheckBoxRenderer());
     }
 
-// Renderizador de celda para CheckBox
-    class CheckBoxRenderer extends JCheckBox implements TableCellRenderer {
-
-        public CheckBoxRenderer() {
-            setHorizontalAlignment(SwingConstants.CENTER);
-        }
-
-        @Override
-        public java.awt.Component getTableCellRendererComponent(JTable table, Object value,
-                boolean isSelected, boolean hasFocus, int row, int column) {
-
-            if (value instanceof Boolean) {
-                setSelected((Boolean) value);
-            } else if (value instanceof Integer) {
-                setSelected(((Integer) value) == 1); // Si el valor es 1, se selecciona; de lo contrario, no
+    private void limipiarTabla(JTable tabla, DefaultTableModel modeloTabla) {
+        if (modeloTabla.getRowCount() > 0) {
+            for (int i = 0; i < tabla.getRowCount(); i++) {
+                modeloTabla.removeRow(i);
+                i -= 1;
             }
-
-            return this;
-        }
-    }
-
-    public class CheckBoxEditor extends DefaultCellEditor {
-
-        private JCheckBox checkBox;
-
-        public CheckBoxEditor() {
-            super(new JCheckBox());
-            checkBox = (JCheckBox) getComponent();
-            checkBox.setHorizontalAlignment(SwingConstants.CENTER);
-        }
-
-        @Override
-        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-            if (value instanceof Boolean) {
-                checkBox.setSelected((Boolean) value);
-            } else if (value instanceof Integer) {
-                checkBox.setSelected(((Integer) value) == 1);
-            }
-            return checkBox;
-        }
-
-        @Override
-        public Object getCellEditorValue() {
-            return checkBox.isSelected();
         }
     }
 
@@ -207,6 +174,56 @@ public class Presentacion_DlgSeleccionarIngredientesProducto extends javax.swing
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+//    // Renderizador de celda para CheckBox
+//    class CheckBoxRenderer extends JCheckBox implements TableCellRenderer {
+//
+//        public CheckBoxRenderer() {
+//            setHorizontalAlignment(SwingConstants.CENTER);
+//        }
+//
+//        @Override
+//        public java.awt.Component getTableCellRendererComponent(JTable table, Object value,
+//                boolean isSelected, boolean hasFocus, int row, int column) {
+//
+//            if (value instanceof Boolean) {
+//                setSelected((Boolean) value);
+//            } else if (value instanceof Integer) {
+//                setSelected(((Integer) value) == 1); // Si el valor es 1, se selecciona; de lo contrario, no
+//            }
+//
+//            return this;
+//        }
+//    }
+//
+//public class CheckBoxEditor extends DefaultCellEditor implements TableCellEditor {
+//
+//    private final JCheckBox checkBox;
+//
+//    public CheckBoxEditor() {
+//        super(new JCheckBox());
+//        checkBox = (JCheckBox) getComponent();
+//        checkBox.setHorizontalAlignment(SwingConstants.CENTER);
+//        checkBox.addItemListener(new ItemListener() {
+//            @Override
+//            public void itemStateChanged(ItemEvent e) {
+//                fireEditingStopped();
+//            }
+//        });
+//    }
+//
+//    @Override
+//    public Object getCellEditorValue() {
+//        return checkBox.isSelected();
+//    }
+//
+//    @Override
+//    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+//        if (value instanceof Boolean) {
+//            checkBox.setSelected((Boolean) value);
+//        }
+//        return checkBox;
+//    }
+//}
     /**
      * @param args the command line arguments
      */

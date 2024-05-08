@@ -41,6 +41,7 @@ extras\TableActionEvent.class
 extras\PastelComboBoxModel.class
 presentacion\Presentacion_FrmHistorialVentas$4.class
 presentacion\Presentacion_ProductosVenta$BotonRenderer.class
+extras\Render.class
 presentacion\Presentacion_FrmDetallesVenta$1.class
 presentacion\Presentacion_DlgInventarioIngredientes$3.class
 presentacion\Presentacion_DlgAgregarDireccion$1.class
@@ -53,7 +54,6 @@ presentacion\Presentacion_DlgHistorialReportes.class
 presentacion\Presentacion_DlgConfirmacionPago$2.class
 presentacion\Presentacion_DlgAgregarPastel.class
 presentacion\Presentacion_DlgInventarioProductos$5.class
-presentacion\Presentacion_DlgSeleccionarIngredientesProducto$CheckBoxEditor.class
 presentacion\Presentacion_DlgVentasTotales$2.class
 presentacion\Presentacion_DlgInventarioIngredientes$9.class
 presentacion\Presentacion_DlgInventarioProductos.class
@@ -70,7 +70,6 @@ presentacion\Presentacion_ProductosVenta.class
 presentacion\Presentacion_DlgListaClientes.class
 presentacion\Presentacion_DlgSeleccionarIngredientesProducto$1.class
 presentacion\Presentacion_DlgConfirmacionPago$4.class
-presentacion\Presentacion_DlgSeleccionarIngredientesProducto$CheckBoxRenderer.class
 presentacion\Presentacion_DlgInventarioProductos$11.class
 presentacion\Presentacion_DlgDatosCliente$2.class
 presentacion\Presentacion_DlgInventarioIngredientes$8.class
