@@ -1,4 +1,3 @@
-C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgInventarioProductos.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgVentasTotales.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgSeleccionarIngredientesProducto.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\control\ControlAgregarVenta.java
@@ -7,12 +6,13 @@ C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\Pasteleri
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgAgregarPastel.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgHistorialReportes.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\extras\TableActionEvent.java
-C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgGestionarInventario.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_ProductosVenta.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\com\mycompany\pasteleria\Pasteleria.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\extras\ComboBoxMultiSeleccion.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgConfirmacionPago.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\extras\TableActionCellRender.java
+C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgIngredientesSeleccionados.java
+C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgSeleccionOpcionGestion.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\extras\PanelBotones.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_MenuPrincipal.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgSeleccionarFechaIngresos.java
@@ -25,6 +25,7 @@ C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\Pasteleri
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgInventarioIngredientes.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgDirecciones.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\extras\ActionButton.java
+C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgInventarioPasteles.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_FrmHistorialVentas.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_FrmDetallesVenta.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgDatosCliente.java

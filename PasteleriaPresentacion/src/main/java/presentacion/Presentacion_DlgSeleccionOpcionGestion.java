@@ -8,12 +8,12 @@ package presentacion;
  *
  * @author af_da
  */
-public class Presentacion_DlgGestionarInventario extends javax.swing.JFrame {
+public class Presentacion_DlgSeleccionOpcionGestion extends javax.swing.JFrame {
 
     /**
      * Creates new form Presentacion_DlgGestionarInventario
      */
-    public Presentacion_DlgGestionarInventario() {
+    public Presentacion_DlgSeleccionOpcionGestion() {
         initComponents();
     }
 

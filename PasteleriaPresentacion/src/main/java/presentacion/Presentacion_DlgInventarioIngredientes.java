@@ -462,7 +462,7 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
 
             }
         }
-
+        valoresPorDefecto();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnModificarCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCantidadActionPerformed
