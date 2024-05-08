@@ -63,7 +63,7 @@ public class Presentacion_DlgSeleccionarIngredientesProducto extends javax.swing
 
             model.addRow(new Object[]{ingrediente.getNombre(), false});
         }
-        
+
         tableIngredientes.setModel(model);
     }
 
@@ -88,12 +88,14 @@ public class Presentacion_DlgSeleccionarIngredientesProducto extends javax.swing
         scrollPane = new javax.swing.JScrollPane();
         tableIngredientes = new javax.swing.JTable();
         btnAceptar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tableIngredientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null},
+                {null, null}
             },
             new String [] {
                 "Nombre", "Seleccionar"
@@ -108,12 +110,18 @@ public class Presentacion_DlgSeleccionarIngredientesProducto extends javax.swing
             }
         });
         tableIngredientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tableIngredientes.getTableHeader().setReorderingAllowed(false);
         tableIngredientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableIngredientesMouseClicked(evt);
             }
         });
         scrollPane.setViewportView(tableIngredientes);
+        if (tableIngredientes.getColumnModel().getColumnCount() > 0) {
+            tableIngredientes.getColumnModel().getColumn(0).setResizable(false);
+            tableIngredientes.getColumnModel().getColumn(1).setResizable(false);
+            tableIngredientes.getColumnModel().getColumn(1).setPreferredWidth(1);
+        }
 
         btnAceptar.setBackground(new java.awt.Color(140, 220, 254));
         btnAceptar.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
@@ -124,27 +132,31 @@ public class Presentacion_DlgSeleccionarIngredientesProducto extends javax.swing
             }
         });
 
+        jLabel1.setText("Selecciona los ingredientes.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAceptar)
-                .addGap(86, 86, 86))
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnAceptar)
+                        .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(84, 84, 84)
+                .addGap(27, 27, 27)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
-                .addGap(34, 34, 34))
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -155,75 +167,24 @@ public class Presentacion_DlgSeleccionarIngredientesProducto extends javax.swing
     }//GEN-LAST:event_tableIngredientesMouseClicked
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        List<Object[]> elementosSeleccionados = new ArrayList<>();
+        List<String> elementosSeleccionados = new ArrayList<>();
 
         for (int i = 0; i < tableIngredientes.getRowCount(); i++) {
             // Obtener el valor del CheckBox en la columna "Seleccionar"
             boolean seleccionado = (boolean) tableIngredientes.getValueAt(i, 1);
 
             if (seleccionado) {
-                Object[] fila = {
-                    tableIngredientes.getValueAt(i, 0), // Nombre
-                };
+                String fila = tableIngredientes.getValueAt(i, 0).toString(); // Nombre
+
                 elementosSeleccionados.add(fila);
             }
         }
 
-        for (Object[] fila : elementosSeleccionados) {
-            System.out.println(Arrays.toString(fila));
+        for (String fila : elementosSeleccionados) {
+            System.out.println(fila);
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-//    // Renderizador de celda para CheckBox
-//    class CheckBoxRenderer extends JCheckBox implements TableCellRenderer {
-//
-//        public CheckBoxRenderer() {
-//            setHorizontalAlignment(SwingConstants.CENTER);
-//        }
-//
-//        @Override
-//        public java.awt.Component getTableCellRendererComponent(JTable table, Object value,
-//                boolean isSelected, boolean hasFocus, int row, int column) {
-//
-//            if (value instanceof Boolean) {
-//                setSelected((Boolean) value);
-//            } else if (value instanceof Integer) {
-//                setSelected(((Integer) value) == 1); // Si el valor es 1, se selecciona; de lo contrario, no
-//            }
-//
-//            return this;
-//        }
-//    }
-//
-//public class CheckBoxEditor extends DefaultCellEditor implements TableCellEditor {
-//
-//    private final JCheckBox checkBox;
-//
-//    public CheckBoxEditor() {
-//        super(new JCheckBox());
-//        checkBox = (JCheckBox) getComponent();
-//        checkBox.setHorizontalAlignment(SwingConstants.CENTER);
-//        checkBox.addItemListener(new ItemListener() {
-//            @Override
-//            public void itemStateChanged(ItemEvent e) {
-//                fireEditingStopped();
-//            }
-//        });
-//    }
-//
-//    @Override
-//    public Object getCellEditorValue() {
-//        return checkBox.isSelected();
-//    }
-//
-//    @Override
-//    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-//        if (value instanceof Boolean) {
-//            checkBox.setSelected((Boolean) value);
-//        }
-//        return checkBox;
-//    }
-//}
     /**
      * @param args the command line arguments
      */
@@ -269,6 +230,7 @@ public class Presentacion_DlgSeleccionarIngredientesProducto extends javax.swing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JTable tableIngredientes;
     // End of variables declaration//GEN-END:variables

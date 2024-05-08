@@ -18,6 +18,7 @@ public class Render extends DefaultTableCellRenderer {
     public Component getTableCellRenderComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         if (value instanceof JCheckBox) {
             JCheckBox jCheckBox = (JCheckBox) value;
+            jCheckBox.setOpaque(true);
             return jCheckBox;
         }
         return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
