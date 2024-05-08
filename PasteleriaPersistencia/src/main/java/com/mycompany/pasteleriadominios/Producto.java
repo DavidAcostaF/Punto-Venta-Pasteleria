@@ -5,20 +5,24 @@
 package com.mycompany.pasteleriadominios;
 
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author abelc
  */
 public class Producto {
-
-    public float precio;
-    public String nombre;
-    public String descripcion;
-    public String tamaño;
-     public List<DetalleVenta> detallesVenta;
+private ObjectId id;
+    private float precio;
+    private String nombre;
+    private String descripcion;
+    private String tamaño;
 
     public Producto() {
+    }
+
+    public Producto(ObjectId id) {
+        this.id = id;
     }
 
     public Producto(float precio, String nombre, String descripcion, String tamaño) {
@@ -26,6 +30,14 @@ public class Producto {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.tamaño = tamaño;
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
     }
 
     public float getPrecio() {
@@ -60,4 +72,10 @@ public class Producto {
         this.tamaño = tamaño;
     }
 
+    @Override
+    public String toString() {
+        return "Producto{" + "id=" + id + ", precio=" + precio + ", nombre=" + nombre + ", descripcion=" + descripcion + ", tama\u00f1o=" + tamaño + '}';
+    }
+
+   
 }

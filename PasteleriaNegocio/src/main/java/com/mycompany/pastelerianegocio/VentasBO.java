@@ -27,7 +27,7 @@ import java.util.List;
 /**
  *
  * @author f_aco
- */
+ *//*
 public class VentasBO implements IVentasBO {
 
     private IClienteDAO clienteDAO;
@@ -96,10 +96,9 @@ public class VentasBO implements IVentasBO {
                     direccionDTO.getCliente().getNombre(),
                     direccionDTO.getCliente().getApellidoP(),
                     direccionDTO.getCliente().getApellidoM(),
-                    direccionDTO.getCliente().getTelefono(),
-                    direccionDTO.getCliente().getCorreo());
+                    direccionDTO.getCliente().getTelefono();*/
 
-            Direccion direccion = new Direccion(
+           /* Direccion direccion = new Direccion(
                     direccionDTO.getCalle(),
                     direccionDTO.getColonia(),
                     direccionDTO.getNumExterior(),
@@ -121,7 +120,7 @@ public class VentasBO implements IVentasBO {
              * direccion.getCliente().getApellidoM(),
              * direccion.getCliente().getTelefono(),
                     direccion.getCliente().getCorreo());
-             */
+             
             DTO_Direccion direccionDTO = new DTO_Direccion(
                     direccion.getCalle(),
                     direccion.getColonia(),
@@ -152,5 +151,5 @@ public class VentasBO implements IVentasBO {
             detalleVenta.setImporte(dv.getImporte());
 
     }
-}
-}
+}*/
+//}

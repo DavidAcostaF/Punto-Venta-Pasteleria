@@ -5,7 +5,7 @@
 package com.mycompany.pasteleriaventa;
 
 import com.mycompany.pastelerianegocio.IVentasBO;
-import com.mycompany.pastelerianegocio.VentasBO;
+//import com.mycompany.pastelerianegocio.VentasBO;
 import dto.DTO_Venta;
 
 /**
@@ -16,7 +16,7 @@ public class OperacionesVenta {
     IVentasBO ventas;
 
     public OperacionesVenta() {
-    this.ventas=new VentasBO();
+    //this.ventas=new VentasBO();
     }
     protected void agregarVenta(DTO_Venta venta){
     ventas.agregarVenta(venta);

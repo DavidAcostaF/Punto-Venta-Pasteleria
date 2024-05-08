@@ -5,36 +5,46 @@
 package com.mycompany.pasteleriadominios;
 
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author f_aco
  */
 public class Cliente {
-
-    public String nombre;
-    public String apellidoP;
-    public String apellidoM;
-    public String telefono;
-    public String correo;
-    public List<Direccion> direcciones;
+   private ObjectId id;
+    private String nombre;
+     private String apellidoP;
+    private String apellidoM;
+    private String telefono;
+    private List<Direccion> direcciones;
 
     public Cliente() {
     }
 
-    public Cliente(String nombre, String apellidoP, String apellidoM, String telefono) {
+    public Cliente(ObjectId id, String nombre, String apellidoP, String apellidoM, String telefono, List<Direccion> direcciones) {
+        this.id = id;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
         this.telefono = telefono;
+        this.direcciones = direcciones;
     }
 
-    public Cliente(String nombre, String apellidoP, String apellidoM, String telefono, String correo) {
+    public Cliente(String nombre, String apellidoP, String apellidoM, String telefono, List<Direccion> direcciones) {
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
         this.telefono = telefono;
-        this.correo = correo;
+        this.direcciones = direcciones;
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -69,13 +79,7 @@ public class Cliente {
         this.telefono = telefono;
     }
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
+  
 
     public List<Direccion> getDirecciones() {
         return direcciones;
@@ -87,6 +91,10 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "ClienteDTO{" + "nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", telefono=" + telefono + ", correo=" + correo + '}';
+        return "Cliente{" + "id=" + id + ", nombre=" + nombre + ", apellidoP=" + apellidoP + ", apellidoM=" + apellidoM + ", telefono=" + telefono + ", direcciones=" + direcciones + '}';
     }
+
+   
+
+    
 }

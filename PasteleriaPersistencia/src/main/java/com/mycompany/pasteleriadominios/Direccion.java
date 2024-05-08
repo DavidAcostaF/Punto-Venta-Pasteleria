@@ -10,21 +10,11 @@ package com.mycompany.pasteleriadominios;
  */
 public class Direccion {
 
-    public String calle;
-    public String colonia;
-    public String numExterior;
-    public Cliente cliente;
+    private String calle;
+    private String colonia;
+    private String numExterior;
 
     public Direccion() {
-    }
-    
-    
-
-    public Direccion(String calle, String colonia, String numExterior, Cliente cliente) {
-        this.calle = calle;
-        this.colonia = colonia;
-        this.numExterior = numExterior;
-        this.cliente = cliente;
     }
 
     public Direccion(String calle, String colonia, String numExterior) {
@@ -32,8 +22,6 @@ public class Direccion {
         this.colonia = colonia;
         this.numExterior = numExterior;
     }
-    
-    
 
     public String getCalle() {
         return calle;
@@ -59,12 +47,9 @@ public class Direccion {
         this.numExterior = numExterior;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    @Override
+    public String toString() {
+        return "Direccion{" + "calle=" + calle + ", colonia=" + colonia + ", numExterior=" + numExterior + '}';
     }
 
 }
