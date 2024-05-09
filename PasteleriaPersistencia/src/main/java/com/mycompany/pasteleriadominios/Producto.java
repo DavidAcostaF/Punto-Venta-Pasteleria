@@ -4,6 +4,7 @@
  */
 package com.mycompany.pasteleriadominios;
 
+import com.mycompany.pasteleriadocumentosanidados.IngredienteDetalle;
 import java.util.List;
 import org.bson.types.ObjectId;
 
@@ -17,6 +18,7 @@ public class Producto {
     private float precio;
     private String nombre;
     private String descripcion;
+    private List<IngredienteDetalle> ingredientes;
 
     public Producto() {
     }
@@ -25,18 +27,31 @@ public class Producto {
         this.id = id;
     }
 
-    public Producto(ObjectId id, float precio, String nombre, String descripcion) {
+    public Producto(ObjectId id, float precio, String nombre, String descripcion, List<IngredienteDetalle> ingredientes) {
         this.id = id;
         this.precio = precio;
         this.nombre = nombre;
         this.descripcion = descripcion;
-
+        this.ingredientes = ingredientes;
     }
 
-    public Producto(float precio, String nombre, String descripcion) {
+    public Producto(float precio, String nombre, String descripcion, List<IngredienteDetalle> ingredientes) {
         this.precio = precio;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.ingredientes = ingredientes;
+    }
+
+    public List<IngredienteDetalle> getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(List<IngredienteDetalle> ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+
+    public void addIngredienteDetalle(IngredienteDetalle ingrediente) {
+        this.getIngredientes().add(ingrediente);
     }
 
     public ObjectId getId() {

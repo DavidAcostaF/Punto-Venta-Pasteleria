@@ -4,27 +4,32 @@
  */
 package com.mycompany.pasteleriadocumentosanidados;
 
+import org.bson.types.ObjectId;
+
 /**
  *
  * @author af_da
  */
 public class IngredienteDetalle {
 
-    private String ingredienteId;
+    private ObjectId ingredienteId;
     private String nombre;
     private Integer cantidad;
 
-    public IngredienteDetalle(String ingredienteId, String nombre, Integer cantidad) {
+    public IngredienteDetalle(ObjectId ingredienteId, String nombre, Integer cantidad) {
         this.ingredienteId = ingredienteId;
         this.nombre = nombre;
         this.cantidad = cantidad;
     }
 
-    public String getIngredienteId() {
+    public ObjectId getIngredienteId() {
         return ingredienteId;
     }
 
-    public void setIngredienteId(String ingredienteId) {
+    public IngredienteDetalle() {
+    }
+
+    public void setIngredienteId(ObjectId ingredienteId) {
         this.ingredienteId = ingredienteId;
     }
 
@@ -43,6 +48,5 @@ public class IngredienteDetalle {
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
-    
-    
+
 }
