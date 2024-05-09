@@ -7,8 +7,13 @@ package presentacion;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import consultarClientes.FuncionalidadConsultarClientes;
+import consultarClientes.IFuncionalidadConsultarClientes;
 import control.ControlHistoriales;
+import dto.DTO_Cliente;
+import extras.ClientesComboBoxModel;
 import java.awt.Font;
+import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.UIManager;
 
@@ -17,16 +22,25 @@ import javax.swing.UIManager;
  * @author abelc
  */
 public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
-private ControlHistoriales control;
+    private ControlHistoriales control;
+    private DTO_Cliente cliente;
+    private IFuncionalidadConsultarClientes funcionalidadesClientes;
+    private List<DTO_Cliente> listaClientes;
+
     /**
      * Creates new form FrmHistorialVentas
      */
     public Presentacion_FrmHistorialVentas() {
-
+        this.control = new ControlHistoriales();
+        this.funcionalidadesClientes = new FuncionalidadConsultarClientes();
+        this.cliente = new DTO_Cliente();
+        listaClientes = funcionalidadesClientes.consultarClientes();
         initComponents();
-        control=new ControlHistoriales();
-         testData(productosComboBox);
-            FlatRobotoFont.install();
+        
+        System.out.println(funcionalidadesClientes.consultarClientes());
+        
+        testData(productosComboBox);
+        FlatRobotoFont.install();
         FlatLaf.registerCustomDefaultsSource("extras");
         UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
         FlatMacDarkLaf.setup();
@@ -44,7 +58,6 @@ private ControlHistoriales control;
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         filtrarClienteRadioBtn = new javax.swing.JRadioButton();
-        clientesComboBox = new javax.swing.JComboBox<>();
         filtrarPorProductosRadioBtn = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         desdeDatePicker = new com.github.lgooddatepicker.components.DatePicker();
@@ -58,6 +71,7 @@ private ControlHistoriales control;
         detallesVentaBtn = new javax.swing.JButton();
         regresarBtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        clientesComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,17 +87,6 @@ private ControlHistoriales control;
         filtrarClienteRadioBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtrarClienteRadioBtnActionPerformed(evt);
-            }
-        });
-
-        clientesComboBox.setForeground(new java.awt.Color(255, 255, 255));
-        clientesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        clientesComboBox.setToolTipText("");
-        clientesComboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        clientesComboBox.setEnabled(false);
-        clientesComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clientesComboBoxActionPerformed(evt);
             }
         });
 
@@ -114,6 +117,11 @@ private ControlHistoriales control;
         aplicarFiltroBtn.setBackground(new java.awt.Color(140, 220, 254));
         aplicarFiltroBtn.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         aplicarFiltroBtn.setForeground(new java.awt.Color(0, 0, 0));
+        aplicarFiltroBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aplicarFiltroBtnActionPerformed(evt);
+            }
+        });
 
         jTable1.setForeground(new java.awt.Color(255, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -165,6 +173,9 @@ private ControlHistoriales control;
         jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 102, 255));
 
+        clientesComboBox.setModel(new ClientesComboBoxModel(listaClientes));
+        clientesComboBox.setEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -182,8 +193,8 @@ private ControlHistoriales control;
                                         .addComponent(filtrarPorProductosRadioBtn))
                                     .addGap(43, 43, 43)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(clientesComboBox, 0, 280, Short.MAX_VALUE)
-                                        .addComponent(productosComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addComponent(productosComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                                        .addComponent(clientesComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(regresarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(163, 163, 163)
@@ -222,8 +233,8 @@ private ControlHistoriales control;
                         .addComponent(jLabel1)
                         .addGap(44, 44, 44)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(clientesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(filtrarClienteRadioBtn)))
+                            .addComponent(filtrarClienteRadioBtn)
+                            .addComponent(clientesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jLabel2)
@@ -277,28 +288,28 @@ private ControlHistoriales control;
         }
     }//GEN-LAST:event_filtrarClienteRadioBtnActionPerformed
 
-    private void clientesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_clientesComboBoxActionPerformed
-
     private void filtrarPorProductosRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtrarPorProductosRadioBtnActionPerformed
         if (filtrarPorProductosRadioBtn.isSelected()) {
             productosComboBox.setEnabled(true);
-        }else{
+        } else {
             productosComboBox.limpiarElementosSeleccionados();
             productosComboBox.setEnabled(false);
         }
     }//GEN-LAST:event_filtrarPorProductosRadioBtnActionPerformed
 
     private void regresarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarBtnActionPerformed
-       control.mostrarMenu();
+        control.mostrarMenu();
     }//GEN-LAST:event_regresarBtnActionPerformed
 
     private void detallesVentaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detallesVentaBtnActionPerformed
         System.out.println(productosComboBox.obtenerElementosSeleccionados());
         control.mostrarDetallesVenta();
     }//GEN-LAST:event_detallesVentaBtnActionPerformed
-    
+
+    private void aplicarFiltroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarFiltroBtnActionPerformed
+      
+    }//GEN-LAST:event_aplicarFiltroBtnActionPerformed
+
     //Metodo para probar el combobox nomas(se va borrar esta madre)
     private void testData(JComboBox combo) {
         combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{
@@ -335,19 +346,23 @@ private ControlHistoriales control;
         }));
     }
 
+    public void desplegarClientes(List<DTO_Cliente> clientes) {
+        clientesComboBox.setModel(new ClientesComboBoxModel(clientes));
+    }
+
     public void mostrarHistorialVentas() {
         FlatRobotoFont.install();
         FlatLaf.registerCustomDefaultsSource("extras");
         UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
         FlatMacDarkLaf.setup();
-
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Presentacion_FrmHistorialVentas().setVisible(true);
             }
         });
     }
-  
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aplicarFiltroBtn;

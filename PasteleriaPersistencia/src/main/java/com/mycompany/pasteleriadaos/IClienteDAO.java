@@ -5,6 +5,7 @@
 package com.mycompany.pasteleriadaos;
 
 import com.mycompany.pasteleriadominios.Cliente;
+import dto.DTO_Cliente;
 import java.util.List;
 
 /**
@@ -15,5 +16,5 @@ public interface IClienteDAO {
     public Cliente agregarCliente(Cliente cliente);
     
     
-    public List<Cliente> consultarClientes();
+    public List<DTO_Cliente> consultarClientes();
 }

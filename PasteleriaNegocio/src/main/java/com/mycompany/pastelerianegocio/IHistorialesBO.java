@@ -4,10 +4,13 @@
  */
 package com.mycompany.pastelerianegocio;
 
+import dto.DTO_Cliente;
+import java.util.List;
+
 /**
  *
  * @author abelc
  */
 public interface IHistorialesBO {
-    
+   public List<DTO_Cliente> consultarClientes();
 }

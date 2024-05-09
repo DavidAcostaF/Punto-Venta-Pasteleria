@@ -418,7 +418,6 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
             detalleVenta.setCantidad(cantidad);
             float total = Float.parseFloat(tableProductos.getValueAt(i, 2).toString());
             detalleVenta.setImporte(total * cantidad);
-            detalleVenta.setVenta(venta);
             detalleVenta.setPrecio(total);
             detallesVenta.add(detalleVenta);
 

@@ -7,6 +7,7 @@ package pruebas;
 import com.mycompany.pasteleriadaos.ClienteDAO;
 import com.mycompany.pasteleriadominios.Cliente;
 import com.mycompany.pasteleriadominios.Direccion;
+import dto.DTO_Cliente;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class pruebaCliente {
         ClienteDAO clientedao=new ClienteDAO();
         Cliente cliente = new Cliente();
  
-    cliente.setNombre("Maria");
+   /* cliente.setNombre("Maria");
     cliente.setApellidoP("Gonzales");
     cliente.setApellidoM("KK");
     cliente.setTelefono("12345654890");
@@ -34,15 +35,15 @@ public class pruebaCliente {
     direcciones.add(new Direccion("Calle 2", "Colonia 2", "2"));
     cliente.setDirecciones(direcciones);
     
-    clientedao.agregarCliente(cliente);
+    clientedao.agregarCliente(cliente);*/
     
-     List<Cliente> clientes = clientedao.consultarClientes();
-/*
+     List<DTO_Cliente> clientes = clientedao.consultarClientes();
+     
     // Imprimir la lista de clientes
     System.out.println("Clientes consultados:");
-    for (Cliente cliente1 : clientes) {
-        System.out.println(cliente1.getDirecciones());
-    }*/
+    for (DTO_Cliente cliente1 : clientes) {
+        System.out.println(cliente1);
+    }
     }
     
 }

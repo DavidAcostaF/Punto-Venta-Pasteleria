@@ -7,6 +7,8 @@ package com.mycompany.pasteleriadaos;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mycompany.pasteleriadominios.Cliente;
+import conversiones.ClientesConversiones;
+import dto.DTO_Cliente;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,9 +20,13 @@ import java.util.List;
 public class ClienteDAO implements IClienteDAO {
 
     private IConexion conexion;
+    private DTO_Cliente clientedto;
+    private ClientesConversiones conversor;
 
     public ClienteDAO() {
+        clientedto = new DTO_Cliente();
         conexion = new Conexion("clientes", Cliente.class);
+        conversor = new ClientesConversiones();
 
     }
 
@@ -32,16 +38,16 @@ public class ClienteDAO implements IClienteDAO {
     }
 
     @Override
-    public List<Cliente> consultarClientes() {
+    public List<DTO_Cliente> consultarClientes() {
         MongoCollection<Cliente> coleccion = conexion.obtenerColeccion();
         FindIterable<Cliente> clientesConsulta = coleccion.find();
-        List<Cliente> listaCliente = new LinkedList<>();
+        List<DTO_Cliente> listaDTOClientes = new ArrayList<>();
 
         for (Cliente cliente : clientesConsulta) {
-            listaCliente.add(cliente);
+            listaDTOClientes.add(conversor.convertirCliente(cliente));
         }
 
-        return listaCliente;
+        return listaDTOClientes;
     }
 
 }

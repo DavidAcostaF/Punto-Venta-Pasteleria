@@ -13,20 +13,17 @@ import java.util.List;
  *
  * @author Paco
  */
-public class FuncionalidadConsultarClientes implements IFuncionalidadConsultarClientes{
-    
+public class FuncionalidadConsultarClientes implements IFuncionalidadConsultarClientes {
+
     private IVentasBO ventaBO;
 
     public FuncionalidadConsultarClientes() {
         this.ventaBO = new VentasBO();
     }
-    
+
     @Override
     public List<DTO_Cliente> consultarClientes() {
-        List<DTO_Cliente> clientes;
-
-        clientes = this.ventaBO.consultarClientes();
-
+        List<DTO_Cliente> clientes = ventaBO.consultarClientes();
         return clientes;
     }
 }

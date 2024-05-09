@@ -9,10 +9,12 @@ C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersi
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\DireccionDAO.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\VentaDAO.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IVentaDAO.java
+C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\conversiones\ClientesConversiones.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IConexion.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadominios\Cliente.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IProductoDAO.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadominios\DetalleVenta.java
+C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadocumentosanidados\IngredienteDetalle.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IDetalleVentaDAO.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IngredienteDAO.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadominios\Ingrediente.java

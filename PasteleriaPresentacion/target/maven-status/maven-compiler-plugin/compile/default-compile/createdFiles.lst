@@ -74,6 +74,7 @@ presentacion\Presentacion_DlgSeleccionarIngredientesProducto$1.class
 presentacion\Presentacion_DlgConfirmacionPago$4.class
 presentacion\Presentacion_DlgDatosCliente$2.class
 presentacion\Presentacion_DlgInventarioPasteles$5.class
+extras\ClientesComboBoxModel.class
 presentacion\Presentacion_DlgInventarioIngredientes$8.class
 presentacion\Presentacion_DlgIngredientesSeleccionados$3.class
 presentacion\Presentacion_DlgSeleccionOpcionGestion$3.class

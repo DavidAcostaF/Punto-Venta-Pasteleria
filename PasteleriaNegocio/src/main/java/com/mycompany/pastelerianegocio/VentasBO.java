@@ -42,7 +42,8 @@ public class VentasBO implements IVentasBO {
 
     @Override
     public List<DTO_Cliente> consultarClientes() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<DTO_Cliente> clientes=clienteDAO.consultarClientes();
+        return clientes;
     }
 
     @Override
@@ -69,6 +70,5 @@ public class VentasBO implements IVentasBO {
     public void agregarVenta(DTO_Venta venta) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
 
 }

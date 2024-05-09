@@ -14,7 +14,7 @@ import org.bson.types.ObjectId;
 public class Cliente {
    private ObjectId id;
     private String nombre;
-     private String apellidoP;
+    private String apellidoP;
     private String apellidoM;
     private String telefono;
     private List<Direccion> direcciones;

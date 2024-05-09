@@ -12,7 +12,7 @@ import org.bson.types.ObjectId;
  * @author abelc
  */
 public class Producto {
-private ObjectId id;
+    private ObjectId id;
     private float precio;
     private String nombre;
     private String descripcion;
