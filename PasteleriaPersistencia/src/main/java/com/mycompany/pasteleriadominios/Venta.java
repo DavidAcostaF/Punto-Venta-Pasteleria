@@ -4,6 +4,7 @@
  */
 package com.mycompany.pasteleriadominios;
 
+import java.util.Date;
 import java.util.List;
 import org.bson.types.ObjectId;
 
@@ -15,8 +16,8 @@ public class Venta {
 
     private ObjectId id;
     private float montoTotal;
-    private String fechaEntrega;
-    private String fechaRegistro;
+    private Date fechaEntrega;
+    private Date fechaRegistro;
     private ObjectId clienteid;
     private List<DetalleVenta> detallesVenta;
     private Direccion direccionEntrega;
@@ -24,7 +25,7 @@ public class Venta {
     public Venta() {
     }
 
-    public Venta(ObjectId id, float montoTotal, String fechaEntrega, String fechaRegistro, ObjectId clienteid, List<DetalleVenta> detallesVenta, Direccion direccionEntrega) {
+    public Venta(ObjectId id, float montoTotal, Date fechaEntrega, Date fechaRegistro, ObjectId clienteid, List<DetalleVenta> detallesVenta, Direccion direccionEntrega) {
         this.id = id;
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
@@ -34,7 +35,7 @@ public class Venta {
         this.direccionEntrega = direccionEntrega;
     }
 
-    public Venta(float montoTotal, String fechaEntrega, String fechaRegistro, ObjectId clienteid, List<DetalleVenta> detallesVenta, Direccion direccionEntrega) {
+    public Venta(float montoTotal, Date fechaEntrega, Date fechaRegistro, ObjectId clienteid, List<DetalleVenta> detallesVenta, Direccion direccionEntrega) {
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
         this.fechaRegistro = fechaRegistro;
@@ -42,6 +43,8 @@ public class Venta {
         this.detallesVenta = detallesVenta;
         this.direccionEntrega = direccionEntrega;
     }
+
+ 
 
     public ObjectId getId() {
         return id;
@@ -59,21 +62,23 @@ public class Venta {
         this.montoTotal = montoTotal;
     }
 
-    public String getFechaEntrega() {
+    public Date getFechaEntrega() {
         return fechaEntrega;
     }
 
-    public void setFechaEntrega(String fechaEntrega) {
+    public void setFechaEntrega(Date fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
     }
 
-    public String getFechaRegistro() {
+    public Date getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(String fechaRegistro) {
+    public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
+
+
 
     public ObjectId getClienteid() {
         return clienteid;

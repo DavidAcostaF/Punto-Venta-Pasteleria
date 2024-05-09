@@ -29,7 +29,7 @@ IFuncionalidadesVenta ventas;
         initComponents();
         //txtCliente.setText(venta.getCliente().getNombre());
         txtCosto.setText(Float.toString(venta.getMontoTotal()));
-        txtFechaEntrega.setText(venta.getFechaEntrega());
+        //txtFechaEntrega.setText(venta.getFechaEntrega());
         txtUbicacionEntrega.setText(venta.getDieccionEntrega().getCalle());
         setVisible(true);
         

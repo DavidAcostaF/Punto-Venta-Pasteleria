@@ -17,6 +17,7 @@ public class DetalleVenta {
     private float importe;
     private int cantidad;
     private String detallesCliente;
+    private String tamanhoProducto;
     private ObjectId productoId;
   
     public DetalleVenta() {

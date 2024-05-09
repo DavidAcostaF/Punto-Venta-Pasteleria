@@ -17,12 +17,7 @@ public class ProductoDAO implements IProductoDAO {
 
     public ProductoDAO() {
         this.listaProductos = new ArrayList<>();    
-        listaProductos.add(new Producto(300, "Pastel de Chocolate", "Cubierto con ganache de chocolate y decorado con virutas de chocolate.", "Grande"));
-        listaProductos.add(new Producto(200, "Tarta de Fresa", "Rellena con crema de fresa y cubierta con glaseado de fresa.", "Mediano"));
-        listaProductos.add(new Producto(150, "Pastel de Zanahoria", "Lleno de nueces y especias, cubierto con frosting de queso crema.", "Chico"));
-        listaProductos.add(new Producto(300, "Tarta de Limón", "Bizcocho esponjoso de limón cubierto con crema de limón y ralladura de limón.", "Grande"));
-        listaProductos.add(new Producto(400, "Pastel Red Velvet", "Bizcocho de terciopelo rojo con capas de frosting de queso crema.", "Grande"));
-        listaProductos.add(new Producto(600,"Pastel de caca","afeff"," "));
+
     }
 
     @Override

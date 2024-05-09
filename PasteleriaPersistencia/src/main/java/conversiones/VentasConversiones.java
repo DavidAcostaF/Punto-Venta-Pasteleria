@@ -17,13 +17,13 @@ import java.util.List;
  * @author PC
  */
 public class VentasConversiones {
-
+    
     public DTO_Venta convertirVentaADTO(Venta venta) {
         DTO_Venta dtoVenta = new DTO_Venta();
         dtoVenta.setID(venta.getId().toString());
-        dtoVenta.setMontoTotal(venta.getMontoTotal());
         dtoVenta.setFechaEntrega(venta.getFechaEntrega());
         dtoVenta.setFechaRegistro(venta.getFechaRegistro());
+        dtoVenta.setMontoTotal(venta.getMontoTotal());
         dtoVenta.setIDcliente(venta.getClienteid().toString());
         List<DTO_DetalleVenta> detallesVenta = new ArrayList<>();
         for (DetalleVenta detalleVenta : venta.getDetallesVenta()) {
@@ -42,13 +42,5 @@ public class VentasConversiones {
         dtoVenta.setDieccionEntrega(dtoDireccion);
         return dtoVenta;
     }
-
-     public  List<DTO_Venta> convertirListaVentasADTO(List<Venta> ventas) {
-        List<DTO_Venta> ventasDTO = new ArrayList<>();
-        for (Venta venta : ventas) {
-            DTO_Venta dtoVenta = convertirVentaADTO(venta);
-            ventasDTO.add(dtoVenta);
-        }
-        return ventasDTO;
-    }
+    
 }

@@ -12,11 +12,11 @@ import org.bson.types.ObjectId;
  * @author abelc
  */
 public class Producto {
+
     private ObjectId id;
     private float precio;
     private String nombre;
     private String descripcion;
-    private String tamaño;
 
     public Producto() {
     }
@@ -25,19 +25,18 @@ public class Producto {
         this.id = id;
     }
 
-    public Producto(ObjectId id, float precio, String nombre, String descripcion, String tamaño) {
+    public Producto(ObjectId id, float precio, String nombre, String descripcion) {
         this.id = id;
         this.precio = precio;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.tamaño = tamaño;
+
     }
 
-    public Producto(float precio, String nombre, String descripcion, String tamaño) {
+    public Producto(float precio, String nombre, String descripcion) {
         this.precio = precio;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.tamaño = tamaño;
     }
 
     public ObjectId getId() {
@@ -72,18 +71,9 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public String getTamaño() {
-        return tamaño;
-    }
-
-    public void setTamaño(String tamaño) {
-        this.tamaño = tamaño;
-    }
-
     @Override
     public String toString() {
-        return "Producto{" + "id=" + id + ", precio=" + precio + ", nombre=" + nombre + ", descripcion=" + descripcion + ", tama\u00f1o=" + tamaño + '}';
+        return "Producto{" + "id=" + id + ", precio=" + precio + ", nombre=" + nombre + ", descripcion=" + descripcion + '}';
     }
 
-   
 }

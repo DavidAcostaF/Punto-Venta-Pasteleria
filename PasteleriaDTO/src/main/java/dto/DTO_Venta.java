@@ -4,8 +4,7 @@
  */
 package dto;
 
-import dto.DTO_Cliente;
-import dto.DTO_Producto;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,8 +14,8 @@ import java.util.List;
 public class DTO_Venta {
     private String ID;
     private float montoTotal;
-    private String fechaEntrega;
-    private String fechaRegistro;
+    private Date fechaEntrega;
+    private Date fechaRegistro;
     private String IDcliente;
     private List<DTO_DetalleVenta> detallesVenta;  
     private DTO_Direccion dieccionEntrega;
@@ -24,7 +23,7 @@ public class DTO_Venta {
     public DTO_Venta() {
     }
 
-    public DTO_Venta(String ID, float montoTotal, String fechaEntrega, String fechaRegistro, String IDcliente, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion dieccionEntrega) {
+    public DTO_Venta(String ID, float montoTotal, Date fechaEntrega, Date fechaRegistro, String IDcliente, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion dieccionEntrega) {
         this.ID = ID;
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
@@ -34,6 +33,16 @@ public class DTO_Venta {
         this.dieccionEntrega = dieccionEntrega;
     }
 
+    public DTO_Venta(float montoTotal, Date fechaEntrega, Date fechaRegistro, String IDcliente, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion dieccionEntrega) {
+        this.montoTotal = montoTotal;
+        this.fechaEntrega = fechaEntrega;
+        this.fechaRegistro = fechaRegistro;
+        this.IDcliente = IDcliente;
+        this.detallesVenta = detallesVenta;
+        this.dieccionEntrega = dieccionEntrega;
+    }
+
+    
     public String getID() {
         return ID;
     }
@@ -50,21 +59,23 @@ public class DTO_Venta {
         this.montoTotal = montoTotal;
     }
 
-    public String getFechaEntrega() {
+    public Date getFechaEntrega() {
         return fechaEntrega;
     }
 
-    public void setFechaEntrega(String fechaEntrega) {
+    public void setFechaEntrega(Date fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
     }
 
-    public String getFechaRegistro() {
+    public Date getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(String fechaRegistro) {
+    public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
+
+  
 
     public String getIDcliente() {
         return IDcliente;
