@@ -11,6 +11,8 @@ import com.mycompany.pasteleriadaos.ProductoDAO;
 import com.mycompany.pasteleriadocumentosanidados.IngredienteDetalle;
 import com.mycompany.pasteleriadominios.Ingrediente;
 import com.mycompany.pasteleriadominios.Producto;
+import dto.DTO_Ingrediente;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -40,16 +42,16 @@ public class PruebasProductos {
         producto.setNombre("Pastelongo");
         producto.setPrecio(100F);
 
-        Ingrediente ingredienteConsultado1 = ingredienteDAO.consultarPorNombre(ingrediento1.getNombre());
-        Ingrediente ingredienteConsultado2 = ingredienteDAO.consultarPorNombre(ingrediento1.getNombre());
+        DTO_Ingrediente ingredienteConsultado1 = ingredienteDAO.consultarPorNombre(ingrediento1.getNombre());
+        DTO_Ingrediente ingredienteConsultado2 = ingredienteDAO.consultarPorNombre(ingrediento1.getNombre());
 
         IngredienteDetalle ingredienteDetalle1 = new IngredienteDetalle();
-        ingredienteDetalle1.setIngredienteId(ingredienteConsultado1.getId());
+        ingredienteDetalle1.setIngredienteId(new ObjectId(ingredienteConsultado1.getId()));
         ingredienteDetalle1.setCantidad(ingredienteConsultado1.getCantidad());
         ingredienteDetalle1.setNombre(ingredienteConsultado1.getNombre());
 
         IngredienteDetalle ingredienteDetalle2 = new IngredienteDetalle();
-        ingredienteDetalle2.setIngredienteId(ingredienteConsultado2.getId());
+        ingredienteDetalle2.setIngredienteId(new ObjectId(ingredienteConsultado1.getId()));
         ingredienteDetalle2.setCantidad(ingredienteConsultado2.getCantidad());
         ingredienteDetalle2.setNombre(ingredienteConsultado2.getNombre());
 

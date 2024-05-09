@@ -4,6 +4,7 @@ C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\Pasteleri
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadominios\Ingrediente.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\conversiones\ProductosConversiones.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadocumentosanidados\IngredienteDetalle.java
+C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\Exceptions\PersistenciaException.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadominios\Venta.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\ProductoDAO.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\DetalleVentaDAO.java
@@ -25,5 +26,6 @@ C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\Pasteleri
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IVentaDAO.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IngredienteDAO.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IIngredienteDAO.java
+C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\conversiones\IngredienteDetalleConversiones.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadominios\DetalleVenta.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPersistencia\src\main\java\pruebas\PruebasVenta.java

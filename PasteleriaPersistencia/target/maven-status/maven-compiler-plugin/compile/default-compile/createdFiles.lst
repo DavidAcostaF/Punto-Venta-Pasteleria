@@ -12,11 +12,13 @@ com\mycompany\pasteleriadaos\IDetalleVentaDAO.class
 pruebas\Pruebas.class
 com\mycompany\pasteleriadaos\IIngredienteDAO.class
 pruebas\PruebasProductos.class
+conversiones\IngredienteDetalleConversiones.class
 com\mycompany\pasteleriadominios\Ingrediente.class
 conversiones\IngredienteConversiones.class
 com\mycompany\pasteleriadaos\IDireccionDAO.class
 com\mycompany\pasteleriadaos\IConexion.class
 com\mycompany\pasteleriadominios\DetalleVenta.class
+Exceptions\PersistenciaException.class
 com\mycompany\pasteleriadaos\IngredienteDAO.class
 com\mycompany\pasteleriadominios\Producto.class
 com\mycompany\pasteleriadaos\IProductoDAO.class

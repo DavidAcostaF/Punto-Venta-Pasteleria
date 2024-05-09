@@ -358,7 +358,8 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
             modelo.addRow(new Object[]{ingredienteNuevo.getNombre(), ingredienteNuevo.getCantidad(), ingredienteNuevo.getUnidadDeMedida(), ingredienteNuevo.getPrecio()});
             this.limpiarCampos();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, ex.getCause());
         }
 
     }//GEN-LAST:event_btnAgregarActionPerformed

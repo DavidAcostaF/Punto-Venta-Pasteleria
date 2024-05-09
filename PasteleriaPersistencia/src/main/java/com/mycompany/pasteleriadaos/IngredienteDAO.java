@@ -9,12 +9,14 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
+import com.mongodb.client.model.Sorts;
 import com.mongodb.client.result.DeleteResult;
 import com.mycompany.pasteleriadominios.Ingrediente;
 import conversiones.IngredienteConversiones;
 import dto.DTO_Ingrediente;
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.text.Document;
 
 /**
  *
@@ -34,7 +36,14 @@ public class IngredienteDAO implements IIngredienteDAO {
     public DTO_Ingrediente agregar(Ingrediente ingrediente) {
         MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
         coleccion.insertOne(ingrediente);
-        return ingredienteConversiones.convertir(ingrediente);
+        Ingrediente ingredienteAgregado = coleccion.find().sort(Sorts.descending("_id")).first();
+        if (ingredienteAgregado != null && !ingredienteAgregado.getNombre().equals(ingrediente.getNombre())) {
+            //Arrojar una excepcion
+        }
+        System.out.println(ingredienteAgregado);
+        System.out.println(ingredienteAgregado.getId());
+
+        return ingredienteConversiones.convertir(ingredienteAgregado);
     }
 
     @Override
@@ -69,6 +78,9 @@ public class IngredienteDAO implements IIngredienteDAO {
     public DTO_Ingrediente consultarPorNombre(String nombre) {
         MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
         Ingrediente resultado = coleccion.find(regex("nombre", "^" + nombre + "$", "i")).first();
+        DTO_Ingrediente ingredienteDTO = new DTO_Ingrediente();
+        
+        
         return ingredienteConversiones.convertir(resultado);
     }
 
@@ -76,11 +88,8 @@ public class IngredienteDAO implements IIngredienteDAO {
     public Boolean eliminar(Ingrediente ingrediente) {
         MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
         DeleteResult result = coleccion.deleteOne(eq("nombre", ingrediente.getNombre()));
-        if (result.getDeletedCount() == 1) {
-            return true;
-        } else {
-            return false;
-        }
+
+        return result.getDeletedCount() == 1;
     }
 
 }

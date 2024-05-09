@@ -16,6 +16,9 @@ import java.util.List;
 public class IngredienteConversiones {
 
     public DTO_Ingrediente convertir(Ingrediente ingrediente) {
+        if (ingrediente == null) {
+            return null;
+        }
         DTO_Ingrediente ingredienteDTO = new DTO_Ingrediente();
         ingredienteDTO.setId(ingrediente.getId().toHexString());
         ingredienteDTO.setNombre(ingrediente.getNombre());
@@ -28,7 +31,9 @@ public class IngredienteConversiones {
 
     public List<DTO_Ingrediente> convertir(List<Ingrediente> ingredientes) {
         List<DTO_Ingrediente> ingredientesDTO = new ArrayList<>();
-
+        if (ingredientes == null) {
+            return null;
+        }
         for (Ingrediente ingrediente : ingredientes) {
             ingredientesDTO.add(this.convertir(ingrediente));
         }
