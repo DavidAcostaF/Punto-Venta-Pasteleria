@@ -4,17 +4,23 @@
  */
 package presentacion;
 
+import control.ControlGestionarInventario;
+
 /**
  *
  * @author af_da
  */
 public class Presentacion_DlgSeleccionOpcionGestion extends javax.swing.JFrame {
 
+    private ControlGestionarInventario controlGesionarInventario;
+
     /**
      * Creates new form Presentacion_DlgGestionarInventario
      */
     public Presentacion_DlgSeleccionOpcionGestion() {
         initComponents();
+        controlGesionarInventario = new ControlGestionarInventario();
+
     }
 
     /**
@@ -91,11 +97,13 @@ public class Presentacion_DlgSeleccionOpcionGestion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-       
+        controlGesionarInventario.mostrarInventarioIngredientes();
+        this.dispose();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed
-        // TODO add your handling code here:
+        controlGesionarInventario.mostrarInvetarioProductos();
+        this.dispose();
     }//GEN-LAST:event_btnAgregar1ActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
