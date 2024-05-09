@@ -4,6 +4,8 @@
  */
 package consultarClientes;
 
+import com.mycompany.pastelerianegocio.ClientesBO;
+import com.mycompany.pastelerianegocio.IClientesBO;
 import com.mycompany.pastelerianegocio.IVentasBO;
 import com.mycompany.pastelerianegocio.VentasBO;
 import dto.DTO_Cliente;
@@ -15,15 +17,15 @@ import java.util.List;
  */
 public class FuncionalidadConsultarClientes implements IFuncionalidadConsultarClientes {
 
-    private IVentasBO ventaBO;
+    private IClientesBO clientesBO;
 
     public FuncionalidadConsultarClientes() {
-        this.ventaBO = new VentasBO();
+        this.clientesBO = new ClientesBO();
     }
 
     @Override
     public List<DTO_Cliente> consultarClientes() {
-        List<DTO_Cliente> clientes = ventaBO.consultarClientes();
+        List<DTO_Cliente> clientes = clientesBO.consultarClientes();
         return clientes;
     }
 }

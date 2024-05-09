@@ -4,6 +4,8 @@
  */
 package com.mycompany.pasteleriadirecciones;
 
+import com.mycompany.pastelerianegocio.DireccionesBO;
+import com.mycompany.pastelerianegocio.IDireccionesBO;
 import com.mycompany.pastelerianegocio.IVentasBO;
 import com.mycompany.pastelerianegocio.VentasBO;
 import dto.DTO_Cliente;
@@ -16,17 +18,17 @@ import java.util.List;
  * @author PC
  */
 public class OperacionesDirecciones {
-    private IVentasBO ventaBO;
+    private IDireccionesBO direccionesBO;
     
     public OperacionesDirecciones() {
-        this.ventaBO = new VentasBO();
+        this.direccionesBO = new DireccionesBO();
     }
 
     
     protected List<DTO_Direccion> consultarDirecciones(){
         List<DTO_Direccion> direcciones;
         
-        direcciones=ventaBO.consultarDirecciones();
+        direcciones=direccionesBO.consultarDirecciones();
         
         return direcciones;
     }

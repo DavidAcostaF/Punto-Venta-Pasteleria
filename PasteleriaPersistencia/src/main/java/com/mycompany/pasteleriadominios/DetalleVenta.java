@@ -5,6 +5,7 @@
 package com.mycompany.pasteleriadominios;
 
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -16,17 +17,17 @@ public class DetalleVenta {
     private float importe;
     private int cantidad;
     private String detallesCliente;
-    private Producto producto;
+    private ObjectId productoId;
   
     public DetalleVenta() {
     }
-    
-    public DetalleVenta(float precio, float importe, int cantidad, String detallesCliente, Producto producto) {
+
+    public DetalleVenta(float precio, float importe, int cantidad, String detallesCliente, ObjectId productoId) {
         this.precio = precio;
         this.importe = importe;
         this.cantidad = cantidad;
         this.detallesCliente = detallesCliente;
-        this.producto = producto;
+        this.productoId = productoId;
     }
 
     public float getPrecio() {
@@ -61,19 +62,19 @@ public class DetalleVenta {
         this.detallesCliente = detallesCliente;
     }
 
-    public Producto getProducto() {
-        return producto;
+    public ObjectId getProductoId() {
+        return productoId;
     }
 
-    public void setProducto(Producto producto) {
-        this.producto = producto;
+    public void setProductoId(ObjectId productoId) {
+        this.productoId = productoId;
     }
 
     @Override
     public String toString() {
-        return "DetalleVenta{" + "precio=" + precio + ", importe=" + importe + ", cantidad=" + cantidad + ", detallesCliente=" + detallesCliente + ", producto=" + producto + '}';
+        return "DetalleVenta{" + "precio=" + precio + ", importe=" + importe + ", cantidad=" + cantidad + ", detallesCliente=" + detallesCliente + ", productoId=" + productoId + '}';
     }
-
+  
   
    
 }

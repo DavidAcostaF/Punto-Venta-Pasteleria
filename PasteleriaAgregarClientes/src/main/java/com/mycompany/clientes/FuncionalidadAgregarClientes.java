@@ -4,6 +4,8 @@
  */
 package com.mycompany.clientes;
 
+import com.mycompany.pastelerianegocio.ClientesBO;
+import com.mycompany.pastelerianegocio.IClientesBO;
 import com.mycompany.pastelerianegocio.IVentasBO;
 import com.mycompany.pastelerianegocio.VentasBO;
 import dto.DTO_Cliente;
@@ -12,15 +14,15 @@ import dto.DTO_Cliente;
 public class FuncionalidadAgregarClientes implements IFuncionalidadAgregarClientes {
     //esta clase tendra todas las operaciones del cliente necesarias
 
-    private IVentasBO ventaBO;
+    private IClientesBO clientesBO;
 
     public FuncionalidadAgregarClientes() {
-        this.ventaBO = new VentasBO();
+        this.clientesBO = new ClientesBO();
     }
 
     @Override
     public void agregarCliente(DTO_Cliente cliente) {
-        ventaBO.agregarCliente(cliente);
+        clientesBO.agregarCliente(cliente);
     }
 
 }

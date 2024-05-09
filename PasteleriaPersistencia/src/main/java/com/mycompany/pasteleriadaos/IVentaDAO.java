@@ -5,6 +5,8 @@
 package com.mycompany.pasteleriadaos;
 
 import com.mycompany.pasteleriadominios.Venta;
+import dto.DTO_Venta;
+import java.util.List;
 
 /**
  *
@@ -14,4 +16,6 @@ public interface IVentaDAO {
      public Venta agregarVenta(Venta venta);
     
     public void eliminarVenta(Venta venta);
+    
+    public List<DTO_Venta> ventasPorCliente(String clienteId);
 }
