@@ -1,5 +1,5 @@
-dto\DTO_DetalleIngrediente.class
 dto\DTO_Direccion.class
+dto\DTO_IngredienteDetalle.class
 dto\DTO_Ingrediente.class
 dto\DTO_Cliente.class
 dto\DTO_DetalleVenta.class

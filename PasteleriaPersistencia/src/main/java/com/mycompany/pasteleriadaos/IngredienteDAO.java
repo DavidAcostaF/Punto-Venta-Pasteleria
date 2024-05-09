@@ -11,6 +11,8 @@ import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
 import com.mongodb.client.result.DeleteResult;
 import com.mycompany.pasteleriadominios.Ingrediente;
+import conversiones.IngredienteConversiones;
+import dto.DTO_Ingrediente;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,50 +23,53 @@ import java.util.List;
 public class IngredienteDAO implements IIngredienteDAO {
 
     private IConexion conexion;
+    private IngredienteConversiones ingredienteConversiones;
 
     public IngredienteDAO() {
         conexion = new Conexion("ingredientes", Ingrediente.class);
+        ingredienteConversiones = new IngredienteConversiones();
     }
 
     @Override
-    public Ingrediente agregar(Ingrediente ingrediente) {
+    public DTO_Ingrediente agregar(Ingrediente ingrediente) {
         MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
         coleccion.insertOne(ingrediente);
-        return ingrediente;
+        return ingredienteConversiones.convertir(ingrediente);
     }
 
     @Override
-    public Ingrediente actualizar(Ingrediente ingrediente) {
+    public DTO_Ingrediente actualizar(Ingrediente ingrediente) {
         MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
         Ingrediente ingredienteActualizado = coleccion.findOneAndReplace(eq("nombre", ingrediente.getNombre()), ingrediente);
-        return ingredienteActualizado;
+
+        return ingredienteConversiones.convertir(ingredienteActualizado);
     }
 
     @Override
-    public List<Ingrediente> consultar() {
+    public List<DTO_Ingrediente> consultar() {
         MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
         FindIterable<Ingrediente> resultados = coleccion.find();
 
         List<Ingrediente> listaIngredientes = new LinkedList<>();
         resultados.into(listaIngredientes);
-        return listaIngredientes;
+        return ingredienteConversiones.convertir(listaIngredientes);
     }
 
     @Override
-    public List<Ingrediente> consultar(Ingrediente ingrediente) {
+    public List<DTO_Ingrediente> consultar(Ingrediente ingrediente) {
         MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
         FindIterable<Ingrediente> resultados = coleccion.find(regex("nombre", "^" + ingrediente.getNombre(), "i"));
 
         List<Ingrediente> listaIngredientes = new LinkedList<>();
         resultados.into(listaIngredientes);
-        return listaIngredientes;
+        return ingredienteConversiones.convertir(listaIngredientes);
     }
 
     @Override
-    public Ingrediente consultarPorNombre(String nombre) {
+    public DTO_Ingrediente consultarPorNombre(String nombre) {
         MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
         Ingrediente resultado = coleccion.find(regex("nombre", "^" + nombre + "$", "i")).first();
-        return resultado;
+        return ingredienteConversiones.convertir(resultado);
     }
 
     @Override

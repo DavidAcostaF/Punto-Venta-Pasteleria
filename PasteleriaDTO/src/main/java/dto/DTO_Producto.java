@@ -4,18 +4,26 @@
  */
 package dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author PC
  */
 public class DTO_Producto {
+
     private String Id;
     private float precio;
     private String nombre;
     private String descripcion;
     private String tamaño;
+    private List<DTO_IngredienteDetalle> ingredientes;
 
     public DTO_Producto() {
+        if (ingredientes == null) {
+            ingredientes = new ArrayList<>();
+        }
     }
 
     public DTO_Producto(String nombre) {
@@ -30,11 +38,23 @@ public class DTO_Producto {
         this.tamaño = tamaño;
     }
 
+    public List<DTO_IngredienteDetalle> getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(List<DTO_IngredienteDetalle> ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+
     public DTO_Producto(float precio, String nombre, String descripcion, String tamaño) {
         this.precio = precio;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.tamaño = tamaño;
+    }
+
+    public void addDTO_IngredienteDetalle(DTO_IngredienteDetalle ingredienteDetalle) {
+        this.getIngredientes().add(ingredienteDetalle);
     }
 
     public String getId() {
@@ -82,5 +102,4 @@ public class DTO_Producto {
         return "DTO_Producto{" + "Id=" + Id + ", precio=" + precio + ", nombre=" + nombre + ", descripcion=" + descripcion + ", tama\u00f1o=" + tamaño + '}';
     }
 
-    
 }
