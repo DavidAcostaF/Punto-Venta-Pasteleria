@@ -14,6 +14,7 @@ import com.mycompany.pasteleriadominios.Venta;
 import conversiones.VentasConversiones;
 import dto.DTO_Venta;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
@@ -29,9 +30,9 @@ public class VentaDAO implements IVentaDAO {
     private VentasConversiones conversor;
 
     public VentaDAO() {
-    conexion=new Conexion("ventas",Venta.class);
-    ventadto=new DTO_Venta();
-    conversor=new VentasConversiones();
+        conexion = new Conexion("ventas", Venta.class);
+        ventadto = new DTO_Venta();
+        conversor = new VentasConversiones();
     }
 
     @Override
@@ -49,16 +50,16 @@ public class VentaDAO implements IVentaDAO {
         } catch (MongoException e) {
             System.out.println(e.getMessage());
         }
-        
+
     }
 
     @Override
     public List<DTO_Venta> ventasPorCliente(String clienteId) {
-          
+
         MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
         Bson filtroCliente = eq("clienteid", new ObjectId(clienteId));
         FindIterable<Venta> ventasCliente = coleccion.find(filtroCliente);
-        List<DTO_Venta> ventasDTO=new ArrayList<>();
+        List<DTO_Venta> ventasDTO = new ArrayList<>();
         for (Venta venta : ventasCliente) {
             ventasDTO.add(conversor.convertirVentaADTO(venta));
         }
@@ -67,10 +68,37 @@ public class VentaDAO implements IVentaDAO {
 
     @Override
     public List<DTO_Venta> consultarVentas() {
-         MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
-         FindIterable<Venta> ventas=coleccion.find();
-         List<DTO_Venta> ventasDTO=new ArrayList<>();
+        MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
+        FindIterable<Venta> ventas = coleccion.find();
+        List<DTO_Venta> ventasDTO = new ArrayList<>();
         for (Venta venta : ventas) {
+            ventasDTO.add(conversor.convertirVentaADTO(venta));
+        }
+        return ventasDTO;
+    }
+
+    @Override
+    public List<DTO_Venta> consultarVentasPorFecha(Date fecha) {
+        MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
+        Bson filtroFecha = eq("fechaRegistro", fecha);
+        FindIterable<Venta> ventasPorFecha = coleccion.find(filtroFecha);
+        List<DTO_Venta> ventasDTO = new ArrayList<>();
+        for (Venta venta : ventasPorFecha) {
+            ventasDTO.add(conversor.convertirVentaADTO(venta));
+        }
+        return ventasDTO;
+    }
+
+    @Override
+    public List<DTO_Venta> consultarVentasPorRangoFechas(Date fechaInicio, Date fechaFin) {
+        MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
+        Bson filtroRangoFechas = Filters.and(
+                Filters.gte("fechaRegistro", fechaInicio),
+                Filters.lte("fechaRegistro", fechaFin)
+        );
+        FindIterable<Venta> ventasPorRangoFechas = coleccion.find(filtroRangoFechas);
+        List<DTO_Venta> ventasDTO = new ArrayList<>();
+        for (Venta venta : ventasPorRangoFechas) {
             ventasDTO.add(conversor.convertirVentaADTO(venta));
         }
         return ventasDTO;

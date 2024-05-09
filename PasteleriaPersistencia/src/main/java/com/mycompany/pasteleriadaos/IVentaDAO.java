@@ -4,8 +4,10 @@
  */
 package com.mycompany.pasteleriadaos;
 
+import Exceptions.PersistenciaException;
 import com.mycompany.pasteleriadominios.Venta;
 import dto.DTO_Venta;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,11 +15,17 @@ import java.util.List;
  * @author f_aco
  */
 public interface IVentaDAO {
-     public Venta agregarVenta(Venta venta);
-    
-    public void eliminarVenta(Venta venta);
-    
-    public List<DTO_Venta> consultarVentas();
-    
-    public List<DTO_Venta> ventasPorCliente(String clienteId);
+
+    public Venta agregarVenta(Venta venta) throws PersistenciaException;
+
+    public void eliminarVenta(Venta venta) throws PersistenciaException;
+
+    public List<DTO_Venta> consultarVentas() throws PersistenciaException;
+
+    public List<DTO_Venta> ventasPorCliente(String clienteId) throws PersistenciaException;
+
+    public List<DTO_Venta> consultarVentasPorFecha(Date fecha) throws PersistenciaException;
+
+    public List<DTO_Venta> consultarVentasPorRangoFechas(Date fechaInicio, Date fechaFin) throws PersistenciaException;
+
 }

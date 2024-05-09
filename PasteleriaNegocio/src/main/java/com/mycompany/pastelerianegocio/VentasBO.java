@@ -4,6 +4,8 @@
  */
 package com.mycompany.pastelerianegocio;
 
+import Excepciones.ConsultarVentasPorFechaException;
+import Exceptions.PersistenciaException;
 import com.mycompany.pasteleriadaos.ClienteDAO;
 import com.mycompany.pasteleriadaos.DireccionDAO;
 import com.mycompany.pasteleriadaos.IClienteDAO;
@@ -24,6 +26,7 @@ import dto.DTO_Producto;
 import dto.DTO_Venta;
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,5 +45,28 @@ public class VentasBO implements IVentasBO {
     public void agregarVenta(DTO_Venta venta) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public List<DTO_Venta> consultarVentasPorFecha(Date fecha) {
+        try {
+            return ventaDAO.consultarVentasPorFecha(fecha);
+        } catch (PersistenciaException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        
+    }
+
+    @Override
+    public List<DTO_Venta> consultarVentasPorRangoFecha(Date fechaInicio, Date fechaFin) {
+        try {
+            return ventaDAO.consultarVentasPorRangoFechas(fechaInicio, fechaFin);
+        } catch (PersistenciaException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+    
+    
 
 }
