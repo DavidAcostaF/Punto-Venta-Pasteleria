@@ -65,4 +65,15 @@ public class VentaDAO implements IVentaDAO {
         return ventasDTO;
     }
 
+    @Override
+    public List<DTO_Venta> consultarVentas() {
+         MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
+         FindIterable<Venta> ventas=coleccion.find();
+         List<DTO_Venta> ventasDTO=new ArrayList<>();
+        for (Venta venta : ventas) {
+            ventasDTO.add(conversor.convertirVentaADTO(venta));
+        }
+        return ventasDTO;
+    }
+
 }

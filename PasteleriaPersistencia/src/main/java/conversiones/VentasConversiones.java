@@ -24,6 +24,7 @@ public class VentasConversiones {
         dtoVenta.setFechaEntrega(venta.getFechaEntrega());
         dtoVenta.setFechaRegistro(venta.getFechaRegistro());
         dtoVenta.setMontoTotal(venta.getMontoTotal());
+        dtoVenta.setEstado(venta.getEstado());
         dtoVenta.setIDcliente(venta.getClienteid().toString());
         List<DTO_DetalleVenta> detallesVenta = new ArrayList<>();
         for (DetalleVenta detalleVenta : venta.getDetallesVenta()) {
@@ -33,8 +34,10 @@ public class VentasConversiones {
             detalleVentaDTO.setIdproducto(detalleVenta.getProductoId().toString());
             detalleVentaDTO.setImporte(detalleVenta.getImporte());
             detalleVentaDTO.setPrecio(detalleVenta.getPrecio());
+            detalleVentaDTO.setTamanhoProducto(detalleVentaDTO.getTamanhoProducto());
             detallesVenta.add(detalleVentaDTO);
         }
+        dtoVenta.setDetallesVenta(detallesVenta);
         DTO_Direccion dtoDireccion = new DTO_Direccion();
         dtoDireccion.setCalle(venta.getDireccionEntrega().getCalle());
         dtoDireccion.setColonia(venta.getDireccionEntrega().getColonia());

@@ -8,6 +8,7 @@ import com.mycompany.pasteleriadaos.VentaDAO;
 import com.mycompany.pasteleriadominios.DetalleVenta;
 import com.mycompany.pasteleriadominios.Direccion;
 import com.mycompany.pasteleriadominios.Venta;
+import dto.DTO_Venta;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +25,7 @@ public class PruebasVenta {
      */
     public static void main(String[] args) {
         VentaDAO ventadao = new VentaDAO();
-        Venta venta = new Venta();
+     Venta venta = new Venta();
         venta.setMontoTotal(150.00f); // Monto total de la venta
 
 // Crear objetos Date para las fechas
@@ -34,7 +35,7 @@ public class PruebasVenta {
 // Establecer las fechas en el objeto Venta
         venta.setFechaEntrega(fechaEntrega);
         venta.setFechaRegistro(fechaRegistro);
-        
+        venta.setEstado("Pagado");
         venta.setClienteid(new ObjectId("663b16288bcd861f9682ffa9"));
         List<DetalleVenta> detallesVenta = new ArrayList<>();
         DetalleVenta dv = new DetalleVenta();
@@ -43,6 +44,7 @@ public class PruebasVenta {
         dv.setImporte(150.00f);
         dv.setPrecio(75);
         dv.setProductoId(new ObjectId("663c434ac97af46c1e9d7bf9"));
+        dv.setTamanhoProducto("chico");
         detallesVenta.add(dv);
         venta.setDetallesVenta(detallesVenta);
         Direccion direccionEntrega = new Direccion();
@@ -51,6 +53,11 @@ public class PruebasVenta {
         direccionEntrega.setColonia("Ciudad Ejemplo");
         venta.setDireccionEntrega(direccionEntrega);
         ventadao.agregarVenta(venta);
+   /*
+   List<DTO_Venta> ventas=ventadao.consultarVentas();
+   // List<DTO_Venta> ventas=ventadao.ventasPorCliente("663b16288bcd861f9682ffa9");
+        for (DTO_Venta venta:ventas) {
+            System.out.println(venta);
+        }*/
     }
-    
 }

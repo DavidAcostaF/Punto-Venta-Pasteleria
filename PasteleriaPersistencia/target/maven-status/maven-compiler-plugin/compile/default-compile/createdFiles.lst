@@ -12,6 +12,7 @@ com\mycompany\pasteleriadaos\IDetalleVentaDAO.class
 pruebas\Pruebas.class
 com\mycompany\pasteleriadaos\IIngredienteDAO.class
 com\mycompany\pasteleriadominios\Ingrediente.class
+conversiones\IngredienteConversiones.class
 com\mycompany\pasteleriadaos\IDireccionDAO.class
 com\mycompany\pasteleriadaos\IConexion.class
 com\mycompany\pasteleriadominios\DetalleVenta.class

@@ -16,17 +16,20 @@ public class DTO_DetalleVenta {
     private int cantidad;
     private String especificacion;
     private String Idproducto;
-
+    private String tamanhoProducto;
     public DTO_DetalleVenta() {
     }
 
-    public DTO_DetalleVenta(float precio, float importe, int cantidad, String especificacion, String Idproducto) {
+    public DTO_DetalleVenta(float precio, float importe, int cantidad, String especificacion, String Idproducto, String tamanhoProducto) {
         this.precio = precio;
         this.importe = importe;
         this.cantidad = cantidad;
         this.especificacion = especificacion;
         this.Idproducto = Idproducto;
+        this.tamanhoProducto = tamanhoProducto;
     }
+
+    
 
     public float getPrecio() {
         return precio;
@@ -66,6 +69,14 @@ public class DTO_DetalleVenta {
 
     public void setIdproducto(String Idproducto) {
         this.Idproducto = Idproducto;
+    }
+
+    public String getTamanhoProducto() {
+        return tamanhoProducto;
+    }
+
+    public void setTamanhoProducto(String tamanhoProducto) {
+        this.tamanhoProducto = tamanhoProducto;
     }
 
     @Override

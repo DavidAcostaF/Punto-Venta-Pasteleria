@@ -18,6 +18,7 @@ public class Venta {
     private float montoTotal;
     private Date fechaEntrega;
     private Date fechaRegistro;
+    private String estado;
     private ObjectId clienteid;
     private List<DetalleVenta> detallesVenta;
     private Direccion direccionEntrega;
@@ -25,24 +26,28 @@ public class Venta {
     public Venta() {
     }
 
-    public Venta(ObjectId id, float montoTotal, Date fechaEntrega, Date fechaRegistro, ObjectId clienteid, List<DetalleVenta> detallesVenta, Direccion direccionEntrega) {
+    public Venta(ObjectId id, float montoTotal, Date fechaEntrega, Date fechaRegistro, String estado, ObjectId clienteid, List<DetalleVenta> detallesVenta, Direccion direccionEntrega) {
         this.id = id;
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
         this.fechaRegistro = fechaRegistro;
+        this.estado = estado;
         this.clienteid = clienteid;
         this.detallesVenta = detallesVenta;
         this.direccionEntrega = direccionEntrega;
     }
 
-    public Venta(float montoTotal, Date fechaEntrega, Date fechaRegistro, ObjectId clienteid, List<DetalleVenta> detallesVenta, Direccion direccionEntrega) {
+    public Venta(float montoTotal, Date fechaEntrega, Date fechaRegistro, String estado, ObjectId clienteid, List<DetalleVenta> detallesVenta, Direccion direccionEntrega) {
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
         this.fechaRegistro = fechaRegistro;
+        this.estado = estado;
         this.clienteid = clienteid;
         this.detallesVenta = detallesVenta;
         this.direccionEntrega = direccionEntrega;
     }
+
+  
 
  
 
@@ -64,6 +69,14 @@ public class Venta {
 
     public Date getFechaEntrega() {
         return fechaEntrega;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public void setFechaEntrega(Date fechaEntrega) {
