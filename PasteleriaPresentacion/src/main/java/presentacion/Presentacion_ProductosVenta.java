@@ -412,7 +412,7 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
         for (int i = 0; i < tableProductos.getRowCount(); i++) {
             DTO_DetalleVenta detalleVenta = new DTO_DetalleVenta();
             DTO_Producto producto = new DTO_Producto(tableProductos.getValueAt(i, 0).toString());
-            detalleVenta.setProductos(producto);
+          //  detalleVenta.setProductos(producto);
             detalleVenta.setEspecificacion(tableProductos.getValueAt(i, 1).toString());
             int cantidad = Integer.parseInt(tableProductos.getValueAt(i, 2).toString());
             detalleVenta.setCantidad(cantidad);

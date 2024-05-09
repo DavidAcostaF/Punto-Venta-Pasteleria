@@ -27,7 +27,7 @@ IFuncionalidadesVenta ventas;
          this.venta=venta;
          this.ventas=new FuncionalidadesVenta();
         initComponents();
-        txtCliente.setText(venta.getCliente().getNombre());
+        //txtCliente.setText(venta.getCliente().getNombre());
         txtCosto.setText(Float.toString(venta.getMontoTotal()));
         txtFechaEntrega.setText(venta.getFechaEntrega());
         txtUbicacionEntrega.setText(venta.getDieccionEntrega().getCalle());

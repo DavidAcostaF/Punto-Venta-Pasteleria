@@ -11,23 +11,21 @@ import java.util.List;
  * @author PC
  */
 public class DTO_DetalleVenta {
-    public float precio;
-    public float importe;
-    public int cantidad;
-    public String especificacion;
-    public DTO_Producto productos;
+    private float precio;
+    private float importe;
+    private int cantidad;
+    private String especificacion;
+    private String Idproducto;
 
     public DTO_DetalleVenta() {
     }
 
-    
-    
-    public DTO_DetalleVenta(float precio, float importe, int cantidad, DTO_Producto productos, DTO_Venta venta) {
+    public DTO_DetalleVenta(float precio, float importe, int cantidad, String especificacion, String Idproducto) {
         this.precio = precio;
         this.importe = importe;
         this.cantidad = cantidad;
-        this.productos = productos;
-        
+        this.especificacion = especificacion;
+        this.Idproducto = Idproducto;
     }
 
     public float getPrecio() {
@@ -42,14 +40,6 @@ public class DTO_DetalleVenta {
         return importe;
     }
 
-    public String getEspecificacion() {
-        return especificacion;
-    }
-
-    public void setEspecificacion(String especificacion) {
-        this.especificacion = especificacion;
-    }
-
     public void setImporte(float importe) {
         this.importe = importe;
     }
@@ -62,15 +52,28 @@ public class DTO_DetalleVenta {
         this.cantidad = cantidad;
     }
 
-    public DTO_Producto getProductos() {
-        return productos;
+    public String getEspecificacion() {
+        return especificacion;
     }
 
-    public void setProductos(DTO_Producto productos) {
-        this.productos = productos;
+    public void setEspecificacion(String especificacion) {
+        this.especificacion = especificacion;
     }
 
- 
+    public String getIdproducto() {
+        return Idproducto;
+    }
+
+    public void setIdproducto(String Idproducto) {
+        this.Idproducto = Idproducto;
+    }
+
+    @Override
+    public String toString() {
+        return "DTO_DetalleVenta{" + "precio=" + precio + ", importe=" + importe + ", cantidad=" + cantidad + ", especificacion=" + especificacion + ", Idproducto=" + Idproducto + '}';
+    }
+
+   
     
     
     

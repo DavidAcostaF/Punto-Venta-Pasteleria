@@ -178,7 +178,7 @@ public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
 //        IAgregarCliente agregar = new AgregarCliente();
         DTO_Cliente cliente = new DTO_Cliente(this.campoTextoNombre.getText());
         
-        venta.setCliente(cliente);
+        //venta.setCliente(cliente);
         
           int respuesta = JOptionPane.showOptionDialog(null, "¿Realizara envio a domicilio?", "Tipo de envio", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
 

@@ -185,7 +185,7 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
              cliente.setApellidoP(tablaClientes.getValueAt(filaSeleccionada, 1).toString());
              cliente.setApellidoM(tablaClientes.getValueAt(filaSeleccionada, 2).toString());
              cliente.setTelefono(tablaClientes.getValueAt(filaSeleccionada, 3).toString());
-             venta.setCliente(cliente);
+            // venta.setCliente(cliente);
 
         if (respuesta == JOptionPane.YES_OPTION) {
             this.dispose();

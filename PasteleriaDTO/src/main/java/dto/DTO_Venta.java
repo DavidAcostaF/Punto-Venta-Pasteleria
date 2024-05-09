@@ -17,30 +17,29 @@ public class DTO_Venta {
     private float montoTotal;
     private String fechaEntrega;
     private String fechaRegistro;
-    private DTO_Cliente cliente;
+    private String IDcliente;
     private List<DTO_DetalleVenta> detallesVenta;  
     private DTO_Direccion dieccionEntrega;
 
     public DTO_Venta() {
     }
 
-    public DTO_Venta(String ID, float montoTotal, String fechaEntrega, String fechaRegistro, DTO_Cliente cliente, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion dieccionEntrega) {
+    public DTO_Venta(String ID, float montoTotal, String fechaEntrega, String fechaRegistro, String IDcliente, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion dieccionEntrega) {
         this.ID = ID;
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
         this.fechaRegistro = fechaRegistro;
-        this.cliente = cliente;
+        this.IDcliente = IDcliente;
         this.detallesVenta = detallesVenta;
         this.dieccionEntrega = dieccionEntrega;
     }
 
-    public DTO_Venta(float montoTotal, String fechaEntrega, String fechaRegistro, DTO_Cliente cliente, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion dieccionEntrega) {
-        this.montoTotal = montoTotal;
-        this.fechaEntrega = fechaEntrega;
-        this.fechaRegistro = fechaRegistro;
-        this.cliente = cliente;
-        this.detallesVenta = detallesVenta;
-        this.dieccionEntrega = dieccionEntrega;
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public float getMontoTotal() {
@@ -67,12 +66,12 @@ public class DTO_Venta {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public DTO_Cliente getCliente() {
-        return cliente;
+    public String getIDcliente() {
+        return IDcliente;
     }
 
-    public void setCliente(DTO_Cliente cliente) {
-        this.cliente = cliente;
+    public void setIDcliente(String IDcliente) {
+        this.IDcliente = IDcliente;
     }
 
     public List<DTO_DetalleVenta> getDetallesVenta() {
@@ -91,8 +90,12 @@ public class DTO_Venta {
         this.dieccionEntrega = dieccionEntrega;
     }
 
-   
+    @Override
+    public String toString() {
+        return "DTO_Venta{" + "ID=" + ID + ", montoTotal=" + montoTotal + ", fechaEntrega=" + fechaEntrega + ", fechaRegistro=" + fechaRegistro + ", IDcliente=" + IDcliente + ", detallesVenta=" + detallesVenta + ", dieccionEntrega=" + dieccionEntrega + '}';
+    }
 
+   
 
     
 }
