@@ -5,6 +5,7 @@
 package presentacion;
 
 import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import java.awt.Font;
@@ -181,10 +182,10 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
   public void mostrarDetallesVentas() {
-        FlatRobotoFont.install();
+         FlatRobotoFont.install();
         FlatLaf.registerCustomDefaultsSource("extras");
         UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
-        FlatMacDarkLaf.setup();
+        FlatLightLaf.setup();
 
        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

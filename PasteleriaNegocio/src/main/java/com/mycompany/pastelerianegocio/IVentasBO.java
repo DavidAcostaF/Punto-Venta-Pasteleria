@@ -22,7 +22,10 @@ public interface IVentasBO {
     public void agregarVenta(DTO_Venta venta);
 
     public List<DTO_Venta> consultarVentasPorFecha(Date fecha);
-    
+
     public List<DTO_Venta> consultarVentasPorRangoFecha(Date fechaInicio, Date fechaFin);
 
+    public List<DTO_Venta> consultarVentas();
+    
+    public DTO_Venta encontrarVenta(String idVenta);
 }

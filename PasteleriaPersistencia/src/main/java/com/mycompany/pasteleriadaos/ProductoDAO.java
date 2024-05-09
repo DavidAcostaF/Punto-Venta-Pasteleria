@@ -4,8 +4,10 @@
  */
 package com.mycompany.pasteleriadaos;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mycompany.pasteleriadominios.Producto;
+import conversiones.ProductosConversiones;
 import dto.DTO_Producto;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +20,11 @@ public class ProductoDAO implements IProductoDAO {
 
     //List<Producto> listaProductos;
     private IConexion conexion;
+    private ProductosConversiones conversor;
 
     public ProductoDAO() {
         conexion = new Conexion("productos", Producto.class);
-        //this.listaProductos = new ArrayList<>();    
+        conversor = new ProductosConversiones();
 
     }
 
@@ -40,8 +43,14 @@ public class ProductoDAO implements IProductoDAO {
     }
 
     @Override
-    public List<Producto> consultarProductos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<DTO_Producto> consultarProductos() {
+        MongoCollection<Producto> coleccion = conexion.obtenerColeccion();
+        FindIterable<Producto> Productos = coleccion.find();
+        List<DTO_Producto> listaProductos = new ArrayList<>();
+        for (Producto producto : Productos) {
+            listaProductos.add(conversor.convertirProducto(producto));
+        }
+        return listaProductos;
     }
 
 }

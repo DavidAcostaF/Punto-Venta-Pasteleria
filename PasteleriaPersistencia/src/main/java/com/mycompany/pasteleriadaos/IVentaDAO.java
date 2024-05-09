@@ -28,4 +28,5 @@ public interface IVentaDAO {
 
     public List<DTO_Venta> consultarVentasPorRangoFechas(Date fechaInicio, Date fechaFin) throws PersistenciaException;
 
+    public DTO_Venta encontrarVenta(String idVenta)throws PersistenciaException;
 }

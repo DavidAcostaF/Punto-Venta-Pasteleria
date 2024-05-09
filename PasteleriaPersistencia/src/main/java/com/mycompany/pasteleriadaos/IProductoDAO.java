@@ -17,5 +17,5 @@ public interface IProductoDAO {
     
     public void eliminarProducto(Producto producto);
     
-    public List<Producto> consultarProductos();
+    public List<DTO_Producto> consultarProductos();
 }

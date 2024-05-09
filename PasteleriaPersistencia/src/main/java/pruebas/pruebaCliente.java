@@ -37,13 +37,15 @@ public class pruebaCliente {
     
     clientedao.agregarCliente(cliente);*/
     
-     List<DTO_Cliente> clientes = clientedao.consultarClientes();
+    /* List<DTO_Cliente> clientes = clientedao.consultarClientes();
      
     // Imprimir la lista de clientes
     System.out.println("Clientes consultados:");
     for (DTO_Cliente cliente1 : clientes) {
         System.out.println(cliente1);
-    }
+    }*/
+    DTO_Cliente cliente1=clientedao.encontrarCliente("Perez", "Mendez", "Juan", "1234567890");
+        System.out.println(cliente1.getDirecciones());
     }
     
 }

@@ -172,7 +172,7 @@ public class Presentacion_DlgAgregarPastel extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         producto.setNombre((String) jComboBox1.getSelectedItem());
-        producto.setTamaño((String) jComboBox2.getSelectedItem());
+     //   producto.setTamaño((String) jComboBox2.getSelectedItem());
         producto.setDescripcion(jTextField1.getText());
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

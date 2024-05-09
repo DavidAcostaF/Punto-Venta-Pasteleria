@@ -28,6 +28,8 @@ import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -54,7 +56,7 @@ public class VentasBO implements IVentasBO {
             System.out.println(e.getMessage());
             return null;
         }
-        
+
     }
 
     @Override
@@ -66,7 +68,25 @@ public class VentasBO implements IVentasBO {
             return null;
         }
     }
-    
-    
+
+    @Override
+    public List<DTO_Venta> consultarVentas() {
+        try {
+            return ventaDAO.consultarVentas();
+        } catch (PersistenciaException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public DTO_Venta encontrarVenta(String idVenta) {
+        try {
+            return ventaDAO.encontrarVenta(idVenta);
+        } catch (PersistenciaException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
 
 }

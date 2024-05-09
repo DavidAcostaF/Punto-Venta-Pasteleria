@@ -4,6 +4,7 @@
  */
 package consultarClientes;
 
+
 import dto.DTO_Cliente;
 import java.util.List;
 
@@ -13,4 +14,8 @@ import java.util.List;
  */
 public interface IFuncionalidadConsultarClientes {
     public List<DTO_Cliente> consultarClientes();
+    
+     public DTO_Cliente encontrarCliente(String apellidoPaterno, String apellidoMaterno, String nombres, String telefono);
+     
+     public DTO_Cliente encontrarClienteID(String idCliente);
 }

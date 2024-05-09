@@ -4,6 +4,7 @@
  */
 package com.mycompany.pastelerianegocio;
 
+import com.mycompany.pasteleriadominios.Cliente;
 import dto.DTO_Cliente;
 import java.util.List;
 
@@ -16,4 +17,8 @@ public interface IClientesBO {
     public List<DTO_Cliente> consultarClientes();
 
     public void agregarCliente(DTO_Cliente clientes);
+    
+    public DTO_Cliente encontrarCliente(String apellidoPaterno, String apellidoMaterno, String nombres, String telefono);
+    
+    public DTO_Cliente encontrarClienteID(String idCliente);
 }

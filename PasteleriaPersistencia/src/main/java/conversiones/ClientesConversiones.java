@@ -17,6 +17,9 @@ import java.util.List;
  */
 public class ClientesConversiones {
 
+    public ClientesConversiones() {
+    }
+
     public DTO_Cliente convertirCliente(Cliente cliente) {
         DTO_Cliente dtoCliente = new DTO_Cliente();
         dtoCliente.setID(cliente.getId().toString());

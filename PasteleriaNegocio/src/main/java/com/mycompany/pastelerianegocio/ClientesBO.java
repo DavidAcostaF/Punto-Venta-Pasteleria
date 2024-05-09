@@ -6,6 +6,7 @@ package com.mycompany.pastelerianegocio;
 
 import com.mycompany.pasteleriadaos.ClienteDAO;
 import com.mycompany.pasteleriadaos.IClienteDAO;
+import com.mycompany.pasteleriadominios.Cliente;
 import dto.DTO_Cliente;
 import java.util.List;
 
@@ -31,4 +32,16 @@ public class ClientesBO implements IClientesBO {
     public void agregarCliente(DTO_Cliente clientes) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public DTO_Cliente encontrarCliente(String apellidoPaterno, String apellidoMaterno, String nombres, String telefono) {
+        DTO_Cliente cliente = clienteDAO.encontrarCliente(apellidoPaterno, apellidoMaterno, nombres, telefono);
+        return cliente;
+    }
+
+    @Override
+    public DTO_Cliente encontrarClienteID(String idCliente) {
+       return clienteDAO.encontrarClienteID(idCliente);
+    }
+
 }

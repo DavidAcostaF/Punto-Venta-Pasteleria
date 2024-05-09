@@ -24,6 +24,7 @@ public class ProductosBO implements IProductosBO {
 
     @Override
     public List<DTO_Producto> consultarProductos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<DTO_Producto> listaProductos = productoDAO.consultarProductos();
+        return listaProductos;
     }
 }

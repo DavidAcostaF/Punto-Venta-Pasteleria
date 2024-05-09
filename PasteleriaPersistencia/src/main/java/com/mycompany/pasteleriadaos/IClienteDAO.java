@@ -17,4 +17,8 @@ public interface IClienteDAO {
     
     
     public List<DTO_Cliente> consultarClientes();
+    
+     public DTO_Cliente encontrarCliente(String apellidoPaterno, String apellidoMaterno, String nombres, String telefono);
+     
+      public DTO_Cliente encontrarClienteID(String idCliente);
 }

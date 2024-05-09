@@ -8,39 +8,52 @@ import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import com.mycompany.pasteleriaconsultarventas.FuncionalidadConsultarVentas;
+import com.mycompany.pasteleriaconsultarventas.IFuncionalidadConsultarVentas;
+import com.mycompany.pasteleriaproductosventa.FuncionalidadProductos;
+import com.mycompany.pasteleriaproductosventa.IFuncionalidadProductos;
 import consultarClientes.FuncionalidadConsultarClientes;
 import consultarClientes.IFuncionalidadConsultarClientes;
 import control.ControlHistoriales;
 import dto.DTO_Cliente;
+import dto.DTO_Producto;
+import dto.DTO_Venta;
 import extras.ClientesComboBoxModel;
+import extras.PastelComboBoxModel;
 import java.awt.Font;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author abelc
  */
 public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
+
     private ControlHistoriales control;
     private DTO_Cliente cliente;
     private IFuncionalidadConsultarClientes funcionalidadesClientes;
     private List<DTO_Cliente> listaClientes;
+    private List<DTO_Producto> listaProductos;
+    private IFuncionalidadProductos funcionalidadConsultarProductos;
+    private IFuncionalidadConsultarVentas funcionalidadConsultarVentas;
 
     /**
      * Creates new form FrmHistorialVentas
      */
     public Presentacion_FrmHistorialVentas() {
         this.control = new ControlHistoriales();
+        this.funcionalidadConsultarVentas = new FuncionalidadConsultarVentas();
         this.funcionalidadesClientes = new FuncionalidadConsultarClientes();
+        this.funcionalidadConsultarProductos = new FuncionalidadProductos();
         this.cliente = new DTO_Cliente();
         listaClientes = funcionalidadesClientes.consultarClientes();
+        listaProductos = funcionalidadConsultarProductos.consultarProductosVenta();
         initComponents();
-        
-        System.out.println(funcionalidadesClientes.consultarClientes());
-        
-        testData(productosComboBox);
+        llenarTabla();
         FlatRobotoFont.install();
         FlatLaf.registerCustomDefaultsSource("extras");
         UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
@@ -68,7 +81,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         productosComboBox = new extras.ComboBoxMultiSeleccion();
         aplicarFiltroBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaVentas = new javax.swing.JTable();
         detallesVentaBtn = new javax.swing.JButton();
         regresarBtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -111,6 +124,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
 
+        productosComboBox.setModel((new PastelComboBoxModel(listaProductos)));
         productosComboBox.setEnabled(false);
         productosComboBox.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -124,8 +138,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setForeground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"", null, null, null},
                 {null, null, null, null},
@@ -144,11 +157,12 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setSelectionBackground(new java.awt.Color(140, 220, 254));
-        jTable1.setSelectionForeground(new java.awt.Color(0, 0, 0));
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(jTable1);
+        tablaVentas.setForeground(new java.awt.Color(0, 0, 0));
+        tablaVentas.setSelectionBackground(new java.awt.Color(140, 220, 254));
+        tablaVentas.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        tablaVentas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaVentas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(tablaVentas);
 
         detallesVentaBtn.setText("Ver detalles de la venta");
         detallesVentaBtn.setBackground(new java.awt.Color(140, 220, 254));
@@ -308,55 +322,81 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_detallesVentaBtnActionPerformed
 
     private void aplicarFiltroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarFiltroBtnActionPerformed
-      
-    }//GEN-LAST:event_aplicarFiltroBtnActionPerformed
+        if (filtrarClienteRadioBtn.isSelected()) {
+            obtenerCliente();
+        }
 
-    //Metodo para probar el combobox nomas(se va borrar esta madre)
-    private void testData(JComboBox combo) {
-        combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{
-            "Blueberry",
-            "Kiwi",
-            "Mango",
-            "Pineapple",
-            "Strawberry",
-            "Watermelon",
-            "Raspberry",
-            "Peach",
-            "Grapefruit",
-            "Lemon",
-            "Orange",
-            "Apple",
-            "Banana",
-            "Pear",
-            "Cherry",
-            "Papaya",
-            "Plum",
-            "Apricot",
-            "Blackberry",
-            "Cranberry",
-            "Guava",
-            "Lime",
-            "Lychee",
-            "Coconut",
-            "Fig",
-            "Pomegranate",
-            "Avocado",
-            "Grape",
-            "Cantaloupe",
-            "Dragonfruit"
-        }));
+
+    }//GEN-LAST:event_aplicarFiltroBtnActionPerformed
+    public void obtenerCliente() {
+        String clienteSeleccionado = (String) clientesComboBox.getSelectedItem();
+        if (clienteSeleccionado != null) {
+            // Dividir el texto en partes usando el guion como separador
+            String[] partes = clienteSeleccionado.split("-");
+
+            if (partes.length >= 2) {
+                // El último elemento del array es el número de teléfono
+                String numeroTelefono = partes[partes.length - 1].trim();
+
+                // Extraer el nombre y apellidos
+                String nombreCompleto = partes[0].trim();
+                String[] nombresApellidos = nombreCompleto.split("\\s+");
+
+                String nombre = nombresApellidos[0];
+                String apellidoPaterno = "";
+                String apellidoMaterno = "";
+
+                if (nombresApellidos.length >= 3) {
+                    // Hay dos nombres y apellidos
+                    apellidoPaterno = nombresApellidos[1];
+                    apellidoMaterno = nombresApellidos[2];
+                } else if (nombresApellidos.length == 2) {
+                    // Solo hay un nombre y apellidos
+                    String[] apellidos = nombresApellidos[1].split(" ");
+                    if (apellidos.length >= 2) {
+                        apellidoPaterno = apellidos[0];
+                        apellidoMaterno = apellidos[1];
+                    } else {
+                        apellidoPaterno = apellidos[0];
+                    }
+
+                }
+
+                cliente = funcionalidadesClientes.encontrarCliente(apellidoPaterno, apellidoMaterno, nombre, numeroTelefono);
+                System.out.println(cliente.getID());
+            }
+        }
     }
 
-    public void desplegarClientes(List<DTO_Cliente> clientes) {
-        clientesComboBox.setModel(new ClientesComboBoxModel(clientes));
+    public void llenarTabla() {
+        limpiarTabla();
+        System.out.println("hola");
+        List<DTO_Venta> listaVentas = funcionalidadConsultarVentas.consultarVentas();
+        DefaultTableModel modelo = (DefaultTableModel) tablaVentas.getModel();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy"); 
+        if (listaVentas != null) {
+            listaVentas.forEach(t -> {
+                String fechaRegistro = formatoFecha.format(t.getFechaRegistro());
+                String fechaEntrega = formatoFecha.format(t.getFechaEntrega());
+                modelo.addRow(new Object[]{t.getID(), fechaRegistro, fechaEntrega, t.getEstado()});
+            });
+        }
+    }
+
+    private void limpiarTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) tablaVentas.getModel();
+
+        modelo.setRowCount(0);
+
+        tablaVentas.setModel(modelo);
     }
 
     public void mostrarHistorialVentas() {
         FlatRobotoFont.install();
         FlatLaf.registerCustomDefaultsSource("extras");
         UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
-        FlatLightLaf.setup(); 
-        
+        FlatLightLaf.setup();
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Presentacion_FrmHistorialVentas().setVisible(true);
@@ -380,8 +420,8 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private extras.ComboBoxMultiSeleccion productosComboBox;
     private javax.swing.JButton regresarBtn;
+    private javax.swing.JTable tablaVentas;
     // End of variables declaration//GEN-END:variables
 }

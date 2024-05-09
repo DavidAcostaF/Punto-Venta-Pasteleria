@@ -4,11 +4,14 @@
  */
 package com.mycompany.pasteleriadaos;
 
+import Exceptions.PersistenciaException;
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.regex;
 import com.mycompany.pasteleriadominios.Cliente;
 import com.mycompany.pasteleriadominios.Venta;
 import conversiones.VentasConversiones;
@@ -104,4 +107,21 @@ public class VentaDAO implements IVentaDAO {
         return ventasDTO;
     }
 
+    @Override
+    public DTO_Venta encontrarVenta(String idVenta) throws PersistenciaException {
+        try {
+            ObjectId objectIdVenta = new ObjectId(idVenta);
+
+            MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
+
+            Venta resultado = coleccion.find(eq("_id", objectIdVenta)).first();
+            if (resultado != null) {
+                return conversor.convertirVentaADTO(resultado);
+            } else {
+                return null;
+            }
+        } catch (IllegalArgumentException e) {
+            throw new PersistenciaException("ID de venta no válido: " + idVenta);
+        }
+    }
 }

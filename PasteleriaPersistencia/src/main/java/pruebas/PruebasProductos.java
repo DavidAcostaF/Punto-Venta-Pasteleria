@@ -12,6 +12,8 @@ import com.mycompany.pasteleriadocumentosanidados.IngredienteDetalle;
 import com.mycompany.pasteleriadominios.Ingrediente;
 import com.mycompany.pasteleriadominios.Producto;
 import dto.DTO_Ingrediente;
+import dto.DTO_Producto;
+import java.util.List;
 import org.bson.types.ObjectId;
 
 /**
@@ -27,7 +29,7 @@ public class PruebasProductos {
         IIngredienteDAO ingredienteDAO = new IngredienteDAO();
         IProductoDAO productoDAO = new ProductoDAO();
         Ingrediente ingrediento1 = new Ingrediente();
-        ingrediento1.setNombre("Azucar");
+       ingrediento1.setNombre("Azucar");
         ingrediento1.setCantidad(2);
         ingrediento1.setPrecio(123F);
         ingrediento1.setUnidadDeMedida("gramos");
@@ -37,7 +39,8 @@ public class PruebasProductos {
         ingrediento2.setCantidad(2);
         ingrediento2.setPrecio(123F);
         ingrediento2.setUnidadDeMedida("gramos");
-
+ingredienteDAO.agregar(ingrediento1);
+ingredienteDAO.agregar(ingrediento2);
         Producto producto = new Producto();
         producto.setNombre("Pastelongo");
         producto.setPrecio(100F);
@@ -59,6 +62,10 @@ public class PruebasProductos {
         producto.addIngredienteDetalle(ingredienteDetalle2);
 
         productoDAO.agregarProducto(producto);
-    }
+
+       /*
+       List<DTO_Producto> listaproductos=productoDAO.consultarProductos();
+        System.out.println(listaproductos);*/
+}
 
 }

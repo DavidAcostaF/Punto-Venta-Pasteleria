@@ -17,7 +17,6 @@ public class DTO_Producto {
     private float precio;
     private String nombre;
     private String descripcion;
-    private String tamaño;
     private List<DTO_IngredienteDetalle> ingredientes;
 
     public DTO_Producto() {
@@ -30,12 +29,12 @@ public class DTO_Producto {
         this.nombre = nombre;
     }
 
-    public DTO_Producto(String Id, float precio, String nombre, String descripcion, String tamaño) {
+    public DTO_Producto(String Id, float precio, String nombre, String descripcion) {
         this.Id = Id;
         this.precio = precio;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.tamaño = tamaño;
+        
     }
 
     public List<DTO_IngredienteDetalle> getIngredientes() {
@@ -46,11 +45,11 @@ public class DTO_Producto {
         this.ingredientes = ingredientes;
     }
 
-    public DTO_Producto(float precio, String nombre, String descripcion, String tamaño) {
+    public DTO_Producto(float precio, String nombre, String descripcion) {
         this.precio = precio;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.tamaño = tamaño;
+       
     }
 
     public void addDTO_IngredienteDetalle(DTO_IngredienteDetalle ingredienteDetalle) {
@@ -89,17 +88,11 @@ public class DTO_Producto {
         this.descripcion = descripcion;
     }
 
-    public String getTamaño() {
-        return tamaño;
-    }
 
-    public void setTamaño(String tamaño) {
-        this.tamaño = tamaño;
-    }
 
     @Override
     public String toString() {
-        return "DTO_Producto{" + "Id=" + Id + ", precio=" + precio + ", nombre=" + nombre + ", descripcion=" + descripcion + ", tama\u00f1o=" + tamaño + '}';
+        return "DTO_Producto{" + "Id=" + Id + ", precio=" + precio + ", nombre=" + nombre + ", descripcion=" + descripcion +  '}';
     }
 
 }

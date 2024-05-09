@@ -4,14 +4,18 @@
  */
 package com.mycompany.pasteleriadaos;
 
+import Exceptions.PersistenciaException;
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import static com.mongodb.client.model.Filters.eq;
 import com.mycompany.pasteleriadominios.Cliente;
 import conversiones.ClientesConversiones;
 import dto.DTO_Cliente;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -50,4 +54,27 @@ public class ClienteDAO implements IClienteDAO {
         return listaDTOClientes;
     }
 
+    @Override
+    public DTO_Cliente encontrarCliente(String apellidoPaterno, String apellidoMaterno, String nombres, String telefono) {
+        MongoCollection<Cliente> coleccion = conexion.obtenerColeccion();
+        BasicDBObject filtro = new BasicDBObject();
+        filtro.put("apellidoP", apellidoPaterno);
+        filtro.put("apellidoM", apellidoMaterno);
+        filtro.put("nombre", nombres);
+        filtro.put("telefono", telefono);
+        DTO_Cliente clienteEncontrado = conversor.convertirCliente(coleccion.find(filtro).first());
+        return clienteEncontrado;
+    }
+
+    @Override
+    public DTO_Cliente encontrarClienteID(String idCliente) {
+        MongoCollection<Cliente> coleccion = conexion.obtenerColeccion();
+        Cliente resultado = coleccion.find(eq("_id", new ObjectId(idCliente))).first();
+        if (resultado != null) {
+            return conversor.convertirCliente(resultado);
+        } else {
+            return null;
+        }
+
+    }
 }

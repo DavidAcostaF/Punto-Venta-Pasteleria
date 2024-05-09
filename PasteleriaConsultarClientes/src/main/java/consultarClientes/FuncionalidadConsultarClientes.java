@@ -4,10 +4,9 @@
  */
 package consultarClientes;
 
+
 import com.mycompany.pastelerianegocio.ClientesBO;
 import com.mycompany.pastelerianegocio.IClientesBO;
-import com.mycompany.pastelerianegocio.IVentasBO;
-import com.mycompany.pastelerianegocio.VentasBO;
 import dto.DTO_Cliente;
 import java.util.List;
 
@@ -28,4 +27,17 @@ public class FuncionalidadConsultarClientes implements IFuncionalidadConsultarCl
         List<DTO_Cliente> clientes = clientesBO.consultarClientes();
         return clientes;
     }
+
+    @Override
+    public DTO_Cliente encontrarCliente(String apellidoPaterno, String apellidoMaterno, String nombres, String telefono) {
+        DTO_Cliente cliente = clientesBO.encontrarCliente(apellidoPaterno, apellidoMaterno, nombres, telefono);
+        return cliente;
+    }
+
+    @Override
+    public DTO_Cliente encontrarClienteID(String idCliente) {
+       return clientesBO.encontrarClienteID(idCliente);
+    }
+
+ 
 }
