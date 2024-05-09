@@ -1,12 +1,11 @@
 presentacion\Presentacion_DlgInventarioIngredientes.class
-presentacion\Presentacion_DlgSeleccionarIngredientesProducto.class
 presentacion\Presentacion_DlgCobrarVenta.class
 extras\ActionButton$1.class
 extras\ActionButton.class
 presentacion\Presentacion_FrmMenuHistoriales.class
 extras\PanelBotones$2.class
-presentacion\Presentacion_DlgSeleccionarIngredientesProducto$3.class
 extras\ComboBoxMultiSeleccion$InterfazComboMultiple$PopupComboMultiple.class
+presentacion\Presentacion_DlgDatosDelPastel$4.class
 presentacion\Presentacion_DlgHistorialReportes$2.class
 presentacion\Presentacion_DlgInventarioPasteles$9.class
 presentacion\Presentacion_ProductosVenta$3.class
@@ -52,13 +51,14 @@ presentacion\Presentacion_DlgInventarioPasteles$4.class
 presentacion\Presentacion_FrmMenuHistoriales$2.class
 presentacion\Presentacion_DlgHistorialReportes$1.class
 presentacion\Presentacion_MenuPrincipal$9.class
-presentacion\Presentacion_DlgSeleccionarIngredientesProducto$2.class
 presentacion\Presentacion_DlgHistorialReportes.class
 presentacion\Presentacion_DlgConfirmacionPago$2.class
 presentacion\Presentacion_DlgAgregarPastel.class
+control\ControlGestionarInventario.class
 presentacion\Presentacion_DlgVentasTotales$2.class
 presentacion\Presentacion_DlgInventarioIngredientes$9.class
 presentacion\Presentacion_DlgInventarioIngredientes$2.class
+presentacion\Presentacion_DlgDatosDelPastel.class
 presentacion\Presentacion_FrmHistorialVentas$5.class
 presentacion\Presentacion_ProductosVenta$4.class
 presentacion\Presentacion_DlgDatosCliente.class
@@ -70,7 +70,6 @@ extras\ComboBoxMultiSeleccion$InterfazComboMultiple.class
 presentacion\Presentacion_ProductosVenta.class
 presentacion\Presentacion_DlgListaClientes.class
 presentacion\Presentacion_DlgSeleccionOpcionGestion.class
-presentacion\Presentacion_DlgSeleccionarIngredientesProducto$1.class
 presentacion\Presentacion_DlgConfirmacionPago$4.class
 presentacion\Presentacion_DlgDatosCliente$2.class
 presentacion\Presentacion_DlgInventarioPasteles$5.class
@@ -80,6 +79,7 @@ presentacion\Presentacion_DlgIngredientesSeleccionados$3.class
 presentacion\Presentacion_DlgSeleccionOpcionGestion$3.class
 presentacion\Presentacion_DlgInventarioIngredientes$5.class
 presentacion\Presentacion_FrmHistorialVentas$2.class
+presentacion\Presentacion_DlgDatosDelPastel$5.class
 presentacion\Presentacion_DlgSeleccionarFechaIngresos$2.class
 presentacion\Presentacion_DlgInventarioPasteles$2.class
 presentacion\Presentacion_DlgCobrarVenta$2.class
@@ -88,6 +88,7 @@ presentacion\Presentacion_FrmHistorialVentas.class
 presentacion\Presentacion_MenuPrincipal$6.class
 presentacion\Presentacion_ProductosVenta$2.class
 extras\ComboBoxMultiSeleccion.class
+presentacion\Presentacion_DlgDatosDelPastel$3.class
 presentacion\Presentacion_DlgAgregarDireccion$2.class
 extras\ComboBoxMultiSeleccion$EditorComboMultiple.class
 presentacion\Presentacion_DlgInventarioIngredientes$11.class
@@ -98,7 +99,6 @@ presentacion\Presentacion_MenuPrincipal$5.class
 presentacion\Presentacion_DlgAgregarPastel$1.class
 presentacion\Presentacion_DlgSeleccionarFechaIngresos.class
 presentacion\Presentacion_DlgInventarioPasteles$7.class
-presentacion\Presentacion_DlgSeleccionarIngredientesProducto$5.class
 presentacion\Presentacion_DlgIngredientesSeleccionados.class
 presentacion\Presentacion_DlgSeleccionarFechaIngresos$3.class
 presentacion\Presentacion_DlgDirecciones$2.class
@@ -106,16 +106,15 @@ presentacion\Presentacion_DlgCobrarVenta$1.class
 presentacion\Presentacion_DlgConfirmacionPago.class
 presentacion\Presentacion_DlgInventarioPasteles$10.class
 presentacion\Presentacion_FrmHistorialVentas$7.class
+presentacion\Presentacion_DlgDatosDelPastel$2.class
 presentacion\Presentacion_ProductosVenta$1.class
 presentacion\Presentacion_DlgAgregarDireccion.class
 control\ControlAgregarVenta.class
 presentacion\Presentacion_DlgHistorialReportes$4.class
 com\mycompany\pasteleria\Pasteleria.class
 extras\PanelBotones$1.class
-presentacion\Presentacion_DlgSeleccionarIngredientesProducto$4.class
 presentacion\Presentacion_DlgAgregarPastel$2.class
 presentacion\Presentacion_DlgInventarioPasteles$1.class
-presentacion\Presentacion_DlgInventarioPasteles$11.class
 presentacion\Presentacion_MenuPrincipal$4.class
 presentacion\Presentacion_DlgSeleccionOpcionGestion$1.class
 presentacion\Presentacion_DlgInventarioPasteles.class
@@ -130,3 +129,4 @@ presentacion\Presentacion_DlgDirecciones$1.class
 presentacion\Presentacion_DlgListaClientes$3.class
 presentacion\Presentacion_MenuPrincipal.class
 presentacion\Presentacion_DlgDatosCliente$1.class
+presentacion\Presentacion_DlgDatosDelPastel$1.class

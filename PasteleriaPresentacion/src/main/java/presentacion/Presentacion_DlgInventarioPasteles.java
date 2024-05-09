@@ -27,25 +27,16 @@ public class Presentacion_DlgInventarioPasteles extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtCantidad = new javax.swing.JTextField();
-        txtPrecio = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         scrollPane = new javax.swing.JScrollPane();
         tableIngredientes = new javax.swing.JTable();
         btnVolver = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
-        comboUnidad = new javax.swing.JComboBox<>();
         btnVolver1 = new javax.swing.JButton();
-        txtNombre = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         btnEliminar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        btnModificarCantidad = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         btnLimpiar = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,8 +103,6 @@ public class Presentacion_DlgInventarioPasteles extends javax.swing.JFrame {
             }
         });
 
-        comboUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "gramos", "mililitros", "unidad" }));
-
         btnVolver1.setBackground(new java.awt.Color(140, 220, 254));
         btnVolver1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         btnVolver1.addActionListener(new java.awt.event.ActionListener() {
@@ -124,8 +113,6 @@ public class Presentacion_DlgInventarioPasteles extends javax.swing.JFrame {
 
         jLabel5.setText("Nombre:");
 
-        jLabel1.setText("Nombre:");
-
         btnEliminar.setBackground(new java.awt.Color(140, 220, 254));
         btnEliminar.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
@@ -135,17 +122,6 @@ public class Presentacion_DlgInventarioPasteles extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Cantidad:");
-
-        btnModificarCantidad.setText("Modificar");
-        btnModificarCantidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarCantidadActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Unidad:");
-
         btnLimpiar.setBackground(new java.awt.Color(140, 220, 254));
         btnLimpiar.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         btnLimpiar.setText("Limpiar");
@@ -154,8 +130,6 @@ public class Presentacion_DlgInventarioPasteles extends javax.swing.JFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-
-        jLabel4.setText("Precio:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,42 +141,21 @@ public class Presentacion_DlgInventarioPasteles extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addComponent(btnVolver))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(btnAgregar)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnEliminar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(comboUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel4))
-                                        .addGap(8, 8, 8)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnModificarCantidad)))
+                        .addGap(25, 25, 25)
+                        .addComponent(btnAgregar)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEliminar)
                         .addGap(56, 56, 56)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(32, 32, 32)
                                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnVolver1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -220,24 +173,7 @@ public class Presentacion_DlgInventarioPasteles extends javax.swing.JFrame {
                 .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41))
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(btnModificarCantidad))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(57, 57, 57)
+                .addGap(180, 180, 180)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
                     .addComponent(btnActualizar)
@@ -261,20 +197,8 @@ public class Presentacion_DlgInventarioPasteles extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void tableIngredientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableIngredientesMouseClicked
-        int fila = tableIngredientes.rowAtPoint(evt.getPoint());
-        txtNombre.setText(tableIngredientes.getValueAt(fila, 0).toString());
-        txtCantidad.setText(tableIngredientes.getValueAt(fila, 1).toString());
-        comboUnidad.setSelectedItem(tableIngredientes.getValueAt(fila, 0).toString());
-        txtPrecio.setText(tableIngredientes.getValueAt(fila, 3).toString());
 
-        btnActualizar.setEnabled(true);
-        btnModificarCantidad.setEnabled(true);
-        btnAgregar.setEnabled(false);
-        btnEliminar.setEnabled(true);
-        txtCantidad.setEnabled(false);
-        txtNombre.setEnabled(false);
 
-        btnModificarCantidad.setVisible(true);
     }//GEN-LAST:event_tableIngredientesMouseClicked
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
@@ -300,10 +224,6 @@ public class Presentacion_DlgInventarioPasteles extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
  
     }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void btnModificarCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCantidadActionPerformed
-
-    }//GEN-LAST:event_btnModificarCantidadActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
 
@@ -353,21 +273,12 @@ public class Presentacion_DlgInventarioPasteles extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
-    private javax.swing.JButton btnModificarCantidad;
     private javax.swing.JButton btnVolver;
     private javax.swing.JButton btnVolver1;
-    private javax.swing.JComboBox<String> comboUnidad;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JTable tableIngredientes;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtCantidad;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }

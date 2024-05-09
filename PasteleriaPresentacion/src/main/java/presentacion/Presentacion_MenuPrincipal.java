@@ -7,13 +7,16 @@ package presentacion;
 //import com.mycompany.pastelerianegocio.ControlRegistrarVenta;
 //import com.mycompany.pastelerianegocio.IControlRegistrarVenta;
 import control.ControlAgregarVenta;
+import control.ControlGestionarInventario;
 
 /**
  *
  * @author abelc
  */
 public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
+
     ControlAgregarVenta control;
+    private ControlGestionarInventario controlGesionarInventario;
 //    private IControlRegistrarVenta controlRegistrarVenta;
 
     /**
@@ -22,6 +25,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
     public Presentacion_MenuPrincipal() {
         initComponents();
         control = new ControlAgregarVenta();
+        controlGesionarInventario = new ControlGestionarInventario();
     }
 
     /**
@@ -225,7 +229,8 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+        controlGesionarInventario.mostrarOpcionesGestion();
+        this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
