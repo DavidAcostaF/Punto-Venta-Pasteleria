@@ -4,8 +4,13 @@
  */
 package com.mycompany.pasteleriadaos;
 
+import com.mongodb.MongoException;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
 import com.mycompany.pasteleriadominios.Cliente;
 import com.mycompany.pasteleriadominios.Venta;
+import conversiones.VentasConversiones;
+import dto.DTO_Venta;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,21 +19,31 @@ import java.util.List;
  * @author f_aco
  */
 public class VentaDAO implements IVentaDAO {
-    List<Venta> listaVentas;
-    
-     public VentaDAO() {
-        this.listaVentas = new ArrayList<>();
+
+    private IConexion conexion;
+    private DTO_Venta ventadto;
+    private VentasConversiones conversor;
+
+    public VentaDAO() {
+
     }
 
     @Override
     public Venta agregarVenta(Venta venta) {
-        this.listaVentas.add(venta); 
+        MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
+        coleccion.insertOne(venta);
         return venta;
     }
 
     @Override
-    public void eliminarCliente(Venta venta) {
-        this.listaVentas.remove(venta);
+    public void eliminarVenta(Venta venta) {
+        MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
+        try {
+            coleccion.deleteOne(Filters.eq("_id", venta.getId()));
+        } catch (MongoException e) {
+            System.out.println(e.getMessage());
+        }
+        
     }
-    
+
 }

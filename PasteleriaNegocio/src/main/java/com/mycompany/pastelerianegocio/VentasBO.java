@@ -9,7 +9,9 @@ import com.mycompany.pasteleriadaos.DireccionDAO;
 import com.mycompany.pasteleriadaos.IClienteDAO;
 import com.mycompany.pasteleriadaos.IDireccionDAO;
 import com.mycompany.pasteleriadaos.IProductoDAO;
+import com.mycompany.pasteleriadaos.IVentaDAO;
 import com.mycompany.pasteleriadaos.ProductoDAO;
+import com.mycompany.pasteleriadaos.VentaDAO;
 import com.mycompany.pasteleriadominios.Cliente;
 import com.mycompany.pasteleriadominios.DetalleVenta;
 import com.mycompany.pasteleriadominios.Direccion;
@@ -30,40 +32,10 @@ import java.util.List;
  */
 public class VentasBO implements IVentasBO {
 
-    private IClienteDAO clienteDAO;
-    private IProductoDAO productoDAO;
-    private IDireccionDAO direccionDAO;
+    private IVentaDAO ventaDAO;
 
     public VentasBO() {
-        this.clienteDAO = new ClienteDAO();
-        this.productoDAO = new ProductoDAO();
-        this.direccionDAO = new DireccionDAO();
-    }
-
-    @Override
-    public List<DTO_Cliente> consultarClientes() {
-        List<DTO_Cliente> clientes=clienteDAO.consultarClientes();
-        return clientes;
-    }
-
-    @Override
-    public void agregarCliente(DTO_Cliente clientes) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<DTO_Producto> consultarProductos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void agregarDirecciones(List<DTO_Direccion> direcciones) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<DTO_Direccion> consultarDirecciones() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.ventaDAO = new VentaDAO();
     }
 
     @Override

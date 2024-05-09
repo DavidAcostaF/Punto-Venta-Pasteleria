@@ -13,5 +13,5 @@ import com.mycompany.pasteleriadominios.Venta;
 public interface IVentaDAO {
      public Venta agregarVenta(Venta venta);
     
-    public void eliminarCliente(Venta venta);
+    public void eliminarVenta(Venta venta);
 }

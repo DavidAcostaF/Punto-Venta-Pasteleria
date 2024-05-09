@@ -4,7 +4,10 @@
  */
 package com.mycompany.pasteleriaproductosventa;
 
-import com.mycompany.pastelerianegocio.IVentasBO;
+import com.mycompany.pastelerianegocio.ClientesBO;
+import com.mycompany.pastelerianegocio.IClientesBO;
+import com.mycompany.pastelerianegocio.IProductosBO;
+import com.mycompany.pastelerianegocio.ProductosBO;
 import com.mycompany.pastelerianegocio.VentasBO;
 import dto.DTO_Producto;
 import java.util.ArrayList;
@@ -18,15 +21,15 @@ import java.util.List;
 public class FuncionalidadProductos implements IFuncionalidadProductos {
     //esta clase tendra todas las operaciones de ventas necesarias 
 
-    private IVentasBO ventaBO;
+    private IProductosBO productoBO;
 
     public FuncionalidadProductos() {
-       this.ventaBO = new VentasBO();
+       this.productoBO = new ProductosBO();
     }
 
     @Override
     public List<DTO_Producto> consultarProductosVenta() {
-        List<DTO_Producto> pasteles = ventaBO.consultarProductos();
+        List<DTO_Producto> pasteles = productoBO.consultarProductos();
         return pasteles;
     }
 }

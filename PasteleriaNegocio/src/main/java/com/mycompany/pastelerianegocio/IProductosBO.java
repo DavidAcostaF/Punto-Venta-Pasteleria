@@ -4,21 +4,14 @@
  */
 package com.mycompany.pastelerianegocio;
 
-import com.mycompany.pasteleriadominios.Cliente;
-import dto.DTO_Cliente;
-import dto.DTO_Direccion;
 import dto.DTO_Producto;
-import dto.DTO_Venta;
 import java.util.List;
 
 /**
  *
- * @author f_aco
+ * @author PC
  */
-public interface IVentasBO {
+public interface IProductosBO {
 
-    // En esta clase iran todos los metodos encargados de para agregar una venta 
-    
-
-    public void agregarVenta(DTO_Venta venta);
+    public List<DTO_Producto> consultarProductos();
 }
