@@ -4,7 +4,9 @@
  */
 package control;
 
+import presentacion.Presentacion_DlgIngresarDatosDelProducto;
 import presentacion.Presentacion_DlgInventarioIngredientes;
+import presentacion.Presentacion_DlgInventarioProductos;
 import presentacion.Presentacion_DlgSeleccionOpcionGestion;
 
 /**
@@ -17,9 +19,19 @@ public class ControlGestionarInventario {
         Presentacion_DlgSeleccionOpcionGestion seleccionOpcionGestion = new Presentacion_DlgSeleccionOpcionGestion();
         seleccionOpcionGestion.setVisible(true);
     }
+
+    public void mostrarInventarioIngredientes() {
+        Presentacion_DlgInventarioIngredientes p = new Presentacion_DlgInventarioIngredientes();
+        p.setVisible(true);
+    }
+
+    public void mostrarInvetarioProductos() {
+        Presentacion_DlgInventarioProductos p = new Presentacion_DlgInventarioProductos();
+        p.setVisible(true);
+    }
     
-    public void mostrarInventarioIngredientes(){
-    Presentacion_DlgInventarioIngredientes p = new Presentacion_DlgInventarioIngredientes();
-    p.setVisible(true);
+    public void mostrarIngresarDatosDelProducto(){
+    Presentacion_DlgIngresarDatosDelProducto p = new Presentacion_DlgIngresarDatosDelProducto();
+        p.setVisible(true);
     }
 }

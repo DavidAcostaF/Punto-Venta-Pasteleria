@@ -102,7 +102,8 @@ public class Presentacion_DlgSeleccionOpcionGestion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed
-        // TODO add your handling code here:
+        controlGesionarInventario.mostrarInvetarioProductos();
+        this.dispose();
     }//GEN-LAST:event_btnAgregar1ActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed

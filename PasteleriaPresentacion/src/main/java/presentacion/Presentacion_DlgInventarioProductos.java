@@ -4,17 +4,23 @@
  */
 package presentacion;
 
+import control.ControlGestionarInventario;
+
 /**
  *
  * @author af_da
  */
-public class Presentacion_DlgInventarioPasteles extends javax.swing.JFrame {
+public class Presentacion_DlgInventarioProductos extends javax.swing.JFrame {
+
+    private ControlGestionarInventario controlGesionarInventario;
 
     /**
      * Creates new form Presentacion_DlgCatalogoProductos
      */
-    public Presentacion_DlgInventarioPasteles() {
+    public Presentacion_DlgInventarioProductos() {
         initComponents();
+        controlGesionarInventario = new ControlGestionarInventario();
+
     }
 
     /**
@@ -189,7 +195,8 @@ public class Presentacion_DlgInventarioPasteles extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-
+        controlGesionarInventario.mostrarIngresarDatosDelProducto();
+        this.dispose();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
@@ -222,12 +229,12 @@ public class Presentacion_DlgInventarioPasteles extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolver1ActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
- 
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
 
- 
+
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     /**
@@ -247,14 +254,18 @@ public class Presentacion_DlgInventarioPasteles extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_DlgInventarioPasteles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Presentacion_DlgInventarioProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_DlgInventarioPasteles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Presentacion_DlgInventarioProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_DlgInventarioPasteles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Presentacion_DlgInventarioProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_DlgInventarioPasteles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Presentacion_DlgInventarioProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -263,7 +274,7 @@ public class Presentacion_DlgInventarioPasteles extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Presentacion_DlgInventarioPasteles().setVisible(true);
+                new Presentacion_DlgInventarioProductos().setVisible(true);
             }
         });
     }
