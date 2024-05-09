@@ -23,13 +23,16 @@ public class DetalleVenta {
     public DetalleVenta() {
     }
 
-    public DetalleVenta(float precio, float importe, int cantidad, String detallesCliente, ObjectId productoId) {
+    public DetalleVenta(float precio, float importe, int cantidad, String detallesCliente, String tamanhoProducto, ObjectId productoId) {
         this.precio = precio;
         this.importe = importe;
         this.cantidad = cantidad;
         this.detallesCliente = detallesCliente;
+        this.tamanhoProducto = tamanhoProducto;
         this.productoId = productoId;
     }
+
+   
 
     public float getPrecio() {
         return precio;
@@ -69,6 +72,14 @@ public class DetalleVenta {
 
     public void setProductoId(ObjectId productoId) {
         this.productoId = productoId;
+    }
+
+    public String getTamanhoProducto() {
+        return tamanhoProducto;
+    }
+
+    public void setTamanhoProducto(String tamanhoProducto) {
+        this.tamanhoProducto = tamanhoProducto;
     }
 
     @Override

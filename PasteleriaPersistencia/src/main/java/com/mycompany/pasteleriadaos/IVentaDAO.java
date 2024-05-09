@@ -17,5 +17,7 @@ public interface IVentaDAO {
     
     public void eliminarVenta(Venta venta);
     
+    public List<DTO_Venta> consultarVentas();
+    
     public List<DTO_Venta> ventasPorCliente(String clienteId);
 }

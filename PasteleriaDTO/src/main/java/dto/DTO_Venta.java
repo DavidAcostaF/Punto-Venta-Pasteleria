@@ -17,30 +17,35 @@ public class DTO_Venta {
     private Date fechaEntrega;
     private Date fechaRegistro;
     private String IDcliente;
+    private String Estado;
     private List<DTO_DetalleVenta> detallesVenta;  
     private DTO_Direccion dieccionEntrega;
 
     public DTO_Venta() {
     }
 
-    public DTO_Venta(String ID, float montoTotal, Date fechaEntrega, Date fechaRegistro, String IDcliente, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion dieccionEntrega) {
+    public DTO_Venta(float montoTotal, Date fechaEntrega, Date fechaRegistro, String IDcliente, String Estado, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion dieccionEntrega) {
+        this.montoTotal = montoTotal;
+        this.fechaEntrega = fechaEntrega;
+        this.fechaRegistro = fechaRegistro;
+        this.IDcliente = IDcliente;
+        this.Estado = Estado;
+        this.detallesVenta = detallesVenta;
+        this.dieccionEntrega = dieccionEntrega;
+    }
+
+    public DTO_Venta(String ID, float montoTotal, Date fechaEntrega, Date fechaRegistro, String IDcliente, String Estado, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion dieccionEntrega) {
         this.ID = ID;
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
         this.fechaRegistro = fechaRegistro;
         this.IDcliente = IDcliente;
+        this.Estado = Estado;
         this.detallesVenta = detallesVenta;
         this.dieccionEntrega = dieccionEntrega;
     }
 
-    public DTO_Venta(float montoTotal, Date fechaEntrega, Date fechaRegistro, String IDcliente, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion dieccionEntrega) {
-        this.montoTotal = montoTotal;
-        this.fechaEntrega = fechaEntrega;
-        this.fechaRegistro = fechaRegistro;
-        this.IDcliente = IDcliente;
-        this.detallesVenta = detallesVenta;
-        this.dieccionEntrega = dieccionEntrega;
-    }
+   
 
     
     public String getID() {
@@ -99,6 +104,14 @@ public class DTO_Venta {
 
     public void setDieccionEntrega(DTO_Direccion dieccionEntrega) {
         this.dieccionEntrega = dieccionEntrega;
+    }
+
+    public String getEstado() {
+        return Estado;
+    }
+
+    public void setEstado(String Estado) {
+        this.Estado = Estado;
     }
 
     @Override
