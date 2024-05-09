@@ -5,6 +5,7 @@
 package com.mycompany.pasteleriadominios;
 
 import com.mycompany.pasteleriadocumentosanidados.IngredienteDetalle;
+import java.util.ArrayList;
 import java.util.List;
 import org.bson.types.ObjectId;
 
@@ -21,6 +22,9 @@ public class Producto {
     private List<IngredienteDetalle> ingredientes;
 
     public Producto() {
+        if(ingredientes == null){
+            ingredientes = new ArrayList<>();
+        }
     }
 
     public Producto(ObjectId id) {

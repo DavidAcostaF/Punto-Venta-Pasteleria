@@ -20,7 +20,7 @@ public class ProductoDAO implements IProductoDAO {
     private IConexion conexion;
 
     public ProductoDAO() {
-        conexion = new Conexion("pasteles", Producto.class);
+        conexion = new Conexion("productos", Producto.class);
         //this.listaProductos = new ArrayList<>();    
 
     }
