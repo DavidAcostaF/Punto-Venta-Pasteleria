@@ -71,7 +71,7 @@ public class PruebasProductos {
     }
 
        
-       List<DTO_Producto> listaproductos=productoDAO.consultarProductos();
-        System.out.println(listaproductos);
+//       List<DTO_Producto> listaproductos=productoDAO.consultarProductos();
+//        System.out.println(listaproductos);
 }
 
