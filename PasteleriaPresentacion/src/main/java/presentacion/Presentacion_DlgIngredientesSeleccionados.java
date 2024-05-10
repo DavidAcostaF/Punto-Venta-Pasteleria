@@ -4,17 +4,59 @@
  */
 package presentacion;
 
+import com.mycompany.pasteleriaconsultaringrediente.FuncionalidadConsultarIngrediente;
+import com.mycompany.pasteleriaconsultaringrediente.IFuncionalidadConsultarIngrediente;
+import com.mycompany.pasteleriaconsultaringredientes.IFuncionalidadConsultarIngredientes;
+import control.ControlGestionarInventario;
+import dto.DTO_Ingrediente;
+import dto.DTO_IngredienteDetalle;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author af_da
  */
 public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFrame {
 
+    private IFuncionalidadConsultarIngrediente funcionalidadConsultarIngrediente;
+    private ControlGestionarInventario control;
+
     /**
      * Creates new form Presentacion_DlgIngredientesSeleccionados
      */
     public Presentacion_DlgIngredientesSeleccionados() {
         initComponents();
+        funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngrediente();
+        control = ControlGestionarInventario.getInstance();
+
+    }
+
+    private void llenarTabla() {
+        limpiarTabla();
+        List<DTO_Ingrediente> listaIngredientes = new ArrayList<>();
+        List<DTO_IngredienteDetalle> ingredientesDetalleDTO = control.getProductoDTO().getIngredientes();
+        if (ingredientesDetalleDTO != null) {
+            for (DTO_IngredienteDetalle ingredienteDetalle : ingredientesDetalleDTO) {
+                List<DTO_Ingrediente> ingredientes = funcionalidadConsultarIngrediente.consultarIngrediente(new DTO_Ingrediente(ingredienteDetalle.getNombre()));
+                listaIngredientes.add(ingredientes.getFirst());
+            }
+        }
+        DefaultTableModel modelo = (DefaultTableModel) tableIngredientes.getModel();
+
+        if (listaIngredientes != null) {
+            listaIngredientes.forEach(t -> modelo.addRow(new Object[]{t.getNombre(), t.getCantidad(), t.getUnidadDeMedida(), t.getPrecio()}));
+        }
+
+    }
+
+    private void limpiarTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) tableIngredientes.getModel();
+
+        modelo.setRowCount(0);
+
+        tableIngredientes.setModel(modelo);
     }
 
     /**
@@ -27,12 +69,12 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableIngredientes = new javax.swing.JTable();
         btnAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableIngredientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -54,9 +96,9 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
+        jScrollPane1.setViewportView(tableIngredientes);
+        if (tableIngredientes.getColumnModel().getColumnCount() > 0) {
+            tableIngredientes.getColumnModel().getColumn(0).setResizable(false);
         }
 
         btnAceptar.setBackground(new java.awt.Color(140, 220, 254));
@@ -72,21 +114,21 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(108, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(422, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addGap(58, 58, 58))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(83, Short.MAX_VALUE)
+                .addContainerGap(90, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(26, 26, 26)
                 .addComponent(btnAceptar)
                 .addGap(36, 36, 36))
         );
@@ -95,7 +137,7 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        
+
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
@@ -136,6 +178,6 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableIngredientes;
     // End of variables declaration//GEN-END:variables
 }

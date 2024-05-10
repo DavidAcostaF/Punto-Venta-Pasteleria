@@ -6,7 +6,10 @@ package presentacion;
 
 import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
 import com.mycompany.pasteleriaconsultaringredientes.IFuncionalidadConsultarIngredientes;
+import control.ControlGestionarInventario;
 import dto.DTO_Ingrediente;
+import dto.DTO_IngredienteDetalle;
+import dto.DTO_Producto;
 import extras.Render;
 import java.awt.Component;
 import java.awt.event.ItemEvent;
@@ -29,6 +32,7 @@ import javax.swing.table.TableCellRenderer;
 public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame {
 
     private IFuncionalidadConsultarIngredientes funcionalidadConsultarIngrediente;
+    private ControlGestionarInventario control;
 
     /**
      * Creates new form Presentacion_DlgSeleccionarIngredientesProducto
@@ -36,6 +40,7 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
     public Presentacion_DlgIngresarDatosDelProducto() {
         initComponents();
         funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngredientes();
+        control = ControlGestionarInventario.getInstance();
         cargaTabla();
     }
 
@@ -183,6 +188,8 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         List<String> elementosSeleccionados = new ArrayList<>();
+        DTO_Producto productoDTO = new DTO_Producto();
+        List<DTO_IngredienteDetalle> listaIngredienteDetalle = new ArrayList<>();
 
         for (int i = 0; i < tableIngredientes.getRowCount(); i++) {
             // Obtener el valor del CheckBox en la columna "Seleccionar"
@@ -194,10 +201,16 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
                 elementosSeleccionados.add(fila);
             }
         }
-
-        for (String fila : elementosSeleccionados) {
-            System.out.println(fila);
+        if (elementosSeleccionados.size() > 0) {
+            for (String nombre : elementosSeleccionados) {
+                DTO_IngredienteDetalle ingredienteDetalleDTO = new DTO_IngredienteDetalle();
+                ingredienteDetalleDTO.setNombre(nombre);
+                listaIngredienteDetalle.add(ingredienteDetalleDTO);
+            }
+            productoDTO.setIngredientes(listaIngredienteDetalle);
+            control.setProductoDTO(productoDTO);
         }
+
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**

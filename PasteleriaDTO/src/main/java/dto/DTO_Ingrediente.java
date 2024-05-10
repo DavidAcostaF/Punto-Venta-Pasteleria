@@ -27,6 +27,10 @@ public class DTO_Ingrediente {
         this.precio = precio;
     }
 
+    public DTO_Ingrediente(String nombre) {
+        this.nombre = nombre;
+    }
+
     public String getId() {
         return id;
     }

@@ -4,6 +4,7 @@
  */
 package control;
 
+import dto.DTO_Producto;
 import presentacion.Presentacion_DlgIngresarDatosDelProducto;
 import presentacion.Presentacion_DlgInventarioIngredientes;
 import presentacion.Presentacion_DlgInventarioProductos;
@@ -14,6 +15,29 @@ import presentacion.Presentacion_DlgSeleccionOpcionGestion;
  * @author af_da
  */
 public class ControlGestionarInventario {
+
+    private static ControlGestionarInventario instance;
+    private DTO_Producto productoDTO;
+
+    public ControlGestionarInventario() {
+        this.productoDTO = new DTO_Producto();
+    }
+    
+    
+    public static ControlGestionarInventario getInstance() {
+        if (instance == null) {
+            instance = new ControlGestionarInventario();
+        }
+        return instance;
+    }
+
+    public DTO_Producto getProductoDTO() {
+        return productoDTO;
+    }
+
+    public void setProductoDTO(DTO_Producto productoDTO) {
+        this.productoDTO = productoDTO;
+    }
 
     public void mostrarOpcionesGestion() {
         Presentacion_DlgSeleccionOpcionGestion seleccionOpcionGestion = new Presentacion_DlgSeleccionOpcionGestion();
@@ -29,9 +53,13 @@ public class ControlGestionarInventario {
         Presentacion_DlgInventarioProductos p = new Presentacion_DlgInventarioProductos();
         p.setVisible(true);
     }
-    
-    public void mostrarIngresarDatosDelProducto(){
-    Presentacion_DlgIngresarDatosDelProducto p = new Presentacion_DlgIngresarDatosDelProducto();
+
+    public void mostrarIngresarDatosDelProducto() {
+        Presentacion_DlgIngresarDatosDelProducto p = new Presentacion_DlgIngresarDatosDelProducto();
         p.setVisible(true);
+    }
+    
+    public void mostrarIngredientesSeleccionados(){
+    
     }
 }
