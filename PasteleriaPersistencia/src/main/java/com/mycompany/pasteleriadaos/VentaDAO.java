@@ -7,18 +7,26 @@ package com.mycompany.pasteleriadaos;
 import Exceptions.PersistenciaException;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoException;
+import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Aggregates;
+import com.mongodb.client.model.Field;
 import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
+import com.mongodb.client.model.Projections;
 import com.mycompany.pasteleriadominios.Cliente;
 import com.mycompany.pasteleriadominios.Venta;
 import conversiones.VentasConversiones;
+import dto.DTO_Producto;
 import dto.DTO_Venta;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
@@ -36,6 +44,7 @@ public class VentaDAO implements IVentaDAO {
         conexion = new Conexion("ventas", Venta.class);
         ventadto = new DTO_Venta();
         conversor = new VentasConversiones();
+
     }
 
     @Override
@@ -99,6 +108,7 @@ public class VentaDAO implements IVentaDAO {
                 Filters.gte("fechaRegistro", fechaInicio),
                 Filters.lte("fechaRegistro", fechaFin)
         );
+
         FindIterable<Venta> ventasPorRangoFechas = coleccion.find(filtroRangoFechas);
         List<DTO_Venta> ventasDTO = new ArrayList<>();
         for (Venta venta : ventasPorRangoFechas) {
@@ -113,15 +123,53 @@ public class VentaDAO implements IVentaDAO {
             ObjectId objectIdVenta = new ObjectId(idVenta);
 
             MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
+            List<Bson> pipeline = Arrays.asList(
+                    Aggregates.match(Filters.eq("_id", objectIdVenta)),
+                    Aggregates.lookup("clientes", "clienteid", "_id", "cliente"),
+                    Aggregates.addFields(new Field<>("cliente", new Document("$arrayElemAt", Arrays.asList("$cliente", 0)))),
+                    Aggregates.lookup("productos", "detallesVenta.productoId", "_id", "producto"),
+                    Aggregates.addFields(new Field<>("detallesVenta.producto", new Document("$arrayElemAt", Arrays.asList("$producto", 0)))),
+                    Aggregates.project(Projections.fields(
+                            Projections.include("_id", "clienteid", "cliente", "detallesVenta", "direccionEntrega", "estado", "fechaEntrega", "fechaRegistro", "montoTotal")
+                    ))
+            );
+            AggregateIterable<Venta> resultados = coleccion.aggregate(pipeline);
+            Venta ventaEncontrada = resultados.first();
 
-            Venta resultado = coleccion.find(eq("_id", objectIdVenta)).first();
-            if (resultado != null) {
-                return conversor.convertirVentaADTO(resultado);
-            } else {
-                return null;
-            }
+            return conversor.convertirADTO(ventaEncontrada);
         } catch (IllegalArgumentException e) {
             throw new PersistenciaException("ID de venta no válido: " + idVenta);
+        }
+    }
+
+    @Override
+    public List<DTO_Venta> consultarVentasPorProductos(List<DTO_Producto> listaProductos) throws PersistenciaException {
+        try {
+            // Convertir los IDs de productos de tipo String a ObjectId
+            List<ObjectId> idsProductos = listaProductos.stream()
+                    .map(producto -> new ObjectId(producto.getId()))
+                    .collect(Collectors.toList());
+
+            Bson filtro = Filters.in("detallesVenta.productoId", idsProductos);
+
+            MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
+            List<Bson> pipeline = Arrays.asList(
+                    Aggregates.match(filtro),
+                    Aggregates.lookup("clientes", "clienteid", "_id", "cliente"),
+                    Aggregates.addFields(new Field<>("cliente", new Document("$arrayElemAt", Arrays.asList("$cliente", 0)))),
+                    Aggregates.project(Projections.fields(
+                            Projections.include("_id", "clienteid", "cliente", "detallesVenta", "direccionEntrega", "estado", "fechaEntrega", "fechaRegistro", "montoTotal")
+                    ))
+            );
+
+            AggregateIterable<Venta> resultados = coleccion.aggregate(pipeline);
+            List<DTO_Venta> ventas = new ArrayList<>();
+            for (Venta venta : resultados) {
+                ventas.add(conversor.convertirVentaADTO(venta));
+            }
+            return ventas;
+        } catch (IllegalArgumentException e) {
+            throw new PersistenciaException("Error al consultar ventas por productos: " + e.getMessage());
         }
     }
 }

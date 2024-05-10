@@ -30,6 +30,8 @@ public class PruebasProductos {
         IProductoDAO productoDAO = new ProductoDAO();
         Ingrediente ingrediento1 = new Ingrediente();
         ingrediento1.setNombre("Azucar");
+
+   /*    ingrediento1.setNombre("Azucar");
         ingrediento1.setCantidad(2);
         ingrediento1.setPrecio(123F);
         ingrediento1.setUnidadDeMedida("gramos");
@@ -68,4 +70,8 @@ public class PruebasProductos {
         System.out.println(listaproductos);*/
     }
 
+       
+       List<DTO_Producto> listaproductos=productoDAO.consultarProductos();
+        System.out.println(listaproductos);
 }
+

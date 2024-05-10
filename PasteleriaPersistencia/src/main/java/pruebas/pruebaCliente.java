@@ -24,18 +24,18 @@ public class pruebaCliente {
         ClienteDAO clientedao=new ClienteDAO();
         Cliente cliente = new Cliente();
  
-   /* cliente.setNombre("Maria");
-    cliente.setApellidoP("Gonzales");
-    cliente.setApellidoM("KK");
-    cliente.setTelefono("12345654890");
+    cliente.setNombre("Taylor");
+    cliente.setApellidoP("Swift");
+    cliente.setApellidoM("Morales");
+    cliente.setTelefono("644412345");
 
     // Crear algunas direcciones de ejemplo y agregarlas al cliente
     List<Direccion> direcciones = new ArrayList<>();
-    direcciones.add(new Direccion("Calle 1", "Colonia 1", "1"));
+    direcciones.add(new Direccion("Calle wallabe #42", "sydney", "1"));
     direcciones.add(new Direccion("Calle 2", "Colonia 2", "2"));
     cliente.setDirecciones(direcciones);
     
-    clientedao.agregarCliente(cliente);*/
+    clientedao.agregarCliente(cliente);
     
     /* List<DTO_Cliente> clientes = clientedao.consultarClientes();
      
@@ -44,8 +44,10 @@ public class pruebaCliente {
     for (DTO_Cliente cliente1 : clientes) {
         System.out.println(cliente1);
     }*/
+    /*
     DTO_Cliente cliente1=clientedao.encontrarCliente("Perez", "Mendez", "Juan", "1234567890");
         System.out.println(cliente1.getDirecciones());
+*/
     }
     
 }

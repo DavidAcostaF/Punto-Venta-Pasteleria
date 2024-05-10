@@ -19,7 +19,8 @@ public class DetalleVenta {
     private String detallesCliente;
     private String tamanhoProducto;
     private ObjectId productoId;
-  
+    private Producto producto;
+
     public DetalleVenta() {
     }
 
@@ -32,8 +33,6 @@ public class DetalleVenta {
         this.productoId = productoId;
     }
 
-   
-
     public float getPrecio() {
         return precio;
     }
@@ -42,6 +41,16 @@ public class DetalleVenta {
         this.precio = precio;
     }
 
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    
+    
     public float getImporte() {
         return importe;
     }
@@ -86,7 +95,5 @@ public class DetalleVenta {
     public String toString() {
         return "DetalleVenta{" + "precio=" + precio + ", importe=" + importe + ", cantidad=" + cantidad + ", detallesCliente=" + detallesCliente + ", productoId=" + productoId + '}';
     }
-  
-  
-   
+
 }

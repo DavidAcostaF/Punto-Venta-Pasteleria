@@ -73,6 +73,7 @@ presentacion\Presentacion_DlgListaClientes.class
 presentacion\Presentacion_DlgSeleccionOpcionGestion.class
 presentacion\Presentacion_DlgConfirmacionPago$4.class
 presentacion\Presentacion_DlgDatosCliente$2.class
+presentacion\Presentacion_FrmDetallesVenta$3.class
 extras\ClientesComboBoxModel.class
 presentacion\Presentacion_DlgInventarioIngredientes$8.class
 presentacion\Presentacion_DlgIngredientesSeleccionados$3.class

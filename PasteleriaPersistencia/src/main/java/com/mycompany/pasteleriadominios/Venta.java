@@ -22,11 +22,12 @@ public class Venta {
     private ObjectId clienteid;
     private List<DetalleVenta> detallesVenta;
     private Direccion direccionEntrega;
+    private Cliente cliente;
 
     public Venta() {
     }
 
-    public Venta(ObjectId id, float montoTotal, Date fechaEntrega, Date fechaRegistro, String estado, ObjectId clienteid, List<DetalleVenta> detallesVenta, Direccion direccionEntrega) {
+    public Venta(ObjectId id, float montoTotal, Date fechaEntrega, Date fechaRegistro, String estado, ObjectId clienteid, List<DetalleVenta> detallesVenta, Direccion direccionEntrega, Cliente cliente) {
         this.id = id;
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
@@ -35,9 +36,10 @@ public class Venta {
         this.clienteid = clienteid;
         this.detallesVenta = detallesVenta;
         this.direccionEntrega = direccionEntrega;
+        this.cliente = cliente;
     }
 
-    public Venta(float montoTotal, Date fechaEntrega, Date fechaRegistro, String estado, ObjectId clienteid, List<DetalleVenta> detallesVenta, Direccion direccionEntrega) {
+    public Venta(float montoTotal, Date fechaEntrega, Date fechaRegistro, String estado, ObjectId clienteid, List<DetalleVenta> detallesVenta, Direccion direccionEntrega, Cliente cliente) {
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
         this.fechaRegistro = fechaRegistro;
@@ -45,11 +47,8 @@ public class Venta {
         this.clienteid = clienteid;
         this.detallesVenta = detallesVenta;
         this.direccionEntrega = direccionEntrega;
+        this.cliente = cliente;
     }
-
-  
-
- 
 
     public ObjectId getId() {
         return id;
@@ -58,7 +57,13 @@ public class Venta {
     public void setId(ObjectId id) {
         this.id = id;
     }
+    public Cliente getCliente() {
+        return cliente;
+    }
 
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
     public float getMontoTotal() {
         return montoTotal;
     }

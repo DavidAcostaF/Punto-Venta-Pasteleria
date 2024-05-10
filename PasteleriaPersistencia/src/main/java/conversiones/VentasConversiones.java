@@ -17,6 +17,14 @@ import java.util.List;
  * @author PC
  */
 public class VentasConversiones {
+
+    ClientesConversiones conversorCliente;
+    ProductosConversiones conversorProductos;
+
+    public VentasConversiones() {
+        conversorCliente = new ClientesConversiones();
+        conversorProductos = new ProductosConversiones();
+    }
     
     public DTO_Venta convertirVentaADTO(Venta venta) {
         DTO_Venta dtoVenta = new DTO_Venta();
@@ -46,4 +54,33 @@ public class VentasConversiones {
         return dtoVenta;
     }
     
+    public DTO_Venta convertirADTO(Venta venta) {
+        DTO_Venta dtoVenta = new DTO_Venta();
+        dtoVenta.setID(venta.getId().toString());
+        dtoVenta.setFechaEntrega(venta.getFechaEntrega());
+        dtoVenta.setFechaRegistro(venta.getFechaRegistro());
+        dtoVenta.setMontoTotal(venta.getMontoTotal());
+        dtoVenta.setEstado(venta.getEstado());
+        dtoVenta.setIDcliente(venta.getClienteid().toString());
+        dtoVenta.setCliente(conversorCliente.convertirCliente(venta.getCliente()));
+        List<DTO_DetalleVenta> detallesVenta = new ArrayList<>();
+        for (DetalleVenta detalleVenta : venta.getDetallesVenta()) {
+            DTO_DetalleVenta detalleVentaDTO = new DTO_DetalleVenta();
+            detalleVentaDTO.setCantidad(detalleVenta.getCantidad());
+            detalleVentaDTO.setEspecificacion(detalleVenta.getDetallesCliente());
+            detalleVentaDTO.setIdproducto(detalleVenta.getProductoId().toString());
+            detalleVentaDTO.setImporte(detalleVenta.getImporte());
+            detalleVentaDTO.setPrecio(detalleVenta.getPrecio());
+            detalleVentaDTO.setTamanhoProducto(detalleVentaDTO.getTamanhoProducto());
+            detalleVentaDTO.setProducto(conversorProductos.convertirProducto(detalleVenta.getProducto()));
+            detallesVenta.add(detalleVentaDTO);
+        }
+        dtoVenta.setDetallesVenta(detallesVenta);
+        DTO_Direccion dtoDireccion = new DTO_Direccion();
+        dtoDireccion.setCalle(venta.getDireccionEntrega().getCalle());
+        dtoDireccion.setColonia(venta.getDireccionEntrega().getColonia());
+        dtoDireccion.setNumExterior(venta.getDireccionEntrega().getNumExterior());
+        dtoVenta.setDieccionEntrega(dtoDireccion);
+        return dtoVenta;
+    }
 }

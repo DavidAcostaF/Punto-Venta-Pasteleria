@@ -16,6 +16,7 @@ import dto.DTO_DetalleVenta;
 import dto.DTO_Producto;
 import dto.DTO_Venta;
 import java.awt.Font;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -40,8 +41,15 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
         this.venta = control.getVenta();
         funcionalidadConsultarProducto = new FuncionalidadProductos();
         initComponents();
-        System.out.println(venta.getID());
+        System.out.println(venta.getFechaEntrega());
+        SimpleDateFormat ff = new SimpleDateFormat("dd/MM/yyyy");
+        detallesVentaLabel.setText("Fecha de compra: "+ff.format(venta.getFechaRegistro()));
+        fechaEntregalabel.setText("Fecha de entrega: "+ff.format(venta.getFechaEntrega()));
+        totalVentalabel.setText("Total: "+Float.toString(venta.getMontoTotal()));
+        estadoLabel.setText("Historial: "+venta.getEstado());
+        clienteLabel.setText("Cliente: "+venta.getCliente().getNombre()+" "+venta.getCliente().getApellidoP()+" "+venta.getCliente().getApellidoM());
         llenarTabla();
+
     }
 
     /**
@@ -64,7 +72,7 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
         detallesVentaTabla = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        clienteLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -72,29 +80,29 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(232, 232, 232));
         jPanel1.setForeground(new java.awt.Color(0, 0, 0));
 
+        jLabel1.setText("Detalles de la venta");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Detalles de la venta");
 
+        detallesVentaLabel.setText("Fecha de la compra:");
         detallesVentaLabel.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         detallesVentaLabel.setForeground(new java.awt.Color(0, 0, 0));
-        detallesVentaLabel.setText("Fecha de la compra:");
 
+        jLabel3.setText("Detalles");
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Detalles");
 
+        estadoLabel.setText("Estado:");
         estadoLabel.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         estadoLabel.setForeground(new java.awt.Color(0, 0, 0));
-        estadoLabel.setText("Estado:");
 
+        fechaEntregalabel.setText("Fecha de entrega:");
         fechaEntregalabel.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         fechaEntregalabel.setForeground(new java.awt.Color(0, 0, 0));
-        fechaEntregalabel.setText("Fecha de entrega:");
 
+        totalVentalabel.setText("Total:");
         totalVentalabel.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         totalVentalabel.setForeground(new java.awt.Color(0, 0, 0));
-        totalVentalabel.setText("Total de la venta:");
 
         detallesVentaTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,56 +131,61 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
         detallesVentaTabla.setSurrendersFocusOnKeystroke(true);
         jScrollPane1.setViewportView(detallesVentaTabla);
 
+        jButton1.setText("Regresar");
         jButton1.setBackground(new java.awt.Color(140, 220, 254));
         jButton1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Regresar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
+        jButton2.setText("Generar Ticket");
         jButton2.setBackground(new java.awt.Color(140, 220, 254));
         jButton2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Generar Ticket");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Cliente:");
+        clienteLabel.setText("Cliente:");
+        clienteLabel.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        clienteLabel.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jScrollPane1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(215, 215, 215)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(jButton1)
+                                .addGap(260, 260, 260)
+                                .addComponent(jButton2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(144, 144, 144)
+                                .addComponent(jLabel1)))
+                        .addGap(0, 18, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(detallesVentaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(detallesVentaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalVentalabel, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(estadoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fechaEntregalabel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(215, 215, 215)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jButton1)
-                        .addGap(260, 260, 260)
-                        .addComponent(jButton2)))
-                .addContainerGap(24, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(16, 16, 16)
-                    .addComponent(totalVentalabel, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(294, Short.MAX_VALUE)))
+                    .addComponent(fechaEntregalabel, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(clienteLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                        .addComponent(estadoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(19, 19, 19))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,11 +196,16 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(detallesVentaLabel)
                     .addComponent(fechaEntregalabel))
-                .addGap(27, 27, 27)
-                .addComponent(estadoLabel)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(estadoLabel))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(totalVentalabel)))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addComponent(clienteLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -196,11 +214,6 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton2))
                 .addGap(15, 15, 15))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(96, 96, 96)
-                    .addComponent(totalVentalabel)
-                    .addContainerGap(318, Short.MAX_VALUE)))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 430));
@@ -208,6 +221,11 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        control.mostrarHistorialVentas();
+    }//GEN-LAST:event_jButton1ActionPerformed
   public void mostrarDetallesVentas() {
         FlatRobotoFont.install();
         FlatLaf.registerCustomDefaultsSource("extras");
@@ -226,8 +244,7 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
         List<DTO_DetalleVenta> detallesVenta = venta.getDetallesVenta();
         DefaultTableModel modelo = (DefaultTableModel) detallesVentaTabla.getModel();
         detallesVenta.forEach(t -> {
-            DTO_Producto producto = funcionalidadConsultarProducto.consultarProductoId(t.getIdproducto());
-            modelo.addRow(new Object[]{producto.getNombre(), t.getEspecificacion(),
+            modelo.addRow(new Object[]{t.getProducto().getNombre(), t.getEspecificacion(),
                 t.getCantidad(), t.getPrecio(), t.getImporte()
             });
         });
@@ -242,6 +259,7 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel clienteLabel;
     private javax.swing.JLabel detallesVentaLabel;
     private javax.swing.JTable detallesVentaTabla;
     private javax.swing.JLabel estadoLabel;
@@ -249,7 +267,6 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

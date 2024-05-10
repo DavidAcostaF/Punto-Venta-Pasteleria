@@ -6,6 +6,7 @@ package com.mycompany.pasteleriadaos;
 
 import Exceptions.PersistenciaException;
 import com.mycompany.pasteleriadominios.Venta;
+import dto.DTO_Producto;
 import dto.DTO_Venta;
 import java.util.Date;
 import java.util.List;
@@ -29,4 +30,6 @@ public interface IVentaDAO {
     public List<DTO_Venta> consultarVentasPorRangoFechas(Date fechaInicio, Date fechaFin) throws PersistenciaException;
 
     public DTO_Venta encontrarVenta(String idVenta)throws PersistenciaException;
+    
+    public List<DTO_Venta> consultarVentasPorProductos(List<DTO_Producto> listaProductos)throws PersistenciaException;
 }

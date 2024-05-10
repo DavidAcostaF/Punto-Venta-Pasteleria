@@ -302,6 +302,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
             clientesComboBox.setEnabled(true);
         } else {
             clientesComboBox.setEnabled(false);
+            clientesComboBox.setSelectedIndex(0);
         }
     }//GEN-LAST:event_filtrarClienteRadioBtnActionPerformed
 
@@ -315,14 +316,14 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_filtrarPorProductosRadioBtnActionPerformed
 
     private void regresarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarBtnActionPerformed
+        this.dispose();
         control.mostrarMenu();
     }//GEN-LAST:event_regresarBtnActionPerformed
 
     private void detallesVentaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detallesVentaBtnActionPerformed
-        System.out.println(productosComboBox.obtenerElementosSeleccionados());
-        obtenerDatosFilaSeleccionada();
-        System.out.println(venta.getID());
-        control.setVenta(venta);
+       obtenerDatosFilaSeleccionada();
+       control.setVenta(venta);
+       this.dispose();
         control.mostrarDetallesVenta();
     }//GEN-LAST:event_detallesVentaBtnActionPerformed
 
@@ -375,7 +376,6 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
     
     public void llenarTabla() {
         limpiarTabla();
-        System.out.println("hola");
         List<DTO_Venta> listaVentas = funcionalidadConsultarVentas.consultarVentas();
         DefaultTableModel modelo = (DefaultTableModel) tablaVentas.getModel();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");        
