@@ -29,7 +29,7 @@ public class PruebasProductos {
         IIngredienteDAO ingredienteDAO = new IngredienteDAO();
         IProductoDAO productoDAO = new ProductoDAO();
         Ingrediente ingrediento1 = new Ingrediente();
-       ingrediento1.setNombre("Azucar");
+        ingrediento1.setNombre("Azucar");
         ingrediento1.setCantidad(2);
         ingrediento1.setPrecio(123F);
         ingrediento1.setUnidadDeMedida("gramos");
@@ -39,8 +39,8 @@ public class PruebasProductos {
         ingrediento2.setCantidad(2);
         ingrediento2.setPrecio(123F);
         ingrediento2.setUnidadDeMedida("gramos");
-ingredienteDAO.agregar(ingrediento1);
-ingredienteDAO.agregar(ingrediento2);
+        ingredienteDAO.agregar(ingrediento1);
+        ingredienteDAO.agregar(ingrediento2);
         Producto producto = new Producto();
         producto.setNombre("Pastelongo");
         producto.setPrecio(100F);
@@ -63,9 +63,9 @@ ingredienteDAO.agregar(ingrediento2);
 
         productoDAO.agregarProducto(producto);
 
-       /*
+        /*
        List<DTO_Producto> listaproductos=productoDAO.consultarProductos();
         System.out.println(listaproductos);*/
-}
+    }
 
 }

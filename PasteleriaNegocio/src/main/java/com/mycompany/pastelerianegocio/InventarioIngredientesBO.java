@@ -94,4 +94,10 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
         return false;
     }
 
+    @Override
+    public DTO_Ingrediente consultarIngredientePorNombre(DTO_Ingrediente ingrediente) {
+        DTO_Ingrediente ingredienteConsultado = ingredienteDAO.consultarPorNombre(ingrediente.getNombre());
+        return ingredienteConsultado;
+    }
+
 }

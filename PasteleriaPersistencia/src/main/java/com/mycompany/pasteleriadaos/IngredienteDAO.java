@@ -77,10 +77,9 @@ public class IngredienteDAO implements IIngredienteDAO {
     @Override
     public DTO_Ingrediente consultarPorNombre(String nombre) {
         MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
-        Ingrediente resultado = coleccion.find(regex("nombre", "^" + nombre + "$", "i")).first();
+        Ingrediente resultado = coleccion.find(eq("nombre", nombre)).first();
         DTO_Ingrediente ingredienteDTO = new DTO_Ingrediente();
-        
-        
+
         return ingredienteConversiones.convertir(resultado);
     }
 

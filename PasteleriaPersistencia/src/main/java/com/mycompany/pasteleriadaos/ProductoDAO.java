@@ -34,7 +34,6 @@ public class ProductoDAO implements IProductoDAO {
     public DTO_Producto agregarProducto(Producto producto) {
         MongoCollection<Producto> coleccion = conexion.obtenerColeccion();
         coleccion.insertOne(producto);
-
         //Retornar el producto convertido a DTO por la clase encargada de la chamba esa
         return new DTO_Producto();
     }

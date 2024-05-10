@@ -5,6 +5,7 @@
 package control;
 
 import dto.DTO_Producto;
+import presentacion.Presentacion_DlgIngredientesSeleccionados;
 import presentacion.Presentacion_DlgIngresarDatosDelProducto;
 import presentacion.Presentacion_DlgInventarioIngredientes;
 import presentacion.Presentacion_DlgInventarioProductos;
@@ -22,8 +23,7 @@ public class ControlGestionarInventario {
     public ControlGestionarInventario() {
         this.productoDTO = new DTO_Producto();
     }
-    
-    
+
     public static ControlGestionarInventario getInstance() {
         if (instance == null) {
             instance = new ControlGestionarInventario();
@@ -58,8 +58,9 @@ public class ControlGestionarInventario {
         Presentacion_DlgIngresarDatosDelProducto p = new Presentacion_DlgIngresarDatosDelProducto();
         p.setVisible(true);
     }
-    
-    public void mostrarIngredientesSeleccionados(){
-    
+
+    public void mostrarIngredientesSeleccionados() {
+        Presentacion_DlgIngredientesSeleccionados p = new Presentacion_DlgIngredientesSeleccionados();
+        p.setVisible(true);
     }
 }

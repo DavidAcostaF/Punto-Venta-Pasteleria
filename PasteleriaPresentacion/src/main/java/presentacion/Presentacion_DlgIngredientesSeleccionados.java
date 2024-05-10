@@ -4,14 +4,20 @@
  */
 package presentacion;
 
+import com.mycompany.pasteleriaagregarproducto.FuncionalidadAgregarProducto;
+import com.mycompany.pasteleriaagregarproducto.IFuncionalidadAgregarProducto;
 import com.mycompany.pasteleriaconsultaringrediente.FuncionalidadConsultarIngrediente;
 import com.mycompany.pasteleriaconsultaringrediente.IFuncionalidadConsultarIngrediente;
-import com.mycompany.pasteleriaconsultaringredientes.IFuncionalidadConsultarIngredientes;
 import control.ControlGestionarInventario;
 import dto.DTO_Ingrediente;
 import dto.DTO_IngredienteDetalle;
+import dto.DTO_Producto;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
 public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFrame {
 
     private IFuncionalidadConsultarIngrediente funcionalidadConsultarIngrediente;
+    private IFuncionalidadAgregarProducto funcionalidadAgregarProducto;
     private ControlGestionarInventario control;
 
     /**
@@ -29,7 +36,10 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
     public Presentacion_DlgIngredientesSeleccionados() {
         initComponents();
         funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngrediente();
+        funcionalidadAgregarProducto = new FuncionalidadAgregarProducto();
         control = ControlGestionarInventario.getInstance();
+        llenarTabla();
+        agregarListenerCambioCantidad();
 
     }
 
@@ -37,16 +47,19 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
         limpiarTabla();
         List<DTO_Ingrediente> listaIngredientes = new ArrayList<>();
         List<DTO_IngredienteDetalle> ingredientesDetalleDTO = control.getProductoDTO().getIngredientes();
+        System.out.println(ingredientesDetalleDTO.get(0).getNombre());
+
+        System.out.println(ingredientesDetalleDTO.get(1).getNombre());
         if (ingredientesDetalleDTO != null) {
             for (DTO_IngredienteDetalle ingredienteDetalle : ingredientesDetalleDTO) {
-                List<DTO_Ingrediente> ingredientes = funcionalidadConsultarIngrediente.consultarIngrediente(new DTO_Ingrediente(ingredienteDetalle.getNombre()));
-                listaIngredientes.add(ingredientes.getFirst());
+                DTO_Ingrediente ingredientes = funcionalidadConsultarIngrediente.consultarIngredientePorNombre(new DTO_Ingrediente(ingredienteDetalle.getNombre()));
+                listaIngredientes.add(ingredientes);
             }
         }
         DefaultTableModel modelo = (DefaultTableModel) tableIngredientes.getModel();
 
         if (listaIngredientes != null) {
-            listaIngredientes.forEach(t -> modelo.addRow(new Object[]{t.getNombre(), t.getCantidad(), t.getUnidadDeMedida(), t.getPrecio()}));
+            listaIngredientes.forEach(t -> modelo.addRow(new Object[]{t.getNombre(), null, t.getUnidadDeMedida()}));
         }
 
     }
@@ -57,6 +70,46 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
         modelo.setRowCount(0);
 
         tableIngredientes.setModel(modelo);
+    }
+
+    private List<DTO_IngredienteDetalle> obtenerListaIngredientes() {
+        JTable tabla = tableIngredientes;
+        List<DTO_IngredienteDetalle> listaIngredientes = control.getProductoDTO().getIngredientes();
+        int numRows = tabla.getRowCount();
+
+        for (int fila = 0; fila < numRows; fila++) {
+            Object valorCelda = tabla.getValueAt(fila, 1);
+            DTO_IngredienteDetalle ingrediente = listaIngredientes.get(fila);
+            ingrediente.setCantidad(Integer.valueOf(String.valueOf(valorCelda)));
+        }
+
+        return listaIngredientes;
+    }
+
+    public void agregarListenerCambioCantidad() {
+        final int columnaNumero = 1;
+
+        tableIngredientes.getColumnModel().getColumn(columnaNumero).setCellEditor(new DefaultCellEditor(new JTextField()) {
+            @Override
+            public boolean stopCellEditing() {
+                try {
+                    JTextField textField = (JTextField) getComponent();
+                    String valorCelda = textField.getText();
+                    double numero = Double.parseDouble(valorCelda);
+
+                    if (numero < 0) {
+                        JOptionPane.showMessageDialog(null, "El número debe ser igual o menor que 0", "Error", JOptionPane.ERROR_MESSAGE);
+                        return false; // Permite al usuario corregir el valor
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Por favor ingrese un número válido", "Error", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+
+                return super.stopCellEditing();
+            }
+        });
+
     }
 
     /**
@@ -71,6 +124,7 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
         jScrollPane1 = new javax.swing.JScrollPane();
         tableIngredientes = new javax.swing.JTable();
         btnAceptar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,16 +143,18 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tableIngredientes.setRowHeight(25);
         jScrollPane1.setViewportView(tableIngredientes);
         if (tableIngredientes.getColumnModel().getColumnCount() > 0) {
             tableIngredientes.getColumnModel().getColumn(0).setResizable(false);
+            tableIngredientes.getColumnModel().getColumn(2).setResizable(false);
         }
 
         btnAceptar.setBackground(new java.awt.Color(140, 220, 254));
@@ -110,6 +166,8 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
             }
         });
 
+        jLabel1.setText("Ingrese las cantidades de cada ingrediente.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,13 +178,19 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
                 .addGap(58, 58, 58))
             .addGroup(layout.createSequentialGroup()
                 .addGap(74, 74, 74)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(90, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(btnAceptar)
@@ -137,46 +201,15 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-
+        control.getProductoDTO().setIngredientes(obtenerListaIngredientes());
+        DTO_Producto producto = control.getProductoDTO();
+        funcionalidadAgregarProducto.agregarProducto(producto);
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_DlgIngredientesSeleccionados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_DlgIngredientesSeleccionados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_DlgIngredientesSeleccionados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_DlgIngredientesSeleccionados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Presentacion_DlgIngredientesSeleccionados().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableIngredientes;
     // End of variables declaration//GEN-END:variables

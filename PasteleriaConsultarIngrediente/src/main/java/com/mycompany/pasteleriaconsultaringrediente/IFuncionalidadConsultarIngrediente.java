@@ -15,4 +15,5 @@ public interface IFuncionalidadConsultarIngrediente {
 
     public List<DTO_Ingrediente> consultarIngrediente(DTO_Ingrediente ingrediente);
 
+    public DTO_Ingrediente consultarIngredientePorNombre(DTO_Ingrediente ingrediente);
 }

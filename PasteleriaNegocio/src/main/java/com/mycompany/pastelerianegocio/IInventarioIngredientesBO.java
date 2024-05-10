@@ -29,4 +29,6 @@ public interface IInventarioIngredientesBO {
     public DTO_Ingrediente validarExistencia(DTO_Ingrediente ingrediente);
     
     public Boolean eliminarIngrediente(DTO_Ingrediente ingrediente);
+    
+    public DTO_Ingrediente consultarIngredientePorNombre(DTO_Ingrediente ingrediente);
 }

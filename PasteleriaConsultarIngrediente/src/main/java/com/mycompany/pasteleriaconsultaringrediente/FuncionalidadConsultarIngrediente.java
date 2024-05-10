@@ -26,4 +26,10 @@ public class FuncionalidadConsultarIngrediente implements IFuncionalidadConsulta
         List<DTO_Ingrediente> ingredienteNuevo = inventarioIngredientesBO.consultarIngrediente(ingrediente);
         return ingredienteNuevo;
     }
+
+    @Override
+    public DTO_Ingrediente consultarIngredientePorNombre(DTO_Ingrediente ingrediente) {
+        return inventarioIngredientesBO.consultarIngredientePorNombre(ingrediente);
+
+    }
 }

@@ -187,7 +187,6 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
     }//GEN-LAST:event_tableIngredientesMouseClicked
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        List<String> elementosSeleccionados = new ArrayList<>();
         DTO_Producto productoDTO = new DTO_Producto();
         List<DTO_IngredienteDetalle> listaIngredienteDetalle = new ArrayList<>();
 
@@ -196,21 +195,19 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
             boolean seleccionado = (boolean) tableIngredientes.getValueAt(i, 1);
 
             if (seleccionado) {
-                String fila = tableIngredientes.getValueAt(i, 0).toString(); // Nombre
-
-                elementosSeleccionados.add(fila);
-            }
-        }
-        if (elementosSeleccionados.size() > 0) {
-            for (String nombre : elementosSeleccionados) {
+                String fila = tableIngredientes.getValueAt(i, 0).toString(); 
                 DTO_IngredienteDetalle ingredienteDetalleDTO = new DTO_IngredienteDetalle();
-                ingredienteDetalleDTO.setNombre(nombre);
+                ingredienteDetalleDTO.setNombre(fila);
                 listaIngredienteDetalle.add(ingredienteDetalleDTO);
+
             }
-            productoDTO.setIngredientes(listaIngredienteDetalle);
-            control.setProductoDTO(productoDTO);
         }
 
+        productoDTO.setIngredientes(listaIngredienteDetalle);
+        productoDTO.setNombre(this.txtNombre.getText());
+        control.setProductoDTO(productoDTO);
+        this.dispose();
+        control.mostrarIngredientesSeleccionados();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
