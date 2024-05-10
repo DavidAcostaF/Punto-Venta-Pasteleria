@@ -69,6 +69,7 @@ public class PruebasVenta {
         } catch (PersistenciaException ex) {
             Logger.getLogger(PruebasVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(venta1.getID());
+        System.out.println(venta1.getDetallesVenta()
+        );
     }
 }

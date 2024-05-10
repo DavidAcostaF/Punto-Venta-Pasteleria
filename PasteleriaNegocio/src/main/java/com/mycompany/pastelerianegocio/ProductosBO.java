@@ -27,4 +27,11 @@ public class ProductosBO implements IProductosBO {
         List<DTO_Producto> listaProductos = productoDAO.consultarProductos();
         return listaProductos;
     }
+
+    @Override
+    public DTO_Producto consultarProductoId(String idProducto) {
+        return productoDAO.consultarProductoId(idProducto);
+    }
+    
+      
 }

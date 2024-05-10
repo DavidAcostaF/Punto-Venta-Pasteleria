@@ -32,4 +32,9 @@ public class FuncionalidadProductos implements IFuncionalidadProductos {
         List<DTO_Producto> pasteles = productoBO.consultarProductos();
         return pasteles;
     }
+
+    @Override
+    public DTO_Producto consultarProductoId(String idProducto) {
+        return productoBO.consultarProductoId(idProducto);
+    }
 }

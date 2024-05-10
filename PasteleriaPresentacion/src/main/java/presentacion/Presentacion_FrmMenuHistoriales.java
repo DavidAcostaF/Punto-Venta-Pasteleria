@@ -12,6 +12,7 @@ import control.ControlHistoriales;
  */
 public class Presentacion_FrmMenuHistoriales extends javax.swing.JFrame {
 private ControlHistoriales control;
+
     /**
      * Creates new form FrmMenuHistoriales
      */

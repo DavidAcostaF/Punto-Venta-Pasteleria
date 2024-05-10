@@ -12,6 +12,8 @@ import java.util.List;
  * @author f_aco
  */
 public interface IFuncionalidadProductos {
-        public List<DTO_Producto> consultarProductosVenta();
 
+    public List<DTO_Producto> consultarProductosVenta();
+
+    public DTO_Producto consultarProductoId(String idProducto);
 }

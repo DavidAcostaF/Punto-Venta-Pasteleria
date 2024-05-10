@@ -32,7 +32,7 @@ import javax.swing.table.DefaultTableModel;
  * @author abelc
  */
 public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
-
+    
     private ControlHistoriales control;
     private DTO_Cliente cliente;
     private IFuncionalidadConsultarClientes funcionalidadesClientes;
@@ -40,16 +40,18 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
     private List<DTO_Producto> listaProductos;
     private IFuncionalidadProductos funcionalidadConsultarProductos;
     private IFuncionalidadConsultarVentas funcionalidadConsultarVentas;
+    private DTO_Venta venta;
 
     /**
      * Creates new form FrmHistorialVentas
      */
     public Presentacion_FrmHistorialVentas() {
-        this.control = new ControlHistoriales();
+        this.control = ControlHistoriales.getInstance();
         this.funcionalidadConsultarVentas = new FuncionalidadConsultarVentas();
         this.funcionalidadesClientes = new FuncionalidadConsultarClientes();
         this.funcionalidadConsultarProductos = new FuncionalidadProductos();
         this.cliente = new DTO_Cliente();
+        this.venta = new DTO_Venta();
         listaClientes = funcionalidadesClientes.consultarClientes();
         listaProductos = funcionalidadConsultarProductos.consultarProductosVenta();
         initComponents();
@@ -318,6 +320,9 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
 
     private void detallesVentaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detallesVentaBtnActionPerformed
         System.out.println(productosComboBox.obtenerElementosSeleccionados());
+        obtenerDatosFilaSeleccionada();
+        System.out.println(venta.getID());
+        control.setVenta(venta);
         control.mostrarDetallesVenta();
     }//GEN-LAST:event_detallesVentaBtnActionPerformed
 
@@ -325,7 +330,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         if (filtrarClienteRadioBtn.isSelected()) {
             obtenerCliente();
         }
-
+        
 
     }//GEN-LAST:event_aplicarFiltroBtnActionPerformed
     public void obtenerCliente() {
@@ -333,7 +338,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         if (clienteSeleccionado != null) {
             // Dividir el texto en partes usando el guion como separador
             String[] partes = clienteSeleccionado.split("-");
-
+            
             if (partes.length >= 2) {
                 // El último elemento del array es el número de teléfono
                 String numeroTelefono = partes[partes.length - 1].trim();
@@ -341,11 +346,11 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
                 // Extraer el nombre y apellidos
                 String nombreCompleto = partes[0].trim();
                 String[] nombresApellidos = nombreCompleto.split("\\s+");
-
+                
                 String nombre = nombresApellidos[0];
                 String apellidoPaterno = "";
                 String apellidoMaterno = "";
-
+                
                 if (nombresApellidos.length >= 3) {
                     // Hay dos nombres y apellidos
                     apellidoPaterno = nombresApellidos[1];
@@ -359,21 +364,21 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
                     } else {
                         apellidoPaterno = apellidos[0];
                     }
-
+                    
                 }
-
+                
                 cliente = funcionalidadesClientes.encontrarCliente(apellidoPaterno, apellidoMaterno, nombre, numeroTelefono);
                 System.out.println(cliente.getID());
             }
         }
     }
-
+    
     public void llenarTabla() {
         limpiarTabla();
         System.out.println("hola");
         List<DTO_Venta> listaVentas = funcionalidadConsultarVentas.consultarVentas();
         DefaultTableModel modelo = (DefaultTableModel) tablaVentas.getModel();
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy"); 
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");        
         if (listaVentas != null) {
             listaVentas.forEach(t -> {
                 String fechaRegistro = formatoFecha.format(t.getFechaRegistro());
@@ -382,21 +387,30 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
             });
         }
     }
-
+    
     private void limpiarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tablaVentas.getModel();
-
+        
         modelo.setRowCount(0);
-
+        
         tablaVentas.setModel(modelo);
     }
-
+    
+    private void obtenerDatosFilaSeleccionada() {
+        int filaSeleccionada = tablaVentas.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            String idVenta = tablaVentas.getValueAt(filaSeleccionada, 0).toString();
+            venta = funcionalidadConsultarVentas.encontrarVenta(idVenta);
+            
+        }
+    }
+    
     public void mostrarHistorialVentas() {
         FlatRobotoFont.install();
         FlatLaf.registerCustomDefaultsSource("extras");
         UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
         FlatLightLaf.setup();
-
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Presentacion_FrmHistorialVentas().setVisible(true);

@@ -14,4 +14,6 @@ import java.util.List;
 public interface IProductosBO {
 
     public List<DTO_Producto> consultarProductos();
+    
+    public DTO_Producto consultarProductoId(String idProducto);
 }

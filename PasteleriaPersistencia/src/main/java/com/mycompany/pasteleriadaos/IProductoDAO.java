@@ -18,4 +18,6 @@ public interface IProductoDAO {
     public void eliminarProducto(Producto producto);
     
     public List<DTO_Producto> consultarProductos();
+    
+    public DTO_Producto consultarProductoId(String idProducto);
 }

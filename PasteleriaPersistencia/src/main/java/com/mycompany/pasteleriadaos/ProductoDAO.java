@@ -6,11 +6,13 @@ package com.mycompany.pasteleriadaos;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import static com.mongodb.client.model.Filters.eq;
 import com.mycompany.pasteleriadominios.Producto;
 import conversiones.ProductosConversiones;
 import dto.DTO_Producto;
 import java.util.ArrayList;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -51,6 +53,17 @@ public class ProductoDAO implements IProductoDAO {
             listaProductos.add(conversor.convertirProducto(producto));
         }
         return listaProductos;
+    }
+
+    @Override
+    public DTO_Producto consultarProductoId(String idProducto) {
+        MongoCollection<Producto> coleccion = conexion.obtenerColeccion();
+        Producto resultado=coleccion.find(eq("_id", new ObjectId(idProducto))).first();
+         if (resultado != null) {
+            return conversor.convertirProducto(resultado);
+        } else {
+            return null;
+        }
     }
 
 }
