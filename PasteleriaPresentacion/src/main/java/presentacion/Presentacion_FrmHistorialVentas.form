@@ -96,7 +96,7 @@
                               <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
                           </Group>
                           <Component id="desdeDatePicker" alignment="1" max="32767" attributes="0"/>
-                          <Component id="hastaDatePicker1" alignment="1" max="32767" attributes="0"/>
+                          <Component id="hastaDatePicker" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
@@ -139,7 +139,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="filtrarPorProductosRadioBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="productosComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="hastaDatePicker1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="hastaDatePicker" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -227,7 +227,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="com.github.lgooddatepicker.components.DatePicker" name="hastaDatePicker1">
+        <Component class="com.github.lgooddatepicker.components.DatePicker" name="hastaDatePicker">
         </Component>
         <Component class="extras.ComboBoxMultiSeleccion" name="productosComboBox">
           <Properties>

@@ -21,7 +21,7 @@ public interface IProductosBO {
 
     public List<DTO_Producto> consultarProductos();
 
-    public DTO_Producto consultarProductoId(String idProducto);
+     public DTO_Producto consultarProductoPorNombre(String nombre);
     public Producto convertirDTOAProducto(DTO_Producto producto);
     public IngredienteDetalle convertirDTOAIngredienteDetalle(DTO_IngredienteDetalle ingredienteDetalle);
     public DTO_Ingrediente consultarIngredientePorNombre(String nombre);

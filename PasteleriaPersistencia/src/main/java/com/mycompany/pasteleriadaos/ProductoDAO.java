@@ -55,14 +55,12 @@ public class ProductoDAO implements IProductoDAO {
     }
 
     @Override
-    public DTO_Producto consultarProductoId(String idProducto) {
-        MongoCollection<Producto> coleccion = conexion.obtenerColeccion();
-        Producto resultado=coleccion.find(eq("_id", new ObjectId(idProducto))).first();
-         if (resultado != null) {
-            return conversor.convertirProducto(resultado);
-        } else {
-            return null;
-        }
+    public DTO_Producto consultarPorNombre(String nombre) {
+       MongoCollection<Producto> coleccion = conexion.obtenerColeccion();
+       Producto resultado=coleccion.find(eq("nombre", nombre)).first();
+       return conversor.convertirProducto(resultado);
     }
+
+   
 
 }

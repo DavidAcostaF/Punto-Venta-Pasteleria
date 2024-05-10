@@ -4,7 +4,9 @@
  */
 package com.mycompany.pasteleriaconsultarventas;
 
+import dto.DTO_Producto;
 import dto.DTO_Venta;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,4 +16,8 @@ import java.util.List;
 public interface IFuncionalidadConsultarVentas {
     public List<DTO_Venta> consultarVentas();
     public DTO_Venta encontrarVenta(String idVenta);
+     public List<DTO_Venta> ventasPorCliente(String clienteId);
+     public List<DTO_Venta> consultarVentasPorProductos(List<DTO_Producto> listaProductos);
+     public List<DTO_Venta> consultarVentasPorRangoFechas(Date fechaInicio, Date fechaFin);
+     public List<DTO_Venta> consultarVentasConFiltros(String clienteId, Date fechaInicio, Date fechaFin, List<DTO_Producto> listaProductos);
 }

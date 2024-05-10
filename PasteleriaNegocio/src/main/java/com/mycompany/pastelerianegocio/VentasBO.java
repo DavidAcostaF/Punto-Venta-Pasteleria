@@ -14,18 +14,10 @@ import com.mycompany.pasteleriadaos.IProductoDAO;
 import com.mycompany.pasteleriadaos.IVentaDAO;
 import com.mycompany.pasteleriadaos.ProductoDAO;
 import com.mycompany.pasteleriadaos.VentaDAO;
-import com.mycompany.pasteleriadominios.Cliente;
-import com.mycompany.pasteleriadominios.DetalleVenta;
-import com.mycompany.pasteleriadominios.Direccion;
-import com.mycompany.pasteleriadominios.Producto;
-import com.mycompany.pasteleriadominios.Venta;
-import dto.DTO_Cliente;
-import dto.DTO_DetalleVenta;
-import dto.DTO_Direccion;
 import dto.DTO_Producto;
+
 import dto.DTO_Venta;
-import java.util.AbstractList;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -83,6 +75,46 @@ public class VentasBO implements IVentasBO {
     public DTO_Venta encontrarVenta(String idVenta) {
         try {
             return ventaDAO.encontrarVenta(idVenta);
+        } catch (PersistenciaException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<DTO_Venta> ventasPorCliente(String clienteId) {
+        try {
+            return ventaDAO.ventasPorCliente(clienteId);
+        } catch (PersistenciaException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<DTO_Venta> consultarVentasPorProductos(List<DTO_Producto> listaProductos) {
+        try {
+            return ventaDAO.consultarVentasPorProductos(listaProductos);
+        } catch (PersistenciaException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<DTO_Venta> consultarVentasPorRangoFechas(Date fechaInicio, Date fechaFin) {
+        try {
+            return ventaDAO.consultarVentasPorRangoFechas(fechaInicio, fechaFin);
+        } catch (PersistenciaException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public List<DTO_Venta> consultarVentasConFiltros(String clienteId, Date fechaInicio, Date fechaFin, List<DTO_Producto> listaProductos) {
+        try {
+            return ventaDAO.consultarVentas();
         } catch (PersistenciaException ex) {
             System.out.println(ex.getMessage());
             return null;

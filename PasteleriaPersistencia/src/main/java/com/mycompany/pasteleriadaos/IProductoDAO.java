@@ -19,5 +19,5 @@ public interface IProductoDAO {
     
     public List<DTO_Producto> consultarProductos();
     
-    public DTO_Producto consultarProductoId(String idProducto);
+    public DTO_Producto consultarPorNombre(String nombre);
 }

@@ -23,9 +23,9 @@ public class ProductosConversiones {
         productoDTO.setNombre(producto.getNombre());
         productoDTO.setDescripcion(producto.getDescripcion());
 
-        /*for (IngredienteDetalle ingredienteDetalle : producto.getIngredientes()) {
+        for (IngredienteDetalle ingredienteDetalle : producto.getIngredientes()) {
             productoDTO.addDTO_IngredienteDetalle(convertirIngredienteDetalle.convertir(ingredienteDetalle));
-        }*/
+        }
         
         return productoDTO;
     }

@@ -42,8 +42,8 @@ public class ProductosBO implements IProductosBO {
     }
 
     @Override
-    public DTO_Producto consultarProductoId(String idProducto) {
-        return productoDAO.consultarProductoId(idProducto);
+    public DTO_Producto consultarProductoPorNombre(String nombre) {
+        return productoDAO.consultarPorNombre(nombre);
     }
 
     @Override

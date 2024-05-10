@@ -83,6 +83,7 @@ public class PruebasVenta {
    DTO_Producto producto1=new DTO_Producto();
    producto1.setId("663d1f0de604fa31cd6f6b5b");
    List<DTO_Producto> listaprod=new ArrayList<>();
+   listaprod.add(producto1);
    listaprod.add(producto);
         try {
             List<DTO_Venta> ventas=ventadao.consultarVentasPorProductos(listaprod);

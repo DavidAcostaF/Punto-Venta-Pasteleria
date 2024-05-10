@@ -145,7 +145,6 @@ public class VentaDAO implements IVentaDAO {
     @Override
     public List<DTO_Venta> consultarVentasPorProductos(List<DTO_Producto> listaProductos) throws PersistenciaException {
         try {
-            // Convertir los IDs de productos de tipo String a ObjectId
             List<ObjectId> idsProductos = listaProductos.stream()
                     .map(producto -> new ObjectId(producto.getId()))
                     .collect(Collectors.toList());
@@ -172,4 +171,37 @@ public class VentaDAO implements IVentaDAO {
             throw new PersistenciaException("Error al consultar ventas por productos: " + e.getMessage());
         }
     }
+
+    @Override
+    public List<DTO_Venta> consultarVentasConFiltros(String clienteId, Date fechaInicio, Date fechaFin, List<DTO_Producto> listaProductos) throws PersistenciaException {
+         try {
+        MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
+        List<Bson> filtros = new ArrayList<>();
+        if (clienteId != null && !clienteId.isEmpty()) {
+            filtros.add(eq("clienteid", new ObjectId(clienteId)));
+        }
+        if (fechaInicio != null && fechaFin != null) {
+            Bson filtroRangoFechas = Filters.and(
+                Filters.gte("fechaRegistro", fechaInicio),
+                Filters.lte("fechaRegistro", fechaFin)
+            );
+            filtros.add(filtroRangoFechas);
+        }
+        if (listaProductos != null && !listaProductos.isEmpty()) {
+            List<ObjectId> idsProductos = listaProductos.stream()
+                    .map(producto -> new ObjectId(producto.getId()))
+                    .collect(Collectors.toList());
+
+            filtros.add(Filters.in("detallesVenta.productoId", idsProductos));
+        }
+        Bson filtroFinal = Filters.and(filtros);
+        FindIterable<Venta> ventasFiltradas = coleccion.find(filtroFinal);
+        List<DTO_Venta> ventasDTO = new ArrayList<>();
+        for (Venta venta : ventasFiltradas) {
+            ventasDTO.add(conversor.convertirVentaADTO(venta));
+        }
+        return ventasDTO;
+    } catch (Exception e) {
+        throw new PersistenciaException("Error al consultar ventas con filtros: " + e.getMessage());
+    }}
 }

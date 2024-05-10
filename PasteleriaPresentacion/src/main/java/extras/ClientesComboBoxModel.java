@@ -16,7 +16,7 @@ public class ClientesComboBoxModel extends DefaultComboBoxModel{
 
     public ClientesComboBoxModel(List<DTO_Cliente> clientes) {
           super();
-           addElement("");
+           addElement("Todos");
         for (DTO_Cliente cliente : clientes) {
             addElement(cliente.getNombre()+" "+cliente.getApellidoP()+" "+cliente.getApellidoM()+"-"+cliente.getTelefono());
         }
