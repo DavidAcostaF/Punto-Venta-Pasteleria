@@ -17,17 +17,21 @@ public class DTO_DetalleVenta {
     private String especificacion;
     private String Idproducto;
     private String tamanhoProducto;
+    private DTO_Producto producto;
     public DTO_DetalleVenta() {
     }
 
-    public DTO_DetalleVenta(float precio, float importe, int cantidad, String especificacion, String Idproducto, String tamanhoProducto) {
+    public DTO_DetalleVenta(float precio, float importe, int cantidad, String especificacion, String Idproducto, String tamanhoProducto, DTO_Producto producto) {
         this.precio = precio;
         this.importe = importe;
         this.cantidad = cantidad;
         this.especificacion = especificacion;
         this.Idproducto = Idproducto;
         this.tamanhoProducto = tamanhoProducto;
+        this.producto = producto;
     }
+
+ 
 
     
 
@@ -59,6 +63,16 @@ public class DTO_DetalleVenta {
         return especificacion;
     }
 
+    public DTO_Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(DTO_Producto producto) {
+        this.producto = producto;
+    }
+
+    
+    
     public void setEspecificacion(String especificacion) {
         this.especificacion = especificacion;
     }

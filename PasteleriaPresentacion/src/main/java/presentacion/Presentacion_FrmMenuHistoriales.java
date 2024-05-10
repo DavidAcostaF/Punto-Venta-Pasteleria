@@ -99,6 +99,7 @@ private ControlHistoriales control;
     }// </editor-fold>//GEN-END:initComponents
 
     private void historialVentaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historialVentaBtnActionPerformed
+        this.dispose();
         control.mostrarHistorialVentas();
     }//GEN-LAST:event_historialVentaBtnActionPerformed
 

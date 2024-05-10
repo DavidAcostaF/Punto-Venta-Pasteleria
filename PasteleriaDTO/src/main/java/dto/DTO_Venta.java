@@ -20,11 +20,12 @@ public class DTO_Venta {
     private String Estado;
     private List<DTO_DetalleVenta> detallesVenta;  
     private DTO_Direccion dieccionEntrega;
+    private DTO_Cliente cliente;
 
     public DTO_Venta() {
     }
 
-    public DTO_Venta(float montoTotal, Date fechaEntrega, Date fechaRegistro, String IDcliente, String Estado, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion dieccionEntrega) {
+    public DTO_Venta(float montoTotal, Date fechaEntrega, Date fechaRegistro, String IDcliente, String Estado, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion dieccionEntrega, DTO_Cliente cliente) {
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
         this.fechaRegistro = fechaRegistro;
@@ -32,9 +33,10 @@ public class DTO_Venta {
         this.Estado = Estado;
         this.detallesVenta = detallesVenta;
         this.dieccionEntrega = dieccionEntrega;
+        this.cliente = cliente;
     }
 
-    public DTO_Venta(String ID, float montoTotal, Date fechaEntrega, Date fechaRegistro, String IDcliente, String Estado, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion dieccionEntrega) {
+    public DTO_Venta(String ID, float montoTotal, Date fechaEntrega, Date fechaRegistro, String IDcliente, String Estado, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion dieccionEntrega, DTO_Cliente cliente) {
         this.ID = ID;
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
@@ -43,10 +45,12 @@ public class DTO_Venta {
         this.Estado = Estado;
         this.detallesVenta = detallesVenta;
         this.dieccionEntrega = dieccionEntrega;
+        this.cliente = cliente;
     }
 
-   
 
+   
+ 
     
     public String getID() {
         return ID;
@@ -62,6 +66,14 @@ public class DTO_Venta {
 
     public void setMontoTotal(float montoTotal) {
         this.montoTotal = montoTotal;
+    }
+
+    public DTO_Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(DTO_Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public Date getFechaEntrega() {

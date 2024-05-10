@@ -9,6 +9,8 @@ import com.mycompany.pasteleriadaos.VentaDAO;
 import com.mycompany.pasteleriadominios.DetalleVenta;
 import com.mycompany.pasteleriadominios.Direccion;
 import com.mycompany.pasteleriadominios.Venta;
+import dto.DTO_DetalleVenta;
+import dto.DTO_Producto;
 import dto.DTO_Venta;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,11 +33,11 @@ public class PruebasVenta {
      Venta venta = new Venta();
         venta.setMontoTotal(150.00f); // Monto total de la venta
 /*
-// Crear objetos Date para las fechas
+// 
         Date fechaEntrega = new Date(); // Fecha de entrega
         Date fechaRegistro = new Date(); // Fecha de registro
 
-// Establecer las fechas en el objeto Venta
+// 
         venta.setFechaEntrega(fechaEntrega);
         venta.setFechaRegistro(fechaRegistro);
         venta.setEstado("Pagado");
@@ -63,13 +65,31 @@ public class PruebasVenta {
             System.out.println(venta1);
         }*/
    
-   DTO_Venta venta1 = null;
+   /*DTO_Venta venta1 = null;
         try {
             venta1 = ventadao.encontrarVenta("663c5d4fa6ca7e6121d3e116");
         } catch (PersistenciaException ex) {
             Logger.getLogger(PruebasVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(venta1.getDetallesVenta()
-        );
+        System.out.println(venta1.getFechaEntrega());
+        System.out.println(venta1.getFechaRegistro());
+        for (DTO_DetalleVenta dv:venta1.getDetallesVenta()) {
+            System.out.println(dv);
+            System.out.println(dv.getProducto().getId());
+            
+        }*/
+   DTO_Producto producto=new DTO_Producto();
+   producto.setId("663c434ac97af46c1e9d7bf9");
+   DTO_Producto producto1=new DTO_Producto();
+   producto1.setId("663d1f0de604fa31cd6f6b5b");
+   List<DTO_Producto> listaprod=new ArrayList<>();
+   listaprod.add(producto);
+        try {
+            List<DTO_Venta> ventas=ventadao.consultarVentasPorProductos(listaprod);
+            System.out.println(ventas);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(PruebasVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   
     }
 }
