@@ -40,8 +40,8 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtNombreCliente = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        btnVolver2 = new javax.swing.JButton();
-        btnVolver1 = new javax.swing.JButton();
+        btnSeleccionar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -126,23 +126,23 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
         jLabel1.setText("Seleccione una venta para facturar:");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
 
-        btnVolver2.setBackground(new java.awt.Color(18, 111, 161));
-        btnVolver2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnVolver2.setForeground(new java.awt.Color(255, 255, 255));
-        btnVolver2.setText("Seleccionar");
-        btnVolver2.addActionListener(new java.awt.event.ActionListener() {
+        btnSeleccionar.setBackground(new java.awt.Color(18, 111, 161));
+        btnSeleccionar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSeleccionar.setForeground(new java.awt.Color(255, 255, 255));
+        btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolver2ActionPerformed(evt);
+                btnSeleccionarActionPerformed(evt);
             }
         });
 
-        btnVolver1.setBackground(new java.awt.Color(18, 111, 161));
-        btnVolver1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnVolver1.setForeground(new java.awt.Color(255, 255, 255));
-        btnVolver1.setText("Cancelar");
-        btnVolver1.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setBackground(new java.awt.Color(18, 111, 161));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolver1ActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
@@ -177,9 +177,9 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(184, 184, 184)
-                        .addComponent(btnVolver2)
+                        .addComponent(btnSeleccionar)
                         .addGap(42, 42, 42)
-                        .addComponent(btnVolver1)))
+                        .addComponent(btnCancelar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -209,8 +209,8 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
                         .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnVolver2)
-                    .addComponent(btnVolver1))
+                    .addComponent(btnSeleccionar)
+                    .addComponent(btnCancelar))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -234,13 +234,13 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnVolver1ActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnVolver2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver2ActionPerformed
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnVolver2ActionPerformed
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,9 +278,9 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnSeleccionar;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JButton btnVolver1;
-    private javax.swing.JButton btnVolver2;
     private com.github.lgooddatepicker.components.DatePicker datePickerDesde;
     private com.github.lgooddatepicker.components.DatePicker datePickerHasta;
     private javax.swing.JLabel jLabel1;
