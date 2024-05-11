@@ -114,7 +114,7 @@ public class VentasBO implements IVentasBO {
     @Override
     public List<DTO_Venta> consultarVentasConFiltros(String clienteId, Date fechaInicio, Date fechaFin, List<DTO_Producto> listaProductos) {
         try {
-            return ventaDAO.consultarVentas();
+            return ventaDAO.consultarVentasConFiltros(clienteId, fechaInicio, fechaFin, listaProductos);
         } catch (PersistenciaException ex) {
             System.out.println(ex.getMessage());
             return null;

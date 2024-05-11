@@ -174,34 +174,44 @@ public class VentaDAO implements IVentaDAO {
 
     @Override
     public List<DTO_Venta> consultarVentasConFiltros(String clienteId, Date fechaInicio, Date fechaFin, List<DTO_Producto> listaProductos) throws PersistenciaException {
-         try {
+       try {
         MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
+
         List<Bson> filtros = new ArrayList<>();
+
         if (clienteId != null && !clienteId.isEmpty()) {
             filtros.add(eq("clienteid", new ObjectId(clienteId)));
         }
+
         if (fechaInicio != null && fechaFin != null) {
             Bson filtroRangoFechas = Filters.and(
-                Filters.gte("fechaRegistro", fechaInicio),
-                Filters.lte("fechaRegistro", fechaFin)
+                    Filters.gte("fechaRegistro", fechaInicio),
+                    Filters.lte("fechaRegistro", fechaFin)
             );
             filtros.add(filtroRangoFechas);
         }
+
+        // Filtro por productos
+        List<ObjectId> idsProductos = null;
         if (listaProductos != null && !listaProductos.isEmpty()) {
-            List<ObjectId> idsProductos = listaProductos.stream()
+            idsProductos = listaProductos.stream()
                     .map(producto -> new ObjectId(producto.getId()))
                     .collect(Collectors.toList());
-
+            
             filtros.add(Filters.in("detallesVenta.productoId", idsProductos));
         }
+
         Bson filtroFinal = Filters.and(filtros);
+
         FindIterable<Venta> ventasFiltradas = coleccion.find(filtroFinal);
         List<DTO_Venta> ventasDTO = new ArrayList<>();
         for (Venta venta : ventasFiltradas) {
             ventasDTO.add(conversor.convertirVentaADTO(venta));
         }
+
         return ventasDTO;
     } catch (Exception e) {
         throw new PersistenciaException("Error al consultar ventas con filtros: " + e.getMessage());
-    }}
+    }
+    }
 }

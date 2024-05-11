@@ -373,24 +373,24 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
             System.out.println("hola");
             List<DTO_Venta> listaVentas = funcionalidadConsultarVentas.consultarVentasConFiltros(cliente.getID(), null, null, listaProductosSeleccionados);
             tablaVentas(listaVentas);
-        }
+        } 
     }//GEN-LAST:event_aplicarFiltroBtnActionPerformed
 
     public void tablaVentas(List<DTO_Venta> listaVentas) {
         limpiarTabla();
         DefaultTableModel modelo = (DefaultTableModel) tablaVentas.getModel();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-        if (listaVentas != null) {
-            listaVentas.forEach(t -> {
-                String fechaRegistro = formatoFecha.format(t.getFechaRegistro());
-                String fechaEntrega = formatoFecha.format(t.getFechaEntrega());
-                modelo.addRow(new Object[]{t.getID(), fechaRegistro, fechaEntrega, t.getEstado()});
-            });
-        }
+
+        listaVentas.forEach(t -> {
+            String fechaRegistro = formatoFecha.format(t.getFechaRegistro());
+            String fechaEntrega = formatoFecha.format(t.getFechaEntrega());
+            modelo.addRow(new Object[]{t.getID(), fechaRegistro, fechaEntrega, t.getEstado()});
+        });
 
     }
 
     public void obtenerProductos() {
+        listaProductosSeleccionados.clear();
         System.out.println(productosComboBox.obtenerElementosSeleccionados());
         List<String> productosSeleccionados = productosComboBox.obtenerElementosSeleccionados();
         if (!productosSeleccionados.isEmpty()) {
