@@ -7,6 +7,7 @@ package pruebas;
 import Exceptions.PersistenciaException;
 import com.mycompany.pasteleriadaos.VentaDAO;
 import com.mycompany.pasteleriadominioentidades.Cliente;
+import com.mycompany.pasteleriadominioentidades.DetalleVenta;
 import com.mycompany.pasteleriadominioentidades.Producto;
 import com.mycompany.pasteleriadominioentidades.Venta;
 import com.mycompany.pasteleriadominiosMapeo.DireccionMapeo;
@@ -66,7 +67,7 @@ public class PruebasVenta {
         for (DTO_Venta venta1:ventas) {
             System.out.println(venta1);
         }*/
- /*DTO_Venta venta1 = null;
+  Venta venta1 = null;
         try {
             venta1 = ventadao.encontrarVenta("663c5d4fa6ca7e6121d3e116");
         } catch (PersistenciaException ex) {
@@ -74,12 +75,12 @@ public class PruebasVenta {
         }
         System.out.println(venta1.getFechaEntrega());
         System.out.println(venta1.getFechaRegistro());
-        for (DTO_DetalleVenta dv:venta1.getDetallesVenta()) {
+        for (DetalleVenta dv:venta1.getDetallesVenta()) {
             System.out.println(dv);
             System.out.println(dv.getProducto().getId());
             
-        }*/
-        Producto producto1 = new Producto();
+        }
+        /*Producto producto1 = new Producto();
         producto1.setId("663d1f0de604fa31cd6f6b5b");
         List<Producto> listaprod = new ArrayList<>();
         listaprod.add(producto1);
@@ -92,6 +93,6 @@ public class PruebasVenta {
         } catch (PersistenciaException ex) {
             Logger.getLogger(PruebasVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+*/
     }
 }

@@ -16,10 +16,12 @@ import consultarClientes.FuncionalidadConsultarClientes;
 import consultarClientes.IFuncionalidadConsultarClientes;
 import control.ControlHistoriales;
 import dto.DTO_Cliente;
+import dto.DTO_DetalleVenta;
 import dto.DTO_Producto;
 import dto.DTO_Venta;
 import extras.ClientesComboBoxModel;
 import extras.PastelComboBoxModel;
+import java.awt.Color;
 import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -28,8 +30,12 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import javax.swing.JComboBox;
+import java.util.Map;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
@@ -63,6 +69,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         listaClientes = funcionalidadesClientes.consultarClientes();
         listaProductos = funcionalidadConsultarProductos.consultarProductosVenta();
         initComponents();
+        panelProductos.setVisible(false);
         llenarTabla();
         FlatRobotoFont.install();
         FlatLaf.registerCustomDefaultsSource("extras");
@@ -96,6 +103,8 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         regresarBtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         clientesComboBox = new javax.swing.JComboBox<>();
+        restablecerBtn = new javax.swing.JButton();
+        panelProductos = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -201,6 +210,16 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         clientesComboBox.setModel(new ClientesComboBoxModel(listaClientes));
         clientesComboBox.setEnabled(false);
 
+        restablecerBtn.setBackground(new java.awt.Color(140, 220, 254));
+        restablecerBtn.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        restablecerBtn.setForeground(new java.awt.Color(0, 0, 0));
+        restablecerBtn.setText("Restablecer");
+        restablecerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restablecerBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -210,21 +229,24 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(aplicarFiltroBtn)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(filtrarClienteRadioBtn)
-                                        .addComponent(filtrarPorProductosRadioBtn))
-                                    .addGap(43, 43, 43)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(productosComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                                        .addComponent(clientesComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(filtrarClienteRadioBtn)
+                                    .addComponent(filtrarPorProductosRadioBtn))
+                                .addGap(43, 43, 43)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(productosComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                                    .addComponent(clientesComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(regresarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(163, 163, 163)
-                                .addComponent(jLabel5)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE))
+                                .addComponent(jLabel5))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(253, 253, 253)
+                                .addComponent(aplicarFiltroBtn)
+                                .addGap(151, 151, 151)
+                                .addComponent(restablecerBtn)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
@@ -241,7 +263,9 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
                         .addComponent(hastaDatePicker, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(46, 46, 46))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(panelProductos)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -275,9 +299,13 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
                             .addComponent(productosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(hastaDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(aplicarFiltroBtn)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(aplicarFiltroBtn)
+                    .addComponent(restablecerBtn))
                 .addGap(16, 16, 16)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelProductos)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(detallesVentaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -339,6 +367,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         if (filtrarClienteRadioBtn.isSelected() && !filtrarPorProductosRadioBtn.isSelected()
                 && hastaDatePicker.getDate() == null && desdeDatePicker.getDate() == null
                 && !clientesComboBox.getSelectedItem().equals("Todos")) {
+            panelProductos.setVisible(false);
             obtenerCliente();
             List<DTO_Venta> listaVentas = funcionalidadConsultarVentas.ventasPorCliente(cliente.getID());
             tablaVentas(listaVentas);
@@ -347,10 +376,25 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
                 && hastaDatePicker.getDate() == null && desdeDatePicker.getDate() == null) {
             obtenerProductos();
             List<DTO_Venta> listaVentas = funcionalidadConsultarVentas.consultarVentasPorProductos(listaProductosSeleccionados);
-            tablaVentas(listaVentas);
+            Map<DTO_Producto, Integer> cantidadPorProducto = calcularCantidadPorProducto(listaVentas, listaProductosSeleccionados);
+            JPanel panelLabels = new JPanel();
+            panelLabels.setLayout(new BoxLayout(panelLabels, BoxLayout.Y_AXIS));
+            for (Map.Entry<DTO_Producto, Integer> entry : cantidadPorProducto.entrySet()) {
+                DTO_Producto producto = entry.getKey();
+                int cantidad = entry.getValue();
+                JLabel labelProducto = new JLabel(producto.getNombre() + ": " + cantidad);
+                labelProducto.setForeground(Color.BLACK);
+                panelLabels.add(labelProducto);
+            }
+            panelLabels.setBackground(Color.WHITE);
+            panelProductos.setBackground(Color.WHITE);
+            panelProductos.setVisible(true);
+            panelProductos.setViewportView(panelLabels);
+
         }
         if (!filtrarClienteRadioBtn.isSelected() && !filtrarPorProductosRadioBtn.isSelected()
                 && hastaDatePicker.getDate() != null && desdeDatePicker.getDate() != null) {
+            panelProductos.setVisible(false);
             LocalDate localDateInicio = desdeDatePicker.getDate();
             Instant instantInicio = localDateInicio.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
             Date fechaInicio = Date.from(instantInicio);
@@ -370,11 +414,143 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
                 && hastaDatePicker.getDate() == null && desdeDatePicker.getDate() == null) {
             obtenerCliente();
             obtenerProductos();
-            System.out.println("hola");
             List<DTO_Venta> listaVentas = funcionalidadConsultarVentas.consultarVentasConFiltros(cliente.getID(), null, null, listaProductosSeleccionados);
+            JPanel panelLabels = new JPanel();
+            panelLabels.setLayout(new BoxLayout(panelLabels, BoxLayout.Y_AXIS));
+            Map<DTO_Producto, Integer> cantidadPorProducto = calcularCantidadPorProducto(listaVentas, listaProductosSeleccionados);
+            for (Map.Entry<DTO_Producto, Integer> entry : cantidadPorProducto.entrySet()) {
+                DTO_Producto producto = entry.getKey();
+                int cantidad = entry.getValue();
+                JLabel labelProducto = new JLabel(producto.getNombre() + ": " + cantidad);
+                labelProducto.setForeground(Color.BLACK);
+                panelLabels.add(labelProducto);
+            }
+            panelLabels.setBackground(Color.WHITE);
+            panelProductos.setBackground(Color.WHITE);
+            panelProductos.setVisible(true);
+            panelProductos.setViewportView(panelLabels);
+
+            tablaVentas(listaVentas);
+        }
+        if (filtrarClienteRadioBtn.isSelected() && !filtrarPorProductosRadioBtn.isSelected()
+                && hastaDatePicker.getDate() != null && desdeDatePicker.getDate() != null) {
+            panelProductos.setVisible(false);
+            obtenerCliente();
+            LocalDate localDateInicio = desdeDatePicker.getDate();
+            Instant instantInicio = localDateInicio.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+            Date fechaInicio = Date.from(instantInicio);
+            LocalDate localDateFin = hastaDatePicker.getDate();
+            Instant instantFin = localDateFin.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+            Date fechaFin = Date.from(instantFin);
+            Calendar calFin = Calendar.getInstance();
+            calFin.setTime(fechaFin);
+            calFin.set(Calendar.HOUR_OF_DAY, 23);
+            calFin.set(Calendar.MINUTE, 59);
+            calFin.set(Calendar.SECOND, 59);
+            fechaFin = calFin.getTime();
+            List<DTO_Venta> listaVentas = funcionalidadConsultarVentas.consultarVentasConFiltros(cliente.getID(), fechaInicio, fechaFin, null);
+            tablaVentas(listaVentas);
+        }
+        if (!filtrarClienteRadioBtn.isSelected() && filtrarPorProductosRadioBtn.isSelected()
+                && hastaDatePicker.getDate() != null && desdeDatePicker.getDate() != null) {
+            obtenerProductos();
+            LocalDate localDateInicio = desdeDatePicker.getDate();
+            Instant instantInicio = localDateInicio.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+            Date fechaInicio = Date.from(instantInicio);
+            LocalDate localDateFin = hastaDatePicker.getDate();
+            Instant instantFin = localDateFin.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+            Date fechaFin = Date.from(instantFin);
+            Calendar calFin = Calendar.getInstance();
+            calFin.setTime(fechaFin);
+            calFin.set(Calendar.HOUR_OF_DAY, 23);
+            calFin.set(Calendar.MINUTE, 59);
+            calFin.set(Calendar.SECOND, 59);
+            fechaFin = calFin.getTime();
+            List<DTO_Venta> listaVentas = funcionalidadConsultarVentas.consultarVentasConFiltros(null, fechaInicio, fechaFin, listaProductos);
+            JPanel panelLabels = new JPanel();
+            panelLabels.setLayout(new BoxLayout(panelLabels, BoxLayout.Y_AXIS));
+            Map<DTO_Producto, Integer> cantidadPorProducto = calcularCantidadPorProducto(listaVentas, listaProductosSeleccionados);
+            for (Map.Entry<DTO_Producto, Integer> entry : cantidadPorProducto.entrySet()) {
+                DTO_Producto producto = entry.getKey();
+                int cantidad = entry.getValue();
+                JLabel labelProducto = new JLabel(producto.getNombre() + ": " + cantidad);
+                labelProducto.setForeground(Color.BLACK);
+                panelLabels.add(labelProducto);
+            }
+            panelLabels.setBackground(Color.WHITE);
+            panelProductos.setBackground(Color.WHITE);
+            panelProductos.setVisible(true);
+            panelProductos.setViewportView(panelLabels);
+            tablaVentas(listaVentas);
+        }
+        if (filtrarClienteRadioBtn.isSelected() && filtrarPorProductosRadioBtn.isSelected()
+                && hastaDatePicker.getDate() != null && desdeDatePicker.getDate() != null) {
+            obtenerCliente();
+            obtenerProductos();
+            LocalDate localDateInicio = desdeDatePicker.getDate();
+            Instant instantInicio = localDateInicio.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+            Date fechaInicio = Date.from(instantInicio);
+            LocalDate localDateFin = hastaDatePicker.getDate();
+            Instant instantFin = localDateFin.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+            Date fechaFin = Date.from(instantFin);
+            Calendar calFin = Calendar.getInstance();
+            calFin.setTime(fechaFin);
+            calFin.set(Calendar.HOUR_OF_DAY, 23);
+            calFin.set(Calendar.MINUTE, 59);
+            calFin.set(Calendar.SECOND, 59);
+            fechaFin = calFin.getTime();
+            List<DTO_Venta> listaVentas = funcionalidadConsultarVentas.consultarVentasConFiltros(cliente.getID(), fechaInicio, fechaFin, listaProductos);
+            JPanel panelLabels = new JPanel();
+            panelLabels.setLayout(new BoxLayout(panelLabels, BoxLayout.Y_AXIS));
+            Map<DTO_Producto, Integer> cantidadPorProducto = calcularCantidadPorProducto(listaVentas, listaProductosSeleccionados);
+            for (Map.Entry<DTO_Producto, Integer> entry : cantidadPorProducto.entrySet()) {
+                DTO_Producto producto = entry.getKey();
+                int cantidad = entry.getValue();
+                JLabel labelProducto = new JLabel(producto.getNombre() + ": " + cantidad);
+                labelProducto.setForeground(Color.BLACK);
+                panelLabels.add(labelProducto);
+            }
+            panelLabels.setBackground(Color.WHITE);
+            panelProductos.setBackground(Color.WHITE);
+            panelProductos.setVisible(true);
+            panelProductos.setViewportView(panelLabels);
             tablaVentas(listaVentas);
         }
     }//GEN-LAST:event_aplicarFiltroBtnActionPerformed
+    private Map<DTO_Producto, Integer> calcularCantidadPorProducto(List<DTO_Venta> listaVentas, List<DTO_Producto> listaProductosSeleccionados) {
+        Map<DTO_Producto, Integer> cantidadPorProducto = new HashMap<>();
+
+        for (DTO_Producto productoSeleccionado : listaProductosSeleccionados) {
+            cantidadPorProducto.put(productoSeleccionado, 0);
+        }
+
+        for (DTO_Venta venta : listaVentas) {
+            for (DTO_DetalleVenta detalleVenta : venta.getDetallesVenta()) {
+                String idProductoVendido = detalleVenta.getIdproducto();
+                for (DTO_Producto productoSeleccionado : listaProductosSeleccionados) {
+                    String idProductoSeleccionado = productoSeleccionado.getId();
+
+                    if (idProductoVendido.equals(idProductoSeleccionado)) {
+                        int cantidadAnterior = cantidadPorProducto.get(productoSeleccionado);
+                        int cantidadActualizada = cantidadAnterior + detalleVenta.getCantidad();
+                        cantidadPorProducto.put(productoSeleccionado, cantidadActualizada);
+                    }
+                }
+            }
+        }
+        return cantidadPorProducto;
+    }
+    private void restablecerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restablecerBtnActionPerformed
+        filtrarClienteRadioBtn.setSelected(false);
+        filtrarPorProductosRadioBtn.setSelected(false);
+        clientesComboBox.setSelectedItem("Todos");
+        desdeDatePicker.setDate(null);
+        hastaDatePicker.setDate(null);
+        productosComboBox.setEnabled(false);
+        clientesComboBox.setEnabled(false);
+        productosComboBox.limpiarElementosSeleccionados();
+        llenarTabla();
+    }//GEN-LAST:event_restablecerBtnActionPerformed
 
     public void tablaVentas(List<DTO_Venta> listaVentas) {
         limpiarTabla();
@@ -471,6 +647,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         int filaSeleccionada = tablaVentas.getSelectedRow();
         if (filaSeleccionada != -1) {
             String idVenta = tablaVentas.getValueAt(filaSeleccionada, 0).toString();
+            System.out.println(idVenta);
             venta = funcionalidadConsultarVentas.encontrarVenta(idVenta);
 
         }
@@ -505,8 +682,10 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane panelProductos;
     private extras.ComboBoxMultiSeleccion productosComboBox;
     private javax.swing.JButton regresarBtn;
+    private javax.swing.JButton restablecerBtn;
     private javax.swing.JTable tablaVentas;
     // End of variables declaration//GEN-END:variables
 }

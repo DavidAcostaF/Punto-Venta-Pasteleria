@@ -17,7 +17,7 @@ import com.mongodb.client.model.Projections;
 import com.mycompany.pasteleriadominioentidades.Producto;
 import com.mycompany.pasteleriadominioentidades.Venta;
 import com.mycompany.pasteleriadominiosMapeo.VentaMapeo;
-import conversiones.VentasConversiones;
+import conversionesPersistencia.VentasConversiones;
 import dto.DTO_Venta;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -134,8 +134,8 @@ public class VentaDAO implements IVentaDAO {
             );
             AggregateIterable<VentaMapeo> resultados = coleccion.aggregate(pipeline);
             VentaMapeo ventaEncontrada = resultados.first();
-
-            return conversor.convertirAVentaEntidadObjetos(ventaEncontrada);
+             Venta venta=conversor.convertirAVentaEntidadObjetos(ventaEncontrada);
+            return venta;
         } catch (IllegalArgumentException e) {
             throw new PersistenciaException("ID de venta no válido: " + idVenta);
         }

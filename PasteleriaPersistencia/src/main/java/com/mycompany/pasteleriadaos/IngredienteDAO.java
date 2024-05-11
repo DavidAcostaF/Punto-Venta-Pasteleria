@@ -12,7 +12,7 @@ import static com.mongodb.client.model.Filters.regex;
 import com.mongodb.client.model.Sorts;
 import com.mongodb.client.result.DeleteResult;
 import com.mycompany.pasteleriadominiosMapeo.IngredienteMapeo;
-import conversiones.IngredienteConversiones;
+import conversionesPersistencia.IngredienteConversiones;
 import dto.DTO_Ingrediente;
 import java.util.LinkedList;
 import java.util.List;

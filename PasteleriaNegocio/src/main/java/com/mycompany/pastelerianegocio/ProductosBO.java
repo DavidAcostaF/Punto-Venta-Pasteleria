@@ -4,7 +4,7 @@
  */
 package com.mycompany.pastelerianegocio;
 
-import Conversiones.ProductosConversiones;
+import conversionesnegocio.ProductosConversiones;
 import com.mycompany.pasteleriadaos.IIngredienteDAO;
 import com.mycompany.pasteleriadaos.IProductoDAO;
 import com.mycompany.pasteleriadaos.IngredienteDAO;

@@ -9,7 +9,7 @@ import com.mongodb.client.MongoCollection;
 import static com.mongodb.client.model.Filters.eq;
 import com.mycompany.pasteleriadominioentidades.Producto;
 import com.mycompany.pasteleriadominiosMapeo.ProductoMapeo;
-import conversiones.ProductosConversiones;
+import conversionesPersistencia.ProductosConversiones;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.types.ObjectId;
