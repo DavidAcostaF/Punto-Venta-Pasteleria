@@ -4,17 +4,28 @@
  */
 package presentacion;
 
+import control.ControlAgregarVenta;
+import control.ControlIngresosMensuales;
+import java.time.LocalDate;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author PC
  */
 public class Presentacion_DlgSeleccionarFechaIngresos extends javax.swing.JFrame {
 
+    private ControlAgregarVenta controlPrincipal;
+    private ControlIngresosMensuales controlIngresos;
+
     /**
      * Creates new form Presentacion_DlgSeleccionarFechaIngresos
      */
     public Presentacion_DlgSeleccionarFechaIngresos() {
         initComponents();
+        this.controlPrincipal = new ControlAgregarVenta();
+        this.controlIngresos = new ControlIngresosMensuales();
     }
 
     /**
@@ -28,12 +39,12 @@ public class Presentacion_DlgSeleccionarFechaIngresos extends javax.swing.JFrame
 
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        fechaEntrega = new com.github.lgooddatepicker.components.DatePicker();
+        fechaSeleccionada = new com.github.lgooddatepicker.components.DatePicker();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        botonRegresar = new javax.swing.JButton();
+        botonContinuar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
@@ -42,41 +53,41 @@ public class Presentacion_DlgSeleccionarFechaIngresos extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel1.setText("Seleccione una fecha");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
 
         jLabel3.setText("Fecha inicial de Consulta:");
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("seleccionada hasta 30 dias hacia delante");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Se calcularan los ingresos desde la fecha");
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
 
-        jButton5.setBackground(new java.awt.Color(140, 220, 254));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton5.setText("Regresar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        botonRegresar.setText("Regresar");
+        botonRegresar.setBackground(new java.awt.Color(140, 220, 254));
+        botonRegresar.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        botonRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                botonRegresarActionPerformed(evt);
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(140, 220, 254));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton6.setText("Continuar");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        botonContinuar.setText("Continuar");
+        botonContinuar.setBackground(new java.awt.Color(140, 220, 254));
+        botonContinuar.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        botonContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                botonContinuarActionPerformed(evt);
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Ingresos Mensuales");
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,13 +103,13 @@ public class Presentacion_DlgSeleccionarFechaIngresos extends javax.swing.JFrame
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fechaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -122,7 +133,7 @@ public class Presentacion_DlgSeleccionarFechaIngresos extends javax.swing.JFrame
                         .addGap(78, 78, 78)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(fechaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -131,61 +142,45 @@ public class Presentacion_DlgSeleccionarFechaIngresos extends javax.swing.JFrame
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(botonContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(140, 140, 140))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
+        controlPrincipal.mostrarMenu();
+    }//GEN-LAST:event_botonRegresarActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void botonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonContinuarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_DlgSeleccionarFechaIngresos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_DlgSeleccionarFechaIngresos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_DlgSeleccionarFechaIngresos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_DlgSeleccionarFechaIngresos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        if (validarCamposVacios()) {
+
+            LocalDate localDate = fechaSeleccionada.getDate();
+            Date date = java.sql.Date.valueOf(localDate);
+
+            controlIngresos.setFechaSeleccionada(date);
+
+            controlIngresos.mostrarVentasTotales();
+
+            this.dispose();
         }
-        //</editor-fold>
+    }//GEN-LAST:event_botonContinuarActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Presentacion_DlgSeleccionarFechaIngresos().setVisible(true);
-            }
-        });
+    private boolean validarCamposVacios() {
+        if (fechaSeleccionada.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una fecha.", "Fecha no seleccionada", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        return true;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.github.lgooddatepicker.components.DatePicker fechaEntrega;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton botonContinuar;
+    private javax.swing.JButton botonRegresar;
+    private com.github.lgooddatepicker.components.DatePicker fechaSeleccionada;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -55,7 +55,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="jButton4" min="-2" pref="170" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jButton5" min="-2" pref="170" max="-2" attributes="0"/>
+                                  <Component id="botonIngresosMensuales" min="-2" pref="170" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jButton6" min="-2" pref="170" max="-2" attributes="0"/>
                               </Group>
@@ -93,7 +93,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton4" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
-                      <Component id="jButton5" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
+                      <Component id="botonIngresosMensuales" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
                       <Component id="jButton6" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -175,7 +175,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
+        <Component class="javax.swing.JButton" name="botonIngresosMensuales">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fe" green="dc" red="8c" type="rgb"/>
@@ -187,7 +187,7 @@
             <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonIngresosMensualesActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton6">

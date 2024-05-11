@@ -8,6 +8,7 @@ package presentacion;
 //import com.mycompany.pastelerianegocio.IControlRegistrarVenta;
 import control.ControlAgregarVenta;
 import control.ControlGestionarInventario;
+import control.ControlIngresosMensuales;
 
 /**
  *
@@ -17,6 +18,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
 
     ControlAgregarVenta control;
     private ControlGestionarInventario controlGesionarInventario;
+    private ControlIngresosMensuales controlIngresos;
 //    private IControlRegistrarVenta controlRegistrarVenta;
 
     /**
@@ -26,6 +28,8 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
         initComponents();
         control = new ControlAgregarVenta();
         controlGesionarInventario = new ControlGestionarInventario();
+        this.controlIngresos = new ControlIngresosMensuales();
+
     }
 
     /**
@@ -43,7 +47,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        botonIngresosMensuales = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
@@ -95,13 +99,13 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(140, 220, 254));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton5.setText("Ingresos mensuales");
-        jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        botonIngresosMensuales.setBackground(new java.awt.Color(140, 220, 254));
+        botonIngresosMensuales.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        botonIngresosMensuales.setText("Ingresos mensuales");
+        botonIngresosMensuales.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        botonIngresosMensuales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                botonIngresosMensualesActionPerformed(evt);
             }
         });
 
@@ -150,7 +154,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(botonIngresosMensuales, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -179,7 +183,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonIngresosMensuales, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -220,9 +224,10 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void botonIngresosMensualesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIngresosMensualesActionPerformed
+        this.dispose();
+        controlIngresos.mostrarSeleccionadorFecha();
+    }//GEN-LAST:event_botonIngresosMensualesActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
@@ -274,11 +279,11 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonIngresosMensuales;
     private javax.swing.JButton btnRegistrarVenta;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;

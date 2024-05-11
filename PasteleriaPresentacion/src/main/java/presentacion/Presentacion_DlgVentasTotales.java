@@ -4,8 +4,19 @@
  */
 package presentacion;
 
+import com.mycompany.pasteleriacalculargananciasdeldia.FuncionalidadCalcularGananciasDelDia;
+import com.mycompany.pasteleriacalculargananciasdeldia.IFuncionalidadCalcularGananciasDelDia;
+import com.mycompany.pasteleriacontarventaspordia.FuncionalidadContarVentasPorDia;
+import com.mycompany.pasteleriacontarventaspordia.IFuncionalidadContarVentasPorDia;
+import control.ControlIngresosMensuales;
 import dto.DTO_Producto;
+import extras.ButtonColumn;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
+import net.miginfocom.layout.AC;
 
 /**
  *
@@ -13,11 +24,30 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
 
+    private IFuncionalidadContarVentasPorDia funcionalidadVentasPorDia;
+    private IFuncionalidadCalcularGananciasDelDia funcionalidadGananciasDelDia;
+    private ControlIngresosMensuales controlIngresos;
+
     /**
      * Creates new form Presentacion_DlgVentasTotales
      */
     public Presentacion_DlgVentasTotales() {
         initComponents();
+        this.funcionalidadVentasPorDia = new FuncionalidadContarVentasPorDia();
+        this.funcionalidadGananciasDelDia = new FuncionalidadCalcularGananciasDelDia();
+        this.controlIngresos = new ControlIngresosMensuales();
+
+        // Asumiendo que tu tabla se llama tableProductos
+        ButtonColumn buttonColumn = new ButtonColumn("Desplegar Ventas", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Coloca aquí el código que deseas ejecutar cuando se haga clic en el botón
+                // Por ejemplo, puedes abrir una ventana de diálogo o realizar alguna acción específica.
+            }
+        });
+
+        // Establece el ancho de la columna de botones
+        this.tableVentas.getColumnModel().getColumn(tableVentas.getColumnCount() - 1).setPreferredWidth(100);
     }
 
     /**
@@ -31,9 +61,9 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
-        jButton3 = new javax.swing.JButton();
+        botonExportarPDF = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableProductos = new javax.swing.JTable();
+        tableVentas = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -41,8 +71,8 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtCantidad = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        botonContinuar = new javax.swing.JButton();
+        botonRetroceder = new javax.swing.JButton();
         labelTotal1 = new javax.swing.JLabel();
         txtCantidad1 = new javax.swing.JTextField();
 
@@ -50,25 +80,25 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton3.setBackground(new java.awt.Color(140, 220, 254));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton3.setText("Exportar a PDF");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        botonExportarPDF.setBackground(new java.awt.Color(140, 220, 254));
+        botonExportarPDF.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        botonExportarPDF.setText("Exportar a PDF");
+        botonExportarPDF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botonExportarPDFActionPerformed(evt);
             }
         });
 
-        tableProductos.setModel(new javax.swing.table.DefaultTableModel(
+        tableVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre", "Especificacion", "Cantidad", "Precio", "+", "-"
+                "Fecha", "Cantidad de Ventas", "Ganancia del Dia"
             }
         ));
-        tableProductos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(tableProductos);
+        tableVentas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(tableVentas);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel4.setText("Lista de Ventas del Mes");
@@ -101,21 +131,21 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Fecha inicial:");
 
-        jButton4.setBackground(new java.awt.Color(140, 220, 254));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton4.setText("Continuar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        botonContinuar.setBackground(new java.awt.Color(140, 220, 254));
+        botonContinuar.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        botonContinuar.setText("Continuar");
+        botonContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                botonContinuarActionPerformed(evt);
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(140, 220, 254));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton5.setText("Retroceder");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        botonRetroceder.setBackground(new java.awt.Color(140, 220, 254));
+        botonRetroceder.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        botonRetroceder.setText("Retroceder");
+        botonRetroceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                botonRetrocederActionPerformed(evt);
             }
         });
 
@@ -150,11 +180,11 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(botonRetroceder, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(70, 70, 70)
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(botonExportarPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(botonContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(217, 217, 217)
@@ -170,8 +200,8 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,68 +219,59 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
                     .addComponent(txtCantidad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonExportarPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonRetroceder, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void botonExportarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonExportarPDFActionPerformed
 //        DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel();
 //        DTO_Producto p = control.agregarPastel(this);
 //        modelo.addRow(new Object[]{p.getNombre(), p.getDescripcion(), 1, 100});
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_botonExportarPDFActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void botonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonContinuarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_botonContinuarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void botonRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRetrocederActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_botonRetrocederActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+    private void llenarTabla() {
+        DefaultTableModel model = (DefaultTableModel) tableVentas.getModel();
+        model.setRowCount(0); // Limpiar la tabla antes de llenarla
+
+        Date fechaInicial = controlIngresos.getFechaSeleccionada();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fechaInicial);
+
+        for (int i = 0; i <= 30; i++) {
+            Date fecha = calendar.getTime();
+            int cantidadVentas = funcionalidadVentasPorDia.contarVentasPorDia(fecha);
+
+            // Verificar si la cantidad de ventas es al menos 1
+            if (cantidadVentas >= 1) {
+                float gananciaDia = funcionalidadGananciasDelDia.CalcularGananciasDelDia(fecha);
+
+                // Agregar la entrada a la tabla
+                model.addRow(new Object[]{fecha, cantidadVentas, gananciaDia});
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_DlgVentasTotales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_DlgVentasTotales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_DlgVentasTotales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_DlgVentasTotales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+            // Avanzar al siguiente día
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Presentacion_DlgVentasTotales().setVisible(true);
-            }
-        });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton botonContinuar;
+    private javax.swing.JButton botonExportarPDF;
+    private javax.swing.JButton botonRetroceder;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -260,7 +281,7 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelTotal;
     private javax.swing.JLabel labelTotal1;
-    private javax.swing.JTable tableProductos;
+    private javax.swing.JTable tableVentas;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCantidad1;
     private javax.swing.JTextField txtNombre;
