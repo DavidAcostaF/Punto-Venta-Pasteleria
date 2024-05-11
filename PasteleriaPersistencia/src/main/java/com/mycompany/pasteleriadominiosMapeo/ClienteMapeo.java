@@ -17,6 +17,7 @@ public class ClienteMapeo {
     private String apellidoP;
     private String apellidoM;
     private String telefono;
+    private String rfc;
     private List<DireccionMapeo> direcciones;
 
     public ClienteMapeo() {
@@ -39,6 +40,25 @@ public class ClienteMapeo {
         this.direcciones = direcciones;
     }
 
+    public ClienteMapeo(String nombre, String apellidoP, String apellidoM, String telefono, String rfc, List<DireccionMapeo> direcciones) {
+        this.nombre = nombre;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.telefono = telefono;
+        this.rfc = rfc;
+        this.direcciones = direcciones;
+    }
+    
+    public ClienteMapeo(ObjectId id, String nombre, String apellidoP, String apellidoM, String telefono, String rfc, List<DireccionMapeo> direcciones) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.telefono = telefono;
+        this.rfc = rfc;
+        this.direcciones = direcciones;
+    }
+    
     public ObjectId getId() {
         return id;
     }
@@ -79,7 +99,13 @@ public class ClienteMapeo {
         this.telefono = telefono;
     }
 
-  
+    public String getRfc() {
+        return rfc;
+    }
+
+    public void setRfc(String rfc) {
+        this.rfc = rfc;
+    }
 
     public List<DireccionMapeo> getDirecciones() {
         return direcciones;

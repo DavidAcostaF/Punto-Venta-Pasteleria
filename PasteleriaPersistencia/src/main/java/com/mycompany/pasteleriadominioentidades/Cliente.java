@@ -16,6 +16,7 @@ public class Cliente {
     private String apellidoP;
     private String apellidoM;
     private String telefono;
+    private String rfc;
     private List<Direccion> direcciones;
 
     public Cliente() {
@@ -35,6 +36,16 @@ public class Cliente {
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
         this.telefono = telefono;
+        this.direcciones = direcciones;
+    }
+
+    public Cliente(String id, String nombre, String apellidoP, String apellidoM, String telefono, String rfc, List<Direccion> direcciones) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.telefono = telefono;
+        this.rfc = rfc;
         this.direcciones = direcciones;
     }
 
@@ -78,7 +89,13 @@ public class Cliente {
         this.telefono = telefono;
     }
 
-  
+    public String getRfc() {
+        return rfc;
+    }
+
+    public void setRfc(String rfc) {
+        this.rfc = rfc;
+    }
 
     public List<Direccion> getDirecciones() {
         return direcciones;

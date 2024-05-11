@@ -17,6 +17,7 @@ public class DTO_Cliente {
     private String apellidoP;
     private String apellidoM;
     private String telefono;
+    private String rfc;
 
     private List<DTO_Direccion> direcciones;
 
@@ -93,6 +94,14 @@ public class DTO_Cliente {
 
     public void setDirecciones(List<DTO_Direccion> direcciones) {
         this.direcciones = direcciones;
+    }
+
+    public String getRfc() {
+        return rfc;
+    }
+
+    public void setRfc(String rfc) {
+        this.rfc = rfc;
     }
 
     @Override

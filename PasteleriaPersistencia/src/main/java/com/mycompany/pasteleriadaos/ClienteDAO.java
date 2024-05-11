@@ -9,6 +9,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import static com.mongodb.client.model.Filters.eq;
+import com.mongodb.client.result.UpdateResult;
 import com.mycompany.pasteleriadominioentidades.Cliente;
 import com.mycompany.pasteleriadominiosMapeo.ClienteMapeo;
 import conversiones.ClientesConversiones;
@@ -35,6 +36,16 @@ public class ClienteDAO implements IClienteDAO {
 
     }
 
+    /**
+     * Permite agregar un cliente a la base de datos. Convierte el cliente dado
+     * en el parámetro a su versión mapeada para la base de datos. Si la
+     * operación se completa con éxito, devuelve el objeto Cliente con su ID
+     * actualizado. En caso de error, lanza una excepción PersistenciaException.
+     *
+     * @param cliente El cliente a agregar.
+     * @return El cliente que fue agregado.
+     * @throws PersistenciaException En caso de no poder se agregado a la BD.
+     */
     @Override
     public Cliente agregarCliente(Cliente cliente) throws PersistenciaException {
         try {
@@ -46,6 +57,44 @@ public class ClienteDAO implements IClienteDAO {
         }
     }
 
+    /**
+     * Actualiza un cliente existente en la base de datos con la información del
+     * cliente dado en el parámetro siempre y cuando el id coincida. Utilizando
+     * UpdateReuslt, confirmamos que el cliente fue actualizado, encaso de no
+     * poder efectuarse dicha acción, puede arrojar PersistenciaExcepcion
+     * dependiendo el caso.
+     *
+     * @param cliente El cliente que tiene los datos que necesitan ser
+     * actualizados.
+     * @return El cliente que fue actualizado.
+     * @throws PersistenciaException En casi de que no se haya podido actualizar
+     * el cliente o hubiese un error al respecto.
+     */
+    @Override
+    public Cliente actualizarCliente(Cliente cliente) throws PersistenciaException {
+        try {
+            MongoCollection<ClienteMapeo> coleccion = conexion.obtenerColeccion();
+            ClienteMapeo clienteActualizado = conversor.convertirClienteAMapeoConRFC(cliente);
+            UpdateResult result = coleccion.replaceOne(eq("_id", clienteActualizado.getId()), clienteActualizado);
+
+            if (result.getModifiedCount() == 1) {
+                return cliente;
+            } else {
+                throw new PersistenciaException("No se pudo actualizar el cliente");
+            }
+        } catch (Exception e) {
+            throw new PersistenciaException("Error al actualizar cliente: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Recupera y obtiene a todos los clientes registrados en la base de datos,
+     * covirtiendo las instancias de ClienteMapeo a Cliente. En caso de
+     * cualquier error en la consulta, nos lanza PersistenciaException.
+     *
+     * @return Lista con todos los clientes consultados.
+     * @throws PersistenciaException Si ocurrió un error con la consulta.
+     */
     @Override
     public List<Cliente> consultarClientes() throws PersistenciaException {
         try {
@@ -54,7 +103,7 @@ public class ClienteDAO implements IClienteDAO {
             List<Cliente> listaClientes = new ArrayList<>();
 
             for (ClienteMapeo cliente : clientesConsulta) {
-                listaClientes.add(conversor.convertirCliente(cliente));
+                listaClientes.add(conversor.convertirCliente(cliente)); //Pendiende de si modificamos la conversión para el rfc
             }
 
             return listaClientes;
@@ -63,6 +112,18 @@ public class ClienteDAO implements IClienteDAO {
         }
     }
 
+    /**
+     * Busca un cliente que coincida con los datos dados en el parámetro, en
+     * este caso siendo los apellidos, el nombre y el teléfono.
+     *
+     * @param apellidoPaterno Apellido paterno del cliente.
+     * @param apellidoMaterno Apellido materno del cliente.
+     * @param nombres Nombre(s) del cliente.
+     * @param telefono Teléfono del cliente.
+     * @return El cliente que coincida con la búsqueda realizada.
+     * @throws PersistenciaException En caso de no haber coincidencias o haber
+     * falla en la base de datos.
+     */
     @Override
     public Cliente encontrarCliente(String apellidoPaterno, String apellidoMaterno, String nombres, String telefono) throws PersistenciaException {
         try {
@@ -79,6 +140,15 @@ public class ClienteDAO implements IClienteDAO {
         }
     }
 
+    /**
+     * Busca un cliente que coincida con los datos dados en el parámetro, en
+     * este caso siendo el identificador del cliente.
+     *
+     * @param idCliente Identificador del cliente a encontrar.
+     * @return El cliente que coincida con la búsqueda realizada.
+     * @throws PersistenciaException En caso de no haber coincidencias o haber
+     * falla en la base de datos.
+     */
     @Override
     public Cliente encontrarClienteID(String idCliente) throws PersistenciaException {
         try {
