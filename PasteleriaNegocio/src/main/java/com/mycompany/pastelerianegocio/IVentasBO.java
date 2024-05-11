@@ -5,6 +5,7 @@
 package com.mycompany.pastelerianegocio;
 
 
+import Excepciones.ConsultarVentasPorFechaException;
 import dto.DTO_Producto;
 import dto.DTO_Venta;
 import java.util.Date;
@@ -34,4 +35,6 @@ public interface IVentasBO {
      public List<DTO_Venta> consultarVentasPorRangoFechas(Date fechaInicio, Date fechaFin);
      
      public List<DTO_Venta> consultarVentasConFiltros(String clienteId, Date fechaInicio, Date fechaFin, List<DTO_Producto> listaProductos);
+     
+     public List<DTO_Venta> consultarVentasPorFecha(Date fecha)throws ConsultarVentasPorFechaException;
 }

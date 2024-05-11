@@ -27,6 +27,8 @@ public interface IVentaDAO {
 
     public List<Venta> consultarVentasPorRangoFechas(Date fechaInicio, Date fechaFin) throws PersistenciaException;
 
+    public List<Venta> consultarVentasPorFecha(Date fecha) throws PersistenciaException;
+
     public Venta encontrarVenta(String idVenta) throws PersistenciaException;
 
     public List<Venta> consultarVentasPorProductos(List<Producto> listaProductos) throws PersistenciaException;

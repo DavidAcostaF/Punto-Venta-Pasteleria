@@ -87,7 +87,6 @@ public class VentaDAO implements IVentaDAO {
         return ventasE;
     }
 
-
     @Override
     public List<Venta> consultarVentasPorRangoFechas(Date fechaInicio, Date fechaFin) {
         MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
@@ -99,6 +98,19 @@ public class VentaDAO implements IVentaDAO {
         FindIterable<VentaMapeo> ventasPorRangoFechas = coleccion.find(filtroRangoFechas);
         List<Venta> ventas = new ArrayList<>();
         for (VentaMapeo venta : ventasPorRangoFechas) {
+            ventas.add(conversor.convertirAVentaEntidad(venta));
+        }
+        return ventas;
+    }
+
+    @Override
+    public List<Venta> consultarVentasPorFecha(Date fecha) {
+        MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
+        Bson filtro = Filters.eq("fechaRegistro", fecha);
+
+        FindIterable<VentaMapeo> ventasPorFecha = coleccion.find(filtro);
+        List<Venta> ventas = new ArrayList<>();
+        for (VentaMapeo venta : ventasPorFecha) {
             ventas.add(conversor.convertirAVentaEntidad(venta));
         }
         return ventas;
@@ -161,44 +173,44 @@ public class VentaDAO implements IVentaDAO {
 
     @Override
     public List<Venta> consultarVentasConFiltros(String clienteId, Date fechaInicio, Date fechaFin, List<Producto> listaProductos) throws PersistenciaException {
-       try {
-        MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
+        try {
+            MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
 
-        List<Bson> filtros = new ArrayList<>();
+            List<Bson> filtros = new ArrayList<>();
 
-        if (clienteId != null && !clienteId.isEmpty()) {
-            filtros.add(eq("clienteid", new ObjectId(clienteId)));
+            if (clienteId != null && !clienteId.isEmpty()) {
+                filtros.add(eq("clienteid", new ObjectId(clienteId)));
+            }
+
+            if (fechaInicio != null && fechaFin != null) {
+                Bson filtroRangoFechas = Filters.and(
+                        Filters.gte("fechaRegistro", fechaInicio),
+                        Filters.lte("fechaRegistro", fechaFin)
+                );
+                filtros.add(filtroRangoFechas);
+            }
+
+            // Filtro por productos
+            List<ObjectId> idsProductos = null;
+            if (listaProductos != null && !listaProductos.isEmpty()) {
+                idsProductos = listaProductos.stream()
+                        .map(producto -> new ObjectId(producto.getId()))
+                        .collect(Collectors.toList());
+
+                filtros.add(Filters.in("detallesVenta.productoId", idsProductos));
+            }
+
+            Bson filtroFinal = Filters.and(filtros);
+
+            FindIterable<VentaMapeo> ventasFiltradas = coleccion.find(filtroFinal);
+            List<Venta> ventas = new ArrayList<>();
+            for (VentaMapeo venta : ventasFiltradas) {
+                ventas.add(conversor.convertirAVentaEntidad(venta));
+            }
+
+            return ventas;
+        } catch (Exception e) {
+            throw new PersistenciaException("Error al consultar ventas con filtros: " + e.getMessage());
         }
-
-        if (fechaInicio != null && fechaFin != null) {
-            Bson filtroRangoFechas = Filters.and(
-                    Filters.gte("fechaRegistro", fechaInicio),
-                    Filters.lte("fechaRegistro", fechaFin)
-            );
-            filtros.add(filtroRangoFechas);
-        }
-
-        // Filtro por productos
-        List<ObjectId> idsProductos = null;
-        if (listaProductos != null && !listaProductos.isEmpty()) {
-            idsProductos = listaProductos.stream()
-                    .map(producto -> new ObjectId(producto.getId()))
-                    .collect(Collectors.toList());
-            
-            filtros.add(Filters.in("detallesVenta.productoId", idsProductos));
-        }
-
-        Bson filtroFinal = Filters.and(filtros);
-
-        FindIterable<VentaMapeo> ventasFiltradas = coleccion.find(filtroFinal);
-        List<Venta> ventas = new ArrayList<>();
-        for (VentaMapeo venta : ventasFiltradas) {
-            ventas.add(conversor.convertirAVentaEntidad(venta));
-        }
-
-        return ventas;
-    } catch (Exception e) {
-        throw new PersistenciaException("Error al consultar ventas con filtros: " + e.getMessage());
-    }
     }
 }

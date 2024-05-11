@@ -117,4 +117,14 @@ public class VentasBO implements IVentasBO {
         }
     }
 
+    @Override
+    public List<DTO_Venta> consultarVentasPorFecha(Date fecha) throws ConsultarVentasPorFechaException {
+        try {
+            return conversor.convertirListaADTO(ventaDAO.consultarVentasPorFecha(fecha));
+        } catch (PersistenciaException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+
 }
