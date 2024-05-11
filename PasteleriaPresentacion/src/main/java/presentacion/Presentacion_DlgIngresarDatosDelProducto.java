@@ -5,25 +5,17 @@
 package presentacion;
 
 //import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
+import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
 import com.mycompany.pasteleriaconsultaringredientes.IFuncionalidadConsultarIngredientes;
 import control.ControlGestionarInventario;
 import dto.DTO_Ingrediente;
 import dto.DTO_IngredienteDetalle;
 import dto.DTO_Producto;
 import extras.Render;
-import java.awt.Component;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JCheckBox;
 import javax.swing.JTable;
-import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
-import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -39,7 +31,7 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
      */
     public Presentacion_DlgIngresarDatosDelProducto() {
         initComponents();
-       // funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngredientes();
+        funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngredientes();
         control = ControlGestionarInventario.getInstance();
         cargaTabla();
     }

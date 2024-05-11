@@ -6,7 +6,8 @@ package presentacion;
 
 //import com.mycompany.pasteleriaagregarproducto.FuncionalidadAgregarProducto;
 import com.mycompany.pasteleriaagregarproducto.IFuncionalidadAgregarProducto;
-//import com.mycompany.pasteleriaconsultaringrediente.FuncionalidadConsultarIngrediente;
+import com.mycompany.pasteleriaconsultaringrediente.FuncionalidadConsultarIngrediente;
+import com.mycompany.pasteleriaconsultaringrediente.FuncionalidadConsultarIngrediente;
 import com.mycompany.pasteleriaconsultaringrediente.IFuncionalidadConsultarIngrediente;
 import control.ControlGestionarInventario;
 import dto.DTO_Ingrediente;
@@ -35,7 +36,7 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
      */
     public Presentacion_DlgIngredientesSeleccionados() {
         initComponents();
-       // funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngrediente();
+        funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngrediente();
         //funcionalidadAgregarProducto = new FuncionalidadAgregarProducto();
         control = ControlGestionarInventario.getInstance();
         llenarTabla();

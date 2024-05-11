@@ -5,13 +5,14 @@
 package com.mycompany.pasteleriaconsultaringrediente;
 
 import com.mycompany.pastelerianegocio.IInventarioIngredientesBO;
+import com.mycompany.pastelerianegocio.InventarioIngredientesBO;
 import dto.DTO_Ingrediente;
 import java.util.List;
 
 /**
  *
  * @author af_da
- *//*
+ */
 public class FuncionalidadConsultarIngrediente implements IFuncionalidadConsultarIngrediente {
 
     private IInventarioIngredientesBO inventarioIngredientesBO;
@@ -31,4 +32,4 @@ public class FuncionalidadConsultarIngrediente implements IFuncionalidadConsulta
         return inventarioIngredientesBO.consultarIngredientePorNombre(ingrediente);
 
     }
-}*/
+}

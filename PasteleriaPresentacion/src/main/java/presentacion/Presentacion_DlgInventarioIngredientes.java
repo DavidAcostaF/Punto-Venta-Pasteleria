@@ -5,24 +5,23 @@
 package presentacion;
 
 //import com.mycompany.pasteleriaactualizaringrediente.FuncionalidadActualizarIngrediente;
+import com.mycompany.pasteleriaactualizaringrediente.FuncionalidadActualizarIngrediente;
 import com.mycompany.pasteleriaactualizaringrediente.IFuncionalidadActualizarIngrediente;
+import com.mycompany.pasteleriaagregaringrediente.FuncionalidadAgregarIngrediente;
 //import com.mycompany.pasteleriaagregaringrediente.FuncionalidadAgregarIngrediente;
 import com.mycompany.pasteleriaagregaringrediente.IFuncionalidadAgregarIngrediente;
+import com.mycompany.pasteleriaconsultaringrediente.FuncionalidadConsultarIngrediente;
 //import com.mycompany.pasteleriaconsultaringrediente.FuncionalidadConsultarIngrediente;
 import com.mycompany.pasteleriaconsultaringrediente.IFuncionalidadConsultarIngrediente;
+import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
 //import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
 import com.mycompany.pasteleriaconsultaringredientes.IFuncionalidadConsultarIngredientes;
+import com.mycompany.pasteleriaeliminaringrediente.FuncionalidadEliminarIngrediente;
 //import com.mycompany.pasteleriaeliminaringrediente.FuncionalidadEliminarIngrediente;
 import com.mycompany.pasteleriaeliminaringrediente.IFuncionalidadEliminarIngrediente;
 import dto.DTO_Ingrediente;
-import java.awt.GridLayout;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -36,19 +35,19 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
     private IFuncionalidadConsultarIngrediente funcionalidadConsultarIngrediente;
     private IFuncionalidadActualizarIngrediente funcionalidadActualizarIngrediente;
     private IFuncionalidadEliminarIngrediente funcionalidadEliminarIngrediente;
-    // private List<DTO_Ingrediente> listaIngredientes;
+   private List<DTO_Ingrediente> listaIngredientes;
 
     /**
      * Creates new form Presentacion_DlgInventarioIngredientes
      */
     public Presentacion_DlgInventarioIngredientes() {
         initComponents();
-       // funcionalidadConsultarIngredientes = new FuncionalidadConsultarIngredientes();
-        //funcionalidadAgregarIngrediente = new FuncionalidadAgregarIngrediente();
-        //funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngrediente();
-       // funcionalidadActualizarIngrediente = new FuncionalidadActualizarIngrediente();
-        //funcionalidadEliminarIngrediente = new FuncionalidadEliminarIngrediente();
-        //listaIngredientes = funcionalidadConsultarIngredientes.consultarIngredientes();
+        funcionalidadConsultarIngredientes = new FuncionalidadConsultarIngredientes();
+        funcionalidadAgregarIngrediente = new FuncionalidadAgregarIngrediente();
+        funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngrediente();
+        funcionalidadActualizarIngrediente = new FuncionalidadActualizarIngrediente();
+        funcionalidadEliminarIngrediente = new FuncionalidadEliminarIngrediente();
+        listaIngredientes = funcionalidadConsultarIngredientes.consultarIngredientes();
         llenarTabla();
         btnActualizar.setEnabled(false);
         btnEliminar.setEnabled(false);
