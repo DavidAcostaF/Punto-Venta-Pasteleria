@@ -11,7 +11,7 @@ import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
 import com.mongodb.client.model.Sorts;
 import com.mongodb.client.result.DeleteResult;
-import com.mycompany.pasteleriadominios.Ingrediente;
+import com.mycompany.pasteleriadominiosMapeo.IngredienteMapeo;
 import conversiones.IngredienteConversiones;
 import dto.DTO_Ingrediente;
 import java.util.LinkedList;
@@ -26,17 +26,17 @@ public class IngredienteDAO implements IIngredienteDAO {
 
     private IConexion conexion;
     private IngredienteConversiones ingredienteConversiones;
-
+/*
     public IngredienteDAO() {
-        conexion = new Conexion("ingredientes", Ingrediente.class);
+        conexion = new Conexion("ingredientes", IngredienteMapeo.class);
         ingredienteConversiones = new IngredienteConversiones();
     }
 
     @Override
-    public DTO_Ingrediente agregar(Ingrediente ingrediente) {
-        MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
+    public DTO_Ingrediente agregar(IngredienteMapeo ingrediente) {
+        MongoCollection<IngredienteMapeo> coleccion = conexion.obtenerColeccion();
         coleccion.insertOne(ingrediente);
-        Ingrediente ingredienteAgregado = coleccion.find().sort(Sorts.descending("_id")).first();
+        IngredienteMapeo ingredienteAgregado = coleccion.find().sort(Sorts.descending("_id")).first();
         if (ingredienteAgregado != null && !ingredienteAgregado.getNombre().equals(ingrediente.getNombre())) {
             //Arrojar una excepcion
         }
@@ -47,48 +47,48 @@ public class IngredienteDAO implements IIngredienteDAO {
     }
 
     @Override
-    public DTO_Ingrediente actualizar(Ingrediente ingrediente) {
-        MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
-        Ingrediente ingredienteActualizado = coleccion.findOneAndReplace(eq("nombre", ingrediente.getNombre()), ingrediente);
+    public DTO_Ingrediente actualizar(IngredienteMapeo ingrediente) {
+        MongoCollection<IngredienteMapeo> coleccion = conexion.obtenerColeccion();
+        IngredienteMapeo ingredienteActualizado = coleccion.findOneAndReplace(eq("nombre", ingrediente.getNombre()), ingrediente);
 
         return ingredienteConversiones.convertir(ingredienteActualizado);
     }
 
     @Override
     public List<DTO_Ingrediente> consultar() {
-        MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
-        FindIterable<Ingrediente> resultados = coleccion.find();
+        MongoCollection<IngredienteMapeo> coleccion = conexion.obtenerColeccion();
+        FindIterable<IngredienteMapeo> resultados = coleccion.find();
 
-        List<Ingrediente> listaIngredientes = new LinkedList<>();
+        List<IngredienteMapeo> listaIngredientes = new LinkedList<>();
         resultados.into(listaIngredientes);
         return ingredienteConversiones.convertir(listaIngredientes);
     }
 
     @Override
-    public List<DTO_Ingrediente> consultar(Ingrediente ingrediente) {
-        MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
-        FindIterable<Ingrediente> resultados = coleccion.find(regex("nombre", "^" + ingrediente.getNombre(), "i"));
+    public List<DTO_Ingrediente> consultar(IngredienteMapeo ingrediente) {
+        MongoCollection<IngredienteMapeo> coleccion = conexion.obtenerColeccion();
+        FindIterable<IngredienteMapeo> resultados = coleccion.find(regex("nombre", "^" + ingrediente.getNombre(), "i"));
 
-        List<Ingrediente> listaIngredientes = new LinkedList<>();
+        List<IngredienteMapeo> listaIngredientes = new LinkedList<>();
         resultados.into(listaIngredientes);
         return ingredienteConversiones.convertir(listaIngredientes);
     }
 
     @Override
     public DTO_Ingrediente consultarPorNombre(String nombre) {
-        MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
-        Ingrediente resultado = coleccion.find(eq("nombre", nombre)).first();
+        MongoCollection<IngredienteMapeo> coleccion = conexion.obtenerColeccion();
+        IngredienteMapeo resultado = coleccion.find(eq("nombre", nombre)).first();
         DTO_Ingrediente ingredienteDTO = new DTO_Ingrediente();
 
         return ingredienteConversiones.convertir(resultado);
     }
 
     @Override
-    public Boolean eliminar(Ingrediente ingrediente) {
-        MongoCollection<Ingrediente> coleccion = conexion.obtenerColeccion();
+    public Boolean eliminar(IngredienteMapeo ingrediente) {
+        MongoCollection<IngredienteMapeo> coleccion = conexion.obtenerColeccion();
         DeleteResult result = coleccion.deleteOne(eq("nombre", ingrediente.getNombre()));
 
         return result.getDeletedCount() == 1;
-    }
+    }*/
 
 }

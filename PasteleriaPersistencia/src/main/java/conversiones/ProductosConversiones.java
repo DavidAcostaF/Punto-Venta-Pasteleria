@@ -4,8 +4,9 @@
  */
 package conversiones;
 
-import com.mycompany.pasteleriadocumentosanidados.IngredienteDetalle;
-import com.mycompany.pasteleriadominios.Producto;
+import com.mycompany.pasteleriadocumentosanidadosmapeo.IngredienteDetalleMapeo;
+import com.mycompany.pasteleriadominioentidades.Producto;
+import com.mycompany.pasteleriadominiosMapeo.ProductoMapeo;
 import dto.DTO_Producto;
 
 /**
@@ -14,19 +15,19 @@ import dto.DTO_Producto;
  */
 public class ProductosConversiones {
 
-    public DTO_Producto convertirProducto(Producto producto) {
-        DTO_Producto productoDTO = new DTO_Producto();
+    public Producto convertirProducto(ProductoMapeo producto) {
+        Producto productoE = new Producto();
         IngredienteDetalleConversiones convertirIngredienteDetalle = new IngredienteDetalleConversiones();
 
-        productoDTO.setId(producto.getId().toHexString());
-        productoDTO.setPrecio(producto.getPrecio());
-        productoDTO.setNombre(producto.getNombre());
-        productoDTO.setDescripcion(producto.getDescripcion());
+        productoE.setId(producto.getId().toHexString());
+        productoE.setPrecio(producto.getPrecio());
+        productoE.setNombre(producto.getNombre());
+        productoE.setDescripcion(producto.getDescripcion());
 
-        for (IngredienteDetalle ingredienteDetalle : producto.getIngredientes()) {
-            productoDTO.addDTO_IngredienteDetalle(convertirIngredienteDetalle.convertir(ingredienteDetalle));
+        for (IngredienteDetalleMapeo ingredienteDetalle : producto.getIngredientes()) {
+            productoE.addIngredienteDetalle(convertirIngredienteDetalle.convertir(ingredienteDetalle));
         }
         
-        return productoDTO;
+        return productoE;
     }
 }

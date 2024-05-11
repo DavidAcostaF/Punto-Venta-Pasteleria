@@ -4,7 +4,7 @@
  */
 package com.mycompany.pasteleriadaos;
 
-import com.mycompany.pasteleriadominios.Ingrediente;
+import com.mycompany.pasteleriadominiosMapeo.IngredienteMapeo;
 import dto.DTO_Ingrediente;
 import java.util.List;
 
@@ -13,16 +13,16 @@ import java.util.List;
  * @author af_da
  */
 public interface IIngredienteDAO {
+/*
+    public DTO_Ingrediente agregar(IngredienteMapeo ingrediente);
 
-    public DTO_Ingrediente agregar(Ingrediente ingrediente);
-
-    public DTO_Ingrediente actualizar(Ingrediente ingrediente);
+    public DTO_Ingrediente actualizar(IngredienteMapeo ingrediente);
 
     public List<DTO_Ingrediente> consultar();
 
-    public List<DTO_Ingrediente> consultar(Ingrediente ingrediente);
+    public List<DTO_Ingrediente> consultar(IngredienteMapeo ingrediente);
 
     public DTO_Ingrediente consultarPorNombre(String nombre);
 
-    public Boolean eliminar(Ingrediente ingrediente);
+    public Boolean eliminar(IngredienteMapeo ingrediente);*/
 }

@@ -2,17 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.pasteleriadominios;
+package com.mycompany.pasteleriadominioentidades;
 
 import java.util.List;
-import org.bson.types.ObjectId;
 
 /**
  *
- * @author f_aco
+ * @author abelc
  */
 public class Cliente {
-   private ObjectId id;
+     private String id;
     private String nombre;
     private String apellidoP;
     private String apellidoM;
@@ -22,7 +21,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(ObjectId id, String nombre, String apellidoP, String apellidoM, String telefono, List<Direccion> direcciones) {
+    public Cliente(String id, String nombre, String apellidoP, String apellidoM, String telefono, List<Direccion> direcciones) {
         this.id = id;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
@@ -39,11 +38,11 @@ public class Cliente {
         this.direcciones = direcciones;
     }
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -96,5 +95,4 @@ public class Cliente {
 
    
 
-    
 }

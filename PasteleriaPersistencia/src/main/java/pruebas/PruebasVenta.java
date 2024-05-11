@@ -6,9 +6,10 @@ package pruebas;
 
 import Exceptions.PersistenciaException;
 import com.mycompany.pasteleriadaos.VentaDAO;
-import com.mycompany.pasteleriadominios.DetalleVenta;
-import com.mycompany.pasteleriadominios.Direccion;
-import com.mycompany.pasteleriadominios.Venta;
+import com.mycompany.pasteleriadominioentidades.Cliente;
+import com.mycompany.pasteleriadominioentidades.Producto;
+import com.mycompany.pasteleriadominioentidades.Venta;
+import com.mycompany.pasteleriadominiosMapeo.DireccionMapeo;
 import dto.DTO_Cliente;
 import dto.DTO_DetalleVenta;
 import dto.DTO_Producto;
@@ -53,7 +54,7 @@ public class PruebasVenta {
         dv.setTamanhoProducto("chico");
         detallesVenta.add(dv);
         venta.setDetallesVenta(detallesVenta);
-        Direccion direccionEntrega = new Direccion();
+        DireccionMapeo direccionEntrega = new DireccionMapeo();
         direccionEntrega.setCalle("Calle Principal");
         direccionEntrega.setNumExterior("123");
         direccionEntrega.setColonia("Ciudad Ejemplo");
@@ -78,15 +79,15 @@ public class PruebasVenta {
             System.out.println(dv.getProducto().getId());
             
         }*/
-        DTO_Producto producto1 = new DTO_Producto();
+        Producto producto1 = new Producto();
         producto1.setId("663d1f0de604fa31cd6f6b5b");
-        List<DTO_Producto> listaprod = new ArrayList<>();
+        List<Producto> listaprod = new ArrayList<>();
         listaprod.add(producto1);
-        DTO_Cliente c = new DTO_Cliente();
-        c.setID("663b16288bcd861f9682ffa9");
+        Cliente c = new Cliente();
+        c.setId("663b16288bcd861f9682ffa9");
 
         try {
-            List<DTO_Venta> ventas = ventadao.consultarVentasConFiltros(c.getID(), null, null,listaprod);
+            List<Venta> ventas = ventadao.consultarVentasConFiltros(c.getId(), null, null,listaprod);
             System.out.println(ventas);
         } catch (PersistenciaException ex) {
             Logger.getLogger(PruebasVenta.class.getName()).log(Level.SEVERE, null, ex);

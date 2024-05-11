@@ -5,13 +5,12 @@
 package com.mycompany.pasteleriaactualizaringrediente;
 
 import com.mycompany.pastelerianegocio.IInventarioIngredientesBO;
-import com.mycompany.pastelerianegocio.InventarioIngredientesBO;
 import dto.DTO_Ingrediente;
 
 /**
  *
  * @author af_da
- */
+ *//*
 public class FuncionalidadActualizarIngrediente implements IFuncionalidadActualizarIngrediente {
 
     private IInventarioIngredientesBO inventarioBO;
@@ -30,3 +29,4 @@ public class FuncionalidadActualizarIngrediente implements IFuncionalidadActuali
     }
 
 }
+*/

@@ -6,7 +6,7 @@ package pruebas;
 
 import com.mycompany.pasteleriadaos.IIngredienteDAO;
 import com.mycompany.pasteleriadaos.IngredienteDAO;
-import com.mycompany.pasteleriadominios.Ingrediente;
+import com.mycompany.pasteleriadominiosMapeo.IngredienteMapeo;
 
 /**
  *
@@ -18,13 +18,13 @@ public class Pruebas {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        IIngredienteDAO ingredienteDAO = new IngredienteDAO();
-        Ingrediente ingrediento = new Ingrediente();
+       /* IIngredienteDAO ingredienteDAO = new IngredienteDAO();
+        IngredienteMapeo ingrediento = new IngredienteMapeo();
         ingrediento.setNombre("Azucar");
         ingrediento.setCantidad(2);
         ingrediento.setPrecio(123F);
         ingrediento.setUnidadDeMedida("gramos");
-        System.out.println(ingredienteDAO.actualizar(ingrediento));
+        System.out.println(ingredienteDAO.actualizar(ingrediento));*/
     }
     
 }

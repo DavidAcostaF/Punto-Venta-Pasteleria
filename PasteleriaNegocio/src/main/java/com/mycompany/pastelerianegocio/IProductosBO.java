@@ -4,8 +4,8 @@
  */
 package com.mycompany.pastelerianegocio;
 
-import com.mycompany.pasteleriadocumentosanidados.IngredienteDetalle;
-import com.mycompany.pasteleriadominios.Producto;
+import com.mycompany.pasteleriadocumentosanidadosmapeo.IngredienteDetalleMapeo;
+import com.mycompany.pasteleriadominiosMapeo.ProductoMapeo;
 import dto.DTO_Ingrediente;
 import dto.DTO_IngredienteDetalle;
 import dto.DTO_Producto;
@@ -17,12 +17,13 @@ import java.util.List;
  */
 public interface IProductosBO {
 
-    public DTO_Producto agregarProducto(DTO_Producto producto);
+   // public DTO_Producto agregarProducto(DTO_Producto producto);
 
     public List<DTO_Producto> consultarProductos();
 
      public DTO_Producto consultarProductoPorNombre(String nombre);
-    public Producto convertirDTOAProducto(DTO_Producto producto);
-    public IngredienteDetalle convertirDTOAIngredienteDetalle(DTO_IngredienteDetalle ingredienteDetalle);
-    public DTO_Ingrediente consultarIngredientePorNombre(String nombre);
+     /*
+    public ProductoMapeo convertirDTOAProducto(DTO_Producto producto);
+    public IngredienteDetalleMapeo convertirDTOAIngredienteDetalle(DTO_IngredienteDetalle ingredienteDetalle);
+    public DTO_Ingrediente consultarIngredientePorNombre(String nombre);*/
 }

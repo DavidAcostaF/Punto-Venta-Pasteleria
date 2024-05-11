@@ -2,16 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.pasteleriadominios;
-
-import org.bson.types.ObjectId;
+package com.mycompany.pasteleriadominioentidades;
 
 /**
  *
- * @author af_da
+ * @author abelc
  */
 public class Ingrediente {
-    private ObjectId id;
+     private String id;
     private String nombre;
     private Integer cantidad;
     private String unidadDeMedida;
@@ -28,12 +26,12 @@ public class Ingrediente {
         this.precio = precio;
     }
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
     

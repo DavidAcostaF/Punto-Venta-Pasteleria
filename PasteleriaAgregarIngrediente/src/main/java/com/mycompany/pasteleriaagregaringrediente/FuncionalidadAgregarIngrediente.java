@@ -5,13 +5,13 @@
 package com.mycompany.pasteleriaagregaringrediente;
 
 import com.mycompany.pastelerianegocio.IInventarioIngredientesBO;
-import com.mycompany.pastelerianegocio.InventarioIngredientesBO;
+
 import dto.DTO_Ingrediente;
 
 /**
  *
  * @author af_da
- */
+ *//*
 public class FuncionalidadAgregarIngrediente implements IFuncionalidadAgregarIngrediente {
 
     private IInventarioIngredientesBO inventarioIngredientesBO;
@@ -29,4 +29,4 @@ public class FuncionalidadAgregarIngrediente implements IFuncionalidadAgregarIng
         DTO_Ingrediente ingredienteNuevo = inventarioIngredientesBO.agregarIngrediente(ingrediente);
         return ingredienteNuevo;
     }
-}
+}*/

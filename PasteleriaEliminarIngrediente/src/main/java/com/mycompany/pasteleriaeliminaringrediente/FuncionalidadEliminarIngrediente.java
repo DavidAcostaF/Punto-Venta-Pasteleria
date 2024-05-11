@@ -5,13 +5,12 @@
 package com.mycompany.pasteleriaeliminaringrediente;
 
 import com.mycompany.pastelerianegocio.IInventarioIngredientesBO;
-import com.mycompany.pastelerianegocio.InventarioIngredientesBO;
 import dto.DTO_Ingrediente;
 
 /**
  *
  * @author af_da
- */
+ *//*
 public class FuncionalidadEliminarIngrediente implements IFuncionalidadEliminarIngrediente {
 
     private IInventarioIngredientesBO ingredienteBO;
@@ -24,4 +23,4 @@ public class FuncionalidadEliminarIngrediente implements IFuncionalidadEliminarI
     public Boolean eliminarIngrediente(DTO_Ingrediente ingrediente) {
         return ingredienteBO.eliminarIngrediente(ingrediente);
     }
-}
+}*/

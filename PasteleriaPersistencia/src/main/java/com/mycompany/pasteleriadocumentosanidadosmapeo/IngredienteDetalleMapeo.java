@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.pasteleriadocumentosanidados;
+package com.mycompany.pasteleriadocumentosanidadosmapeo;
 
 import org.bson.types.ObjectId;
 
@@ -10,13 +10,13 @@ import org.bson.types.ObjectId;
  *
  * @author af_da
  */
-public class IngredienteDetalle {
+public class IngredienteDetalleMapeo {
 
     private ObjectId ingredienteId;
     private String nombre;
     private Integer cantidad;
 
-    public IngredienteDetalle(ObjectId ingredienteId, String nombre, Integer cantidad) {
+    public IngredienteDetalleMapeo(ObjectId ingredienteId, String nombre, Integer cantidad) {
         this.ingredienteId = ingredienteId;
         this.nombre = nombre;
         this.cantidad = cantidad;
@@ -26,7 +26,7 @@ public class IngredienteDetalle {
         return ingredienteId;
     }
 
-    public IngredienteDetalle() {
+    public IngredienteDetalleMapeo() {
     }
 
     public void setIngredienteId(ObjectId ingredienteId) {

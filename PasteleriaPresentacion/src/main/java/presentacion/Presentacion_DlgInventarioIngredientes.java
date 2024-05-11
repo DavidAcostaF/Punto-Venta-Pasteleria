@@ -4,15 +4,15 @@
  */
 package presentacion;
 
-import com.mycompany.pasteleriaactualizaringrediente.FuncionalidadActualizarIngrediente;
+//import com.mycompany.pasteleriaactualizaringrediente.FuncionalidadActualizarIngrediente;
 import com.mycompany.pasteleriaactualizaringrediente.IFuncionalidadActualizarIngrediente;
-import com.mycompany.pasteleriaagregaringrediente.FuncionalidadAgregarIngrediente;
+//import com.mycompany.pasteleriaagregaringrediente.FuncionalidadAgregarIngrediente;
 import com.mycompany.pasteleriaagregaringrediente.IFuncionalidadAgregarIngrediente;
-import com.mycompany.pasteleriaconsultaringrediente.FuncionalidadConsultarIngrediente;
+//import com.mycompany.pasteleriaconsultaringrediente.FuncionalidadConsultarIngrediente;
 import com.mycompany.pasteleriaconsultaringrediente.IFuncionalidadConsultarIngrediente;
-import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
+//import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
 import com.mycompany.pasteleriaconsultaringredientes.IFuncionalidadConsultarIngredientes;
-import com.mycompany.pasteleriaeliminaringrediente.FuncionalidadEliminarIngrediente;
+//import com.mycompany.pasteleriaeliminaringrediente.FuncionalidadEliminarIngrediente;
 import com.mycompany.pasteleriaeliminaringrediente.IFuncionalidadEliminarIngrediente;
 import dto.DTO_Ingrediente;
 import java.awt.GridLayout;
@@ -43,11 +43,11 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
      */
     public Presentacion_DlgInventarioIngredientes() {
         initComponents();
-        funcionalidadConsultarIngredientes = new FuncionalidadConsultarIngredientes();
-        funcionalidadAgregarIngrediente = new FuncionalidadAgregarIngrediente();
-        funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngrediente();
-        funcionalidadActualizarIngrediente = new FuncionalidadActualizarIngrediente();
-        funcionalidadEliminarIngrediente = new FuncionalidadEliminarIngrediente();
+       // funcionalidadConsultarIngredientes = new FuncionalidadConsultarIngredientes();
+        //funcionalidadAgregarIngrediente = new FuncionalidadAgregarIngrediente();
+        //funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngrediente();
+       // funcionalidadActualizarIngrediente = new FuncionalidadActualizarIngrediente();
+        //funcionalidadEliminarIngrediente = new FuncionalidadEliminarIngrediente();
         //listaIngredientes = funcionalidadConsultarIngredientes.consultarIngredientes();
         llenarTabla();
         btnActualizar.setEnabled(false);

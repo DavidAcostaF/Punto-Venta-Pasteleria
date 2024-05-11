@@ -4,12 +4,15 @@
  */
 package conversiones;
 
-import com.mycompany.pasteleriadominios.Cliente;
-import com.mycompany.pasteleriadominios.Direccion;
+import com.mycompany.pasteleriadominioentidades.Cliente;
+import com.mycompany.pasteleriadominiosMapeo.DireccionMapeo;
+import com.mycompany.pasteleriadominiosMapeo.ClienteMapeo;
+import com.mycompany.pasteleriadominioentidades.Direccion;
 import dto.DTO_Cliente;
-import dto.DTO_Direccion;
+
 import java.util.ArrayList;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -20,34 +23,60 @@ public class ClientesConversiones {
     public ClientesConversiones() {
     }
 
-    public DTO_Cliente convertirCliente(Cliente cliente) {
-        DTO_Cliente dtoCliente = new DTO_Cliente();
-        dtoCliente.setID(cliente.getId().toString());
-        dtoCliente.setNombre(cliente.getNombre());
-        dtoCliente.setApellidoP(cliente.getApellidoP());
-        dtoCliente.setApellidoM(cliente.getApellidoM());
-        dtoCliente.setTelefono(cliente.getTelefono());
+    public Cliente convertirCliente(ClienteMapeo cliente) {
+        Cliente Cliente = new Cliente();
+        Cliente.setId(cliente.getId().toString());
+        Cliente.setNombre(cliente.getNombre());
+        Cliente.setApellidoP(cliente.getApellidoP());
+        Cliente.setApellidoM(cliente.getApellidoM());
+        Cliente.setTelefono(cliente.getTelefono());
 
-        List<DTO_Direccion> direcciones = new ArrayList<>();
+        List<Direccion> direcciones = new ArrayList<>();
+        for (DireccionMapeo direccion : cliente.getDirecciones()) {
+            Direccion direccionE = new Direccion();
+            direccionE.setColonia(direccion.getColonia());
+            direccionE.setCalle(direccion.getCalle());
+            direccionE.setNumExterior(direccion.getNumExterior());
+            direcciones.add(direccionE);
+        }
+
+        Cliente.setDirecciones(direcciones);
+
+        return Cliente;
+    }
+
+    public ClienteMapeo convertirClienteAMapeo(Cliente cliente) {
+        if (cliente == null) {
+            return null;
+        }
+        ClienteMapeo clienteMapeo = new ClienteMapeo();
+        clienteMapeo.setId(new ObjectId(cliente.getId()));
+        clienteMapeo.setNombre(cliente.getNombre());
+        clienteMapeo.setApellidoP(cliente.getApellidoP());
+        clienteMapeo.setApellidoM(cliente.getApellidoM());
+        clienteMapeo.setTelefono(cliente.getTelefono());
+
+        List<DireccionMapeo> direccionesMapeo = new ArrayList<>();
         for (Direccion direccion : cliente.getDirecciones()) {
-            DTO_Direccion dtoDireccion = new DTO_Direccion();
-            dtoDireccion.setColonia(direccion.getColonia());
-            dtoDireccion.setCalle(direccion.getCalle());
-            dtoDireccion.setNumExterior(direccion.getNumExterior());
-            direcciones.add(dtoDireccion);
+            DireccionMapeo direccionMapeo = new DireccionMapeo();
+            direccionMapeo.setColonia(direccion.getColonia());
+            direccionMapeo.setCalle(direccion.getCalle());
+            direccionMapeo.setNumExterior(direccion.getNumExterior());
+            direccionesMapeo.add(direccionMapeo);
         }
-        dtoCliente.setDirecciones(direcciones);
 
-        return dtoCliente;
+        clienteMapeo.setDirecciones(direccionesMapeo);
+
+        return clienteMapeo;
     }
 
-    public List<DTO_Cliente> convertirDesdeClientes(List<Cliente> clientes) {
-        List<DTO_Cliente> dtosClientes = new ArrayList<>();
-        for (Cliente cliente : clientes) {
-            dtosClientes.add(convertirCliente(cliente));
+    public List<Cliente> convertirDesdeClientes(List<ClienteMapeo> clientesMapeo) {
+        List<Cliente> clientes = new ArrayList<>();
+        for (ClienteMapeo clienteMapeo : clientesMapeo) {
+            Cliente cliente = convertirCliente(clienteMapeo);
+            clientes.add(cliente);
         }
-        return dtosClientes;
+        return clientes;
     }
-    
-    
+
 }

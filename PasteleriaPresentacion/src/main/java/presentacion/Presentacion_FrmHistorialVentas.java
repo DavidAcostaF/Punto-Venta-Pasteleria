@@ -373,7 +373,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
             System.out.println("hola");
             List<DTO_Venta> listaVentas = funcionalidadConsultarVentas.consultarVentasConFiltros(cliente.getID(), null, null, listaProductosSeleccionados);
             tablaVentas(listaVentas);
-        } 
+        }
     }//GEN-LAST:event_aplicarFiltroBtnActionPerformed
 
     public void tablaVentas(List<DTO_Venta> listaVentas) {

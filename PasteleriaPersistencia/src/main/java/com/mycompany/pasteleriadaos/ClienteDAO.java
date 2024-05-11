@@ -9,7 +9,8 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import static com.mongodb.client.model.Filters.eq;
-import com.mycompany.pasteleriadominios.Cliente;
+import com.mycompany.pasteleriadominioentidades.Cliente;
+import com.mycompany.pasteleriadominiosMapeo.ClienteMapeo;
 import conversiones.ClientesConversiones;
 import dto.DTO_Cliente;
 import java.util.ArrayList;
@@ -29,52 +30,67 @@ public class ClienteDAO implements IClienteDAO {
 
     public ClienteDAO() {
         clientedto = new DTO_Cliente();
-        conexion = new Conexion("clientes", Cliente.class);
+        conexion = new Conexion("clientes", ClienteMapeo.class);
         conversor = new ClientesConversiones();
 
     }
 
     @Override
-    public Cliente agregarCliente(Cliente cliente) {
-        MongoCollection<Cliente> coleccion = conexion.obtenerColeccion();
-        coleccion.insertOne(cliente);
-        return cliente;
-    }
-
-    @Override
-    public List<DTO_Cliente> consultarClientes() {
-        MongoCollection<Cliente> coleccion = conexion.obtenerColeccion();
-        FindIterable<Cliente> clientesConsulta = coleccion.find();
-        List<DTO_Cliente> listaDTOClientes = new ArrayList<>();
-
-        for (Cliente cliente : clientesConsulta) {
-            listaDTOClientes.add(conversor.convertirCliente(cliente));
+    public Cliente agregarCliente(Cliente cliente) throws PersistenciaException {
+        try {
+            MongoCollection<ClienteMapeo> coleccion = conexion.obtenerColeccion();
+            coleccion.insertOne(conversor.convertirClienteAMapeo(cliente));
+            return cliente;
+        } catch (Exception e) {
+            throw new PersistenciaException("Error al agregar cliente: " + e.getMessage());
         }
-
-        return listaDTOClientes;
     }
 
     @Override
-    public DTO_Cliente encontrarCliente(String apellidoPaterno, String apellidoMaterno, String nombres, String telefono) {
-        MongoCollection<Cliente> coleccion = conexion.obtenerColeccion();
-        BasicDBObject filtro = new BasicDBObject();
-        filtro.put("apellidoP", apellidoPaterno);
-        filtro.put("apellidoM", apellidoMaterno);
-        filtro.put("nombre", nombres);
-        filtro.put("telefono", telefono);
-        DTO_Cliente clienteEncontrado = conversor.convertirCliente(coleccion.find(filtro).first());
-        return clienteEncontrado;
-    }
+    public List<Cliente> consultarClientes() throws PersistenciaException {
+        try {
+            MongoCollection<ClienteMapeo> coleccion = conexion.obtenerColeccion();
+            FindIterable<ClienteMapeo> clientesConsulta = coleccion.find();
+            List<Cliente> listaClientes = new ArrayList<>();
 
-    @Override
-    public DTO_Cliente encontrarClienteID(String idCliente) {
-        MongoCollection<Cliente> coleccion = conexion.obtenerColeccion();
-        Cliente resultado = coleccion.find(eq("_id", new ObjectId(idCliente))).first();
-        if (resultado != null) {
-            return conversor.convertirCliente(resultado);
-        } else {
-            return null;
+            for (ClienteMapeo cliente : clientesConsulta) {
+                listaClientes.add(conversor.convertirCliente(cliente));
+            }
+
+            return listaClientes;
+        } catch (Exception e) {
+            throw new PersistenciaException("Error al consultar clientes: " + e.getMessage());
         }
+    }
 
+    @Override
+    public Cliente encontrarCliente(String apellidoPaterno, String apellidoMaterno, String nombres, String telefono) throws PersistenciaException {
+        try {
+            MongoCollection<ClienteMapeo> coleccion = conexion.obtenerColeccion();
+            BasicDBObject filtro = new BasicDBObject();
+            filtro.put("apellidoP", apellidoPaterno);
+            filtro.put("apellidoM", apellidoMaterno);
+            filtro.put("nombre", nombres);
+            filtro.put("telefono", telefono);
+            Cliente clienteEncontrado = conversor.convertirCliente(coleccion.find(filtro).first());
+            return clienteEncontrado;
+        } catch (Exception e) {
+            throw new PersistenciaException("Error al encontrar cliente: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public Cliente encontrarClienteID(String idCliente) throws PersistenciaException {
+        try {
+            MongoCollection<ClienteMapeo> coleccion = conexion.obtenerColeccion();
+            ClienteMapeo resultado = coleccion.find(eq("_id", new ObjectId(idCliente))).first();
+            if (resultado != null) {
+                return conversor.convertirCliente(resultado);
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            throw new PersistenciaException("Error al encontrar cliente por ID: " + e.getMessage());
+        }
     }
 }

@@ -4,7 +4,8 @@
  */
 package conversiones;
 
-import com.mycompany.pasteleriadominios.Ingrediente;
+import com.mycompany.pasteleriadominioentidades.Ingrediente;
+import com.mycompany.pasteleriadominiosMapeo.IngredienteMapeo;
 import dto.DTO_Ingrediente;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,28 +16,27 @@ import java.util.List;
  */
 public class IngredienteConversiones {
 
-    public DTO_Ingrediente convertir(Ingrediente ingrediente) {
-        if (ingrediente == null) {
-            return null;
-        }
-        DTO_Ingrediente ingredienteDTO = new DTO_Ingrediente();
-        ingredienteDTO.setId(ingrediente.getId().toHexString());
-        ingredienteDTO.setNombre(ingrediente.getNombre());
-        ingredienteDTO.setCantidad(ingrediente.getCantidad());
-        ingredienteDTO.setPrecio(ingrediente.getPrecio());
-        ingredienteDTO.setUnidadDeMedida(ingrediente.getUnidadDeMedida());
-
-        return ingredienteDTO;
+    public Ingrediente convertir(IngredienteMapeo ingrediente) {
+       if (ingrediente == null) {
+        return null;
+    }
+    Ingrediente ingredienteE = new Ingrediente();
+    ingredienteE.setId(ingrediente.getId().toHexString());
+    ingredienteE.setNombre(ingrediente.getNombre());
+    ingredienteE.setCantidad(ingrediente.getCantidad());
+    ingredienteE.setPrecio(ingrediente.getPrecio());
+    ingredienteE.setUnidadDeMedida(ingrediente.getUnidadDeMedida());
+    return ingredienteE;
     }
 
-    public List<DTO_Ingrediente> convertir(List<Ingrediente> ingredientes) {
-        List<DTO_Ingrediente> ingredientesDTO = new ArrayList<>();
+    public List<Ingrediente> convertir(List<IngredienteMapeo> ingredientes) {
+        List<Ingrediente> ingredientesE = new ArrayList<>();
         if (ingredientes == null) {
             return null;
         }
-        for (Ingrediente ingrediente : ingredientes) {
-            ingredientesDTO.add(this.convertir(ingrediente));
+        for (IngredienteMapeo ingrediente : ingredientes) {
+            ingredientesE.add(this.convertir(ingrediente));
         }
-        return ingredientesDTO;
+        return ingredientesE;
     }
 }

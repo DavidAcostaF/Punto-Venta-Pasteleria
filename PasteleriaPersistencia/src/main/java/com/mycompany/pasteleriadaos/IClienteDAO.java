@@ -4,7 +4,8 @@
  */
 package com.mycompany.pasteleriadaos;
 
-import com.mycompany.pasteleriadominios.Cliente;
+import Exceptions.PersistenciaException;
+import com.mycompany.pasteleriadominioentidades.Cliente;
 import dto.DTO_Cliente;
 import java.util.List;
 
@@ -13,12 +14,11 @@ import java.util.List;
  * @author f_aco
  */
 public interface IClienteDAO {
-    public Cliente agregarCliente(Cliente cliente);
+   public Cliente agregarCliente(Cliente cliente) throws PersistenciaException;
     
+    public List<Cliente> consultarClientes() throws PersistenciaException;
     
-    public List<DTO_Cliente> consultarClientes();
-    
-     public DTO_Cliente encontrarCliente(String apellidoPaterno, String apellidoMaterno, String nombres, String telefono);
+    public Cliente encontrarCliente(String apellidoPaterno, String apellidoMaterno, String nombres, String telefono) throws PersistenciaException;
      
-      public DTO_Cliente encontrarClienteID(String idCliente);
+    public Cliente encontrarClienteID(String idCliente) throws PersistenciaException;
 }

@@ -13,7 +13,7 @@ import java.util.List;
  * @author f_aco
  */
 //Esta clase funciona de que se manda la informacion al negocio o se obtiene mediante dtos y el negocio se encargara de devolver la info o mandarlas a las daos de ser necesarias
-
+/*
 public class FuncionalidadConsultarDirecciones implements IFuncionalidadConsultarDirecciones {
         //esta clase tendra todas las operaciones de direcciones necesarias 
     private OperacionesDirecciones operacionesDirecciones;
@@ -29,4 +29,4 @@ public class FuncionalidadConsultarDirecciones implements IFuncionalidadConsulta
         return this.operacionesDirecciones.consultarDirecciones();
     }
     
-}
+}*/

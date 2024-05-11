@@ -4,8 +4,7 @@
  */
 package com.mycompany.pasteleriadirecciones;
 
-import com.mycompany.pastelerianegocio.DireccionesBO;
-import com.mycompany.pastelerianegocio.IDireccionesBO;
+
 import com.mycompany.pastelerianegocio.IVentasBO;
 import com.mycompany.pastelerianegocio.VentasBO;
 import dto.DTO_Cliente;
@@ -16,7 +15,7 @@ import java.util.List;
 /**
  *
  * @author PC
- */
+ *//*
 public class OperacionesDirecciones {
     private IDireccionesBO direccionesBO;
     
@@ -32,4 +31,4 @@ public class OperacionesDirecciones {
         
         return direcciones;
     }
-}
+}*/

@@ -19,7 +19,7 @@ public interface IVentasBO {
     // En esta clase iran todos los metodos encargados de para agregar una venta 
     public void agregarVenta(DTO_Venta venta);
 
-    public List<DTO_Venta> consultarVentasPorFecha(Date fecha);
+   
 
     public List<DTO_Venta> consultarVentasPorRangoFecha(Date fechaInicio, Date fechaFin);
 

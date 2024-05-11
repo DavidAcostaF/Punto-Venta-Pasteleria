@@ -5,8 +5,8 @@
 package pruebas;
 
 import com.mycompany.pasteleriadaos.ClienteDAO;
-import com.mycompany.pasteleriadominios.Cliente;
-import com.mycompany.pasteleriadominios.Direccion;
+import com.mycompany.pasteleriadominiosMapeo.ClienteMapeo;
+import com.mycompany.pasteleriadominiosMapeo.DireccionMapeo;
 import dto.DTO_Cliente;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class pruebaCliente {
      */
     public static void main(String[] args) {
         ClienteDAO clientedao=new ClienteDAO();
-        Cliente cliente = new Cliente();
+        ClienteMapeo cliente = new ClienteMapeo();
  
     cliente.setNombre("Taylor");
     cliente.setApellidoP("Swift");
@@ -30,12 +30,11 @@ public class pruebaCliente {
     cliente.setTelefono("644412345");
 
     // Crear algunas direcciones de ejemplo y agregarlas al cliente
-    List<Direccion> direcciones = new ArrayList<>();
-    direcciones.add(new Direccion("Calle wallabe #42", "sydney", "1"));
-    direcciones.add(new Direccion("Calle 2", "Colonia 2", "2"));
+    List<DireccionMapeo> direcciones = new ArrayList<>();
+    direcciones.add(new DireccionMapeo("Calle wallabe #42", "sydney", "1"));
+    direcciones.add(new DireccionMapeo("Calle 2", "Colonia 2", "2"));
     cliente.setDirecciones(direcciones);
-    
-    clientedao.agregarCliente(cliente);
+
     
     /* List<DTO_Cliente> clientes = clientedao.consultarClientes();
      

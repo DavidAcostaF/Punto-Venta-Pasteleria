@@ -4,11 +4,14 @@
  */
 package com.mycompany.pastelerianegocio;
 
+import Conversiones.ClientesConversiones;
+import Exceptions.PersistenciaException;
 import com.mycompany.pasteleriadaos.ClienteDAO;
 import com.mycompany.pasteleriadaos.IClienteDAO;
-import com.mycompany.pasteleriadominios.Cliente;
 import dto.DTO_Cliente;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,15 +20,22 @@ import java.util.List;
 public class ClientesBO implements IClientesBO {
 
     private IClienteDAO clienteDAO;
+    private ClientesConversiones conversor;
 
     public ClientesBO() {
         this.clienteDAO = new ClienteDAO();
+        conversor = new ClientesConversiones();
     }
 
     @Override
     public List<DTO_Cliente> consultarClientes() {
-        List<DTO_Cliente> clientes = clienteDAO.consultarClientes();
-        return clientes;
+        try {
+            List<DTO_Cliente> clientes = conversor.convertirDesdeClientes(clienteDAO.consultarClientes());
+            return clientes;
+        } catch (PersistenciaException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
     }
 
     @Override
@@ -35,13 +45,23 @@ public class ClientesBO implements IClientesBO {
 
     @Override
     public DTO_Cliente encontrarCliente(String apellidoPaterno, String apellidoMaterno, String nombres, String telefono) {
-        DTO_Cliente cliente = clienteDAO.encontrarCliente(apellidoPaterno, apellidoMaterno, nombres, telefono);
-        return cliente;
+        try {
+            DTO_Cliente cliente = conversor.convertirCliente(clienteDAO.encontrarCliente(apellidoPaterno, apellidoMaterno, nombres, telefono));
+            return cliente;
+        } catch (PersistenciaException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
     }
 
     @Override
     public DTO_Cliente encontrarClienteID(String idCliente) {
-       return clienteDAO.encontrarClienteID(idCliente);
+        try {
+            return conversor.convertirCliente(clienteDAO.encontrarClienteID(idCliente));
+        } catch (PersistenciaException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
     }
 
 }

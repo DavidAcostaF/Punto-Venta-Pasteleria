@@ -4,7 +4,8 @@
  */
 package conversiones;
 
-import com.mycompany.pasteleriadocumentosanidados.IngredienteDetalle;
+import com.mycompany.pasteleriadocumentosanidadosmapeo.IngredienteDetalleMapeo;
+import com.mycompany.pasteleriadominiodocumentosanidados.IngredienteDetalle;
 import dto.DTO_IngredienteDetalle;
 
 /**
@@ -13,11 +14,11 @@ import dto.DTO_IngredienteDetalle;
  */
 public class IngredienteDetalleConversiones {
 
-    protected DTO_IngredienteDetalle convertir(IngredienteDetalle detalleIngrediente) {
-        DTO_IngredienteDetalle detalleIngredienteDTO = new DTO_IngredienteDetalle();
-        detalleIngredienteDTO.setIngredienteId(detalleIngrediente.getIngredienteId().toHexString());
-        detalleIngredienteDTO.setCantidad(detalleIngrediente.getCantidad());
-        detalleIngredienteDTO.setNombre(detalleIngrediente.getNombre());
-        return detalleIngredienteDTO;
+    protected IngredienteDetalle convertir(IngredienteDetalleMapeo detalleIngrediente) {
+        IngredienteDetalle detalleIngredienteE = new IngredienteDetalle();
+        detalleIngredienteE.setIngredienteId(detalleIngrediente.getIngredienteId().toHexString());
+        detalleIngredienteE.setCantidad(detalleIngrediente.getCantidad());
+        detalleIngredienteE.setNombre(detalleIngrediente.getNombre());
+        return detalleIngredienteE;
     }
 }
