@@ -2,20 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.pasteleriadominios;
+package com.mycompany.pasteleriadominioentidades;
 
-import com.mycompany.pasteleriadocumentosanidados.IngredienteDetalle;
+import com.mycompany.pasteleriadominiodocumentosanidados.IngredienteDetalle;
 import java.util.ArrayList;
 import java.util.List;
-import org.bson.types.ObjectId;
 
 /**
  *
  * @author abelc
  */
 public class Producto {
-
-    private ObjectId id;
+    private String id;
     private float precio;
     private String nombre;
     private String descripcion;
@@ -27,11 +25,11 @@ public class Producto {
         }
     }
 
-    public Producto(ObjectId id) {
+    public Producto(String id) {
         this.id = id;
     }
 
-    public Producto(ObjectId id, float precio, String nombre, String descripcion, List<IngredienteDetalle> ingredientes) {
+    public Producto(String id, float precio, String nombre, String descripcion, List<IngredienteDetalle> ingredientes) {
         this.id = id;
         this.precio = precio;
         this.nombre = nombre;
@@ -58,11 +56,11 @@ public class Producto {
         this.getIngredientes().add(ingrediente);
     }
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -93,6 +91,5 @@ public class Producto {
     @Override
     public String toString() {
         return "Producto{" + "id=" + id + ", precio=" + precio + ", nombre=" + nombre + ", descripcion=" + descripcion + '}';
-    }
-
+    } 
 }

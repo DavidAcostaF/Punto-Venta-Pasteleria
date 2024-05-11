@@ -4,7 +4,7 @@
  */
 package presentacion;
 
-import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
+//import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
 import com.mycompany.pasteleriaconsultaringredientes.IFuncionalidadConsultarIngredientes;
 import control.ControlGestionarInventario;
 import dto.DTO_Ingrediente;
@@ -39,7 +39,7 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
      */
     public Presentacion_DlgIngresarDatosDelProducto() {
         initComponents();
-        funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngredientes();
+       // funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngredientes();
         control = ControlGestionarInventario.getInstance();
         cargaTabla();
     }

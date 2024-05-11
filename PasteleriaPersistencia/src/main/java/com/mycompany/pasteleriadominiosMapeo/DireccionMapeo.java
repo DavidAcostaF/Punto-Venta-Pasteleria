@@ -2,22 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.pasteleriadominios;
+package com.mycompany.pasteleriadominiosMapeo;
 
 /**
  *
  * @author f_aco
  */
-public class Direccion {
+public class DireccionMapeo {
 
     private String calle;
     private String colonia;
     private String numExterior;
 
-    public Direccion() {
+    public DireccionMapeo() {
     }
 
-    public Direccion(String calle, String colonia, String numExterior) {
+    public DireccionMapeo(String calle, String colonia, String numExterior) {
         this.calle = calle;
         this.colonia = colonia;
         this.numExterior = numExterior;

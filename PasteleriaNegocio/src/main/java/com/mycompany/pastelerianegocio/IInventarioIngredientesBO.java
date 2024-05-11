@@ -1,6 +1,6 @@
 package com.mycompany.pastelerianegocio;
 
-import com.mycompany.pasteleriadominios.Ingrediente;
+import com.mycompany.pasteleriadominiosMapeo.IngredienteMapeo;
 import dto.DTO_Ingrediente;
 import java.util.List;
 
@@ -22,9 +22,9 @@ public interface IInventarioIngredientesBO {
 
     public DTO_Ingrediente actualizarIngrediente(DTO_Ingrediente ingrediente);
 
-    Ingrediente ConvertirDTOAIngrediente(DTO_Ingrediente ingrediente);
+    IngredienteMapeo ConvertirDTOAIngrediente(DTO_Ingrediente ingrediente);
 
-    public DTO_Ingrediente convertirIngredienteADTO(Ingrediente ingrediente);
+    public DTO_Ingrediente convertirIngredienteADTO(IngredienteMapeo ingrediente);
 
     public DTO_Ingrediente validarExistencia(DTO_Ingrediente ingrediente);
     

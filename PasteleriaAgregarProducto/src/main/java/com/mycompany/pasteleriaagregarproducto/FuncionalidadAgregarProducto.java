@@ -11,7 +11,7 @@ import dto.DTO_Producto;
 /**
  *
  * @author af_da
- */
+ *//*
 public class FuncionalidadAgregarProducto implements IFuncionalidadAgregarProducto {
 
     private IProductosBO productosBO;
@@ -26,4 +26,4 @@ public class FuncionalidadAgregarProducto implements IFuncionalidadAgregarProduc
         return productoAgregado;
     }
 
-}
+}*/

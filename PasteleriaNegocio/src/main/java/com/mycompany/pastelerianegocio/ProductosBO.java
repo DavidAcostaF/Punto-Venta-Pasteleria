@@ -4,12 +4,13 @@
  */
 package com.mycompany.pastelerianegocio;
 
+import Conversiones.ProductosConversiones;
 import com.mycompany.pasteleriadaos.IIngredienteDAO;
 import com.mycompany.pasteleriadaos.IProductoDAO;
 import com.mycompany.pasteleriadaos.IngredienteDAO;
 import com.mycompany.pasteleriadaos.ProductoDAO;
-import com.mycompany.pasteleriadocumentosanidados.IngredienteDetalle;
-import com.mycompany.pasteleriadominios.Producto;
+import com.mycompany.pasteleriadocumentosanidadosmapeo.IngredienteDetalleMapeo;
+import com.mycompany.pasteleriadominiosMapeo.ProductoMapeo;
 import dto.DTO_Ingrediente;
 import dto.DTO_IngredienteDetalle;
 import dto.DTO_Producto;
@@ -23,32 +24,34 @@ public class ProductosBO implements IProductosBO {
 
     private IProductoDAO productoDAO;
     private IIngredienteDAO ingredienteDAO;
+    private ProductosConversiones conversor;
 
     public ProductosBO() {
         this.productoDAO = new ProductoDAO();
-        ingredienteDAO = new IngredienteDAO();
+        this.ingredienteDAO = new IngredienteDAO();
+        this.conversor=new ProductosConversiones();
     }
-
+/*
     @Override
     public DTO_Producto agregarProducto(DTO_Producto producto) {
         DTO_Producto producoNuevo = productoDAO.agregarProducto(this.convertirDTOAProducto(producto));
         return producoNuevo;
-    }
+    }*/
 
     @Override
     public List<DTO_Producto> consultarProductos() {
-        List<DTO_Producto> listaProductos = productoDAO.consultarProductos();
+        List<DTO_Producto> listaProductos =conversor.convertirListaProductos(productoDAO.consultarProductos());
         return listaProductos;
     }
 
     @Override
-    public DTO_Producto consultarProductoId(String idProducto) {
-        return productoDAO.consultarProductoId(idProducto);
+    public DTO_Producto consultarProductoPorNombre(String nombre) {
+        return conversor.convertirProducto(productoDAO.consultarPorNombre(nombre));
     }
-
+/*
     @Override
-    public Producto convertirDTOAProducto(DTO_Producto producto) {
-        Producto productoNuevo = new Producto();
+    public ProductoMapeo convertirDTOAProducto(DTO_Producto producto) {
+        ProductoMapeo productoNuevo = new ProductoMapeo();
         productoNuevo.setDescripcion(producto.getDescripcion());
 
         productoNuevo.setNombre(producto.getNombre());
@@ -61,8 +64,8 @@ public class ProductosBO implements IProductosBO {
     }
 
     @Override
-    public IngredienteDetalle convertirDTOAIngredienteDetalle(DTO_IngredienteDetalle ingredienteDetalle) {
-        IngredienteDetalle ingredienteDetalleNuevo = new IngredienteDetalle();
+    public IngredienteDetalleMapeo convertirDTOAIngredienteDetalle(DTO_IngredienteDetalle ingredienteDetalle) {
+        IngredienteDetalleMapeo ingredienteDetalleNuevo = new IngredienteDetalleMapeo();
         ingredienteDetalleNuevo.setCantidad(ingredienteDetalle.getCantidad());
         ingredienteDetalleNuevo.setNombre(ingredienteDetalle.getNombre());
         return ingredienteDetalleNuevo;
@@ -72,5 +75,5 @@ public class ProductosBO implements IProductosBO {
     public DTO_Ingrediente consultarIngredientePorNombre(String nombre) {
         return ingredienteDAO.consultarPorNombre(nombre);
     }
-
+*/
 }

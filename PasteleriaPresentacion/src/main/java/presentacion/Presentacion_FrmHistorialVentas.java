@@ -22,6 +22,12 @@ import extras.ClientesComboBoxModel;
 import extras.PastelComboBoxModel;
 import java.awt.Font;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.UIManager;
@@ -32,12 +38,13 @@ import javax.swing.table.DefaultTableModel;
  * @author abelc
  */
 public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
-    
+
     private ControlHistoriales control;
     private DTO_Cliente cliente;
     private IFuncionalidadConsultarClientes funcionalidadesClientes;
     private List<DTO_Cliente> listaClientes;
     private List<DTO_Producto> listaProductos;
+    private List<DTO_Producto> listaProductosSeleccionados;
     private IFuncionalidadProductos funcionalidadConsultarProductos;
     private IFuncionalidadConsultarVentas funcionalidadConsultarVentas;
     private DTO_Venta venta;
@@ -52,6 +59,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         this.funcionalidadConsultarProductos = new FuncionalidadProductos();
         this.cliente = new DTO_Cliente();
         this.venta = new DTO_Venta();
+        this.listaProductosSeleccionados = new ArrayList<>();
         listaClientes = funcionalidadesClientes.consultarClientes();
         listaProductos = funcionalidadConsultarProductos.consultarProductosVenta();
         initComponents();
@@ -79,7 +87,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         desdeDatePicker = new com.github.lgooddatepicker.components.DatePicker();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        hastaDatePicker1 = new com.github.lgooddatepicker.components.DatePicker();
+        hastaDatePicker = new com.github.lgooddatepicker.components.DatePicker();
         productosComboBox = new extras.ComboBoxMultiSeleccion();
         aplicarFiltroBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -230,7 +238,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
                                 .addComponent(jLabel3))
                             .addGap(138, 138, 138))
                         .addComponent(desdeDatePicker, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(hastaDatePicker1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(hastaDatePicker, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(46, 46, 46))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -265,7 +273,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(filtrarPorProductosRadioBtn)
                             .addComponent(productosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hastaDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(hastaDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(aplicarFiltroBtn)
                 .addGap(16, 16, 16)
@@ -321,25 +329,88 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_regresarBtnActionPerformed
 
     private void detallesVentaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detallesVentaBtnActionPerformed
-       obtenerDatosFilaSeleccionada();
-       control.setVenta(venta);
-       this.dispose();
+        obtenerDatosFilaSeleccionada();
+        control.setVenta(venta);
+        this.dispose();
         control.mostrarDetallesVenta();
     }//GEN-LAST:event_detallesVentaBtnActionPerformed
 
     private void aplicarFiltroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarFiltroBtnActionPerformed
-        if (filtrarClienteRadioBtn.isSelected()) {
+        if (filtrarClienteRadioBtn.isSelected() && !filtrarPorProductosRadioBtn.isSelected()
+                && hastaDatePicker.getDate() == null && desdeDatePicker.getDate() == null
+                && !clientesComboBox.getSelectedItem().equals("Todos")) {
             obtenerCliente();
+            List<DTO_Venta> listaVentas = funcionalidadConsultarVentas.ventasPorCliente(cliente.getID());
+            tablaVentas(listaVentas);
         }
-        
-
+        if (!filtrarClienteRadioBtn.isSelected() && filtrarPorProductosRadioBtn.isSelected()
+                && hastaDatePicker.getDate() == null && desdeDatePicker.getDate() == null) {
+            obtenerProductos();
+            List<DTO_Venta> listaVentas = funcionalidadConsultarVentas.consultarVentasPorProductos(listaProductosSeleccionados);
+            tablaVentas(listaVentas);
+        }
+        if (!filtrarClienteRadioBtn.isSelected() && !filtrarPorProductosRadioBtn.isSelected()
+                && hastaDatePicker.getDate() != null && desdeDatePicker.getDate() != null) {
+            LocalDate localDateInicio = desdeDatePicker.getDate();
+            Instant instantInicio = localDateInicio.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+            Date fechaInicio = Date.from(instantInicio);
+            LocalDate localDateFin = hastaDatePicker.getDate();
+            Instant instantFin = localDateFin.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+            Date fechaFin = Date.from(instantFin);
+            Calendar calFin = Calendar.getInstance();
+            calFin.setTime(fechaFin);
+            calFin.set(Calendar.HOUR_OF_DAY, 23);
+            calFin.set(Calendar.MINUTE, 59);
+            calFin.set(Calendar.SECOND, 59);
+            fechaFin = calFin.getTime();
+            List<DTO_Venta> listaVentas = funcionalidadConsultarVentas.consultarVentasPorRangoFechas(fechaInicio, fechaFin);
+            tablaVentas(listaVentas);
+        }
+        if (filtrarClienteRadioBtn.isSelected() && filtrarPorProductosRadioBtn.isSelected()
+                && hastaDatePicker.getDate() == null && desdeDatePicker.getDate() == null) {
+            obtenerCliente();
+            obtenerProductos();
+            System.out.println("hola");
+            List<DTO_Venta> listaVentas = funcionalidadConsultarVentas.consultarVentasConFiltros(cliente.getID(), null, null, listaProductosSeleccionados);
+            tablaVentas(listaVentas);
+        }
     }//GEN-LAST:event_aplicarFiltroBtnActionPerformed
+
+    public void tablaVentas(List<DTO_Venta> listaVentas) {
+        limpiarTabla();
+        DefaultTableModel modelo = (DefaultTableModel) tablaVentas.getModel();
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+
+        listaVentas.forEach(t -> {
+            String fechaRegistro = formatoFecha.format(t.getFechaRegistro());
+            String fechaEntrega = formatoFecha.format(t.getFechaEntrega());
+            modelo.addRow(new Object[]{t.getID(), fechaRegistro, fechaEntrega, t.getEstado()});
+        });
+
+    }
+
+    public void obtenerProductos() {
+        listaProductosSeleccionados.clear();
+        System.out.println(productosComboBox.obtenerElementosSeleccionados());
+        List<String> productosSeleccionados = productosComboBox.obtenerElementosSeleccionados();
+        if (!productosSeleccionados.isEmpty()) {
+            productosSeleccionados.forEach(nombreProducto -> {
+                DTO_Producto producto = funcionalidadConsultarProductos.consultarProductoPorNombre(nombreProducto);
+                System.out.println(producto.getId());
+                System.out.println(producto.getNombre());
+                listaProductosSeleccionados.add(producto);
+
+            });
+        }
+
+    }
+
     public void obtenerCliente() {
         String clienteSeleccionado = (String) clientesComboBox.getSelectedItem();
         if (clienteSeleccionado != null) {
             // Dividir el texto en partes usando el guion como separador
             String[] partes = clienteSeleccionado.split("-");
-            
+
             if (partes.length >= 2) {
                 // El último elemento del array es el número de teléfono
                 String numeroTelefono = partes[partes.length - 1].trim();
@@ -347,11 +418,11 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
                 // Extraer el nombre y apellidos
                 String nombreCompleto = partes[0].trim();
                 String[] nombresApellidos = nombreCompleto.split("\\s+");
-                
+
                 String nombre = nombresApellidos[0];
                 String apellidoPaterno = "";
                 String apellidoMaterno = "";
-                
+
                 if (nombresApellidos.length >= 3) {
                     // Hay dos nombres y apellidos
                     apellidoPaterno = nombresApellidos[1];
@@ -365,20 +436,20 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
                     } else {
                         apellidoPaterno = apellidos[0];
                     }
-                    
+
                 }
-                
+
                 cliente = funcionalidadesClientes.encontrarCliente(apellidoPaterno, apellidoMaterno, nombre, numeroTelefono);
                 System.out.println(cliente.getID());
             }
         }
     }
-    
+
     public void llenarTabla() {
         limpiarTabla();
         List<DTO_Venta> listaVentas = funcionalidadConsultarVentas.consultarVentas();
         DefaultTableModel modelo = (DefaultTableModel) tablaVentas.getModel();
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");        
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
         if (listaVentas != null) {
             listaVentas.forEach(t -> {
                 String fechaRegistro = formatoFecha.format(t.getFechaRegistro());
@@ -387,30 +458,30 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
             });
         }
     }
-    
+
     private void limpiarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tablaVentas.getModel();
-        
+
         modelo.setRowCount(0);
-        
+
         tablaVentas.setModel(modelo);
     }
-    
+
     private void obtenerDatosFilaSeleccionada() {
         int filaSeleccionada = tablaVentas.getSelectedRow();
         if (filaSeleccionada != -1) {
             String idVenta = tablaVentas.getValueAt(filaSeleccionada, 0).toString();
             venta = funcionalidadConsultarVentas.encontrarVenta(idVenta);
-            
+
         }
     }
-    
+
     public void mostrarHistorialVentas() {
         FlatRobotoFont.install();
         FlatLaf.registerCustomDefaultsSource("extras");
         UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
         FlatLightLaf.setup();
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Presentacion_FrmHistorialVentas().setVisible(true);
@@ -426,7 +497,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
     private javax.swing.JButton detallesVentaBtn;
     private javax.swing.JRadioButton filtrarClienteRadioBtn;
     private javax.swing.JRadioButton filtrarPorProductosRadioBtn;
-    private com.github.lgooddatepicker.components.DatePicker hastaDatePicker1;
+    private com.github.lgooddatepicker.components.DatePicker hastaDatePicker;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

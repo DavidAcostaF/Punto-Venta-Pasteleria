@@ -7,9 +7,9 @@ package com.mycompany.pasteleriadaos;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import static com.mongodb.client.model.Filters.eq;
-import com.mycompany.pasteleriadominios.Producto;
+import com.mycompany.pasteleriadominioentidades.Producto;
+import com.mycompany.pasteleriadominiosMapeo.ProductoMapeo;
 import conversiones.ProductosConversiones;
-import dto.DTO_Producto;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.types.ObjectId;
@@ -25,44 +25,42 @@ public class ProductoDAO implements IProductoDAO {
     private ProductosConversiones conversor;
 
     public ProductoDAO() {
-        conexion = new Conexion("productos", Producto.class);
+        conexion = new Conexion("productos", ProductoMapeo.class);
         conversor = new ProductosConversiones();
 
     }
 
-    @Override
-    public DTO_Producto agregarProducto(Producto producto) {
-        MongoCollection<Producto> coleccion = conexion.obtenerColeccion();
+  /*  @Override
+    public DTO_Producto agregarProducto(ProductoMapeo producto) {
+        MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
         coleccion.insertOne(producto);
         //Retornar el producto convertido a DTO por la clase encargada de la chamba esa
         return new DTO_Producto();
     }
 
     @Override
-    public void eliminarProducto(Producto producto) {
+    public void eliminarProducto(ProductoMapeo producto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    }*/
 
     @Override
-    public List<DTO_Producto> consultarProductos() {
-        MongoCollection<Producto> coleccion = conexion.obtenerColeccion();
-        FindIterable<Producto> Productos = coleccion.find();
-        List<DTO_Producto> listaProductos = new ArrayList<>();
-        for (Producto producto : Productos) {
+    public List<Producto> consultarProductos() {
+        MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
+        FindIterable<ProductoMapeo> Productos = coleccion.find();
+        List<Producto> listaProductos = new ArrayList<>();
+        for (ProductoMapeo producto : Productos) {
             listaProductos.add(conversor.convertirProducto(producto));
         }
         return listaProductos;
     }
 
     @Override
-    public DTO_Producto consultarProductoId(String idProducto) {
-        MongoCollection<Producto> coleccion = conexion.obtenerColeccion();
-        Producto resultado=coleccion.find(eq("_id", new ObjectId(idProducto))).first();
-         if (resultado != null) {
-            return conversor.convertirProducto(resultado);
-        } else {
-            return null;
-        }
+    public Producto consultarPorNombre(String nombre) {
+       MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
+       ProductoMapeo resultado=coleccion.find(eq("nombre", nombre)).first();
+       return conversor.convertirProducto(resultado);
     }
+
+   
 
 }

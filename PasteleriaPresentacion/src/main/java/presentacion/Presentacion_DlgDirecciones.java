@@ -4,9 +4,9 @@
  */
 package presentacion;
 
-import com.mycompany.pasteleriadirecciones.FuncionalidadConsultarDirecciones;
+
 import com.mycompany.pasteleriadirecciones.IFuncionalidadConsultarDirecciones;
-import com.mycompany.pasteleriadominios.Direccion;
+import com.mycompany.pasteleriadominiosMapeo.DireccionMapeo;
 import control.ControlAgregarVenta;
 import dto.DTO_Direccion;
 import dto.DTO_Venta;
@@ -31,7 +31,7 @@ public class Presentacion_DlgDirecciones extends javax.swing.JDialog {
         super(parent, modal);
         this.venta = venta;
         control = new ControlAgregarVenta();
-        direcciones = new FuncionalidadConsultarDirecciones();
+       // direcciones = new FuncionalidadConsultarDirecciones();
         direccionesLista = direcciones.consultarDirecciones();
         System.out.println(direccionesLista);
         initComponents();

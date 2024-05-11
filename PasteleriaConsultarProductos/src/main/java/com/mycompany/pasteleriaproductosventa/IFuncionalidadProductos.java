@@ -5,6 +5,7 @@
 package com.mycompany.pasteleriaproductosventa;
 
 import dto.DTO_Producto;
+import dto.DTO_Venta;
 import java.util.List;
 
 /**
@@ -15,5 +16,7 @@ public interface IFuncionalidadProductos {
 
     public List<DTO_Producto> consultarProductosVenta();
 
-    public DTO_Producto consultarProductoId(String idProducto);
+   public DTO_Producto consultarProductoPorNombre(String nombre);
+   
+  
 }

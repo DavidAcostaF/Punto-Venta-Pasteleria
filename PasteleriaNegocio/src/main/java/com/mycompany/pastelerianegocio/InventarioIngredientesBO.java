@@ -6,7 +6,7 @@ package com.mycompany.pastelerianegocio;
 
 import com.mycompany.pasteleriadaos.IIngredienteDAO;
 import com.mycompany.pasteleriadaos.IngredienteDAO;
-import com.mycompany.pasteleriadominios.Ingrediente;
+import com.mycompany.pasteleriadominiosMapeo.IngredienteMapeo;
 import dto.DTO_Ingrediente;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,6 +15,7 @@ import java.util.List;
  *
  * @author af_da
  */
+/*
 public class InventarioIngredientesBO implements IInventarioIngredientesBO {
 
     IIngredienteDAO ingredienteDAO;
@@ -38,8 +39,8 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
     }
 
     @Override
-    public Ingrediente ConvertirDTOAIngrediente(DTO_Ingrediente ingredienteDTO) {
-        Ingrediente ingrediente = new Ingrediente();
+    public IngredienteMapeo ConvertirDTOAIngrediente(DTO_Ingrediente ingredienteDTO) {
+        IngredienteMapeo ingrediente = new IngredienteMapeo();
         ingrediente.setCantidad(ingredienteDTO.getCantidad());
         ingrediente.setNombre(ingredienteDTO.getNombre());
         ingrediente.setPrecio(ingredienteDTO.getPrecio());
@@ -48,7 +49,7 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
     }
 
     @Override
-    public DTO_Ingrediente convertirIngredienteADTO(Ingrediente ingrediente) {
+    public DTO_Ingrediente convertirIngredienteADTO(IngredienteMapeo ingrediente) {
         DTO_Ingrediente dtoIngrediente = new DTO_Ingrediente();
         //dtoIngrediente.setId(ingrediente.getId());
 
@@ -100,4 +101,4 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
         return ingredienteConsultado;
     }
 
-}
+}*/

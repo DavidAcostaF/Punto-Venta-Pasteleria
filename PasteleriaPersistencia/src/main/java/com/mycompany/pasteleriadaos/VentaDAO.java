@@ -5,7 +5,6 @@
 package com.mycompany.pasteleriadaos;
 
 import Exceptions.PersistenciaException;
-import com.mongodb.BasicDBObject;
 import com.mongodb.MongoException;
 import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.FindIterable;
@@ -14,12 +13,11 @@ import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Field;
 import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.regex;
 import com.mongodb.client.model.Projections;
-import com.mycompany.pasteleriadominios.Cliente;
-import com.mycompany.pasteleriadominios.Venta;
+import com.mycompany.pasteleriadominioentidades.Producto;
+import com.mycompany.pasteleriadominioentidades.Venta;
+import com.mycompany.pasteleriadominiosMapeo.VentaMapeo;
 import conversiones.VentasConversiones;
-import dto.DTO_Producto;
 import dto.DTO_Venta;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +39,7 @@ public class VentaDAO implements IVentaDAO {
     private VentasConversiones conversor;
 
     public VentaDAO() {
-        conexion = new Conexion("ventas", Venta.class);
+        conexion = new Conexion("ventas", VentaMapeo.class);
         ventadto = new DTO_Venta();
         conversor = new VentasConversiones();
 
@@ -49,16 +47,16 @@ public class VentaDAO implements IVentaDAO {
 
     @Override
     public Venta agregarVenta(Venta venta) {
-        MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
-        coleccion.insertOne(venta);
+        MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
+        coleccion.insertOne(conversor.convertirAVentaMapeo(venta));
         return venta;
     }
 
     @Override
     public void eliminarVenta(Venta venta) {
-        MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
+        MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
         try {
-            coleccion.deleteOne(Filters.eq("_id", venta.getId()));
+            coleccion.deleteOne(Filters.eq("_id", new ObjectId(venta.getId())));
         } catch (MongoException e) {
             System.out.println(e.getMessage());
         }
@@ -66,63 +64,64 @@ public class VentaDAO implements IVentaDAO {
     }
 
     @Override
-    public List<DTO_Venta> ventasPorCliente(String clienteId) {
+    public List<Venta> ventasPorCliente(String clienteId) {
 
-        MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
+        MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
         Bson filtroCliente = eq("clienteid", new ObjectId(clienteId));
-        FindIterable<Venta> ventasCliente = coleccion.find(filtroCliente);
-        List<DTO_Venta> ventasDTO = new ArrayList<>();
-        for (Venta venta : ventasCliente) {
-            ventasDTO.add(conversor.convertirVentaADTO(venta));
+        FindIterable<VentaMapeo> ventasCliente = coleccion.find(filtroCliente);
+        List<Venta> ventas = new ArrayList<>();
+        for (VentaMapeo venta : ventasCliente) {
+            ventas.add(conversor.convertirAVentaEntidad(venta));
         }
-        return ventasDTO;
+        return ventas;
     }
 
     @Override
-    public List<DTO_Venta> consultarVentas() {
-        MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
-        FindIterable<Venta> ventas = coleccion.find();
-        List<DTO_Venta> ventasDTO = new ArrayList<>();
-        for (Venta venta : ventas) {
-            ventasDTO.add(conversor.convertirVentaADTO(venta));
+    public List<Venta> consultarVentas() {
+        MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
+        FindIterable<VentaMapeo> ventas = coleccion.find();
+        List<Venta> ventasE = new ArrayList<>();
+        for (VentaMapeo venta : ventas) {
+            ventasE.add(conversor.convertirAVentaEntidad(venta));
         }
-        return ventasDTO;
+        return ventasE;
     }
 
     @Override
-    public List<DTO_Venta> consultarVentasPorFecha(Date fecha) {
-        MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
-        Bson filtroFecha = eq("fechaRegistro", fecha);
-        FindIterable<Venta> ventasPorFecha = coleccion.find(filtroFecha);
-        List<DTO_Venta> ventasDTO = new ArrayList<>();
-        for (Venta venta : ventasPorFecha) {
-            ventasDTO.add(conversor.convertirVentaADTO(venta));
-        }
-        return ventasDTO;
-    }
-
-    @Override
-    public List<DTO_Venta> consultarVentasPorRangoFechas(Date fechaInicio, Date fechaFin) {
-        MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
+    public List<Venta> consultarVentasPorRangoFechas(Date fechaInicio, Date fechaFin) {
+        MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
         Bson filtroRangoFechas = Filters.and(
                 Filters.gte("fechaRegistro", fechaInicio),
                 Filters.lte("fechaRegistro", fechaFin)
         );
 
-        FindIterable<Venta> ventasPorRangoFechas = coleccion.find(filtroRangoFechas);
-        List<DTO_Venta> ventasDTO = new ArrayList<>();
-        for (Venta venta : ventasPorRangoFechas) {
-            ventasDTO.add(conversor.convertirVentaADTO(venta));
+        FindIterable<VentaMapeo> ventasPorRangoFechas = coleccion.find(filtroRangoFechas);
+        List<Venta> ventas = new ArrayList<>();
+        for (VentaMapeo venta : ventasPorRangoFechas) {
+            ventas.add(conversor.convertirAVentaEntidad(venta));
         }
-        return ventasDTO;
+        return ventas;
     }
 
     @Override
-    public DTO_Venta encontrarVenta(String idVenta) throws PersistenciaException {
+    public List<Venta> consultarVentasPorFecha(Date fecha) {
+        MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
+        Bson filtro = Filters.eq("fechaRegistro", fecha);
+
+        FindIterable<VentaMapeo> ventasPorFecha = coleccion.find(filtro);
+        List<Venta> ventas = new ArrayList<>();
+        for (VentaMapeo venta : ventasPorFecha) {
+            ventas.add(conversor.convertirAVentaEntidad(venta));
+        }
+        return ventas;
+    }
+
+    @Override
+    public Venta encontrarVenta(String idVenta) throws PersistenciaException {
         try {
             ObjectId objectIdVenta = new ObjectId(idVenta);
 
-            MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
+            MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
             List<Bson> pipeline = Arrays.asList(
                     Aggregates.match(Filters.eq("_id", objectIdVenta)),
                     Aggregates.lookup("clientes", "clienteid", "_id", "cliente"),
@@ -133,26 +132,25 @@ public class VentaDAO implements IVentaDAO {
                             Projections.include("_id", "clienteid", "cliente", "detallesVenta", "direccionEntrega", "estado", "fechaEntrega", "fechaRegistro", "montoTotal")
                     ))
             );
-            AggregateIterable<Venta> resultados = coleccion.aggregate(pipeline);
-            Venta ventaEncontrada = resultados.first();
+            AggregateIterable<VentaMapeo> resultados = coleccion.aggregate(pipeline);
+            VentaMapeo ventaEncontrada = resultados.first();
 
-            return conversor.convertirADTO(ventaEncontrada);
+            return conversor.convertirAVentaEntidadObjetos(ventaEncontrada);
         } catch (IllegalArgumentException e) {
             throw new PersistenciaException("ID de venta no válido: " + idVenta);
         }
     }
 
     @Override
-    public List<DTO_Venta> consultarVentasPorProductos(List<DTO_Producto> listaProductos) throws PersistenciaException {
+    public List<Venta> consultarVentasPorProductos(List<Producto> listaProductos) throws PersistenciaException {
         try {
-            // Convertir los IDs de productos de tipo String a ObjectId
             List<ObjectId> idsProductos = listaProductos.stream()
                     .map(producto -> new ObjectId(producto.getId()))
                     .collect(Collectors.toList());
 
             Bson filtro = Filters.in("detallesVenta.productoId", idsProductos);
 
-            MongoCollection<Venta> coleccion = conexion.obtenerColeccion();
+            MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
             List<Bson> pipeline = Arrays.asList(
                     Aggregates.match(filtro),
                     Aggregates.lookup("clientes", "clienteid", "_id", "cliente"),
@@ -162,14 +160,57 @@ public class VentaDAO implements IVentaDAO {
                     ))
             );
 
-            AggregateIterable<Venta> resultados = coleccion.aggregate(pipeline);
-            List<DTO_Venta> ventas = new ArrayList<>();
-            for (Venta venta : resultados) {
-                ventas.add(conversor.convertirVentaADTO(venta));
+            AggregateIterable<VentaMapeo> resultados = coleccion.aggregate(pipeline);
+            List<Venta> ventas = new ArrayList<>();
+            for (VentaMapeo venta : resultados) {
+                ventas.add(conversor.convertirAVentaEntidad(venta));
             }
             return ventas;
         } catch (IllegalArgumentException e) {
             throw new PersistenciaException("Error al consultar ventas por productos: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Venta> consultarVentasConFiltros(String clienteId, Date fechaInicio, Date fechaFin, List<Producto> listaProductos) throws PersistenciaException {
+        try {
+            MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
+
+            List<Bson> filtros = new ArrayList<>();
+
+            if (clienteId != null && !clienteId.isEmpty()) {
+                filtros.add(eq("clienteid", new ObjectId(clienteId)));
+            }
+
+            if (fechaInicio != null && fechaFin != null) {
+                Bson filtroRangoFechas = Filters.and(
+                        Filters.gte("fechaRegistro", fechaInicio),
+                        Filters.lte("fechaRegistro", fechaFin)
+                );
+                filtros.add(filtroRangoFechas);
+            }
+
+            // Filtro por productos
+            List<ObjectId> idsProductos = null;
+            if (listaProductos != null && !listaProductos.isEmpty()) {
+                idsProductos = listaProductos.stream()
+                        .map(producto -> new ObjectId(producto.getId()))
+                        .collect(Collectors.toList());
+
+                filtros.add(Filters.in("detallesVenta.productoId", idsProductos));
+            }
+
+            Bson filtroFinal = Filters.and(filtros);
+
+            FindIterable<VentaMapeo> ventasFiltradas = coleccion.find(filtroFinal);
+            List<Venta> ventas = new ArrayList<>();
+            for (VentaMapeo venta : ventasFiltradas) {
+                ventas.add(conversor.convertirAVentaEntidad(venta));
+            }
+
+            return ventas;
+        } catch (Exception e) {
+            throw new PersistenciaException("Error al consultar ventas con filtros: " + e.getMessage());
         }
     }
 }

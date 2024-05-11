@@ -5,9 +5,9 @@
 package com.mycompany.pasteleriadaos;
 
 import Exceptions.PersistenciaException;
-import com.mycompany.pasteleriadominios.Venta;
-import dto.DTO_Producto;
-import dto.DTO_Venta;
+import com.mycompany.pasteleriadominioentidades.Producto;
+import com.mycompany.pasteleriadominioentidades.Venta;
+
 import java.util.Date;
 import java.util.List;
 
@@ -21,15 +21,17 @@ public interface IVentaDAO {
 
     public void eliminarVenta(Venta venta) throws PersistenciaException;
 
-    public List<DTO_Venta> consultarVentas() throws PersistenciaException;
+    public List<Venta> consultarVentas() throws PersistenciaException;
 
-    public List<DTO_Venta> ventasPorCliente(String clienteId) throws PersistenciaException;
+    public List<Venta> ventasPorCliente(String clienteId) throws PersistenciaException;
 
-    public List<DTO_Venta> consultarVentasPorFecha(Date fecha) throws PersistenciaException;
+    public List<Venta> consultarVentasPorRangoFechas(Date fechaInicio, Date fechaFin) throws PersistenciaException;
 
-    public List<DTO_Venta> consultarVentasPorRangoFechas(Date fechaInicio, Date fechaFin) throws PersistenciaException;
+    public List<Venta> consultarVentasPorFecha(Date fecha) throws PersistenciaException;
 
-    public DTO_Venta encontrarVenta(String idVenta)throws PersistenciaException;
-    
-    public List<DTO_Venta> consultarVentasPorProductos(List<DTO_Producto> listaProductos)throws PersistenciaException;
+    public Venta encontrarVenta(String idVenta) throws PersistenciaException;
+
+    public List<Venta> consultarVentasPorProductos(List<Producto> listaProductos) throws PersistenciaException;
+
+    public List<Venta> consultarVentasConFiltros(String clienteId, Date fechaInicio, Date fechaFin, List<Producto> listaProductos) throws PersistenciaException;
 }

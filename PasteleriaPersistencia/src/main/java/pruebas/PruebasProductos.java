@@ -8,9 +8,9 @@ import com.mycompany.pasteleriadaos.IIngredienteDAO;
 import com.mycompany.pasteleriadaos.IProductoDAO;
 import com.mycompany.pasteleriadaos.IngredienteDAO;
 import com.mycompany.pasteleriadaos.ProductoDAO;
-import com.mycompany.pasteleriadocumentosanidados.IngredienteDetalle;
-import com.mycompany.pasteleriadominios.Ingrediente;
-import com.mycompany.pasteleriadominios.Producto;
+import com.mycompany.pasteleriadocumentosanidadosmapeo.IngredienteDetalleMapeo;
+import com.mycompany.pasteleriadominiosMapeo.IngredienteMapeo;
+import com.mycompany.pasteleriadominiosMapeo.ProductoMapeo;
 import dto.DTO_Ingrediente;
 import dto.DTO_Producto;
 import java.util.List;
@@ -28,7 +28,7 @@ public class PruebasProductos {
     public static void main(String[] args) {
         IIngredienteDAO ingredienteDAO = new IngredienteDAO();
         IProductoDAO productoDAO = new ProductoDAO();
-        Ingrediente ingrediento1 = new Ingrediente();
+        IngredienteMapeo ingrediento1 = new IngredienteMapeo();
         ingrediento1.setNombre("Azucar");
 
    /*    ingrediento1.setNombre("Azucar");
@@ -36,26 +36,26 @@ public class PruebasProductos {
         ingrediento1.setPrecio(123F);
         ingrediento1.setUnidadDeMedida("gramos");
 
-        Ingrediente ingrediento2 = new Ingrediente();
+        IngredienteMapeo ingrediento2 = new IngredienteMapeo();
         ingrediento2.setNombre("Az");
         ingrediento2.setCantidad(2);
         ingrediento2.setPrecio(123F);
         ingrediento2.setUnidadDeMedida("gramos");
         ingredienteDAO.agregar(ingrediento1);
         ingredienteDAO.agregar(ingrediento2);
-        Producto producto = new Producto();
+        ProductoMapeo producto = new ProductoMapeo();
         producto.setNombre("Pastelongo");
         producto.setPrecio(100F);
 
         DTO_Ingrediente ingredienteConsultado1 = ingredienteDAO.consultarPorNombre(ingrediento1.getNombre());
         DTO_Ingrediente ingredienteConsultado2 = ingredienteDAO.consultarPorNombre(ingrediento1.getNombre());
 
-        IngredienteDetalle ingredienteDetalle1 = new IngredienteDetalle();
+        IngredienteDetalleMapeo ingredienteDetalle1 = new IngredienteDetalleMapeo();
         ingredienteDetalle1.setIngredienteId(new ObjectId(ingredienteConsultado1.getId()));
         ingredienteDetalle1.setCantidad(ingredienteConsultado1.getCantidad());
         ingredienteDetalle1.setNombre(ingredienteConsultado1.getNombre());
 
-        IngredienteDetalle ingredienteDetalle2 = new IngredienteDetalle();
+        IngredienteDetalleMapeo ingredienteDetalle2 = new IngredienteDetalleMapeo();
         ingredienteDetalle2.setIngredienteId(new ObjectId(ingredienteConsultado1.getId()));
         ingredienteDetalle2.setCantidad(ingredienteConsultado2.getCantidad());
         ingredienteDetalle2.setNombre(ingredienteConsultado2.getNombre());
