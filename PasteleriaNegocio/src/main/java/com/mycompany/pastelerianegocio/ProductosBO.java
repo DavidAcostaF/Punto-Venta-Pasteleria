@@ -10,7 +10,9 @@ import com.mycompany.pasteleriadaos.IProductoDAO;
 import com.mycompany.pasteleriadaos.IngredienteDAO;
 import com.mycompany.pasteleriadaos.ProductoDAO;
 import com.mycompany.pasteleriadocumentosanidadosmapeo.IngredienteDetalleMapeo;
+import com.mycompany.pasteleriadominioentidades.Producto;
 import com.mycompany.pasteleriadominiosMapeo.ProductoMapeo;
+import conversionesnegocio.IngredienteConversiones;
 import dto.DTO_Ingrediente;
 import dto.DTO_IngredienteDetalle;
 import dto.DTO_Producto;
@@ -25,22 +27,24 @@ public class ProductosBO implements IProductosBO {
     private IProductoDAO productoDAO;
     private IIngredienteDAO ingredienteDAO;
     private ProductosConversiones conversor;
+    private IngredienteConversiones conversorIngredientes;
 
     public ProductosBO() {
         this.productoDAO = new ProductoDAO();
         this.ingredienteDAO = new IngredienteDAO();
-        this.conversor=new ProductosConversiones();
+        this.conversor = new ProductosConversiones();
+        this.conversorIngredientes = new IngredienteConversiones();
     }
-/*
+
     @Override
     public DTO_Producto agregarProducto(DTO_Producto producto) {
-        DTO_Producto producoNuevo = productoDAO.agregarProducto(this.convertirDTOAProducto(producto));
-        return producoNuevo;
-    }*/
+        Producto producoNuevo = productoDAO.agregarProducto(this.convertirDTOAProducto(producto));
+        return conversor.convertirProducto(producoNuevo);
+    }
 
     @Override
     public List<DTO_Producto> consultarProductos() {
-        List<DTO_Producto> listaProductos =conversor.convertirListaProductos(productoDAO.consultarProductos());
+        List<DTO_Producto> listaProductos = conversor.convertirListaProductos(productoDAO.consultarProductos());
         return listaProductos;
     }
 
@@ -48,7 +52,7 @@ public class ProductosBO implements IProductosBO {
     public DTO_Producto consultarProductoPorNombre(String nombre) {
         return conversor.convertirProducto(productoDAO.consultarPorNombre(nombre));
     }
-/*
+
     @Override
     public ProductoMapeo convertirDTOAProducto(DTO_Producto producto) {
         ProductoMapeo productoNuevo = new ProductoMapeo();
@@ -73,7 +77,7 @@ public class ProductosBO implements IProductosBO {
 
     @Override
     public DTO_Ingrediente consultarIngredientePorNombre(String nombre) {
-        return ingredienteDAO.consultarPorNombre(nombre);
+        return conversorIngredientes.convertir(ingredienteDAO.consultarPorNombre(nombre));
     }
-*/
+
 }

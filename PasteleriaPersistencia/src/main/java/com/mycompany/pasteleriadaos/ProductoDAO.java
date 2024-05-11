@@ -30,18 +30,18 @@ public class ProductoDAO implements IProductoDAO {
 
     }
 
-  /*  @Override
-    public DTO_Producto agregarProducto(ProductoMapeo producto) {
+    @Override
+    public Producto agregarProducto(ProductoMapeo producto) {
         MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
         coleccion.insertOne(producto);
         //Retornar el producto convertido a DTO por la clase encargada de la chamba esa
-        return new DTO_Producto();
+        return new Producto();
     }
 
     @Override
     public void eliminarProducto(ProductoMapeo producto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }*/
+    }
 
     @Override
     public List<Producto> consultarProductos() {
@@ -56,11 +56,9 @@ public class ProductoDAO implements IProductoDAO {
 
     @Override
     public Producto consultarPorNombre(String nombre) {
-       MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
-       ProductoMapeo resultado=coleccion.find(eq("nombre", nombre)).first();
-       return conversor.convertirProducto(resultado);
+        MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
+        ProductoMapeo resultado = coleccion.find(eq("nombre", nombre)).first();
+        return conversor.convertirProducto(resultado);
     }
-
-   
 
 }

@@ -5,6 +5,7 @@
 package com.mycompany.pasteleriadaos;
 
 import com.mycompany.pasteleriadominioentidades.Producto;
+import com.mycompany.pasteleriadominiosMapeo.ProductoMapeo;
 import java.util.List;
 
 /**
@@ -12,9 +13,9 @@ import java.util.List;
  * @author PC
  */
 public interface IProductoDAO {
-   /* public DTO_Producto agregarProducto(ProductoMapeo producto);
+   public Producto agregarProducto(ProductoMapeo producto);
     
-    public void eliminarProducto(ProductoMapeo producto);*/
+    public void eliminarProducto(ProductoMapeo producto);
     
     public List<Producto> consultarProductos();
     
