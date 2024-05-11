@@ -4,25 +4,17 @@
  */
 package com.mycompany.pastelerianegocio;
 
-import Conversiones.ProductosConversiones;
-import Conversiones.VentasConversiones;
+import conversionesnegocio.ProductosConversiones;
+import conversionesnegocio.VentasConversiones;
 import Excepciones.ConsultarVentasPorFechaException;
 import Exceptions.PersistenciaException;
-import com.mycompany.pasteleriadaos.ClienteDAO;
-import com.mycompany.pasteleriadaos.IClienteDAO;
-import com.mycompany.pasteleriadaos.IProductoDAO;
 import com.mycompany.pasteleriadaos.IVentaDAO;
-import com.mycompany.pasteleriadaos.ProductoDAO;
 import com.mycompany.pasteleriadaos.VentaDAO;
 import com.mycompany.pasteleriadominioentidades.Producto;
 import dto.DTO_Producto;
-
 import dto.DTO_Venta;
-
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

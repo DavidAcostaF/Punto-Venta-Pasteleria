@@ -4,7 +4,7 @@
  */
 package com.mycompany.pastelerianegocio;
 
-import Conversiones.ClientesConversiones;
+import conversionesnegocio.ClientesConversiones;
 import Exceptions.PersistenciaException;
 import com.mycompany.pasteleriadaos.ClienteDAO;
 import com.mycompany.pasteleriadaos.IClienteDAO;

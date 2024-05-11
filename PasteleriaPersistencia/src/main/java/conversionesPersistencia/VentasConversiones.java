@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package conversiones;
+package conversionesPersistencia;
 
 import com.mycompany.pasteleriadominioentidades.DetalleVenta;
 import com.mycompany.pasteleriadominioentidades.Direccion;
@@ -34,7 +34,7 @@ public class VentasConversiones {
 
     public Venta convertirAVentaEntidad(VentaMapeo venta) {
         Venta ventaE = new Venta();
-        ventaE.setId(venta.getClienteid().toHexString());
+        ventaE.setId(venta.getId().toHexString());
         ventaE.setFechaEntrega(venta.getFechaEntrega());
         ventaE.setFechaRegistro(venta.getFechaRegistro());
         ventaE.setMontoTotal(venta.getMontoTotal());

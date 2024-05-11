@@ -25,6 +25,7 @@ presentacion\Presentacion_DlgIngredientesSeleccionados$2.class
 presentacion\Presentacion_DlgInventarioIngredientes$7.class
 presentacion\Presentacion_DlgInventarioIngredientes$4.class
 presentacion\Presentacion_FrmDetallesVenta$2.class
+pruebas\prueba.class
 presentacion\Presentacion_DlgVentasTotales.class
 presentacion\Presentacion_FrmMenuHistoriales$1.class
 presentacion\Presentacion_DlgConfirmacionPago$6.class
@@ -129,5 +130,6 @@ presentacion\Presentacion_DlgInventarioIngredientes$6.class
 extras\ComboBoxMultiSeleccion$Item.class
 presentacion\Presentacion_DlgDirecciones$1.class
 presentacion\Presentacion_DlgListaClientes$3.class
+presentacion\Presentacion_FrmHistorialVentas$8.class
 presentacion\Presentacion_MenuPrincipal.class
 presentacion\Presentacion_DlgDatosCliente$1.class
