@@ -5,9 +5,9 @@
 package control;
 
 import dto.DTO_Venta;
-import presentacion.Presentacion_FrmDetallesVenta;
-import presentacion.Presentacion_FrmHistorialVentas;
-import presentacion.Presentacion_FrmMenuHistoriales;
+import presentacion.casohistoriales.Presentacion_FrmDetallesVenta;
+import presentacion.casohistoriales.Presentacion_FrmHistorialVentas;
+import presentacion.casohistoriales.Presentacion_FrmMenuHistoriales;
 
 /**
  *
@@ -36,7 +36,7 @@ public class ControlHistoriales {
 
     public void mostrarMenu() {
         Presentacion_FrmMenuHistoriales menu = new Presentacion_FrmMenuHistoriales();
-        menu.setVisible(true);
+        menu.mostrarHistorialVentas();
     }
 
     public void mostrarDetallesVenta() {

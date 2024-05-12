@@ -5,6 +5,7 @@
 package com.mycompany.pasteleriagenerarreporte;
 
 import dto.DTO_GenerarReporte;
+import dto.DTO_ReciboFormato;
 import dto.DTO_ReporteVentasFormato;
 import dto.DTO_Venta;
 import java.io.File;
@@ -27,19 +28,19 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
  *
  * @author abelc
  */
-public class FuncionalidadGenerarReporte implements IFuncionalidadGenerarReporte{
+public class FuncionalidadGenerarReporte implements IFuncionalidadGenerarReporte {
 
     @Override
-      public DTO_GenerarReporte generarReporteVentasCasoHistoriales(List<DTO_ReporteVentasFormato> reporteVentas) {
+    public DTO_GenerarReporte generarReporteVentasCasoHistoriales(List<DTO_ReporteVentasFormato> reporteVentas) {
         try {
-            DTO_GenerarReporte reporteGenerado=new DTO_GenerarReporte();
+            DTO_GenerarReporte reporteGenerado = new DTO_GenerarReporte();
             JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(reporteVentas);
-            
+
             Map<String, Object> parameters = new HashMap<String, Object>();
             parameters.put("ds", itemsJRBean);
-            
+
             InputStream input = null;
-            
+
             input = new FileInputStream(new File("src\\main\\resources\\JasperFile\\ReporteVentas.jrxml"));
 
             JasperDesign jasperDesign = JRXmlLoader.load(input);
@@ -56,6 +57,31 @@ public class FuncionalidadGenerarReporte implements IFuncionalidadGenerarReporte
         }
     }
 
- 
-    
+    @Override
+    public DTO_GenerarReporte generarRecibo(DTO_ReciboFormato reciboFormato) {
+        try {
+            DTO_GenerarReporte reporteGenerado = new DTO_GenerarReporte();
+            JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(reciboFormato.getDetallesVenta());
+            Map<String, Object> parameters = new HashMap<String, Object>();
+            parameters.put("ds", itemsJRBean);
+            parameters.put("nombre", reciboFormato.getNombre());
+            parameters.put("fechaCompra", reciboFormato.getFechaCompra());
+            parameters.put("total", reciboFormato.getTotal());
+            InputStream input = null;
+            input = new FileInputStream(new File("src\\main\\resources\\JasperRecibo\\ReciboPasteleria.jrxml"));
+            JasperDesign jasperDesign = JRXmlLoader.load(input);
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+            reporteGenerado.setJasperReport(jasperReport);
+            reporteGenerado.setParameters(parameters);
+            return reporteGenerado;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FuncionalidadGenerarReporte.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } catch (JRException ex) {
+            Logger.getLogger(FuncionalidadGenerarReporte.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+
 }

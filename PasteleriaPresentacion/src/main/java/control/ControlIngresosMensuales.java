@@ -8,7 +8,7 @@ import dto.DTO_Venta;
 import java.util.Date;
 import presentacion.Presentacion_DlgSeleccionarFechaIngresos;
 import presentacion.Presentacion_DlgVentasTotales;
-import presentacion.Presentacion_FrmMenuHistoriales;
+import presentacion.casohistoriales.Presentacion_FrmMenuHistoriales;
 
 /**
  *

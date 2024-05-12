@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package presentacion;
+package presentacion.casohistoriales;
 
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
@@ -52,6 +52,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
 import com.mycompany.pasteleriaproductosventa.IFuncionalidadConsultarProductos;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -87,6 +88,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         listaClientes = funcionalidadesClientes.consultarClientes();
         listaProductos = funcionalidadConsultarProductos.consultarProductos();
         initComponents();
+        setTitle("Historial de ventas");
         panelProductos.setVisible(false);
         llenarTabla();
         FlatRobotoFont.install();
@@ -380,12 +382,15 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_regresarBtnActionPerformed
 
     private void detallesVentaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detallesVentaBtnActionPerformed
-        obtenerDatosFilaSeleccionada();
-        //se llena la venta con todos los objetos en lugar de solo referencias
-        venta = funcionalidadConsultarVentas.encontrarVenta(venta.getID());
-        control.setVenta(venta);
-        this.dispose();
-        control.mostrarDetallesVenta();
+     obtenerDatosFilaSeleccionada();
+    if (venta == null) {
+        JOptionPane.showMessageDialog(this, "Debe seleccionar una venta.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        return; 
+    }
+    venta = funcionalidadConsultarVentas.encontrarVenta(venta.getID());
+    control.setVenta(venta);
+    this.dispose();
+    control.mostrarDetallesVenta();
     }//GEN-LAST:event_detallesVentaBtnActionPerformed
 
     private void aplicarFiltroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarFiltroBtnActionPerformed

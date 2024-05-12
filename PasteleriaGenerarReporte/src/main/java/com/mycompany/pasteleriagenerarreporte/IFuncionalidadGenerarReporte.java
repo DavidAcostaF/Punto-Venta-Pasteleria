@@ -5,6 +5,7 @@
 package com.mycompany.pasteleriagenerarreporte;
 
 import dto.DTO_GenerarReporte;
+import dto.DTO_ReciboFormato;
 import dto.DTO_ReporteVentasFormato;
 import dto.DTO_Venta;
 import java.util.List;
@@ -16,4 +17,6 @@ import java.util.List;
 public interface IFuncionalidadGenerarReporte {
     
     public DTO_GenerarReporte generarReporteVentasCasoHistoriales(List<DTO_ReporteVentasFormato> listaVentas);
+    
+    public DTO_GenerarReporte generarRecibo(DTO_ReciboFormato reciboFormato);
 }

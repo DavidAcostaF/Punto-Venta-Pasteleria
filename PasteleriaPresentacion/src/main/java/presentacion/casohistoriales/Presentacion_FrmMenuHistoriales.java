@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package presentacion;
+package presentacion.casohistoriales;
 
 import control.ControlHistoriales;
 
@@ -11,14 +11,17 @@ import control.ControlHistoriales;
  * @author abelc
  */
 public class Presentacion_FrmMenuHistoriales extends javax.swing.JFrame {
-private ControlHistoriales control;
+
+    private ControlHistoriales control;
 
     /**
      * Creates new form FrmMenuHistoriales
      */
     public Presentacion_FrmMenuHistoriales() {
+        setTitle("Menú");
         initComponents();
-        control=new ControlHistoriales();
+
+        control = ControlHistoriales.getInstance();
     }
 
     /**
@@ -40,24 +43,24 @@ private ControlHistoriales control;
         jPanel1.setBackground(new java.awt.Color(232, 232, 232));
         jPanel1.setForeground(new java.awt.Color(0, 0, 0));
 
+        historialVentaBtn.setText("Historial de ventas");
         historialVentaBtn.setBackground(new java.awt.Color(140, 220, 254));
         historialVentaBtn.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         historialVentaBtn.setForeground(new java.awt.Color(0, 0, 0));
-        historialVentaBtn.setText("Historial de ventas");
         historialVentaBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 historialVentaBtnActionPerformed(evt);
             }
         });
 
+        jLabel1.setText("Historiales");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Historiales");
 
+        jButton2.setText("Historial de reportes");
         jButton2.setBackground(new java.awt.Color(140, 220, 254));
         jButton2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Historial de reportes");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,44 +107,13 @@ private ControlHistoriales control;
     }//GEN-LAST:event_historialVentaBtnActionPerformed
 
     public void mostrarHistorialVentas() {
-    }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_FrmMenuHistoriales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_FrmMenuHistoriales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_FrmMenuHistoriales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_FrmMenuHistoriales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Presentacion_FrmMenuHistoriales().setVisible(true);
             }
         });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton historialVentaBtn;

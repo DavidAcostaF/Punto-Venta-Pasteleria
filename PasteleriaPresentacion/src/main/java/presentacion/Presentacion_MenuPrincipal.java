@@ -8,6 +8,7 @@ package presentacion;
 //import com.mycompany.pastelerianegocio.IControlRegistrarVenta;
 import control.ControlAgregarVenta;
 import control.ControlGestionarInventario;
+import control.ControlHistoriales;
 import control.ControlIngresosMensuales;
 
 /**
@@ -19,6 +20,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
     ControlAgregarVenta control;
     private ControlGestionarInventario controlGesionarInventario;
     private ControlIngresosMensuales controlIngresos;
+    private ControlHistoriales controlHistoriales;
 //    private IControlRegistrarVenta controlRegistrarVenta;
 
     /**
@@ -29,6 +31,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
         control = new ControlAgregarVenta();
         controlGesionarInventario = new ControlGestionarInventario();
         this.controlIngresos = ControlIngresosMensuales.getInstance();
+        controlHistoriales=ControlHistoriales.getInstance();
 
     }
 
@@ -57,7 +60,8 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(232, 232, 232));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jLabel1.setText("Gestor de ventas y compras");
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Pasteleria Dulce Tentación");
 
         btnRegistrarVenta.setBackground(new java.awt.Color(140, 220, 254));
         btnRegistrarVenta.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
@@ -146,9 +150,6 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(181, 181, 181)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -167,7 +168,10 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
                                 .addGap(86, 86, 86)
                                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(28, 28, 28)
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(184, 184, 184)
+                        .addComponent(jLabel1)))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -213,7 +217,8 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarVentaActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        controlHistoriales.mostrarMenu();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

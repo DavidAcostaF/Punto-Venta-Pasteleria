@@ -2,12 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package presentacion;
+package presentacion.casohistoriales;
 
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import com.mycompany.pasteleriagenerarreporte.FuncionalidadGenerarReporte;
+import com.mycompany.pasteleriagenerarreporte.IFuncionalidadGenerarReporte;
 import com.mycompany.pasteleriaproductosventa.FuncionalidadConsultarProductos;
 import control.ControlHistoriales;
 import dto.DTO_Cliente;
@@ -20,17 +22,29 @@ import java.util.List;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import com.mycompany.pasteleriaproductosventa.IFuncionalidadConsultarProductos;
+import dto.DTO_DetallesVentaReporte;
+import dto.DTO_GenerarReporte;
+import dto.DTO_ReciboFormato;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
  * @author abelc
  */
 public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
-    
+
     private ControlHistoriales control;
     private DTO_Cliente cliente;
     private DTO_Venta venta;
     private IFuncionalidadConsultarProductos funcionalidadConsultarProducto;
+    private IFuncionalidadGenerarReporte generarReporte;
 
     /**
      * Creates new form FrmDetallesVenta
@@ -40,6 +54,8 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
         this.cliente = new DTO_Cliente();
         this.venta = control.getVenta();
         funcionalidadConsultarProducto = new FuncionalidadConsultarProductos();
+        generarReporte = new FuncionalidadGenerarReporte();
+        setTitle("Detalles de la venta");
         initComponents();
         System.out.println(venta.getFechaEntrega());
         SimpleDateFormat ff = new SimpleDateFormat("dd/MM/yyyy");
@@ -60,18 +76,18 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
         }
         String colonia = venta.getDieccionEntrega().getColonia();
         if (colonia != null) {
-            coloniaLbl.setText("Colonia: "+colonia);
+            coloniaLbl.setText("Colonia: " + colonia);
         } else {
             coloniaLbl.setText(" ");
         }
         String numExterior = venta.getDieccionEntrega().getNumExterior();
         if (numExterior != null) {
-            jLabel8.setText("Num Exterior: #"+numExterior);
+            jLabel8.setText("Num Exterior: #" + numExterior);
         } else {
             jLabel8.setText("");
         }
         llenarTabla();
-        
+
     }
 
     /**
@@ -93,7 +109,7 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         detallesVentaTabla = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        generarReciboBtn = new javax.swing.JButton();
         clienteLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -170,10 +186,15 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(140, 220, 254));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Generar Ticket");
+        generarReciboBtn.setBackground(new java.awt.Color(140, 220, 254));
+        generarReciboBtn.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        generarReciboBtn.setForeground(new java.awt.Color(0, 0, 0));
+        generarReciboBtn.setText("Generar recibo");
+        generarReciboBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generarReciboBtnActionPerformed(evt);
+            }
+        });
 
         clienteLabel.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         clienteLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -221,7 +242,7 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(generarReciboBtn)
                         .addGap(80, 80, 80))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -266,9 +287,9 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(calleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(coloniaLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(calleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(coloniaLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24))))
@@ -304,7 +325,7 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(generarReciboBtn)
                     .addComponent(jButton1))
                 .addGap(26, 26, 26))
         );
@@ -319,19 +340,46 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
         this.dispose();
         control.mostrarHistorialVentas();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void generarReciboBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarReciboBtnActionPerformed
+        try {
+            SimpleDateFormat ff = new SimpleDateFormat("dd/MM/yyyy");
+            DTO_ReciboFormato recibo = new DTO_ReciboFormato();
+            recibo.setNombre(venta.getCliente().getNombre() + " " + venta.getCliente().getApellidoP() + " " + venta.getCliente().getApellidoM());
+            recibo.setFechaCompra(ff.format(venta.getFechaRegistro()));
+            recibo.setTotal("$" + Float.toString(venta.getMontoTotal()));
+            List<DTO_DetallesVentaReporte> detallesVenta = new ArrayList<>();
+            for (DTO_DetalleVenta ventaDetalle : venta.getDetallesVenta()) {
+                DTO_DetallesVentaReporte dv = new DTO_DetallesVentaReporte();
+                dv.setCantidad(Integer.toString(ventaDetalle.getCantidad()));
+                dv.setImporte(Float.toString(ventaDetalle.getImporte()));
+                dv.setProducto(ventaDetalle.getProducto().getNombre());
+                dv.setPrecio(Float.toString(ventaDetalle.getPrecio()));
+                detallesVenta.add(dv);
+            }
+            recibo.setDetallesVenta(detallesVenta);
+            DTO_GenerarReporte reporteGenerado = generarReporte.generarRecibo(recibo);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reporteGenerado.getJasperReport(), reporteGenerado.getParameters(), new JREmptyDataSource());
+
+            JasperViewer.viewReport(jasperPrint, false);
+        } catch (JRException ex) {
+            Logger.getLogger(Presentacion_FrmDetallesVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_generarReciboBtnActionPerformed
     public void mostrarDetallesVentas() {
         FlatRobotoFont.install();
         FlatLaf.registerCustomDefaultsSource("extras");
         UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
         FlatLightLaf.setup();
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Presentacion_FrmDetallesVenta().setVisible(true);
             }
         });
     }
-    
+
     private void llenarTabla() {
         limpiarTabla();
         List<DTO_DetalleVenta> detallesVenta = venta.getDetallesVenta();
@@ -342,12 +390,12 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
             });
         });
     }
-    
+
     private void limpiarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) detallesVentaTabla.getModel();
-        
+
         modelo.setRowCount(0);
-        
+
         detallesVentaTabla.setModel(modelo);
     }
 
@@ -359,8 +407,8 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
     private javax.swing.JTable detallesVentaTabla;
     private javax.swing.JLabel estadoLabel;
     private javax.swing.JLabel fechaEntregalabel;
+    private javax.swing.JButton generarReciboBtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
