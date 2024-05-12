@@ -116,5 +116,10 @@ public class ProductosBO implements IProductosBO {
     public Float calcularCosto(List<IngredienteDetalle> productos) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
+    @Override
+    public boolean eliminarProducto(DTO_Producto producto) {
+        return productoDAO.eliminarProducto(convertirDTOAProductoMapeo(producto));
+    }
+
 }

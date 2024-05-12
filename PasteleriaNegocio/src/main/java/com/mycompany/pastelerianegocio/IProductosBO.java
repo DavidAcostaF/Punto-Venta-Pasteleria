@@ -37,4 +37,6 @@ public interface IProductosBO {
 
     public Float calcularCosto(List<IngredienteDetalle> productos);
 
+    public boolean eliminarProducto(DTO_Producto producto);
+
 }

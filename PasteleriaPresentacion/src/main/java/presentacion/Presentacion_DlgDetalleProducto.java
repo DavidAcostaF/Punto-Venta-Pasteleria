@@ -4,6 +4,8 @@
  */
 package presentacion;
 
+import com.mycompany.pasteleriaeliminarproducto.FuncionalidadEliminarProducto;
+import com.mycompany.pasteleriaeliminarproducto.IFuncionalidadEliminarProducto;
 import com.mycompany.pasteleriaproductosventa.FuncionalidadConsultarProductos;
 import com.mycompany.pasteleriaproductosventa.IFuncionalidadConsultarProductos;
 import control.ControlGestionarInventario;
@@ -14,6 +16,7 @@ import extras.DynamicComboBoxRenderer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
@@ -23,9 +26,10 @@ import javax.swing.table.TableCellEditor;
  * @author af_da
  */
 public class Presentacion_DlgDetalleProducto extends javax.swing.JFrame {
-    
+
     private ControlGestionarInventario controlGesionarInventario;
     private IFuncionalidadConsultarProductos funcionalidadConsultarProductos;
+    private IFuncionalidadEliminarProducto funcionalidadEliminarProducto;
 
     /**
      * Creates new form Presentacion_DlgCatalogoProductos
@@ -34,6 +38,7 @@ public class Presentacion_DlgDetalleProducto extends javax.swing.JFrame {
         initComponents();
         controlGesionarInventario = ControlGestionarInventario.getInstance();
         funcionalidadConsultarProductos = new FuncionalidadConsultarProductos();
+        funcionalidadEliminarProducto = new FuncionalidadEliminarProducto();
         DTO_Producto producto = funcionalidadConsultarProductos.consultarProductoPorNombre(ControlGestionarInventario.getInstance().getProductoDTO().getNombre());
         labelNombre.setText(producto.getNombre());
         labelDescripcion.setText(producto.getDescripcion());
@@ -179,21 +184,21 @@ public class Presentacion_DlgDetalleProducto extends javax.swing.JFrame {
     private void llenarTabla(DTO_Producto producto) {
         limpiarTabla();
         DefaultTableModel modelo = (DefaultTableModel) tableIngredientes.getModel();
-        
+
         if (producto != null) {
             producto.getIngredientes().forEach(t -> {
                 // Agregar la fila al modelo
                 modelo.addRow(new Object[]{t.getNombre(), t.getCantidad()});
-                
+
             });
         }
     }
-    
+
     private void limpiarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tableIngredientes.getModel();
-        
+
         modelo.setRowCount(0);
-        
+
         tableIngredientes.setModel(modelo);
     }
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
@@ -205,13 +210,19 @@ public class Presentacion_DlgDetalleProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_tableIngredientesMouseClicked
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-       controlGesionarInventario.mostrarInvetarioProductos();
-       controlGesionarInventario.setProductoDTO(null);
-       this.dispose();
+        controlGesionarInventario.mostrarInvetarioProductos();
+        controlGesionarInventario.setProductoDTO(null);
+        this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-
+        int response = JOptionPane.showConfirmDialog(this, "Estas seguro que deseas eliminar el producto" + controlGesionarInventario.getProductoDTO().getNombre());
+        if (response == JOptionPane.YES_OPTION) {
+            funcionalidadEliminarProducto.eliminarProducto(controlGesionarInventario.getProductoDTO());
+            controlGesionarInventario.mostrarInvetarioProductos();
+            controlGesionarInventario.setProductoDTO(null);
+            this.dispose();
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
