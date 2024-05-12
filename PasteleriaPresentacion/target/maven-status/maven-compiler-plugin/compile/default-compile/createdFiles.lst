@@ -33,6 +33,7 @@ presentacion\Presentacion_DlgInventarioIngredientes$4.class
 presentacion\Presentacion_FrmDetallesVenta$2.class
 presentacion\Presentacion_DlgFacturarACliente$3.class
 pruebas\prueba.class
+presentacion\Presentacion_DlgActualizarDatosDelProducto$3.class
 presentacion\Presentacion_DlgVentasTotales.class
 pruebas\pruebaJasper.class
 presentacion\Presentacion_FrmMenuHistoriales$1.class
@@ -65,6 +66,7 @@ presentacion\Presentacion_MenuPrincipal$2.class
 presentacion\Presentacion_FrmMenuHistoriales$2.class
 presentacion\Presentacion_DlgHistorialReportes$1.class
 presentacion\Presentacion_MenuPrincipal$9.class
+presentacion\Presentacion_DlgActualizarDatosDelProducto$2.class
 presentacion\Presentacion_FrmSeleccionarVenta$1.class
 presentacion\Presentacion_DlgHistorialReportes.class
 presentacion\Presentacion_DlgConfirmacionPago$2.class
@@ -101,6 +103,7 @@ presentacion\Presentacion_FrmHistorialFacturas.class
 presentacion\Presentacion_DlgDatosCliente$2.class
 presentacion\Presentacion_DlgFacturarACliente$2.class
 presentacion\Presentacion_FrmDetallesVenta$3.class
+presentacion\Presentacion_DlgActualizarDatosDelProducto$1.class
 presentacion\Presentacion_FrmConfirmarGenerarFactura$4.class
 extras\ClientesComboBoxModel.class
 presentacion\Presentacion_DlgInventarioIngredientes$8.class
@@ -108,6 +111,7 @@ presentacion\Presentacion_DlgIngredientesSeleccionados$3.class
 presentacion\Presentacion_DlgSeleccionOpcionGestion$3.class
 presentacion\Presentacion_DlgInventarioIngredientes$5.class
 presentacion\Presentacion_DlgInventarioProductos$2.class
+presentacion\Presentacion_DlgActualizarDatosDelProducto$4.class
 presentacion\Presentacion_FrmHistorialVentas$2.class
 presentacion\Presentacion_DlgSeleccionarFechaIngresos$2.class
 presentacion\Presentacion_DlgVentasTotales$5.class
@@ -134,7 +138,6 @@ presentacion\Presentacion_DlgDetalleProducto$5.class
 extras\DynamicComboBoxEditor.class
 presentacion\Presentacion_MenuPrincipal$3.class
 presentacion\Presentacion_DlgIngredientesSeleccionados$1.class
-presentacion\Presentacion_DlgIngresarDatosDelProducto$5.class
 presentacion\Presentacion_MenuPrincipal$5.class
 presentacion\Presentacion_DlgAgregarPastel$1.class
 presentacion\Presentacion_DlgSeleccionarFechaIngresos.class
@@ -142,6 +145,7 @@ presentacion\Presentacion_DlgIngredientesSeleccionados.class
 presentacion\Presentacion_FrmSeleccionarVenta$5.class
 presentacion\Presentacion_DlgDetalleProducto$3.class
 presentacion\Presentacion_DlgDirecciones$2.class
+presentacion\Presentacion_DlgActualizarDatosDelProducto.class
 presentacion\Presentacion_DlgCobrarVenta$1.class
 presentacion\Presentacion_DlgConfirmacionPago.class
 presentacion\Presentacion_FrmHistorialVentas$7.class

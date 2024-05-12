@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author af_da
  */
-public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame {
+public class Presentacion_DlgActualizarDatosDelProducto extends javax.swing.JFrame {
 
     private IFuncionalidadConsultarIngredientes funcionalidadConsultarIngrediente;
     private IFuncionalidadConsultarProductos funcionalidadAgregarProducto;
@@ -33,7 +33,7 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
     /**
      * Creates new form Presentacion_DlgSeleccionarIngredientesProducto
      */
-    public Presentacion_DlgIngresarDatosDelProducto() {
+    public Presentacion_DlgActualizarDatosDelProducto() {
         initComponents();
         funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngredientes();
         funcionalidadAgregarProducto = new FuncionalidadConsultarProductos();

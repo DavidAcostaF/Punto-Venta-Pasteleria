@@ -26,4 +26,7 @@ public interface IIngredienteDAO {
     public Ingrediente consultarPorNombre(String nombre);
 
     public Boolean eliminar(IngredienteMapeo ingrediente);
+
+    public List<Ingrediente> consultarIngredientesFaltantes(List<String> ingredientesIds);
+
 }

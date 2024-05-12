@@ -17,6 +17,8 @@ import conversionesnegocio.IngredienteConversiones;
 import dto.DTO_Ingrediente;
 import dto.DTO_IngredienteDetalle;
 import dto.DTO_Producto;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -120,6 +122,16 @@ public class ProductosBO implements IProductosBO {
     @Override
     public boolean eliminarProducto(DTO_Producto producto) {
         return productoDAO.eliminarProducto(convertirDTOAProductoMapeo(producto));
+    }
+
+    @Override
+    public List<DTO_Ingrediente> consultarIngredientesFaltantes(DTO_Producto producto) {
+        List<DTO_IngredienteDetalle> ingredientes = producto.getIngredientes();
+        List<String> ids = new ArrayList();
+        for (DTO_IngredienteDetalle ingrediente : ingredientes) {
+            ids.add(consultarIngredientePorNombre(ingrediente.getNombre()).getId());
+        }
+        return this.conversorIngredientes.convertir(this.ingredienteDAO.consultarIngredientesFaltantes(ids));
     }
 
 }

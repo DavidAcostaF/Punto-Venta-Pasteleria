@@ -23,5 +23,4 @@ public interface IProductoDAO {
     public List<Producto> consultarProductos();
 
     public Producto consultarPorNombre(String nombre);
-
 }

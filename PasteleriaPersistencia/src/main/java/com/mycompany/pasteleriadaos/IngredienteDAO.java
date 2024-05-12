@@ -7,6 +7,7 @@ package com.mycompany.pasteleriadaos;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
 import com.mongodb.client.model.Sorts;
@@ -15,9 +16,12 @@ import com.mycompany.pasteleriadominioentidades.Ingrediente;
 import com.mycompany.pasteleriadominiosMapeo.IngredienteMapeo;
 import conversionesPersistencia.IngredienteConversiones;
 import dto.DTO_Ingrediente;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.text.Document;
+import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -87,6 +91,19 @@ public class IngredienteDAO implements IIngredienteDAO {
         DeleteResult result = coleccion.deleteOne(eq("nombre", ingrediente.getNombre()));
 
         return result.getDeletedCount() == 1;
+    }
+
+    @Override
+    public List<Ingrediente> consultarIngredientesFaltantes(List<String> ingredientesIds) {
+        MongoCollection<IngredienteMapeo> coleccion = conexion.obtenerColeccion();
+        List<ObjectId> ids = new ArrayList<>();
+        for (String id : ingredientesIds) {
+            ids.add(new ObjectId(id));
+        }
+        Bson filtro = Filters.not(Filters.in("_id", ids));
+
+        return ingredienteConversiones.convertir(coleccion.find(filtro).into(new ArrayList<>()));
+
     }
 
 }
