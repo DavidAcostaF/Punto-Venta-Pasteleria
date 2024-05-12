@@ -20,4 +20,5 @@ public interface IFuncionalidadConsultarVentas {
      public List<DTO_Venta> consultarVentasPorProductos(List<DTO_Producto> listaProductos);
      public List<DTO_Venta> consultarVentasPorRangoFechas(Date fechaInicio, Date fechaFin);
      public List<DTO_Venta> consultarVentasConFiltros(String clienteId, Date fechaInicio, Date fechaFin, List<DTO_Producto> listaProductos);
+     public List<DTO_Venta> consultarVentasPorFecha(Date fechaInicio);
 }

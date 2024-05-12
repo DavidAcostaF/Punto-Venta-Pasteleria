@@ -8,6 +8,7 @@ import com.mycompany.pastelerianegocio.IVentasBO;
 import com.mycompany.pastelerianegocio.VentasBO;
 import dto.DTO_Producto;
 import dto.DTO_Venta;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -15,11 +16,12 @@ import java.util.List;
  *
  * @author abelc
  */
-public class FuncionalidadConsultarVentas implements IFuncionalidadConsultarVentas{
+public class FuncionalidadConsultarVentas implements IFuncionalidadConsultarVentas {
+
     private IVentasBO ventasbo;
 
     public FuncionalidadConsultarVentas() {
-        ventasbo=new VentasBO();
+        ventasbo = new VentasBO();
     }
 
     @Override
@@ -39,7 +41,7 @@ public class FuncionalidadConsultarVentas implements IFuncionalidadConsultarVent
 
     @Override
     public List<DTO_Venta> consultarVentasPorProductos(List<DTO_Producto> listaProductos) {
-   return ventasbo.consultarVentasPorProductos(listaProductos);
+        return ventasbo.consultarVentasPorProductos(listaProductos);
     }
 
     @Override
@@ -49,7 +51,27 @@ public class FuncionalidadConsultarVentas implements IFuncionalidadConsultarVent
 
     @Override
     public List<DTO_Venta> consultarVentasConFiltros(String clienteId, Date fechaInicio, Date fechaFin, List<DTO_Producto> listaProductos) {
-    return ventasbo.consultarVentasConFiltros(clienteId, fechaInicio, fechaFin, listaProductos);
+        return ventasbo.consultarVentasConFiltros(clienteId, fechaInicio, fechaFin, listaProductos);
     }
-    
+
+    @Override
+    public List<DTO_Venta> consultarVentasPorFecha(Date fecha) {
+        Calendar calInicio = Calendar.getInstance();
+        calInicio.setTime(fecha);
+        calInicio.set(Calendar.HOUR_OF_DAY, 0);
+        calInicio.set(Calendar.MINUTE, 0);
+        calInicio.set(Calendar.SECOND, 0);
+        calInicio.set(Calendar.MILLISECOND, 0);
+
+        Calendar calFin = Calendar.getInstance();
+        calFin.setTime(fecha);
+        calFin.set(Calendar.HOUR_OF_DAY, 23);
+        calFin.set(Calendar.MINUTE, 59);
+        calFin.set(Calendar.SECOND, 59);
+        calFin.set(Calendar.MILLISECOND, 999);
+
+        Date fechaInicio = calInicio.getTime();
+        Date fechaFin = calFin.getTime();
+        return ventasbo.consultarVentasPorRangoFecha(fechaInicio, fechaFin);
+    }
 }

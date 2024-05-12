@@ -70,6 +70,30 @@ public class ClientesConversiones {
         return clienteMapeo;
     }
     
+     public ClienteMapeo convertirClienteAMapeoAgregar(Cliente cliente) {
+        if (cliente == null) {
+            return null;
+        }
+        ClienteMapeo clienteMapeo = new ClienteMapeo();
+        clienteMapeo.setNombre(cliente.getNombre());
+        clienteMapeo.setApellidoP(cliente.getApellidoP());
+        clienteMapeo.setApellidoM(cliente.getApellidoM());
+        clienteMapeo.setTelefono(cliente.getTelefono());
+
+        List<DireccionMapeo> direccionesMapeo = new ArrayList<>();
+        for (Direccion direccion : cliente.getDirecciones()) {
+            DireccionMapeo direccionMapeo = new DireccionMapeo();
+            direccionMapeo.setColonia(direccion.getColonia());
+            direccionMapeo.setCalle(direccion.getCalle());
+            direccionMapeo.setNumExterior(direccion.getNumExterior());
+            direccionesMapeo.add(direccionMapeo);
+        }
+
+        clienteMapeo.setDirecciones(direccionesMapeo);
+
+        return clienteMapeo;
+    }
+    
     public Cliente convertirClienteConRFC(ClienteMapeo cliente) {
         Cliente Cliente = new Cliente();
         Cliente.setId(cliente.getId().toString());

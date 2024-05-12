@@ -49,14 +49,14 @@ public class PruebasVenta {
         venta.setFechaRegistro(fechaRegistro);
         venta.setEstado("Pagado");
         venta.setId(new ObjectId());
-        venta.setClienteid(new ObjectId("663b16288bcd861f9682ffa9"));
+        venta.setClienteid(new ObjectId("664062b3be17b02d28f61d60"));
         List<DetalleVentaMapeo> detallesVenta = new ArrayList<>();
         DetalleVentaMapeo dv = new DetalleVentaMapeo();
         dv.setCantidad(2);
         dv.setDetallesCliente(" ");
         dv.setImporte(150.00f);
         dv.setPrecio(75);
-        dv.setProductoId(new ObjectId("663c434ac97af46c1e9d7bf9"));
+        dv.setProductoId(new ObjectId("6640635df35eca6e5bf3d58e"));
         dv.setTamanhoProducto("chico");
         detallesVenta.add(dv);
         venta.setDetallesVenta(detallesVenta);

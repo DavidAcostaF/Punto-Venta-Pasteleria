@@ -6,17 +6,25 @@ package presentacion;
 
 import com.mycompany.pasteleriacalculargananciasdeldia.FuncionalidadCalcularGananciasDelDia;
 import com.mycompany.pasteleriacalculargananciasdeldia.IFuncionalidadCalcularGananciasDelDia;
+import com.mycompany.pasteleriaconsultarventas.FuncionalidadConsultarVentas;
+import com.mycompany.pasteleriaconsultarventas.IFuncionalidadConsultarVentas;
 import com.mycompany.pasteleriacontarventaspordia.FuncionalidadContarVentasPorDia;
 import com.mycompany.pasteleriacontarventaspordia.IFuncionalidadContarVentasPorDia;
 import control.ControlAgregarVenta;
 import control.ControlIngresosMensuales;
 import dto.DTO_Producto;
+import dto.DTO_Venta;
 import extras.ButtonColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import net.miginfocom.layout.AC;
@@ -29,6 +37,7 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
 
     private IFuncionalidadContarVentasPorDia funcionalidadVentasPorDia;
     private IFuncionalidadCalcularGananciasDelDia funcionalidadGananciasDelDia;
+    private IFuncionalidadConsultarVentas funcionalidadConsultarVentas;
     private ControlIngresosMensuales controlIngresos;
     private ControlAgregarVenta controlPrincipal;
     Date fechaInicial;
@@ -41,6 +50,7 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
         initComponents();
         this.funcionalidadVentasPorDia = new FuncionalidadContarVentasPorDia();
         this.funcionalidadGananciasDelDia = new FuncionalidadCalcularGananciasDelDia();
+        this.funcionalidadConsultarVentas = new FuncionalidadConsultarVentas();
         this.controlIngresos = ControlIngresosMensuales.getInstance();
         this.fechaInicial = this.controlIngresos.getFechaSeleccionada();
         this.controlPrincipal = new ControlAgregarVenta();
@@ -184,7 +194,7 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(botonRetroceder, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(70, 70, 70)
@@ -196,7 +206,7 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
                         .addComponent(labelTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtCantidad1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,10 +296,20 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
         this.tableVentas.setModel(model);
         TableColumnModel columnModel = tableVentas.getColumnModel();
 
-        ButtonColumn desplegarButtonColumn = new ButtonColumn("Ver opciones", new ActionListener() {
+        ButtonColumn desplegarButtonColumn = new ButtonColumn("Desplegar Ventas", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                int filaSeleccionada = tableVentas.getSelectedRow();
+                if (filaSeleccionada != -1) {
+                    String fechaSeleccionadaStr = (String) tableVentas.getValueAt(filaSeleccionada, 0);
+                    Date fechaSeleccionada = null;
+                    try {
+                        fechaSeleccionada = dateFormat.parse(fechaSeleccionadaStr);
+                    } catch (ParseException ex) {
+                        ex.printStackTrace();
+                    }
+                    mostrarNuevaTabla(fechaSeleccionada);
+                }
             }
         });
         columnModel.getColumn(0).setPreferredWidth(100);
@@ -300,6 +320,57 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
         columnModel.getColumn(3).setCellEditor(desplegarButtonColumn);
     }
 
+    private void mostrarNuevaTabla(Date fechaSeleccionada) {
+        // Crear una nueva instancia de JTable para la nueva tabla
+        JTable tablaDetallesVentas = new JTable();
+
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Fecha");
+        model.addColumn("Nombre del Cliente");
+        model.addColumn("Total de la Venta");
+
+        List<DTO_Venta> listaVentas = this.funcionalidadConsultarVentas.consultarVentasPorFecha(fechaSeleccionada);
+        for (DTO_Venta listaVenta : listaVentas) {
+            float costoVenta = listaVenta.getMontoTotal();
+            System.out.println(listaVenta.getID());
+            System.out.println(listaVenta.getIDcliente());
+            DTO_Venta ventaProvisional = this.funcionalidadConsultarVentas.encontrarVenta(listaVenta.getID());
+            System.out.println(ventaProvisional.getCliente());
+            String nombreCliente = ventaProvisional.getCliente().getNombre() + " " + ventaProvisional.getCliente().getApellidoP();
+
+            String fechaFormat = dateFormat.format(fechaSeleccionada);
+
+            Object[] fila = {
+                fechaFormat,
+                nombreCliente,
+                costoVenta
+            };
+            // Agregar la entrada a la tabla
+            model.addRow(fila);
+        }
+
+        // Crear un JScrollPane para agregar la nueva tabla
+        JScrollPane scrollPane = new JScrollPane(tablaDetallesVentas);
+
+        // Crear un nuevo botón para ocultar la nueva tabla
+        JButton botonOcultar = new JButton("Ocultar");
+        botonOcultar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Ocultar la nueva tabla y el botón de ocultar
+                scrollPane.setVisible(false);
+                botonOcultar.setVisible(false);
+            }
+        });
+
+        // Agregar la nueva tabla y el botón de ocultar al contenedor principal
+        getContentPane().add(scrollPane);
+        getContentPane().add(botonOcultar);
+
+        // Actualizar la interfaz de usuario
+        revalidate();
+        repaint();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonContinuar;
