@@ -9,6 +9,7 @@ C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\Pasteleri
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgHistorialReportes.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgIngresarDatosDelProducto.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\extras\TableActionEvent.java
+C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgDetalleProducto.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_ProductosVenta.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\com\mycompany\pasteleria\Pasteleria.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\extras\ComboBoxMultiSeleccion.java
@@ -34,11 +35,13 @@ C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\Pasteleri
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgInventarioIngredientes.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\control\ControlFacturar.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgOpcionFactura.java
+C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\extras\DynamicComboBoxRenderer.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\extras\VentasTableModel.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgDirecciones.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\extras\ActionButton.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\extras\ClientesComboBoxModel.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgFacturarACliente.java
+C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\extras\DynamicComboBoxEditor.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_FrmHistorialVentas.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_FrmDetallesVenta.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgDatosCliente.java

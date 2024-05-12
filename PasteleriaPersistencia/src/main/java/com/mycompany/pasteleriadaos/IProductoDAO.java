@@ -16,7 +16,7 @@ public interface IProductoDAO {
 
     public Producto agregarProducto(Producto producto);
 
-    public void eliminarProducto(ProductoMapeo producto);
+    public boolean eliminarProducto(ProductoMapeo producto);
 
     public List<Producto> consultarProductos();
 

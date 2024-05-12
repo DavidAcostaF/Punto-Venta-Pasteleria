@@ -7,7 +7,9 @@ package com.mycompany.pasteleriadaos;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import static com.mongodb.client.model.Filters.eq;
+import com.mongodb.client.result.DeleteResult;
 import com.mycompany.pasteleriadominioentidades.Producto;
+import com.mycompany.pasteleriadominiosMapeo.IngredienteMapeo;
 import com.mycompany.pasteleriadominiosMapeo.ProductoMapeo;
 import conversionesPersistencia.ProductosConversiones;
 import java.util.ArrayList;
@@ -39,8 +41,11 @@ public class ProductoDAO implements IProductoDAO {
     }
 
     @Override
-    public void eliminarProducto(ProductoMapeo producto) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean eliminarProducto(ProductoMapeo producto) {
+        MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
+        DeleteResult result = coleccion.deleteOne(eq("nombre", producto.getNombre()));
+
+        return result.getDeletedCount() == 1;
     }
 
     @Override
