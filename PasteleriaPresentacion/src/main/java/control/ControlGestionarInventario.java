@@ -5,12 +5,13 @@
 package control;
 
 import dto.DTO_Producto;
-import presentacion.Presentacion_DlgDetalleProducto;
-import presentacion.Presentacion_DlgIngredientesSeleccionados;
-import presentacion.Presentacion_DlgIngresarDatosDelProducto;
-import presentacion.Presentacion_DlgInventarioIngredientes;
-import presentacion.Presentacion_DlgInventarioProductos;
-import presentacion.Presentacion_DlgSeleccionOpcionGestion;
+import presentacion.gestioninventarios.Presentacion_DlgActualizarDatosDelProducto;
+import presentacion.gestioninventarios.Presentacion_DlgDetalleProducto;
+import presentacion.gestioninventarios.Presentacion_DlgIngredientesSeleccionados;
+import presentacion.gestioninventarios.Presentacion_DlgIngresarDatosDelProducto;
+import presentacion.gestioninventarios.Presentacion_DlgInventarioIngredientes;
+import presentacion.gestioninventarios.Presentacion_DlgInventarioProductos;
+import presentacion.gestioninventarios.Presentacion_DlgSeleccionOpcionGestion;
 
 /**
  *
@@ -67,6 +68,11 @@ public class ControlGestionarInventario {
     
     public void mostrarDetalleProducto() {
         Presentacion_DlgDetalleProducto p = new Presentacion_DlgDetalleProducto();
+        p.setVisible(true);
+    }
+    
+    public void mostrarActualizarDatosDelProducto(){
+        Presentacion_DlgActualizarDatosDelProducto p = new Presentacion_DlgActualizarDatosDelProducto();
         p.setVisible(true);
     }
 }

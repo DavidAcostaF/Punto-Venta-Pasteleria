@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package presentacion;
+package presentacion.gestioninventarios;
 
 //import com.mycompany.pasteleriaactualizaringrediente.FuncionalidadActualizarIngrediente;
 import com.mycompany.pasteleriaactualizaringrediente.FuncionalidadActualizarIngrediente;
@@ -23,6 +23,7 @@ import dto.DTO_Ingrediente;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import presentacion.Presentacion_MenuPrincipal;
 
 /**
  *

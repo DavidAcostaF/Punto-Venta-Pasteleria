@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package presentacion;
+package presentacion.gestioninventarios;
 
 //import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
 import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
@@ -38,6 +38,9 @@ public class Presentacion_DlgActualizarDatosDelProducto extends javax.swing.JFra
         funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngredientes();
         funcionalidadAgregarProducto = new FuncionalidadConsultarProductos();
         control = ControlGestionarInventario.getInstance();
+        txtNombre.setText(control.getProductoDTO().getNombre());
+        txtDescripcion.setText(control.getProductoDTO().getDescripcion());
+
         cargaTabla();
     }
 
@@ -59,9 +62,14 @@ public class Presentacion_DlgActualizarDatosDelProducto extends javax.swing.JFra
 
         limipiarTabla(tableIngredientes, model);
 
-        Object datos = new Object[columnas.length];
-        List<DTO_Ingrediente> ingredientes = funcionalidadConsultarIngrediente.consultarIngredientes();
-        for (DTO_Ingrediente ingrediente : ingredientes) {
+        List<DTO_IngredienteDetalle> ingredientesDetalle = control.getProductoDTO().getIngredientes();
+        for (DTO_IngredienteDetalle ingrediente : ingredientesDetalle) {
+
+            model.addRow(new Object[]{ingrediente.getNombre(), true});
+        }
+
+        List<DTO_Ingrediente> ingredientesFaltantes = funcionalidadConsultarIngrediente.consultarIngredientesFaltantes(control.getProductoDTO());
+        for (DTO_Ingrediente ingrediente : ingredientesFaltantes) {
 
             model.addRow(new Object[]{ingrediente.getNombre(), false});
         }
