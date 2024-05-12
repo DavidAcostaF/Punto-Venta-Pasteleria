@@ -1,5 +1,6 @@
 presentacion\Presentacion_DlgInventarioIngredientes.class
 presentacion\Presentacion_DlgInventarioProductos$6.class
+presentacion\Presentacion_FrmHistorialVentas$9.class
 presentacion\Presentacion_DlgCobrarVenta.class
 extras\ActionButton$1.class
 extras\ActionButton.class
@@ -32,6 +33,7 @@ presentacion\Presentacion_FrmDetallesVenta$2.class
 presentacion\Presentacion_DlgFacturarACliente$3.class
 pruebas\prueba.class
 presentacion\Presentacion_DlgVentasTotales.class
+pruebas\pruebaJasper.class
 presentacion\Presentacion_FrmMenuHistoriales$1.class
 presentacion\Presentacion_DlgConfirmacionPago$6.class
 presentacion\Presentacion_FrmHistorialVentas$6.class
@@ -72,6 +74,7 @@ presentacion\Presentacion_DlgVentasTotales$2.class
 presentacion\Presentacion_DlgInventarioIngredientes$9.class
 presentacion\Presentacion_DlgInventarioProductos.class
 presentacion\Presentacion_DlgInventarioIngredientes$2.class
+extras\VentasTableModel.class
 presentacion\Presentacion_FrmHistorialVentas$5.class
 presentacion\Presentacion_ProductosVenta$4.class
 presentacion\Presentacion_DlgDatosCliente.class
@@ -105,6 +108,7 @@ presentacion\Presentacion_DlgInventarioProductos$2.class
 presentacion\Presentacion_FrmHistorialVentas$2.class
 presentacion\Presentacion_DlgSeleccionarFechaIngresos$2.class
 presentacion\Presentacion_DlgCobrarVenta$2.class
+extras\ButtonColumn.class
 presentacion\Presentacion_DlgHistorialReportes$3.class
 presentacion\Presentacion_FrmHistorialVentas.class
 presentacion\Presentacion_MenuPrincipal$6.class
@@ -128,13 +132,13 @@ presentacion\Presentacion_MenuPrincipal$5.class
 presentacion\Presentacion_DlgAgregarPastel$1.class
 presentacion\Presentacion_DlgSeleccionarFechaIngresos.class
 presentacion\Presentacion_DlgIngredientesSeleccionados.class
-presentacion\Presentacion_DlgSeleccionarFechaIngresos$3.class
 presentacion\Presentacion_FrmSeleccionarVenta$5.class
 presentacion\Presentacion_DlgInventarioProductos$8.class
 presentacion\Presentacion_DlgDirecciones$2.class
 presentacion\Presentacion_DlgCobrarVenta$1.class
 presentacion\Presentacion_DlgConfirmacionPago.class
 presentacion\Presentacion_FrmHistorialVentas$7.class
+control\ControlIngresosMensuales.class
 presentacion\Presentacion_ProductosVenta$1.class
 presentacion\Presentacion_DlgAgregarDireccion.class
 control\ControlAgregarVenta.class

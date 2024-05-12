@@ -1,5 +1,7 @@
 dto\DTO_Direccion.class
+dto\DTO_ReporteVentasFormato.class
 dto\DTO_IngredienteDetalle.class
+dto\DTO_GenerarReporte.class
 dto\DTO_Ingrediente.class
 dto\DTO_Cliente.class
 dto\DTO_DetalleVenta.class

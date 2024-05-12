@@ -135,6 +135,17 @@
             <artifactId>PasteleriaCalcularGananciasDelDia</artifactId>
             <version>${project.version}</version>
         </dependency>
+          <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.21.2</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>PasteleriaGenerarReporte</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <name>PasteleriaPresentacion</name>
 </project>

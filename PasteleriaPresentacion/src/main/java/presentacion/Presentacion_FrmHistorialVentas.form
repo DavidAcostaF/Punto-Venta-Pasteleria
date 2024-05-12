@@ -71,7 +71,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="regresarBtn" min="-2" pref="160" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
-                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                  <Component id="generarReporteEvnt" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="253" max="-2" attributes="0"/>
@@ -162,7 +162,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="detallesVentaBtn" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="regresarBtn" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="generarReporteEvnt" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               </Group>
@@ -341,7 +341,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="regresarBtnActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
+        <Component class="javax.swing.JLabel" name="generarReporteEvnt">
           <Properties>
             <Property name="text" type="java.lang.String" value="Generar Reporte de las ventas"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -351,6 +351,9 @@
               <Color blue="ff" green="66" red="0" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="generarReporteEvntMousePressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="clientesComboBox">
           <Properties>
@@ -365,6 +368,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="restablecerBtn">
           <Properties>
+            <Property name="text" type="java.lang.String" value="Restablecer"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fe" green="dc" red="8c" type="rgb"/>
             </Property>
@@ -374,7 +378,6 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Restablecer"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="restablecerBtnActionPerformed"/>
