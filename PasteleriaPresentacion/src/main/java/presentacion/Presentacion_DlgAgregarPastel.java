@@ -32,7 +32,7 @@ public class Presentacion_DlgAgregarPastel extends javax.swing.JDialog {
         this.producto = producto;
         this.especificacion=especificacion;
         initComponents();
-        pasteles = funcionalidadesProductos.consultarProductosVenta();
+       pasteles = funcionalidadesProductos.consultarProductos();
         desplegarPasteles(pasteles);
          setVisible(true);
     }

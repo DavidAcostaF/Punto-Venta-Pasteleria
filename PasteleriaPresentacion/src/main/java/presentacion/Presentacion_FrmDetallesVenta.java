@@ -109,29 +109,29 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(232, 232, 232));
         jPanel1.setForeground(new java.awt.Color(0, 0, 0));
 
-        jLabel1.setText("Detalles de la venta");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Detalles de la venta");
 
-        detallesVentaLabel.setText("Fecha de la compra:");
         detallesVentaLabel.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         detallesVentaLabel.setForeground(new java.awt.Color(0, 0, 0));
+        detallesVentaLabel.setText("Fecha de la compra:");
 
-        jLabel3.setText("Detalles de la venta");
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Detalles de la venta");
 
-        estadoLabel.setText("Estado:");
         estadoLabel.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         estadoLabel.setForeground(new java.awt.Color(0, 0, 0));
+        estadoLabel.setText("Estado:");
 
-        fechaEntregalabel.setText("Fecha de entrega:");
         fechaEntregalabel.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         fechaEntregalabel.setForeground(new java.awt.Color(0, 0, 0));
+        fechaEntregalabel.setText("Fecha de entrega:");
 
-        totalVentalabel.setText("Total:");
         totalVentalabel.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         totalVentalabel.setForeground(new java.awt.Color(0, 0, 0));
+        totalVentalabel.setText("Total:");
 
         detallesVentaTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -160,24 +160,24 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
         detallesVentaTabla.setSurrendersFocusOnKeystroke(true);
         jScrollPane1.setViewportView(detallesVentaTabla);
 
-        jButton1.setText("Regresar");
         jButton1.setBackground(new java.awt.Color(140, 220, 254));
         jButton1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setText("Regresar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Generar Ticket");
         jButton2.setBackground(new java.awt.Color(140, 220, 254));
         jButton2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
+        jButton2.setText("Generar Ticket");
 
-        clienteLabel.setText("Cliente:");
         clienteLabel.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         clienteLabel.setForeground(new java.awt.Color(0, 0, 0));
+        clienteLabel.setText("Cliente:");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -217,7 +217,7 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(45, Short.MAX_VALUE))
+                        .addContainerGap(75, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -268,7 +268,7 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(calleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(coloniaLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(coloniaLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24))))
@@ -309,7 +309,7 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
                 .addGap(26, 26, 26))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 510));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 510));
 
         pack();
         setLocationRelativeTo(null);

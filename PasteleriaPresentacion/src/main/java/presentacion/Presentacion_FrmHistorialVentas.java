@@ -26,6 +26,7 @@ import extras.ClientesComboBoxModel;
 import extras.PastelComboBoxModel;
 import extras.VentasTableModel;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -78,11 +79,13 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         this.funcionalidadesClientes = new FuncionalidadConsultarClientes();
         this.funcionalidadConsultarProductos = new FuncionalidadConsultarProductos();
         this.funcionalidadGenerarReporte=new FuncionalidadGenerarReporte();
+        this.funcionalidadConsultarProductos = new FuncionalidadConsultarProductos();
+        this.funcionalidadGenerarReporte = new FuncionalidadGenerarReporte();
         this.cliente = new DTO_Cliente();
         this.venta = new DTO_Venta();
         this.listaProductosSeleccionados = new ArrayList<>();
         listaClientes = funcionalidadesClientes.consultarClientes();
-        listaProductos = funcionalidadConsultarProductos.consultarProductosVenta();
+        listaProductos = funcionalidadConsultarProductos.consultarProductos();
         initComponents();
         panelProductos.setVisible(false);
         llenarTabla();
@@ -578,22 +581,22 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         try {
             VentasTableModel modelo = (VentasTableModel) tablaVentas.getModel();
             List<DTO_Venta> ventas = modelo.getAllVentas();
-            List<DTO_ReporteVentasFormato> reporteVentas=new ArrayList<>();
-        SimpleDateFormat ff = new SimpleDateFormat("dd/MM/yyyy");
-        for (DTO_Venta venta : ventas) {
-            DTO_ReporteVentasFormato r= new DTO_ReporteVentasFormato();
-            r.setFechaEntrega(ff.format(venta.getFechaEntrega()));
-            r.setFechaCompra(ff.format(venta.getFechaRegistro()));
-            r.setEstado(venta.getEstado());
-            r.setTotal(Float.toString(venta.getMontoTotal()));
-            reporteVentas.add(r);
-            r.getEstado();
-        }
+            List<DTO_ReporteVentasFormato> reporteVentas = new ArrayList<>();
+            SimpleDateFormat ff = new SimpleDateFormat("dd/MM/yyyy");
+            for (DTO_Venta venta : ventas) {
+                DTO_ReporteVentasFormato r = new DTO_ReporteVentasFormato();
+                r.setFechaEntrega(ff.format(venta.getFechaEntrega()));
+                r.setFechaCompra(ff.format(venta.getFechaRegistro()));
+                r.setEstado(venta.getEstado());
+                r.setTotal(Float.toString(venta.getMontoTotal()));
+                reporteVentas.add(r);
+                r.getEstado();
+            }
             System.out.println(reporteVentas);
-            DTO_GenerarReporte reporteGenerado=funcionalidadGenerarReporte.generarReporteVentasCasoHistoriales(reporteVentas);
+            DTO_GenerarReporte reporteGenerado = funcionalidadGenerarReporte.generarReporteVentasCasoHistoriales(reporteVentas);
             JasperPrint jasperPrint = JasperFillManager.fillReport(reporteGenerado.getJasperReport(), reporteGenerado.getParameters(), new JREmptyDataSource());
-            
-            JasperViewer.viewReport(jasperPrint,false);
+
+            JasperViewer.viewReport(jasperPrint, false);
         } catch (JRException ex) {
             Logger.getLogger(Presentacion_FrmHistorialVentas.class.getName()).log(Level.SEVERE, null, ex);
         }
