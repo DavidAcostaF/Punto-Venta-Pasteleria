@@ -4,6 +4,8 @@
  */
 package presentacion.gestioninventarios;
 
+import com.mycompany.pasteleriaactualizarproducto.FuncionalidadActualizarProducto;
+import com.mycompany.pasteleriaactualizarproducto.IFuncionalidadActualizarProducto;
 import com.mycompany.pasteleriaagregarproducto.FuncionalidadAgregarProducto;
 import com.mycompany.pasteleriaagregarproducto.IFuncionalidadAgregarProducto;
 import com.mycompany.pasteleriaconsultaringrediente.FuncionalidadConsultarIngrediente;
@@ -25,19 +27,19 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author af_da
  */
-public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFrame {
+public class Presentacion_DlgActualizarIngredientesSeleccionados extends javax.swing.JFrame {
 
     private IFuncionalidadConsultarIngrediente funcionalidadConsultarIngrediente;
-    private IFuncionalidadAgregarProducto funcionalidadAgregarProducto;
+    private IFuncionalidadActualizarProducto funcionalidadActualizarProducto;
     private ControlGestionarInventario control;
 
     /**
      * Creates new form Presentacion_DlgIngredientesSeleccionados
      */
-    public Presentacion_DlgIngredientesSeleccionados() {
+    public Presentacion_DlgActualizarIngredientesSeleccionados() {
         initComponents();
         funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngrediente();
-        funcionalidadAgregarProducto = new FuncionalidadAgregarProducto();
+        funcionalidadActualizarProducto = new FuncionalidadActualizarProducto();
         control = ControlGestionarInventario.getInstance();
         llenarTabla();
         agregarListenerCambioCantidad();
@@ -47,7 +49,8 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
     private void llenarTabla() {
         limpiarTabla();
         List<DTO_Ingrediente> listaIngredientes = new ArrayList<>();
-        List<DTO_IngredienteDetalle> ingredientesDetalleDTO = control.getProductoDTO().getIngredientes();
+        List<DTO_IngredienteDetalle> ingredientesDetalleDTO = control.getProductoAActualizar().getIngredientes();
+        List<DTO_IngredienteDetalle> ingredientesOriginales = control.getProductoDTO().getIngredientes();
         if (ingredientesDetalleDTO != null) {
 
             for (int i = 0; i < ingredientesDetalleDTO.size(); i++) {
@@ -58,8 +61,14 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
         }
         DefaultTableModel modelo = (DefaultTableModel) tableIngredientes.getModel();
 
-        if (listaIngredientes != null) {
-            listaIngredientes.forEach(t -> modelo.addRow(new Object[]{t.getNombre(), null, t.getUnidadDeMedida()}));
+        for (int i = 0; i < listaIngredientes.size(); i++) {
+            if (i < ingredientesOriginales.size() && ingredientesOriginales.get(i) != null && ingredientesOriginales.get(i).getNombre().equals(listaIngredientes.get(i).getNombre())) {
+                modelo.addRow(new Object[]{listaIngredientes.get(i).getNombre(), ingredientesOriginales.get(i).getCantidad(), listaIngredientes.get(i).getUnidadDeMedida()});
+            } else {
+                modelo.addRow(new Object[]{listaIngredientes.get(i).getNombre(), null, listaIngredientes.get(i).getUnidadDeMedida()});
+
+            }
+
         }
 
     }
@@ -74,7 +83,7 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
 
     private List<DTO_IngredienteDetalle> obtenerListaIngredientes() {
         JTable tabla = tableIngredientes;
-        List<DTO_IngredienteDetalle> listaIngredientes = control.getProductoDTO().getIngredientes();
+        List<DTO_IngredienteDetalle> listaIngredientes = control.getProductoAActualizar().getIngredientes();
         int numRows = tabla.getRowCount();
 
         for (int fila = 0; fila < numRows; fila++) {
@@ -229,16 +238,16 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
 
         control.getProductoDTO().setIngredientes(ingredientesAgregados);
 
-        DTO_Producto producto = control.getProductoDTO();
+        DTO_Producto producto = control.getProductoAActualizar();
 
-        DTO_Producto productoAgregado = funcionalidadAgregarProducto.agregarProducto(producto);
+        DTO_Producto productoAgregado = funcionalidadActualizarProducto.actualizarProducto(producto);
 
         if (productoAgregado != null) {
-            JOptionPane.showMessageDialog(this, "Se ha agregado el producto.");
+            JOptionPane.showMessageDialog(this, "Se ha actualizado el producto.");
             control.mostrarInvetarioProductos();
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "No se ha agregado el producto.");
+            JOptionPane.showMessageDialog(this, "No se ha actualizado el producto.");
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 

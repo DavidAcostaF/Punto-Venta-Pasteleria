@@ -19,6 +19,7 @@ import com.mycompany.pasteleriaconsultaringredientes.IFuncionalidadConsultarIngr
 import com.mycompany.pasteleriaeliminaringrediente.FuncionalidadEliminarIngrediente;
 //import com.mycompany.pasteleriaeliminaringrediente.FuncionalidadEliminarIngrediente;
 import com.mycompany.pasteleriaeliminaringrediente.IFuncionalidadEliminarIngrediente;
+import control.ControlGestionarInventario;
 import dto.DTO_Ingrediente;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -36,7 +37,8 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
     private IFuncionalidadConsultarIngrediente funcionalidadConsultarIngrediente;
     private IFuncionalidadActualizarIngrediente funcionalidadActualizarIngrediente;
     private IFuncionalidadEliminarIngrediente funcionalidadEliminarIngrediente;
-   private List<DTO_Ingrediente> listaIngredientes;
+    private ControlGestionarInventario control;
+    private List<DTO_Ingrediente> listaIngredientes;
 
     /**
      * Creates new form Presentacion_DlgInventarioIngredientes
@@ -49,6 +51,7 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
         funcionalidadActualizarIngrediente = new FuncionalidadActualizarIngrediente();
         funcionalidadEliminarIngrediente = new FuncionalidadEliminarIngrediente();
         listaIngredientes = funcionalidadConsultarIngredientes.consultarIngredientes();
+        control = ControlGestionarInventario.getInstance();
         llenarTabla();
         btnActualizar.setEnabled(false);
         btnEliminar.setEnabled(false);
@@ -396,7 +399,8 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        // TODO add your handling code here:
+        control.mostrarOpcionesGestion();
+        this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed

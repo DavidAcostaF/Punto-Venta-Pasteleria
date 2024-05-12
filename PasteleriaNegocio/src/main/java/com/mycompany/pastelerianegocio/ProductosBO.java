@@ -41,10 +41,17 @@ public class ProductosBO implements IProductosBO {
 
     @Override
     public DTO_Producto agregarProducto(DTO_Producto producto) {
-        Producto productosi = this.convertirDTOAProducto(producto);
-        System.out.println(productosi.getPrecio());
-        Producto producoNuevo = productoDAO.agregarProducto(productosi);
+        Producto productoConvertido = this.convertirDTOAProducto(producto);
+        Producto producoNuevo = productoDAO.agregarProducto(productoConvertido);
         return conversor.convertirProducto(producoNuevo);
+    }
+
+    @Override
+    public DTO_Producto actualizarProducto(DTO_Producto producto) {
+        Producto productoConvertido = this.convertirDTOAProducto(producto);
+        Producto producoActualizado = productoDAO.actualizar(productoConvertido);
+        return conversor.convertirProducto(producoActualizado);
+
     }
 
     @Override
@@ -55,7 +62,11 @@ public class ProductosBO implements IProductosBO {
 
     @Override
     public DTO_Producto consultarProductoPorNombre(String nombre) {
-        return conversor.convertirProducto(productoDAO.consultarPorNombre(nombre));
+        Producto productoConsultado = productoDAO.consultarPorNombre(nombre);
+        if (productoConsultado == null) {
+            return null;
+        }
+        return conversor.convertirProducto(productoConsultado);
     }
 
     @Override

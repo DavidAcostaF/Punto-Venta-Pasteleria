@@ -21,6 +21,8 @@ public interface IProductosBO {
 
     public DTO_Producto agregarProducto(DTO_Producto producto);
 
+    public DTO_Producto actualizarProducto(DTO_Producto producto);
+
     public List<DTO_Producto> consultarProductos();
 
     public DTO_Producto consultarProductoPorNombre(String nombre);
