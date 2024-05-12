@@ -39,6 +39,7 @@ public class PruebasVenta {
     public static void main(String[] args) {
         VentaDAO ventadao = new VentaDAO();
         VentaMapeo venta = new VentaMapeo();
+
         venta.setMontoTotal(150.00f); // Monto total de la venta
         VentasConversiones conversor = new VentasConversiones();
 
@@ -70,11 +71,44 @@ public class PruebasVenta {
         Venta ventaEntidad = conversor.convertirAVentaEntidad(venta);
         ventadao.agregarVenta(ventaEntidad);
 
+//        venta.setMontoTotal(150.00f); // Monto total de la venta
+//        VentasConversiones conversor = new VentasConversiones();
+//
+//// 
+//        Date fechaEntrega = new Date(); // Fecha de entrega
+//        Date fechaRegistro = new Date(); // Fecha de registro
+//
+//// 
+//        venta.setFechaEntrega(fechaEntrega);
+//        venta.setFechaRegistro(fechaRegistro);
+//        venta.setEstado("Pagado");
+//        venta.setId(new ObjectId());
+//        venta.setClienteid(new ObjectId("664062b3be17b02d28f61d60"));
+//        List<DetalleVentaMapeo> detallesVenta = new ArrayList<>();
+//        DetalleVentaMapeo dv = new DetalleVentaMapeo();
+//        dv.setCantidad(2);
+//        dv.setDetallesCliente(" ");
+//        dv.setImporte(150.00f);
+//        dv.setPrecio(75);
+//        dv.setProductoId(new ObjectId("6640635df35eca6e5bf3d58e"));
+//        dv.setTamanhoProducto("chico");
+//        detallesVenta.add(dv);
+//        venta.setDetallesVenta(detallesVenta);
+//        DireccionMapeo direccionEntrega = new DireccionMapeo();
+//        direccionEntrega.setCalle("Calle Principal");
+//        direccionEntrega.setNumExterior("123");
+//        direccionEntrega.setColonia("Ciudad Ejemplo");
+//        venta.setDireccionEntrega(direccionEntrega);
+//        Venta ventaEntidad = conversor.convertirAVentaEntidad(venta);
+//        ventadao.agregarVenta(ventaEntidad);
+
+
  /* List<DTO_Venta> ventas=ventadao.consultarVentas();
     // List<DTO_Venta> ventas=ventadao.ventasPorCliente("663b16288bcd861f9682ffa9");
         for (DTO_Venta venta1:ventas) {
             System.out.println(venta1);
         }*/
+
 //  Venta venta1 = null;
 //        try {
 //            venta1 = ventadao.encontrarVenta("66407078f7989940561be054");
@@ -88,6 +122,21 @@ public class PruebasVenta {
 //            System.out.println(dv.getProducto().getId());
 //            
 //        }
+
+  Venta venta1 = null;
+        try {
+            venta1 = ventadao.encontrarVenta("663c5d4fa6ca7e6121d3e116");
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(PruebasVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(venta1.getFechaEntrega());
+        System.out.println(venta1.getFechaRegistro());
+        for (DetalleVenta dv1:venta1.getDetallesVenta()) {
+            System.out.println(dv1);
+            System.out.println(dv1.getProducto().getId());
+            System.out.println(venta1.getCliente());
+ }
+
         /*Producto producto1 = new Producto();
         producto1.setId("663d1f0de604fa31cd6f6b5b");
         List<Producto> listaprod = new ArrayList<>();
