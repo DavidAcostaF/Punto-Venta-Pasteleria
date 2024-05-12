@@ -31,11 +31,13 @@ public class ControlIngresosMensuales {
     }
 
     public Date getFechaSeleccionada() {
+        System.out.println(fechaSeleccionada);
         return fechaSeleccionada;
     }
 
     public void setFechaSeleccionada(Date fechaSeleccionada) {
         this.fechaSeleccionada = fechaSeleccionada;
+        System.out.println(fechaSeleccionada);
     }
 
     public void mostrarSeleccionadorFecha() {

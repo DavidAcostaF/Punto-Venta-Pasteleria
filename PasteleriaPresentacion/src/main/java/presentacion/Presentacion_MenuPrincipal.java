@@ -28,7 +28,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
         initComponents();
         control = new ControlAgregarVenta();
         controlGesionarInventario = new ControlGestionarInventario();
-        this.controlIngresos = new ControlIngresosMensuales();
+        this.controlIngresos = ControlIngresosMensuales.getInstance();
 
     }
 

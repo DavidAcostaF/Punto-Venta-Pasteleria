@@ -9,6 +9,7 @@ import java.util.Date;
 import com.mycompany.pastelerianegocio.IVentasBO;
 import com.mycompany.pastelerianegocio.VentasBO;
 import dto.DTO_Venta;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,18 +29,29 @@ public class FuncionalidadCalcularGananciasDelDia implements IFuncionalidadCalcu
     @Override
     public float CalcularGananciasDelDia(Date fecha) {
 
-        List<DTO_Venta> ventasDia = null;
-        try {
-            ventasDia = ventaBO.consultarVentasPorFecha(fecha);
-        } catch (ConsultarVentasPorFechaException ex) {
-            Logger.getLogger(FuncionalidadCalcularGananciasDelDia.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Calendar calInicio = Calendar.getInstance();
+        calInicio.setTime(fecha);
+        calInicio.set(Calendar.HOUR_OF_DAY, 0);
+        calInicio.set(Calendar.MINUTE, 0);
+        calInicio.set(Calendar.SECOND, 0);
+        calInicio.set(Calendar.MILLISECOND, 0);
+
+        Calendar calFin = Calendar.getInstance();
+        calFin.setTime(fecha);
+        calFin.set(Calendar.HOUR_OF_DAY, 23);
+        calFin.set(Calendar.MINUTE, 59);
+        calFin.set(Calendar.SECOND, 59);
+        calFin.set(Calendar.MILLISECOND, 999);
+
+        Date fechaInicio = calInicio.getTime();
+        Date fechaFin = calFin.getTime();
+
+        List<DTO_Venta> ventasDia = ventaBO.consultarVentasPorRangoFecha(fechaInicio, fechaFin);
 
         float ganancias = 0;
-        if (ventasDia != null) {
-            for (DTO_Venta venta : ventasDia) {
-                ganancias += venta.getMontoTotal();
-            }
+
+        for (DTO_Venta venta : ventasDia) {
+            ganancias += venta.getMontoTotal();
         }
 
         return ganancias;

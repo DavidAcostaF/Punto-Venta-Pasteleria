@@ -8,14 +8,17 @@ import com.mycompany.pasteleriacalculargananciasdeldia.FuncionalidadCalcularGana
 import com.mycompany.pasteleriacalculargananciasdeldia.IFuncionalidadCalcularGananciasDelDia;
 import com.mycompany.pasteleriacontarventaspordia.FuncionalidadContarVentasPorDia;
 import com.mycompany.pasteleriacontarventaspordia.IFuncionalidadContarVentasPorDia;
+import control.ControlAgregarVenta;
 import control.ControlIngresosMensuales;
 import dto.DTO_Producto;
 import extras.ButtonColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import net.miginfocom.layout.AC;
 
 /**
@@ -27,6 +30,9 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
     private IFuncionalidadContarVentasPorDia funcionalidadVentasPorDia;
     private IFuncionalidadCalcularGananciasDelDia funcionalidadGananciasDelDia;
     private ControlIngresosMensuales controlIngresos;
+    private ControlAgregarVenta controlPrincipal;
+    Date fechaInicial;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); // Formato deseado para la fecha
 
     /**
      * Creates new form Presentacion_DlgVentasTotales
@@ -35,19 +41,18 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
         initComponents();
         this.funcionalidadVentasPorDia = new FuncionalidadContarVentasPorDia();
         this.funcionalidadGananciasDelDia = new FuncionalidadCalcularGananciasDelDia();
-        this.controlIngresos = new ControlIngresosMensuales();
+        this.controlIngresos = ControlIngresosMensuales.getInstance();
+        this.fechaInicial = this.controlIngresos.getFechaSeleccionada();
+        this.controlPrincipal = new ControlAgregarVenta();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fechaInicial);
+        calendar.add(Calendar.DAY_OF_MONTH, 30);
+        this.txtFechaInicial.setEditable(false);
+        this.txtFechaFinal.setEditable(false);
+        this.txtFechaInicial.setText(dateFormat.format(controlIngresos.getFechaSeleccionada()));
+        this.txtFechaFinal.setText(dateFormat.format(calendar.getTime()));
+        llenarTabla();
 
-        // Asumiendo que tu tabla se llama tableProductos
-        ButtonColumn buttonColumn = new ButtonColumn("Desplegar Ventas", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Coloca aquí el código que deseas ejecutar cuando se haga clic en el botón
-                // Por ejemplo, puedes abrir una ventana de diálogo o realizar alguna acción específica.
-            }
-        });
-
-        // Establece el ancho de la columna de botones
-        this.tableVentas.getColumnModel().getColumn(tableVentas.getColumnCount() - 1).setPreferredWidth(100);
     }
 
     /**
@@ -69,8 +74,8 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         labelTotal = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
-        txtCantidad = new javax.swing.JTextField();
+        txtFechaInicial = new javax.swing.JTextField();
+        txtFechaFinal = new javax.swing.JTextField();
         botonContinuar = new javax.swing.JButton();
         botonRetroceder = new javax.swing.JButton();
         labelTotal1 = new javax.swing.JLabel();
@@ -94,7 +99,7 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Fecha", "Cantidad de Ventas", "Ganancia del Dia"
+                "Fecha", "Cantidad de Ventas", "Ganancia del Dia", "null"
             }
         ));
         tableVentas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -170,28 +175,28 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
                                     .addComponent(jLabel3))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(30, 30, 30)
                                 .addComponent(jLabel4))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(botonRetroceder, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(70, 70, 70)
                                         .addComponent(botonExportarPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(botonContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addGap(84, 84, 84)
+                                        .addComponent(botonContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(217, 217, 217)
                         .addComponent(labelTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtCantidad1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,11 +213,11 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -235,16 +240,21 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
     }//GEN-LAST:event_botonExportarPDFActionPerformed
 
     private void botonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonContinuarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        controlPrincipal.mostrarMenu();
     }//GEN-LAST:event_botonContinuarActionPerformed
 
     private void botonRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRetrocederActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        controlIngresos.mostrarSeleccionadorFecha();
     }//GEN-LAST:event_botonRetrocederActionPerformed
 
     private void llenarTabla() {
-        DefaultTableModel model = (DefaultTableModel) tableVentas.getModel();
-        model.setRowCount(0); // Limpiar la tabla antes de llenarla
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Fecha");
+        model.addColumn("Cantidad de Ventas");
+        model.addColumn("Ganancias del Dia");
+        model.addColumn("");
 
         Date fechaInicial = controlIngresos.getFechaSeleccionada();
         Calendar calendar = Calendar.getInstance();
@@ -258,13 +268,36 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
             if (cantidadVentas >= 1) {
                 float gananciaDia = funcionalidadGananciasDelDia.CalcularGananciasDelDia(fecha);
 
+                String fechaFormat = dateFormat.format(fecha);
+
+                Object[] fila = {
+                    fechaFormat,
+                    cantidadVentas,
+                    gananciaDia,
+                    "Desplegar Ventas"
+                };
                 // Agregar la entrada a la tabla
-                model.addRow(new Object[]{fecha, cantidadVentas, gananciaDia});
+                model.addRow(fila);
             }
 
             // Avanzar al siguiente día
             calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
+        this.tableVentas.setModel(model);
+        TableColumnModel columnModel = tableVentas.getColumnModel();
+
+        ButtonColumn desplegarButtonColumn = new ButtonColumn("Ver opciones", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        columnModel.getColumn(0).setPreferredWidth(100);
+        columnModel.getColumn(1).setPreferredWidth(150);
+        columnModel.getColumn(2).setPreferredWidth(150);
+        columnModel.getColumn(3).setPreferredWidth(150);
+        columnModel.getColumn(3).setCellRenderer(desplegarButtonColumn);
+        columnModel.getColumn(3).setCellEditor(desplegarButtonColumn);
     }
 
 
@@ -282,8 +315,8 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
     private javax.swing.JLabel labelTotal;
     private javax.swing.JLabel labelTotal1;
     private javax.swing.JTable tableVentas;
-    private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCantidad1;
-    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtFechaFinal;
+    private javax.swing.JTextField txtFechaInicial;
     // End of variables declaration//GEN-END:variables
 }
