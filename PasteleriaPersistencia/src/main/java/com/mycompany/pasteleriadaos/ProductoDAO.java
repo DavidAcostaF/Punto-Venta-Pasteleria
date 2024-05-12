@@ -36,8 +36,16 @@ public class ProductoDAO implements IProductoDAO {
     public Producto agregarProducto(Producto producto) {
         MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
         coleccion.insertOne(conversor.convertirProductoMapeo(producto));
-        //Retornar el producto convertido a DTO por la clase encargada de la chamba esa
-        return new Producto();
+
+        return producto;
+    }
+
+    @Override
+    public Producto actualizar(ProductoMapeo producto) {
+        MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
+        ProductoMapeo productoActualizado = coleccion.findOneAndReplace(eq("nombre", producto.getNombre()), producto);
+
+        return conversor.convertirProducto(productoActualizado);
     }
 
     @Override

@@ -7,6 +7,8 @@ package presentacion;
 //import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
 import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
 import com.mycompany.pasteleriaconsultaringredientes.IFuncionalidadConsultarIngredientes;
+import com.mycompany.pasteleriaproductosventa.FuncionalidadConsultarProductos;
+import com.mycompany.pasteleriaproductosventa.IFuncionalidadConsultarProductos;
 import control.ControlGestionarInventario;
 import dto.DTO_Ingrediente;
 import dto.DTO_IngredienteDetalle;
@@ -14,6 +16,7 @@ import dto.DTO_Producto;
 import extras.Render;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
 public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame {
 
     private IFuncionalidadConsultarIngredientes funcionalidadConsultarIngrediente;
+    private IFuncionalidadConsultarProductos funcionalidadAgregarProducto;
     private ControlGestionarInventario control;
 
     /**
@@ -32,6 +36,7 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
     public Presentacion_DlgIngresarDatosDelProducto() {
         initComponents();
         funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngredientes();
+        funcionalidadAgregarProducto = new FuncionalidadConsultarProductos();
         control = ControlGestionarInventario.getInstance();
         cargaTabla();
     }
@@ -88,6 +93,8 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
         txtNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        txtDescripcion = new javax.swing.JTextField();
+        labelDescripcion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Datos del pastel");
@@ -132,9 +139,14 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Nombre:");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Selecciona los ingredientes.");
+
+        labelDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelDescripcion.setText("Descripcion");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,22 +159,30 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
             .addGroup(layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                         .addComponent(jLabel2)
-                        .addGap(8, 8, 8)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(labelDescripcion)
+                            .addGap(8, 8, 8)
+                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(99, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelDescripcion)
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,6 +199,11 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
     }//GEN-LAST:event_tableIngredientesMouseClicked
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        if (this.txtDescripcion.getText().isBlank() || this.txtNombre.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos son necesarios.");
+            return;
+        }
+
         DTO_Producto productoDTO = new DTO_Producto();
         List<DTO_IngredienteDetalle> listaIngredienteDetalle = new ArrayList<>();
 
@@ -187,16 +212,26 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
             boolean seleccionado = (boolean) tableIngredientes.getValueAt(i, 1);
 
             if (seleccionado) {
-                String fila = tableIngredientes.getValueAt(i, 0).toString(); 
+                String fila = tableIngredientes.getValueAt(i, 0).toString();
                 DTO_IngredienteDetalle ingredienteDetalleDTO = new DTO_IngredienteDetalle();
                 ingredienteDetalleDTO.setNombre(fila);
                 listaIngredienteDetalle.add(ingredienteDetalleDTO);
 
             }
         }
+        if (listaIngredienteDetalle.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No se puede agregar sin ingredientes.");
+            return;
+        }
+        DTO_Producto productoConsultado = funcionalidadAgregarProducto.consultarProductoPorNombre(this.txtNombre.getText());
 
+        if (productoConsultado != null) {
+            JOptionPane.showMessageDialog(this, "El producto ya se encuentra agregado.");
+            return;
+        }
         productoDTO.setIngredientes(listaIngredienteDetalle);
         productoDTO.setNombre(this.txtNombre.getText());
+        productoDTO.setDescripcion(this.txtDescripcion.getText());
         control.setProductoDTO(productoDTO);
         this.dispose();
         control.mostrarIngredientesSeleccionados();
@@ -256,8 +291,10 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
     private javax.swing.JButton btnAceptar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel labelDescripcion;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JTable tableIngredientes;
+    private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
