@@ -46,8 +46,8 @@ public class ComboBoxMultiSeleccion<E> extends JComboBox<E> {
     private Component listaCombo;
 
     /**
-     * Constructor de la clase ComboBoxMultiSeleccion.
-     * Inicializa la interfaz de usuario, el editor y el renderizador del ComboBox.
+     * Constructor de la clase ComboBoxMultiSeleccion. Inicializa la interfaz de
+     * usuario, el editor y el renderizador del ComboBox.
      */
     public ComboBoxMultiSeleccion() {
         setUI(new InterfazComboMultiple());
@@ -70,6 +70,7 @@ public class ComboBoxMultiSeleccion<E> extends JComboBox<E> {
 
     /**
      * Obtiene la lista de elementos seleccionados en el ComboBox.
+     *
      * @return Lista de elementos seleccionados.
      */
     public List<Object> obtenerElementosSeleccionados() {
@@ -78,6 +79,7 @@ public class ComboBoxMultiSeleccion<E> extends JComboBox<E> {
 
     /**
      * Establece los elementos seleccionados en el ComboBox.
+     *
      * @param elementosSeleccionados Lista de elementos seleccionados.
      */
     public void establecerElementosSeleccionados(List<Object> elementosSeleccionados) {
@@ -95,7 +97,8 @@ public class ComboBoxMultiSeleccion<E> extends JComboBox<E> {
     }
 
     /**
-     * Limpia la lista de elementos seleccionados en el ComboBox y actualiza su visualización.
+     * Limpia la lista de elementos seleccionados en el ComboBox y actualiza su
+     * visualización.
      */
     public void limpiarElementosSeleccionados() {
         elementosSeleccionados.clear();
@@ -106,12 +109,16 @@ public class ComboBoxMultiSeleccion<E> extends JComboBox<E> {
             panel.removeAll();
             revalidate();
             repaint();
-            listaCombo.repaint();
+            if (listaCombo != null) { 
+                listaCombo.repaint();
+            }
         }
     }
 
     /**
-     * Remueve un elemento de la lista de elementos seleccionados en el ComboBox y actualiza su visualización.
+     * Remueve un elemento de la lista de elementos seleccionados en el ComboBox
+     * y actualiza su visualización.
+     *
      * @param obj Objeto a remover.
      */
     private void removerElemento(Object obj) {
@@ -123,7 +130,9 @@ public class ComboBoxMultiSeleccion<E> extends JComboBox<E> {
     }
 
     /**
-     * Agrega un elemento a la lista de elementos seleccionados en el ComboBox y actualiza su visualización.
+     * Agrega un elemento a la lista de elementos seleccionados en el ComboBox y
+     * actualiza su visualización.
+     *
      * @param obj Objeto a agregar.
      */
     private void agregarElemento(Object obj) {
@@ -135,7 +144,8 @@ public class ComboBoxMultiSeleccion<E> extends JComboBox<E> {
     }
 
     /**
-     * Clase interna que proporciona una interfaz personalizada para el ComboBox.
+     * Clase interna que proporciona una interfaz personalizada para el
+     * ComboBox.
      */
     private class InterfazComboMultiple extends FlatComboBoxUI {
 
@@ -159,7 +169,8 @@ public class ComboBoxMultiSeleccion<E> extends JComboBox<E> {
     }
 
     /**
-     * Clase interna que proporciona un renderizador personalizado para los elementos del ComboBox.
+     * Clase interna que proporciona un renderizador personalizado para los
+     * elementos del ComboBox.
      */
     private class RenderizadorComboMultiple extends BasicComboBoxRenderer {
 
@@ -227,7 +238,8 @@ public class ComboBoxMultiSeleccion<E> extends JComboBox<E> {
     }
 
     /**
-     * Clase interna que proporciona un icono personalizado para la casilla de verificación en los elementos del ComboBox.
+     * Clase interna que proporciona un icono personalizado para la casilla de
+     * verificación en los elementos del ComboBox.
      */
     private class IconoCheckBox extends FlatCheckBoxIcon {
 
@@ -290,4 +302,3 @@ public class ComboBoxMultiSeleccion<E> extends JComboBox<E> {
         }
     }
 }
-

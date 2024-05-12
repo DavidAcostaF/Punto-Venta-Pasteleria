@@ -52,7 +52,13 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
 import com.mycompany.pasteleriaproductosventa.IFuncionalidadConsultarProductos;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import net.sf.jasperreports.engine.JasperExportManager;
 
 /**
  *
@@ -79,7 +85,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         this.funcionalidadConsultarVentas = new FuncionalidadConsultarVentas();
         this.funcionalidadesClientes = new FuncionalidadConsultarClientes();
         this.funcionalidadConsultarProductos = new FuncionalidadConsultarProductos();
-        this.funcionalidadGenerarReporte=new FuncionalidadGenerarReporte();
+        this.funcionalidadGenerarReporte = new FuncionalidadGenerarReporte();
         this.funcionalidadConsultarProductos = new FuncionalidadConsultarProductos();
         this.funcionalidadGenerarReporte = new FuncionalidadGenerarReporte();
         this.cliente = new DTO_Cliente();
@@ -382,15 +388,15 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_regresarBtnActionPerformed
 
     private void detallesVentaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detallesVentaBtnActionPerformed
-     obtenerDatosFilaSeleccionada();
-    if (venta == null) {
-        JOptionPane.showMessageDialog(this, "Debe seleccionar una venta.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        return; 
-    }
-    venta = funcionalidadConsultarVentas.encontrarVenta(venta.getID());
-    control.setVenta(venta);
-    this.dispose();
-    control.mostrarDetallesVenta();
+        obtenerDatosFilaSeleccionada();
+        if (venta == null) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una venta.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        venta = funcionalidadConsultarVentas.encontrarVenta(venta.getID());
+        control.setVenta(venta);
+        this.dispose();
+        control.mostrarDetallesVenta();
     }//GEN-LAST:event_detallesVentaBtnActionPerformed
 
     private void aplicarFiltroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarFiltroBtnActionPerformed
@@ -597,12 +603,36 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
                 reporteVentas.add(r);
                 r.getEstado();
             }
-            System.out.println(reporteVentas);
+
             DTO_GenerarReporte reporteGenerado = funcionalidadGenerarReporte.generarReporteVentasCasoHistoriales(reporteVentas);
             JasperPrint jasperPrint = JasperFillManager.fillReport(reporteGenerado.getJasperReport(), reporteGenerado.getParameters(), new JREmptyDataSource());
 
-            JasperViewer.viewReport(jasperPrint, false);
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Guardar como...");
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos PDF (*.pdf)", "pdf");
+            fileChooser.setFileFilter(filter);
+            int seleccion = fileChooser.showSaveDialog(this);
+
+            if (seleccion == JFileChooser.APPROVE_OPTION) {
+                // Obtener la ubicación seleccionada por el usuario
+                File archivoSeleccionado = fileChooser.getSelectedFile();
+                String rutaArchivo = archivoSeleccionado.getAbsolutePath();
+
+                // Si el usuario no especifica la extensión ".pdf", agregarla manualmente
+                if (!rutaArchivo.toLowerCase().endsWith(".pdf")) {
+                    rutaArchivo += ".pdf";
+                }
+
+                JasperExportManager.exportReportToPdfFile(jasperPrint, rutaArchivo);
+                JOptionPane.showMessageDialog(this, "El archivo se ha guardado correctamente en:\n" + rutaArchivo, "Archivo guardado", JOptionPane.INFORMATION_MESSAGE);
+                
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(new File(rutaArchivo));
+                }
+            }
         } catch (JRException ex) {
+            Logger.getLogger(Presentacion_FrmHistorialVentas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(Presentacion_FrmHistorialVentas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_generarReporteEvntMousePressed
