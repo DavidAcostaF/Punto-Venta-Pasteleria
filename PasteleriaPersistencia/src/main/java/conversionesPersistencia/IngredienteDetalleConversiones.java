@@ -7,6 +7,7 @@ package conversionesPersistencia;
 import com.mycompany.pasteleriadocumentosanidadosmapeo.IngredienteDetalleMapeo;
 import com.mycompany.pasteleriadominiodocumentosanidados.IngredienteDetalle;
 import dto.DTO_IngredienteDetalle;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -21,4 +22,14 @@ public class IngredienteDetalleConversiones {
         detalleIngredienteE.setNombre(detalleIngrediente.getNombre());
         return detalleIngredienteE;
     }
+    
+    protected IngredienteDetalleMapeo convertirMapeo(IngredienteDetalle detalleIngrediente) {
+    IngredienteDetalleMapeo detalleIngredienteM = new IngredienteDetalleMapeo();
+
+    detalleIngredienteM.setIngredienteId(new ObjectId(detalleIngrediente.getIngredienteId()));
+    detalleIngredienteM.setCantidad(detalleIngrediente.getCantidad());
+    detalleIngredienteM.setNombre(detalleIngrediente.getNombre());
+
+    return detalleIngredienteM;
+}
 }

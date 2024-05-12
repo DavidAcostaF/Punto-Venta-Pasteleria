@@ -10,6 +10,7 @@ import com.mycompany.pasteleriadaos.IProductoDAO;
 import com.mycompany.pasteleriadaos.IngredienteDAO;
 import com.mycompany.pasteleriadaos.ProductoDAO;
 import com.mycompany.pasteleriadocumentosanidadosmapeo.IngredienteDetalleMapeo;
+import com.mycompany.pasteleriadominiodocumentosanidados.IngredienteDetalle;
 import com.mycompany.pasteleriadominioentidades.Producto;
 import com.mycompany.pasteleriadominiosMapeo.ProductoMapeo;
 import conversionesnegocio.IngredienteConversiones;
@@ -54,7 +55,7 @@ public class ProductosBO implements IProductosBO {
     }
     
     @Override
-    public ProductoMapeo convertirDTOAProducto(DTO_Producto producto) {
+    public ProductoMapeo convertirDTOAProductoMapeo(DTO_Producto producto) {
         ProductoMapeo productoNuevo = new ProductoMapeo();
         productoNuevo.setDescripcion(producto.getDescripcion());
         
@@ -62,13 +63,13 @@ public class ProductosBO implements IProductosBO {
         productoNuevo.setPrecio(producto.getPrecio());
         
         for (DTO_IngredienteDetalle ingredienteDetalle : producto.getIngredientes()) {
-            productoNuevo.addIngredienteDetalle(convertirDTOAIngredienteDetalle(ingredienteDetalle));
+            productoNuevo.addIngredienteDetalle(convertirDTOAIngredienteDetalleMapeo(ingredienteDetalle));
         }
         return productoNuevo;
     }
     
     @Override
-    public IngredienteDetalleMapeo convertirDTOAIngredienteDetalle(DTO_IngredienteDetalle ingredienteDetalle) {
+    public IngredienteDetalleMapeo convertirDTOAIngredienteDetalleMapeo(DTO_IngredienteDetalle ingredienteDetalle) {
         IngredienteDetalleMapeo ingredienteDetalleNuevo = new IngredienteDetalleMapeo();
         ingredienteDetalleNuevo.setCantidad(ingredienteDetalle.getCantidad());
         ingredienteDetalleNuevo.setNombre(ingredienteDetalle.getNombre());
@@ -79,6 +80,30 @@ public class ProductosBO implements IProductosBO {
     @Override
     public DTO_Ingrediente consultarIngredientePorNombre(String nombre) {
         return conversorIngredientes.convertir(ingredienteDAO.consultarPorNombre(nombre));
+    }
+    
+    @Override
+    public Producto convertirDTOAProducto(DTO_Producto producto) {
+        Producto productoNuevo = new Producto();
+        productoNuevo.setDescripcion(producto.getDescripcion());
+        
+        productoNuevo.setNombre(producto.getNombre());
+        productoNuevo.setPrecio(producto.getPrecio());
+        
+        for (DTO_IngredienteDetalle ingredienteDetalle : producto.getIngredientes()) {
+            ingredienteDetalle.setIngredienteId(consultarIngredientePorNombre(ingredienteDetalle.getNombre()).getId());
+            productoNuevo.addIngredienteDetalle(convertirDTOAIngredienteDetalle(ingredienteDetalle));
+        }
+        return productoNuevo;
+    }
+    
+    @Override
+    public IngredienteDetalle convertirDTOAIngredienteDetalle(DTO_IngredienteDetalle ingredienteDetalle) {
+        IngredienteDetalle ingredienteDetalleNuevo = new IngredienteDetalle();
+        ingredienteDetalleNuevo.setCantidad(ingredienteDetalle.getCantidad());
+        ingredienteDetalleNuevo.setNombre(ingredienteDetalle.getNombre());
+        ingredienteDetalleNuevo.setIngredienteId(ingredienteDetalle.getIngredienteId());
+        return ingredienteDetalleNuevo;
     }
     
 }
