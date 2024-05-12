@@ -6,16 +6,28 @@ package presentacion;
 
 import com.mycompany.pasteleriacalculargananciasdeldia.FuncionalidadCalcularGananciasDelDia;
 import com.mycompany.pasteleriacalculargananciasdeldia.IFuncionalidadCalcularGananciasDelDia;
+import com.mycompany.pasteleriaconsultarventas.FuncionalidadConsultarVentas;
+import com.mycompany.pasteleriaconsultarventas.IFuncionalidadConsultarVentas;
 import com.mycompany.pasteleriacontarventaspordia.FuncionalidadContarVentasPorDia;
 import com.mycompany.pasteleriacontarventaspordia.IFuncionalidadContarVentasPorDia;
+import control.ControlAgregarVenta;
 import control.ControlIngresosMensuales;
 import dto.DTO_Producto;
+import dto.DTO_Venta;
 import extras.ButtonColumn;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import net.miginfocom.layout.AC;
 
 /**
@@ -23,31 +35,40 @@ import net.miginfocom.layout.AC;
  * @author PC
  */
 public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
-
+    
     private IFuncionalidadContarVentasPorDia funcionalidadVentasPorDia;
     private IFuncionalidadCalcularGananciasDelDia funcionalidadGananciasDelDia;
+    private IFuncionalidadConsultarVentas funcionalidadConsultarVentas;
     private ControlIngresosMensuales controlIngresos;
+    private ControlAgregarVenta controlPrincipal;
+    Date fechaInicial;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); // Formato deseado para la fecha
 
     /**
      * Creates new form Presentacion_DlgVentasTotales
      */
     public Presentacion_DlgVentasTotales() {
         initComponents();
+        setSize(750, 550);
         this.funcionalidadVentasPorDia = new FuncionalidadContarVentasPorDia();
         this.funcionalidadGananciasDelDia = new FuncionalidadCalcularGananciasDelDia();
-        this.controlIngresos = new ControlIngresosMensuales();
-
-        // Asumiendo que tu tabla se llama tableProductos
-        ButtonColumn buttonColumn = new ButtonColumn("Desplegar Ventas", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Coloca aquí el código que deseas ejecutar cuando se haga clic en el botón
-                // Por ejemplo, puedes abrir una ventana de diálogo o realizar alguna acción específica.
-            }
-        });
-
-        // Establece el ancho de la columna de botones
-        this.tableVentas.getColumnModel().getColumn(tableVentas.getColumnCount() - 1).setPreferredWidth(100);
+        this.funcionalidadConsultarVentas = new FuncionalidadConsultarVentas();
+        this.controlIngresos = ControlIngresosMensuales.getInstance();
+        this.fechaInicial = this.controlIngresos.getFechaSeleccionada();
+        this.controlPrincipal = new ControlAgregarVenta();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fechaInicial);
+        calendar.add(Calendar.DAY_OF_MONTH, 30);
+        this.txtFechaInicial.setEditable(false);
+        this.txtFechaFinal.setEditable(false);
+        this.txtIngresosTotales.setEditable(false);
+        this.txtFechaInicial.setText(dateFormat.format(controlIngresos.getFechaSeleccionada()));
+        this.txtFechaFinal.setText(dateFormat.format(calendar.getTime()));
+        this.tableDetallesVenta.getTableHeader().setVisible(false);
+        this.tableDetallesVenta.setVisible(false);
+        this.botonEsconderDetalles.setVisible(false);
+        llenarTabla();
+        establecerIngresosTotales();
     }
 
     /**
@@ -69,16 +90,21 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         labelTotal = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
-        txtCantidad = new javax.swing.JTextField();
+        txtFechaInicial = new javax.swing.JTextField();
+        txtFechaFinal = new javax.swing.JTextField();
         botonContinuar = new javax.swing.JButton();
         botonRetroceder = new javax.swing.JButton();
         labelTotal1 = new javax.swing.JLabel();
-        txtCantidad1 = new javax.swing.JTextField();
+        txtIngresosTotales = new javax.swing.JTextField();
+        botonEsconderDetalles = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tableDetallesVenta = new javax.swing.JTable();
 
         jScrollPane2.setViewportView(jEditorPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setSize(new java.awt.Dimension(255, 255));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         botonExportarPDF.setBackground(new java.awt.Color(140, 220, 254));
         botonExportarPDF.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
@@ -88,20 +114,27 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
                 botonExportarPDFActionPerformed(evt);
             }
         });
+        getContentPane().add(botonExportarPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 440, 130, 37));
 
         tableVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Fecha", "Cantidad de Ventas", "Ganancia del Dia"
+                "Fecha", "Cantidad de Ventas", "Ganancia del Dia", "null"
             }
         ));
         tableVentas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tableVentas);
+        if (tableVentas.getColumnModel().getColumnCount() > 0) {
+            tableVentas.getColumnModel().getColumn(3).setHeaderValue("null");
+        }
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 99, 465, 265));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel4.setText("Lista de Ventas del Mes");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(274, 73, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -125,11 +158,17 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
                 .addContainerGap(59, Short.MAX_VALUE))
         );
 
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 20, -1, -1));
+
         labelTotal.setBackground(new java.awt.Color(0, 0, 0));
         labelTotal.setText("Fecha final:");
+        getContentPane().add(labelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 245, 68, 24));
 
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Fecha inicial:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 188, -1, 24));
+        getContentPane().add(txtFechaInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 188, 97, -1));
+        getContentPane().add(txtFechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 246, 97, -1));
 
         botonContinuar.setBackground(new java.awt.Color(140, 220, 254));
         botonContinuar.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
@@ -139,6 +178,7 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
                 botonContinuarActionPerformed(evt);
             }
         });
+        getContentPane().add(botonContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 130, 37));
 
         botonRetroceder.setBackground(new java.awt.Color(140, 220, 254));
         botonRetroceder.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
@@ -148,84 +188,40 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
                 botonRetrocederActionPerformed(evt);
             }
         });
+        getContentPane().add(botonRetroceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 440, 130, 37));
 
         labelTotal1.setBackground(new java.awt.Color(0, 0, 0));
         labelTotal1.setText("Ingresos Totales:");
+        getContentPane().add(labelTotal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 97, 24));
+        getContentPane().add(txtIngresosTotales, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, 144, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(jLabel4))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(botonRetroceder, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(70, 70, 70)
-                                        .addComponent(botonExportarPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(botonContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(217, 217, 217)
-                        .addComponent(labelTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCantidad1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(67, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCantidad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonExportarPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonRetroceder, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
-        );
+        botonEsconderDetalles.setBackground(new java.awt.Color(140, 220, 254));
+        botonEsconderDetalles.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        botonEsconderDetalles.setText("Ocultar Detalles");
+        botonEsconderDetalles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEsconderDetallesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botonEsconderDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(733, 51, -1, 37));
+
+        tableDetallesVenta.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Fecha", "Nombre Cliente", "Costo de la Venta"
+            }
+        ));
+        jScrollPane3.setViewportView(tableDetallesVenta);
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(733, 100, 430, 264));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonExportarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonExportarPDFActionPerformed
@@ -235,21 +231,33 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
     }//GEN-LAST:event_botonExportarPDFActionPerformed
 
     private void botonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonContinuarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        controlPrincipal.mostrarMenu();
     }//GEN-LAST:event_botonContinuarActionPerformed
 
     private void botonRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRetrocederActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        controlIngresos.mostrarSeleccionadorFecha();
     }//GEN-LAST:event_botonRetrocederActionPerformed
 
+    private void botonEsconderDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEsconderDetallesActionPerformed
+        this.tableDetallesVenta.getTableHeader().setVisible(false);
+        setSize(750, 550);
+        this.tableDetallesVenta.setVisible(false);
+        this.botonEsconderDetalles.setVisible(false);
+    }//GEN-LAST:event_botonEsconderDetallesActionPerformed
+    
     private void llenarTabla() {
-        DefaultTableModel model = (DefaultTableModel) tableVentas.getModel();
-        model.setRowCount(0); // Limpiar la tabla antes de llenarla
-
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Fecha");
+        model.addColumn("Cantidad de Ventas");
+        model.addColumn("Ganancias del Dia");
+        model.addColumn("");
+        
         Date fechaInicial = controlIngresos.getFechaSeleccionada();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(fechaInicial);
-
+        
         for (int i = 0; i <= 30; i++) {
             Date fecha = calendar.getTime();
             int cantidadVentas = funcionalidadVentasPorDia.contarVentasPorDia(fecha);
@@ -257,19 +265,102 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
             // Verificar si la cantidad de ventas es al menos 1
             if (cantidadVentas >= 1) {
                 float gananciaDia = funcionalidadGananciasDelDia.CalcularGananciasDelDia(fecha);
-
+                
+                String fechaFormat = dateFormat.format(fecha);
+                
+                Object[] fila = {
+                    fechaFormat,
+                    cantidadVentas,
+                    gananciaDia,
+                    "Desplegar Ventas"
+                };
                 // Agregar la entrada a la tabla
-                model.addRow(new Object[]{fecha, cantidadVentas, gananciaDia});
+                model.addRow(fila);
             }
 
             // Avanzar al siguiente día
             calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
+        this.tableVentas.setModel(model);
+        TableColumnModel columnModel = tableVentas.getColumnModel();
+        
+        ButtonColumn desplegarButtonColumn = new ButtonColumn("Desplegar Ventas", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int filaSeleccionada = tableVentas.getSelectedRow();
+                if (filaSeleccionada != -1) {
+                    String fechaSeleccionadaStr = (String) tableVentas.getValueAt(filaSeleccionada, 0);
+                    Date fechaSeleccionada = null;
+                    try {
+                        fechaSeleccionada = dateFormat.parse(fechaSeleccionadaStr);
+                    } catch (ParseException ex) {
+                        ex.printStackTrace();
+                    }
+                    mostrarNuevaTabla(fechaSeleccionada);
+                }
+            }
+        });
+        columnModel.getColumn(0).setPreferredWidth(100);
+        columnModel.getColumn(1).setPreferredWidth(150);
+        columnModel.getColumn(2).setPreferredWidth(150);
+        columnModel.getColumn(3).setPreferredWidth(150);
+        columnModel.getColumn(3).setCellRenderer(desplegarButtonColumn);
+        columnModel.getColumn(3).setCellEditor(desplegarButtonColumn);
     }
+    
+    private void mostrarNuevaTabla(Date fechaSeleccionada) {
+        this.tableDetallesVenta.getTableHeader().setVisible(true);
+        setSize(1200, 550);
+        this.tableDetallesVenta.setVisible(true);
+        this.botonEsconderDetalles.setVisible(true);
+        
+        DefaultTableModel model = new DefaultTableModel();
+        model.setRowCount(0);
+        model.addColumn("Fecha");
+        model.addColumn("Nombre del Cliente");
+        model.addColumn("Total de la Venta");
+        
+        List<DTO_Venta> listaVentas = this.funcionalidadConsultarVentas.consultarVentasPorFecha(fechaSeleccionada);
+        for (DTO_Venta listaVenta : listaVentas) {
+            float costoVenta = listaVenta.getMontoTotal();
+            DTO_Venta ventaProvisional = this.funcionalidadConsultarVentas.encontrarVenta(listaVenta.getID());
+            String nombreCliente = ventaProvisional.getCliente().getNombre() + " " + ventaProvisional.getCliente().getApellidoP();
+            
+            String fechaFormat = dateFormat.format(fechaSeleccionada);
+            
+            Object[] fila = {
+                fechaFormat,
+                nombreCliente,
+                costoVenta
+            };
+            // Agregar la entrada a la tabla
+            model.addRow(fila);
+        }
+        this.tableDetallesVenta.setModel(model);
 
+        // Actualizar la interfaz de usuario
+        revalidate();
+        repaint();
+    }
+    
+    private void establecerIngresosTotales() {
+        // Suponiendo que 'model' es tu DefaultTableModel
+        int rowCount = this.tableVentas.getModel().getRowCount();
+        float totalSum = 0.0f;
+        
+        for (int i = 0; i < rowCount; i++) {
+            Object value = this.tableVentas.getModel().getValueAt(i, 2); // Obtener el valor en la segunda columna (índice 1)
+            if (value instanceof Float) {
+                float floatValue = (Float) value;
+                totalSum += floatValue;
+            }
+        }
+        this.txtIngresosTotales.setText(String.valueOf(totalSum));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonContinuar;
+    private javax.swing.JButton botonEsconderDetalles;
     private javax.swing.JButton botonExportarPDF;
     private javax.swing.JButton botonRetroceder;
     private javax.swing.JEditorPane jEditorPane1;
@@ -279,11 +370,13 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel labelTotal;
     private javax.swing.JLabel labelTotal1;
+    private javax.swing.JTable tableDetallesVenta;
     private javax.swing.JTable tableVentas;
-    private javax.swing.JTextField txtCantidad;
-    private javax.swing.JTextField txtCantidad1;
-    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtFechaFinal;
+    private javax.swing.JTextField txtFechaInicial;
+    private javax.swing.JTextField txtIngresosTotales;
     // End of variables declaration//GEN-END:variables
 }

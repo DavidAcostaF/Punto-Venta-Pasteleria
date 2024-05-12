@@ -68,7 +68,7 @@ public class VentasConversiones {
         ventaE.setMontoTotal(venta.getMontoTotal());
         ventaE.setEstado(venta.getEstado());
         ventaE.setClienteid(venta.getClienteid().toString());
-        ventaE.setCliente(conversorCliente.convertirCliente(venta.getCliente()));
+        ventaE.setCliente(conversorCliente.convertirClienteConRFC(venta.getCliente()));
         List<DetalleVenta> detallesVentaE = new ArrayList<>();
         for (DetalleVentaMapeo detalleVenta : venta.getDetallesVenta()) {
             DetalleVenta detalleVentaE = new DetalleVenta();
@@ -92,7 +92,7 @@ public class VentasConversiones {
     
     public VentaMapeo convertirAVentaMapeo(Venta venta) {
     VentaMapeo ventaMapeo = new VentaMapeo();
-    ventaMapeo.setClienteid(new ObjectId(venta.getId())); 
+    ventaMapeo.setClienteid(new ObjectId(venta.getClienteid())); 
     ventaMapeo.setFechaEntrega(venta.getFechaEntrega());
     ventaMapeo.setFechaRegistro(venta.getFechaRegistro());
     ventaMapeo.setMontoTotal(venta.getMontoTotal());

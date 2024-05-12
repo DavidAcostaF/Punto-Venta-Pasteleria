@@ -7,6 +7,7 @@ package presentacion;
 import control.ControlAgregarVenta;
 import control.ControlIngresosMensuales;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -25,7 +26,7 @@ public class Presentacion_DlgSeleccionarFechaIngresos extends javax.swing.JFrame
     public Presentacion_DlgSeleccionarFechaIngresos() {
         initComponents();
         this.controlPrincipal = new ControlAgregarVenta();
-        this.controlIngresos = new ControlIngresosMensuales();
+        this.controlIngresos = ControlIngresosMensuales.getInstance();
     }
 
     /**
@@ -148,9 +149,11 @@ public class Presentacion_DlgSeleccionarFechaIngresos extends javax.swing.JFrame
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
+        this.dispose();
         controlPrincipal.mostrarMenu();
     }//GEN-LAST:event_botonRegresarActionPerformed
 
@@ -159,13 +162,11 @@ public class Presentacion_DlgSeleccionarFechaIngresos extends javax.swing.JFrame
         if (validarCamposVacios()) {
 
             LocalDate localDate = fechaSeleccionada.getDate();
-            Date date = java.sql.Date.valueOf(localDate);
-
+            Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             controlIngresos.setFechaSeleccionada(date);
-
+            this.dispose();
             controlIngresos.mostrarVentasTotales();
 
-            this.dispose();
         }
     }//GEN-LAST:event_botonContinuarActionPerformed
 

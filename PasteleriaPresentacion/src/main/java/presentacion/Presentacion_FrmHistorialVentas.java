@@ -10,6 +10,8 @@ import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.mycompany.pasteleriaconsultarventas.FuncionalidadConsultarVentas;
 import com.mycompany.pasteleriaconsultarventas.IFuncionalidadConsultarVentas;
+import com.mycompany.pasteleriagenerarreporte.FuncionalidadGenerarReporte;
+import com.mycompany.pasteleriagenerarreporte.IFuncionalidadGenerarReporte;
 import com.mycompany.pasteleriaproductosventa.FuncionalidadProductos;
 import com.mycompany.pasteleriaproductosventa.IFuncionalidadProductos;
 import consultarClientes.FuncionalidadConsultarClientes;
@@ -17,10 +19,13 @@ import consultarClientes.IFuncionalidadConsultarClientes;
 import control.ControlHistoriales;
 import dto.DTO_Cliente;
 import dto.DTO_DetalleVenta;
+import dto.DTO_GenerarReporte;
 import dto.DTO_Producto;
+import dto.DTO_ReporteVentasFormato;
 import dto.DTO_Venta;
 import extras.ClientesComboBoxModel;
 import extras.PastelComboBoxModel;
+import extras.VentasTableModel;
 import java.awt.Color;
 import java.awt.Font;
 import java.text.SimpleDateFormat;
@@ -33,11 +38,19 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -53,6 +66,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
     private List<DTO_Producto> listaProductosSeleccionados;
     private IFuncionalidadProductos funcionalidadConsultarProductos;
     private IFuncionalidadConsultarVentas funcionalidadConsultarVentas;
+    private IFuncionalidadGenerarReporte funcionalidadGenerarReporte;
     private DTO_Venta venta;
 
     /**
@@ -63,6 +77,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         this.funcionalidadConsultarVentas = new FuncionalidadConsultarVentas();
         this.funcionalidadesClientes = new FuncionalidadConsultarClientes();
         this.funcionalidadConsultarProductos = new FuncionalidadProductos();
+        this.funcionalidadGenerarReporte=new FuncionalidadGenerarReporte();
         this.cliente = new DTO_Cliente();
         this.venta = new DTO_Venta();
         this.listaProductosSeleccionados = new ArrayList<>();
@@ -101,7 +116,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         tablaVentas = new javax.swing.JTable();
         detallesVentaBtn = new javax.swing.JButton();
         regresarBtn = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        generarReporteEvnt = new javax.swing.JLabel();
         clientesComboBox = new javax.swing.JComboBox<>();
         restablecerBtn = new javax.swing.JButton();
         panelProductos = new javax.swing.JScrollPane();
@@ -203,17 +218,22 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Generar Reporte de las ventas");
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 102, 255));
+        generarReporteEvnt.setText("Generar Reporte de las ventas");
+        generarReporteEvnt.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        generarReporteEvnt.setForeground(new java.awt.Color(0, 102, 255));
+        generarReporteEvnt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                generarReporteEvntMousePressed(evt);
+            }
+        });
 
         clientesComboBox.setModel(new ClientesComboBoxModel(listaClientes));
         clientesComboBox.setEnabled(false);
 
+        restablecerBtn.setText("Restablecer");
         restablecerBtn.setBackground(new java.awt.Color(140, 220, 254));
         restablecerBtn.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         restablecerBtn.setForeground(new java.awt.Color(0, 0, 0));
-        restablecerBtn.setText("Restablecer");
         restablecerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 restablecerBtnActionPerformed(evt);
@@ -240,7 +260,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(regresarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(163, 163, 163)
-                                .addComponent(jLabel5))
+                                .addComponent(generarReporteEvnt))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(253, 253, 253)
                                 .addComponent(aplicarFiltroBtn)
@@ -310,7 +330,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(detallesVentaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(regresarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(generarReporteEvnt))
                 .addGap(44, 44, 44))
         );
 
@@ -358,6 +378,8 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
 
     private void detallesVentaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detallesVentaBtnActionPerformed
         obtenerDatosFilaSeleccionada();
+        //se llena la venta con todos los objetos en lugar de solo referencias
+        venta = funcionalidadConsultarVentas.encontrarVenta(venta.getID());
         control.setVenta(venta);
         this.dispose();
         control.mostrarDetallesVenta();
@@ -390,7 +412,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
             panelProductos.setBackground(Color.WHITE);
             panelProductos.setVisible(true);
             panelProductos.setViewportView(panelLabels);
-
+            tablaVentas(listaVentas);
         }
         if (!filtrarClienteRadioBtn.isSelected() && !filtrarPorProductosRadioBtn.isSelected()
                 && hastaDatePicker.getDate() != null && desdeDatePicker.getDate() != null) {
@@ -552,22 +574,41 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         llenarTabla();
     }//GEN-LAST:event_restablecerBtnActionPerformed
 
+    private void generarReporteEvntMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generarReporteEvntMousePressed
+        try {
+            VentasTableModel modelo = (VentasTableModel) tablaVentas.getModel();
+            List<DTO_Venta> ventas = modelo.getAllVentas();
+            List<DTO_ReporteVentasFormato> reporteVentas=new ArrayList<>();
+        SimpleDateFormat ff = new SimpleDateFormat("dd/MM/yyyy");
+        for (DTO_Venta venta : ventas) {
+            DTO_ReporteVentasFormato r= new DTO_ReporteVentasFormato();
+            r.setFechaEntrega(ff.format(venta.getFechaEntrega()));
+            r.setFechaCompra(ff.format(venta.getFechaRegistro()));
+            r.setEstado(venta.getEstado());
+            r.setTotal(Float.toString(venta.getMontoTotal()));
+            reporteVentas.add(r);
+            r.getEstado();
+        }
+            System.out.println(reporteVentas);
+            DTO_GenerarReporte reporteGenerado=funcionalidadGenerarReporte.generarReporteVentasCasoHistoriales(reporteVentas);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reporteGenerado.getJasperReport(), reporteGenerado.getParameters(), new JREmptyDataSource());
+            
+            JasperViewer.viewReport(jasperPrint,false);
+        } catch (JRException ex) {
+            Logger.getLogger(Presentacion_FrmHistorialVentas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_generarReporteEvntMousePressed
+
     public void tablaVentas(List<DTO_Venta> listaVentas) {
         limpiarTabla();
-        DefaultTableModel modelo = (DefaultTableModel) tablaVentas.getModel();
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 
-        listaVentas.forEach(t -> {
-            String fechaRegistro = formatoFecha.format(t.getFechaRegistro());
-            String fechaEntrega = formatoFecha.format(t.getFechaEntrega());
-            modelo.addRow(new Object[]{t.getID(), fechaRegistro, fechaEntrega, t.getEstado()});
-        });
+        VentasTableModel modelo = new VentasTableModel(listaVentas);
+        tablaVentas.setModel(modelo);
 
     }
 
     public void obtenerProductos() {
         listaProductosSeleccionados.clear();
-        System.out.println(productosComboBox.obtenerElementosSeleccionados());
         List<String> productosSeleccionados = productosComboBox.obtenerElementosSeleccionados();
         if (!productosSeleccionados.isEmpty()) {
             productosSeleccionados.forEach(nombreProducto -> {
@@ -616,7 +657,6 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
                 }
 
                 cliente = funcionalidadesClientes.encontrarCliente(apellidoPaterno, apellidoMaterno, nombre, numeroTelefono);
-                System.out.println(cliente.getID());
             }
         }
     }
@@ -624,31 +664,23 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
     public void llenarTabla() {
         limpiarTabla();
         List<DTO_Venta> listaVentas = funcionalidadConsultarVentas.consultarVentas();
-        DefaultTableModel modelo = (DefaultTableModel) tablaVentas.getModel();
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
         if (listaVentas != null) {
-            listaVentas.forEach(t -> {
-                String fechaRegistro = formatoFecha.format(t.getFechaRegistro());
-                String fechaEntrega = formatoFecha.format(t.getFechaEntrega());
-                modelo.addRow(new Object[]{t.getID(), fechaRegistro, fechaEntrega, t.getEstado()});
-            });
+            VentasTableModel modelo = new VentasTableModel(listaVentas);
+            tablaVentas.setModel(modelo);
         }
     }
 
     private void limpiarTabla() {
-        DefaultTableModel modelo = (DefaultTableModel) tablaVentas.getModel();
-
-        modelo.setRowCount(0);
-
-        tablaVentas.setModel(modelo);
+        TableModel modelo = tablaVentas.getModel();
+        if (modelo instanceof VentasTableModel) {
+            ((VentasTableModel) modelo).limpiarTabla();
+        }
     }
 
     private void obtenerDatosFilaSeleccionada() {
         int filaSeleccionada = tablaVentas.getSelectedRow();
         if (filaSeleccionada != -1) {
-            String idVenta = tablaVentas.getValueAt(filaSeleccionada, 0).toString();
-            System.out.println(idVenta);
-            venta = funcionalidadConsultarVentas.encontrarVenta(idVenta);
+            venta = ((VentasTableModel) tablaVentas.getModel()).getVentaAt(filaSeleccionada);
 
         }
     }
@@ -674,12 +706,12 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
     private javax.swing.JButton detallesVentaBtn;
     private javax.swing.JRadioButton filtrarClienteRadioBtn;
     private javax.swing.JRadioButton filtrarPorProductosRadioBtn;
+    private javax.swing.JLabel generarReporteEvnt;
     private com.github.lgooddatepicker.components.DatePicker hastaDatePicker;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane panelProductos;

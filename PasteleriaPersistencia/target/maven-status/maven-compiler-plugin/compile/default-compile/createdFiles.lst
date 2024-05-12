@@ -17,6 +17,7 @@ conversionesPersistencia\IngredienteDetalleConversiones.class
 com\mycompany\pasteleriadocumentosanidadosmapeo\IngredienteDetalleMapeo.class
 Exceptions\PersistenciaException.class
 com\mycompany\pasteleriadaos\IngredienteDAO.class
+com\mycompany\pasteleriadominioentidades\Factura.class
 com\mycompany\pasteleriadominiosMapeo\VentaMapeo.class
 conversionesPersistencia\ProductosConversiones.class
 com\mycompany\pasteleriadominioentidades\Ingrediente.class
@@ -25,10 +26,13 @@ com\mycompany\pasteleriadominiosMapeo\DireccionMapeo.class
 conversionesPersistencia\ClientesConversiones.class
 com\mycompany\pasteleriadaos\IProductoDAO.class
 com\mycompany\pasteleriadominioentidades\Producto.class
+conversionesPersistencia\ArchivosConversiones.class
+conversionesPersistencia\FacturasConversiones.class
 com\mycompany\pasteleriadaos\ProductoDAO.class
 com\mycompany\pasteleriadaos\IClienteDAO.class
 com\mycompany\pasteleriadominioentidades\Cliente.class
 com\mycompany\pasteleriadominiodocumentosanidados\IngredienteDetalle.class
+com\mycompany\pasteleriadominiosMapeo\FacturaMapeo.class
 com\mycompany\pasteleriadaos\VentaDAO.class
 com\mycompany\pasteleriadaos\IVentaDAO.class
 com\mycompany\pasteleriadominioentidades\Venta.class

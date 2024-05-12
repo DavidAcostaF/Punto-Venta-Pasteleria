@@ -11,5 +11,13 @@
         <maven.compiler.target>20</maven.compiler.target>
         <exec.mainClass>com.mycompany.dto.Dto</exec.mainClass>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.21.2</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
     <name>PasteleriaDTO</name>
 </project>

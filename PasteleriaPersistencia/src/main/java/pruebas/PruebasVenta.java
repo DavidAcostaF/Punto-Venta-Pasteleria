@@ -10,13 +10,18 @@ import com.mycompany.pasteleriadominioentidades.Cliente;
 import com.mycompany.pasteleriadominioentidades.DetalleVenta;
 import com.mycompany.pasteleriadominioentidades.Producto;
 import com.mycompany.pasteleriadominioentidades.Venta;
+import com.mycompany.pasteleriadominiosMapeo.DetalleVentaMapeo;
 import com.mycompany.pasteleriadominiosMapeo.DireccionMapeo;
+import com.mycompany.pasteleriadominiosMapeo.VentaMapeo;
+import conversionesPersistencia.VentasConversiones;
 import dto.DTO_Cliente;
 import dto.DTO_DetalleVenta;
 import dto.DTO_Producto;
 import dto.DTO_Venta;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,25 +38,27 @@ public class PruebasVenta {
      */
     public static void main(String[] args) {
         VentaDAO ventadao = new VentaDAO();
-        Venta venta = new Venta();
+        VentaMapeo venta = new VentaMapeo();
         venta.setMontoTotal(150.00f); // Monto total de la venta
-/*
+        VentasConversiones conversor = new VentasConversiones();
+
 // 
-        Date fechaEntrega = new Date(); // Fecha de entrega
-        Date fechaRegistro = new Date(); // Fecha de registro
+        Date fechaEntrega = new GregorianCalendar(2024, Calendar.MAY, 25).getTime();// Fecha de entrega
+        Date fechaRegistro = new GregorianCalendar(2024, Calendar.MAY, 15).getTime();
 
 // 
         venta.setFechaEntrega(fechaEntrega);
         venta.setFechaRegistro(fechaRegistro);
         venta.setEstado("Pagado");
-        venta.setClienteid(new ObjectId("663b16288bcd861f9682ffa9"));
-        List<DetalleVenta> detallesVenta = new ArrayList<>();
-        DetalleVenta dv = new DetalleVenta();
+        venta.setId(new ObjectId());
+        venta.setClienteid(new ObjectId("66406d0293d57d3040a5bdc8"));
+        List<DetalleVentaMapeo> detallesVenta = new ArrayList<>();
+        DetalleVentaMapeo dv = new DetalleVentaMapeo();
         dv.setCantidad(2);
         dv.setDetallesCliente(" ");
         dv.setImporte(150.00f);
         dv.setPrecio(75);
-        dv.setProductoId(new ObjectId("663c434ac97af46c1e9d7bf9"));
+        dv.setProductoId(new ObjectId("66406d434d21240168dbd52a"));
         dv.setTamanhoProducto("chico");
         detallesVenta.add(dv);
         venta.setDetallesVenta(detallesVenta);
@@ -60,26 +67,27 @@ public class PruebasVenta {
         direccionEntrega.setNumExterior("123");
         direccionEntrega.setColonia("Ciudad Ejemplo");
         venta.setDireccionEntrega(direccionEntrega);
-        ventadao.agregarVenta(venta);*/
+        Venta ventaEntidad = conversor.convertirAVentaEntidad(venta);
+        ventadao.agregarVenta(ventaEntidad);
 
  /* List<DTO_Venta> ventas=ventadao.consultarVentas();
     // List<DTO_Venta> ventas=ventadao.ventasPorCliente("663b16288bcd861f9682ffa9");
         for (DTO_Venta venta1:ventas) {
             System.out.println(venta1);
         }*/
-  Venta venta1 = null;
-        try {
-            venta1 = ventadao.encontrarVenta("663c5d4fa6ca7e6121d3e116");
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(PruebasVenta.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println(venta1.getFechaEntrega());
-        System.out.println(venta1.getFechaRegistro());
-        for (DetalleVenta dv:venta1.getDetallesVenta()) {
-            System.out.println(dv);
-            System.out.println(dv.getProducto().getId());
-            
-        }
+//  Venta venta1 = null;
+//        try {
+//            venta1 = ventadao.encontrarVenta("66407078f7989940561be054");
+//        } catch (PersistenciaException ex) {
+//            Logger.getLogger(PruebasVenta.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        System.out.println(venta1.getFechaEntrega());
+//        System.out.println(venta1.getFechaRegistro());
+//        for (DetalleVenta dv:venta1.getDetallesVenta()) {
+//            System.out.println(dv);
+//            System.out.println(dv.getProducto().getId());
+//            
+//        }
         /*Producto producto1 = new Producto();
         producto1.setId("663d1f0de604fa31cd6f6b5b");
         List<Producto> listaprod = new ArrayList<>();
