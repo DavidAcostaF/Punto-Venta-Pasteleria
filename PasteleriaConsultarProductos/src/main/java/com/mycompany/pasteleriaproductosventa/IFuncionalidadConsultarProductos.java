@@ -12,9 +12,9 @@ import java.util.List;
  *
  * @author f_aco
  */
-public interface IFuncionalidadProductos {
+public interface IFuncionalidadConsultarProductos {
 
-    public List<DTO_Producto> consultarProductosVenta();
+    public List<DTO_Producto> consultarProductos();
 
    public DTO_Producto consultarProductoPorNombre(String nombre);
    

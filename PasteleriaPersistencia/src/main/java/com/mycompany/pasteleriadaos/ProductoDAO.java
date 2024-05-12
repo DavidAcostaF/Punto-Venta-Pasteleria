@@ -40,7 +40,7 @@ public class ProductoDAO implements IProductoDAO {
 
     @Override
     public void eliminarProducto(ProductoMapeo producto) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -60,6 +60,5 @@ public class ProductoDAO implements IProductoDAO {
         ProductoMapeo resultado = coleccion.find(eq("nombre", nombre)).first();
         return conversor.convertirProducto(resultado);
     }
-
 
 }

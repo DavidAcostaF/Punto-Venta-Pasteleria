@@ -116,5 +116,5 @@ public class ProductosBO implements IProductosBO {
     public Float calcularCosto(List<IngredienteDetalle> productos) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
 }
