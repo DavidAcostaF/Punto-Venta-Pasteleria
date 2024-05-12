@@ -12,8 +12,7 @@ import com.mycompany.pasteleriaconsultarventas.FuncionalidadConsultarVentas;
 import com.mycompany.pasteleriaconsultarventas.IFuncionalidadConsultarVentas;
 import com.mycompany.pasteleriagenerarreporte.FuncionalidadGenerarReporte;
 import com.mycompany.pasteleriagenerarreporte.IFuncionalidadGenerarReporte;
-import com.mycompany.pasteleriaproductosventa.FuncionalidadProductos;
-import com.mycompany.pasteleriaproductosventa.IFuncionalidadProductos;
+import com.mycompany.pasteleriaproductosventa.FuncionalidadConsultarProductos;
 import consultarClientes.FuncionalidadConsultarClientes;
 import consultarClientes.IFuncionalidadConsultarClientes;
 import control.ControlHistoriales;
@@ -51,6 +50,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
+import com.mycompany.pasteleriaproductosventa.IFuncionalidadConsultarProductos;
 
 /**
  *
@@ -64,7 +64,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
     private List<DTO_Cliente> listaClientes;
     private List<DTO_Producto> listaProductos;
     private List<DTO_Producto> listaProductosSeleccionados;
-    private IFuncionalidadProductos funcionalidadConsultarProductos;
+    private IFuncionalidadConsultarProductos funcionalidadConsultarProductos;
     private IFuncionalidadConsultarVentas funcionalidadConsultarVentas;
     private IFuncionalidadGenerarReporte funcionalidadGenerarReporte;
     private DTO_Venta venta;
@@ -76,7 +76,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         this.control = ControlHistoriales.getInstance();
         this.funcionalidadConsultarVentas = new FuncionalidadConsultarVentas();
         this.funcionalidadesClientes = new FuncionalidadConsultarClientes();
-        this.funcionalidadConsultarProductos = new FuncionalidadProductos();
+        this.funcionalidadConsultarProductos = new FuncionalidadConsultarProductos();
         this.funcionalidadGenerarReporte=new FuncionalidadGenerarReporte();
         this.cliente = new DTO_Cliente();
         this.venta = new DTO_Venta();

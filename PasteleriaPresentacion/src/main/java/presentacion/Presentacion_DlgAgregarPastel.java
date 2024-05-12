@@ -4,21 +4,21 @@
  */
 package presentacion;
 
-import com.mycompany.pasteleriaproductosventa.FuncionalidadProductos;
-import com.mycompany.pasteleriaproductosventa.IFuncionalidadProductos;
+import com.mycompany.pasteleriaproductosventa.FuncionalidadConsultarProductos;
 import dto.DTO_Producto;
 import extras.PastelComboBoxModel;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import com.mycompany.pasteleriaproductosventa.IFuncionalidadConsultarProductos;
 
 /**
  *
  * @author abelc
  */
 public class Presentacion_DlgAgregarPastel extends javax.swing.JDialog {
-   private IFuncionalidadProductos funcionalidadesProductos;
+   private IFuncionalidadConsultarProductos funcionalidadesProductos;
     private List<DTO_Producto> pasteles;
 
     DTO_Producto producto;
@@ -28,7 +28,7 @@ public class Presentacion_DlgAgregarPastel extends javax.swing.JDialog {
      */
     public Presentacion_DlgAgregarPastel(java.awt.Frame parent, boolean modal, DTO_Producto producto) {
         super(parent, modal);
-        this.funcionalidadesProductos=new FuncionalidadProductos();
+        this.funcionalidadesProductos=new FuncionalidadConsultarProductos();
         this.producto = producto;
         this.especificacion=especificacion;
         initComponents();

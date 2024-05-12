@@ -4,7 +4,13 @@
  */
 package presentacion;
 
+import com.mycompany.pasteleriaproductosventa.FuncionalidadConsultarProductos;
+import com.mycompany.pasteleriaproductosventa.IFuncionalidadConsultarProductos;
 import control.ControlGestionarInventario;
+import dto.DTO_Ingrediente;
+import dto.DTO_Producto;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,6 +19,7 @@ import control.ControlGestionarInventario;
 public class Presentacion_DlgInventarioProductos extends javax.swing.JFrame {
 
     private ControlGestionarInventario controlGesionarInventario;
+    private IFuncionalidadConsultarProductos funcionalidadConsultarProductos;
 
     /**
      * Creates new form Presentacion_DlgCatalogoProductos
@@ -20,7 +27,8 @@ public class Presentacion_DlgInventarioProductos extends javax.swing.JFrame {
     public Presentacion_DlgInventarioProductos() {
         initComponents();
         controlGesionarInventario = new ControlGestionarInventario();
-
+        funcionalidadConsultarProductos = new FuncionalidadConsultarProductos();
+        llenarTabla();
     }
 
     /**
@@ -36,7 +44,7 @@ public class Presentacion_DlgInventarioProductos extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         scrollPane = new javax.swing.JScrollPane();
-        tableIngredientes = new javax.swing.JTable();
+        tableProductos = new javax.swing.JTable();
         btnVolver = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
         btnVolver1 = new javax.swing.JButton();
@@ -64,29 +72,29 @@ public class Presentacion_DlgInventarioProductos extends javax.swing.JFrame {
             }
         });
 
-        tableIngredientes.setModel(new javax.swing.table.DefaultTableModel(
+        tableProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre", "Cantidad", "Unidad", "Precio"
+                "Nombre", "Ingredientes", "Precio"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tableIngredientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tableIngredientes.addMouseListener(new java.awt.event.MouseAdapter() {
+        tableProductos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tableProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableIngredientesMouseClicked(evt);
+                tableProductosMouseClicked(evt);
             }
         });
-        scrollPane.setViewportView(tableIngredientes);
+        scrollPane.setViewportView(tableProductos);
 
         btnVolver.setBackground(new java.awt.Color(140, 220, 254));
         btnVolver.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
@@ -194,19 +202,35 @@ public class Presentacion_DlgInventarioProductos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void llenarTabla() {
+        limpiarTabla();
+        List<DTO_Producto> listaProductos = funcionalidadConsultarProductos.consultarProductos();
+        DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel();
+
+        if (listaProductos != null) {
+            listaProductos.forEach(t -> modelo.addRow(new Object[]{t.getNombre(), t.getIngredientes(), t.getPrecio()}));
+        }
+    }
+
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         controlGesionarInventario.mostrarIngresarDatosDelProducto();
         this.dispose();
     }//GEN-LAST:event_btnAgregarActionPerformed
+    private void limpiarTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel();
 
+        modelo.setRowCount(0);
+
+        tableProductos.setModel(modelo);
+    }
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
 
     }//GEN-LAST:event_btnActualizarActionPerformed
 
-    private void tableIngredientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableIngredientesMouseClicked
+    private void tableProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProductosMouseClicked
 
 
-    }//GEN-LAST:event_tableIngredientesMouseClicked
+    }//GEN-LAST:event_tableProductosMouseClicked
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
@@ -289,7 +313,7 @@ public class Presentacion_DlgInventarioProductos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane scrollPane;
-    private javax.swing.JTable tableIngredientes;
+    private javax.swing.JTable tableProductos;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

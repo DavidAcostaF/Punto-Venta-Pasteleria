@@ -8,8 +8,7 @@ import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import com.mycompany.pasteleriaproductosventa.FuncionalidadProductos;
-import com.mycompany.pasteleriaproductosventa.IFuncionalidadProductos;
+import com.mycompany.pasteleriaproductosventa.FuncionalidadConsultarProductos;
 import control.ControlHistoriales;
 import dto.DTO_Cliente;
 import dto.DTO_DetalleVenta;
@@ -20,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import com.mycompany.pasteleriaproductosventa.IFuncionalidadConsultarProductos;
 
 /**
  *
@@ -30,7 +30,7 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
     private ControlHistoriales control;
     private DTO_Cliente cliente;
     private DTO_Venta venta;
-    private IFuncionalidadProductos funcionalidadConsultarProducto;
+    private IFuncionalidadConsultarProductos funcionalidadConsultarProducto;
 
     /**
      * Creates new form FrmDetallesVenta
@@ -39,7 +39,7 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
         this.control = ControlHistoriales.getInstance();
         this.cliente = new DTO_Cliente();
         this.venta = control.getVenta();
-        funcionalidadConsultarProducto = new FuncionalidadProductos();
+        funcionalidadConsultarProducto = new FuncionalidadConsultarProductos();
         initComponents();
         System.out.println(venta.getFechaEntrega());
         SimpleDateFormat ff = new SimpleDateFormat("dd/MM/yyyy");
