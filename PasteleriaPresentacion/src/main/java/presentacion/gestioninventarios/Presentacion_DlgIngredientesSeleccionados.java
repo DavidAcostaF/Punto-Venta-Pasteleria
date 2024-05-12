@@ -128,6 +128,7 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
         btnAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Ingredientes seleccionados");
 
         tableIngredientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -214,6 +215,7 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

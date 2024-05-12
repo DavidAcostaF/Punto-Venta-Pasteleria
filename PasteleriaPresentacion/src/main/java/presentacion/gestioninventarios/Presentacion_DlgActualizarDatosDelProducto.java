@@ -105,7 +105,7 @@ public class Presentacion_DlgActualizarDatosDelProducto extends javax.swing.JFra
         labelDescripcion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Datos del pastel");
+        setTitle("Actualizar datos del pastel");
 
         tableIngredientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -200,6 +200,7 @@ public class Presentacion_DlgActualizarDatosDelProducto extends javax.swing.JFra
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableIngredientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableIngredientesMouseClicked

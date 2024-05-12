@@ -69,6 +69,7 @@ public class Presentacion_DlgDetalleProducto extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Detalles del producto");
 
         btnActualizar.setBackground(new java.awt.Color(140, 220, 254));
         btnActualizar.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
@@ -199,6 +200,7 @@ public class Presentacion_DlgDetalleProducto extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void llenarTabla(DTO_Producto producto) {

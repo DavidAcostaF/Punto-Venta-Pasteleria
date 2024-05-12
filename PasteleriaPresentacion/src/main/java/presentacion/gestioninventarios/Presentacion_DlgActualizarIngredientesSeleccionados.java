@@ -137,6 +137,7 @@ public class Presentacion_DlgActualizarIngredientesSeleccionados extends javax.s
         btnAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Actualizar ingredientes seleccionados");
 
         tableIngredientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -223,6 +224,7 @@ public class Presentacion_DlgActualizarIngredientesSeleccionados extends javax.s
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

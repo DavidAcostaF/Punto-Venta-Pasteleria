@@ -89,6 +89,7 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
         btnLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Inventario ingredientes");
 
         btnAgregar.setBackground(new java.awt.Color(140, 220, 254));
         btnAgregar.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
@@ -291,6 +292,7 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void llenarTabla() {
