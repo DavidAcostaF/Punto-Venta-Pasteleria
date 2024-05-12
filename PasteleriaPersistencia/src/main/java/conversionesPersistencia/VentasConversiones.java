@@ -92,7 +92,7 @@ public class VentasConversiones {
     
     public VentaMapeo convertirAVentaMapeo(Venta venta) {
     VentaMapeo ventaMapeo = new VentaMapeo();
-    ventaMapeo.setClienteid(new ObjectId(venta.getId())); 
+    ventaMapeo.setClienteid(new ObjectId(venta.getClienteid())); 
     ventaMapeo.setFechaEntrega(venta.getFechaEntrega());
     ventaMapeo.setFechaRegistro(venta.getFechaRegistro());
     ventaMapeo.setMontoTotal(venta.getMontoTotal());

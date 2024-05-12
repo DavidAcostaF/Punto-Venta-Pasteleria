@@ -19,7 +19,9 @@ import dto.DTO_DetalleVenta;
 import dto.DTO_Producto;
 import dto.DTO_Venta;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,22 +43,22 @@ public class PruebasVenta {
         VentasConversiones conversor = new VentasConversiones();
 
 // 
-        Date fechaEntrega = new Date(); // Fecha de entrega
-        Date fechaRegistro = new Date(); // Fecha de registro
+        Date fechaEntrega = new GregorianCalendar(2024, Calendar.MAY, 25).getTime();// Fecha de entrega
+        Date fechaRegistro = new GregorianCalendar(2024, Calendar.MAY, 15).getTime();
 
 // 
         venta.setFechaEntrega(fechaEntrega);
         venta.setFechaRegistro(fechaRegistro);
         venta.setEstado("Pagado");
         venta.setId(new ObjectId());
-        venta.setClienteid(new ObjectId("664062b3be17b02d28f61d60"));
+        venta.setClienteid(new ObjectId("66406d0293d57d3040a5bdc8"));
         List<DetalleVentaMapeo> detallesVenta = new ArrayList<>();
         DetalleVentaMapeo dv = new DetalleVentaMapeo();
         dv.setCantidad(2);
         dv.setDetallesCliente(" ");
         dv.setImporte(150.00f);
         dv.setPrecio(75);
-        dv.setProductoId(new ObjectId("6640635df35eca6e5bf3d58e"));
+        dv.setProductoId(new ObjectId("66406d434d21240168dbd52a"));
         dv.setTamanhoProducto("chico");
         detallesVenta.add(dv);
         venta.setDetallesVenta(detallesVenta);
@@ -75,7 +77,7 @@ public class PruebasVenta {
         }*/
 //  Venta venta1 = null;
 //        try {
-//            venta1 = ventadao.encontrarVenta("663c5d4fa6ca7e6121d3e116");
+//            venta1 = ventadao.encontrarVenta("66407078f7989940561be054");
 //        } catch (PersistenciaException ex) {
 //            Logger.getLogger(PruebasVenta.class.getName()).log(Level.SEVERE, null, ex);
 //        }
