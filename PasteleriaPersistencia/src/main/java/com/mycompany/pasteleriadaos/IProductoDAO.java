@@ -13,11 +13,13 @@ import java.util.List;
  * @author PC
  */
 public interface IProductoDAO {
-   public Producto agregarProducto(Producto producto);
-    
+
+    public Producto agregarProducto(Producto producto);
+
     public void eliminarProducto(ProductoMapeo producto);
-    
+
     public List<Producto> consultarProductos();
-    
+
     public Producto consultarPorNombre(String nombre);
+
 }

@@ -47,7 +47,7 @@ public class PruebasProductos {
         ingredienteDAO.agregar(ingrediento2);
         ProductoMapeo producto = new ProductoMapeo();
         producto.setNombre("Pastelongo");
-        producto.setPrecio(100F);
+        producto.setPrecio(0F);
 
         Ingrediente ingredienteConsultado1 = ingredienteDAO.consultarPorNombre(ingrediento1.getNombre());
         Ingrediente ingredienteConsultado2 = ingredienteDAO.consultarPorNombre(ingrediento1.getNombre());
@@ -65,7 +65,7 @@ public class PruebasProductos {
         producto.addIngredienteDetalle(ingredienteDetalle1);
         producto.addIngredienteDetalle(ingredienteDetalle2);
 
-        productoDAO.agregarProducto(producto);
+//        productoDAO.agregarProducto(producto);
 
 //        List<Producto> listaproductos = productoDAO.consultarProductos();
 //        System.out.println(listaproductos);

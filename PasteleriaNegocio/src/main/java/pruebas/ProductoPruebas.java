@@ -10,6 +10,7 @@ import com.mycompany.pasteleriadominioentidades.Producto;
 import com.mycompany.pastelerianegocio.ProductosBO;
 import conversionesnegocio.IngredienteConversiones;
 import conversionesnegocio.IngredienteDetalleConversiones;
+import dto.DTO_Producto;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class ProductoPruebas {
         IngredienteConversiones conversorIngrediente = new IngredienteConversiones();
         producto.setNombre("Si");
         producto.setDescripcion("!@3");
-        producto.setPrecio(123F);
+        producto.setPrecio(0F);
 
         List<IngredienteDetalle> listaIngredientes = new ArrayList<>();
 
@@ -46,8 +47,9 @@ public class ProductoPruebas {
         listaIngredientes.add(ingredienteDetalle2);
 
         producto.setIngredientes(listaIngredientes);
-
-        dao.agregarProducto(producto);
+        DTO_Producto productoDTO = new DTO_Producto();
+        //producto.set
+        //p.agregarProducto(producto);
     }
 
 }

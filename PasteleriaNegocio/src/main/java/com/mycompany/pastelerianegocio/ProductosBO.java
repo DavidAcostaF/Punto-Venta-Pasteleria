@@ -24,50 +24,52 @@ import java.util.List;
  * @author PC
  */
 public class ProductosBO implements IProductosBO {
-    
+
     private IProductoDAO productoDAO;
     private IIngredienteDAO ingredienteDAO;
     private ProductosConversiones conversor;
     private IngredienteConversiones conversorIngredientes;
-    
+
     public ProductosBO() {
         this.productoDAO = new ProductoDAO();
         this.ingredienteDAO = new IngredienteDAO();
         this.conversor = new ProductosConversiones();
         this.conversorIngredientes = new IngredienteConversiones();
     }
-    
+
     @Override
     public DTO_Producto agregarProducto(DTO_Producto producto) {
-        Producto producoNuevo = productoDAO.agregarProducto(this.convertirDTOAProducto(producto));
+        Producto productosi = this.convertirDTOAProducto(producto);
+        System.out.println(productosi.getPrecio());
+        Producto producoNuevo = productoDAO.agregarProducto(productosi);
         return conversor.convertirProducto(producoNuevo);
     }
-    
+
     @Override
     public List<DTO_Producto> consultarProductos() {
         List<DTO_Producto> listaProductos = conversor.convertirListaProductos(productoDAO.consultarProductos());
         return listaProductos;
     }
-    
+
     @Override
     public DTO_Producto consultarProductoPorNombre(String nombre) {
         return conversor.convertirProducto(productoDAO.consultarPorNombre(nombre));
     }
-    
+
     @Override
     public ProductoMapeo convertirDTOAProductoMapeo(DTO_Producto producto) {
         ProductoMapeo productoNuevo = new ProductoMapeo();
         productoNuevo.setDescripcion(producto.getDescripcion());
-        
+
         productoNuevo.setNombre(producto.getNombre());
         productoNuevo.setPrecio(producto.getPrecio());
-        
+
         for (DTO_IngredienteDetalle ingredienteDetalle : producto.getIngredientes()) {
             productoNuevo.addIngredienteDetalle(convertirDTOAIngredienteDetalleMapeo(ingredienteDetalle));
         }
         return productoNuevo;
     }
-    
+
     @Override
     public IngredienteDetalleMapeo convertirDTOAIngredienteDetalleMapeo(DTO_IngredienteDetalle ingredienteDetalle) {
         IngredienteDetalleMapeo ingredienteDetalleNuevo = new IngredienteDetalleMapeo();
@@ -76,27 +78,31 @@ public class ProductosBO implements IProductosBO {
         //ingredienteDetalleNuevo.setIngredienteId(ingredienteDetalle.getIngredienteId());
         return ingredienteDetalleNuevo;
     }
-    
+
     @Override
     public DTO_Ingrediente consultarIngredientePorNombre(String nombre) {
         return conversorIngredientes.convertir(ingredienteDAO.consultarPorNombre(nombre));
     }
-    
+
     @Override
     public Producto convertirDTOAProducto(DTO_Producto producto) {
+        Float precio = 0F;
         Producto productoNuevo = new Producto();
         productoNuevo.setDescripcion(producto.getDescripcion());
-        
+
         productoNuevo.setNombre(producto.getNombre());
         productoNuevo.setPrecio(producto.getPrecio());
-        
+
         for (DTO_IngredienteDetalle ingredienteDetalle : producto.getIngredientes()) {
-            ingredienteDetalle.setIngredienteId(consultarIngredientePorNombre(ingredienteDetalle.getNombre()).getId());
+            DTO_Ingrediente ingredienteConsultado = consultarIngredientePorNombre(ingredienteDetalle.getNombre());
+            precio += ingredienteConsultado.getPrecio() * ingredienteDetalle.getCantidad();
+            ingredienteDetalle.setIngredienteId(ingredienteConsultado.getId());
             productoNuevo.addIngredienteDetalle(convertirDTOAIngredienteDetalle(ingredienteDetalle));
         }
+        productoNuevo.setPrecio(precio + 50F);
         return productoNuevo;
     }
-    
+
     @Override
     public IngredienteDetalle convertirDTOAIngredienteDetalle(DTO_IngredienteDetalle ingredienteDetalle) {
         IngredienteDetalle ingredienteDetalleNuevo = new IngredienteDetalle();
@@ -105,5 +111,10 @@ public class ProductosBO implements IProductosBO {
         ingredienteDetalleNuevo.setIngredienteId(ingredienteDetalle.getIngredienteId());
         return ingredienteDetalleNuevo;
     }
-    
+
+    @Override
+    public Float calcularCosto(List<IngredienteDetalle> productos) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

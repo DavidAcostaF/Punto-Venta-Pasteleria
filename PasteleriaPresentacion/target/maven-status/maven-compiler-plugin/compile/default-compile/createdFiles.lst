@@ -107,6 +107,7 @@ presentacion\Presentacion_DlgInventarioIngredientes$5.class
 presentacion\Presentacion_DlgInventarioProductos$2.class
 presentacion\Presentacion_FrmHistorialVentas$2.class
 presentacion\Presentacion_DlgSeleccionarFechaIngresos$2.class
+presentacion\Presentacion_DlgVentasTotales$5.class
 presentacion\Presentacion_DlgCobrarVenta$2.class
 extras\ButtonColumn.class
 presentacion\Presentacion_DlgHistorialReportes$3.class

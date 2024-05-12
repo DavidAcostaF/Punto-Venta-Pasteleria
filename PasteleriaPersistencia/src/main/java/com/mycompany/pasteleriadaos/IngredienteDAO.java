@@ -42,7 +42,6 @@ public class IngredienteDAO implements IIngredienteDAO {
             //Arrojar una excepcion
         }
 
-
         return ingredienteConversiones.convertir(ingredienteAgregado);
     }
 
@@ -78,7 +77,6 @@ public class IngredienteDAO implements IIngredienteDAO {
     public Ingrediente consultarPorNombre(String nombre) {
         MongoCollection<IngredienteMapeo> coleccion = conexion.obtenerColeccion();
         IngredienteMapeo resultado = coleccion.find(eq("nombre", nombre)).first();
-        DTO_Ingrediente ingredienteDTO = new DTO_Ingrediente();
 
         return ingredienteConversiones.convertir(resultado);
     }

@@ -34,4 +34,7 @@ public interface IProductosBO {
     public IngredienteDetalle convertirDTOAIngredienteDetalle(DTO_IngredienteDetalle ingredienteDetalle);
 
     public DTO_Ingrediente consultarIngredientePorNombre(String nombre);
+
+    public Float calcularCosto(List<IngredienteDetalle> productos);
+
 }
