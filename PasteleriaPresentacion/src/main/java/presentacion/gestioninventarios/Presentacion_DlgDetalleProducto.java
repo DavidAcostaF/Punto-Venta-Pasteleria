@@ -67,6 +67,9 @@ public class Presentacion_DlgDetalleProducto extends javax.swing.JFrame {
         labelPrecio = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        labelNombre1 = new javax.swing.JLabel();
+        labelPrecio1 = new javax.swing.JLabel();
+        labelDescripcion1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Detalles del producto");
@@ -137,6 +140,15 @@ public class Presentacion_DlgDetalleProducto extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel2.setText("Ingredientes del producto");
 
+        labelNombre1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelNombre1.setText("Nombre:");
+
+        labelPrecio1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelPrecio1.setText("Precio:");
+
+        labelDescripcion1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelDescripcion1.setText("Descripcion:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -151,18 +163,26 @@ public class Presentacion_DlgDetalleProducto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(154, 154, 154)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelNombre)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(24, 24, 24)
                                 .addComponent(jLabel1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(82, 82, 82)
-                                .addComponent(labelPrecio)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(labelDescripcion)
-                                .addGap(78, 78, 78))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(labelNombre1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(labelNombre))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(labelPrecio1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(labelPrecio)
+                                        .addGap(69, 69, 69)
+                                        .addComponent(labelDescripcion1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(labelDescripcion))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(btnVolver)))
@@ -178,11 +198,15 @@ public class Presentacion_DlgDetalleProducto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelNombre)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNombre)
+                    .addComponent(labelNombre1))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelPrecio)
-                    .addComponent(labelDescripcion))
+                    .addComponent(labelDescripcion)
+                    .addComponent(labelPrecio1)
+                    .addComponent(labelDescripcion1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -258,8 +282,11 @@ public class Presentacion_DlgDetalleProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelDescripcion;
+    private javax.swing.JLabel labelDescripcion1;
     private javax.swing.JLabel labelNombre;
+    private javax.swing.JLabel labelNombre1;
     private javax.swing.JLabel labelPrecio;
+    private javax.swing.JLabel labelPrecio1;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JTable tableIngredientes;
     // End of variables declaration//GEN-END:variables
