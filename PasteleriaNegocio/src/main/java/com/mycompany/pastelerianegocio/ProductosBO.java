@@ -23,61 +23,62 @@ import java.util.List;
  * @author PC
  */
 public class ProductosBO implements IProductosBO {
-
+    
     private IProductoDAO productoDAO;
     private IIngredienteDAO ingredienteDAO;
     private ProductosConversiones conversor;
     private IngredienteConversiones conversorIngredientes;
-
+    
     public ProductosBO() {
         this.productoDAO = new ProductoDAO();
         this.ingredienteDAO = new IngredienteDAO();
         this.conversor = new ProductosConversiones();
         this.conversorIngredientes = new IngredienteConversiones();
     }
-
+    
     @Override
     public DTO_Producto agregarProducto(DTO_Producto producto) {
         Producto producoNuevo = productoDAO.agregarProducto(this.convertirDTOAProducto(producto));
         return conversor.convertirProducto(producoNuevo);
     }
-
+    
     @Override
     public List<DTO_Producto> consultarProductos() {
         List<DTO_Producto> listaProductos = conversor.convertirListaProductos(productoDAO.consultarProductos());
         return listaProductos;
     }
-
+    
     @Override
     public DTO_Producto consultarProductoPorNombre(String nombre) {
         return conversor.convertirProducto(productoDAO.consultarPorNombre(nombre));
     }
-
+    
     @Override
     public ProductoMapeo convertirDTOAProducto(DTO_Producto producto) {
         ProductoMapeo productoNuevo = new ProductoMapeo();
         productoNuevo.setDescripcion(producto.getDescripcion());
-
+        
         productoNuevo.setNombre(producto.getNombre());
         productoNuevo.setPrecio(producto.getPrecio());
-
+        
         for (DTO_IngredienteDetalle ingredienteDetalle : producto.getIngredientes()) {
             productoNuevo.addIngredienteDetalle(convertirDTOAIngredienteDetalle(ingredienteDetalle));
         }
         return productoNuevo;
     }
-
+    
     @Override
     public IngredienteDetalleMapeo convertirDTOAIngredienteDetalle(DTO_IngredienteDetalle ingredienteDetalle) {
         IngredienteDetalleMapeo ingredienteDetalleNuevo = new IngredienteDetalleMapeo();
         ingredienteDetalleNuevo.setCantidad(ingredienteDetalle.getCantidad());
         ingredienteDetalleNuevo.setNombre(ingredienteDetalle.getNombre());
+        //ingredienteDetalleNuevo.setIngredienteId(ingredienteDetalle.getIngredienteId());
         return ingredienteDetalleNuevo;
     }
-
+    
     @Override
     public DTO_Ingrediente consultarIngredientePorNombre(String nombre) {
         return conversorIngredientes.convertir(ingredienteDAO.consultarPorNombre(nombre));
     }
-
+    
 }

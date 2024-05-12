@@ -48,13 +48,12 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
         limpiarTabla();
         List<DTO_Ingrediente> listaIngredientes = new ArrayList<>();
         List<DTO_IngredienteDetalle> ingredientesDetalleDTO = control.getProductoDTO().getIngredientes();
-        System.out.println(ingredientesDetalleDTO.get(0).getNombre());
-
-        System.out.println(ingredientesDetalleDTO.get(1).getNombre());
         if (ingredientesDetalleDTO != null) {
-            for (DTO_IngredienteDetalle ingredienteDetalle : ingredientesDetalleDTO) {
-                DTO_Ingrediente ingredientes = funcionalidadConsultarIngrediente.consultarIngredientePorNombre(new DTO_Ingrediente(ingredienteDetalle.getNombre()));
-                listaIngredientes.add(ingredientes);
+
+            for (int i = 0; i < ingredientesDetalleDTO.size(); i++) {
+                DTO_Ingrediente ingrediente = funcionalidadConsultarIngrediente.consultarIngredientePorNombre(new DTO_Ingrediente(ingredientesDetalleDTO.get(i).getNombre()));
+                ingredientesDetalleDTO.get(i).setIngredienteId(ingrediente.getId());
+                listaIngredientes.add(ingrediente);
             }
         }
         DefaultTableModel modelo = (DefaultTableModel) tableIngredientes.getModel();
@@ -202,9 +201,24 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        control.getProductoDTO().setIngredientes(obtenerListaIngredientes());
+        List<DTO_IngredienteDetalle> ingredientesAgregados = obtenerListaIngredientes();
+        for (int i = 0; i < ingredientesAgregados.size(); i++) {
+            System.out.println(ingredientesAgregados.get(i).getIngredienteId());
+        }
+
+        control.getProductoDTO().setIngredientes(ingredientesAgregados);
+
         DTO_Producto producto = control.getProductoDTO();
-        funcionalidadAgregarProducto.agregarProducto(producto);
+
+        DTO_Producto productoAgregado = funcionalidadAgregarProducto.agregarProducto(producto);
+
+        if (productoAgregado != null) {
+            JOptionPane.showMessageDialog(this, "Se ha agregado el producto.");
+            control.mostrarInvetarioProductos();
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se ha agregado el producto.");
+        }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
 

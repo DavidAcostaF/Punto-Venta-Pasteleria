@@ -9,6 +9,8 @@ import com.mycompany.pasteleriadaos.IProductoDAO;
 import com.mycompany.pasteleriadaos.IngredienteDAO;
 import com.mycompany.pasteleriadaos.ProductoDAO;
 import com.mycompany.pasteleriadocumentosanidadosmapeo.IngredienteDetalleMapeo;
+import com.mycompany.pasteleriadominioentidades.Ingrediente;
+import com.mycompany.pasteleriadominioentidades.Producto;
 import com.mycompany.pasteleriadominiosMapeo.IngredienteMapeo;
 import com.mycompany.pasteleriadominiosMapeo.ProductoMapeo;
 import dto.DTO_Ingrediente;
@@ -26,52 +28,50 @@ public class PruebasProductos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        IIngredienteDAO ingredienteDAO = new IngredienteDAO();
-        IProductoDAO productoDAO = new ProductoDAO();
-        IngredienteMapeo ingrediento1 = new IngredienteMapeo();
-        ingrediento1.setNombre("Azucar");
+//        IIngredienteDAO ingredienteDAO = new IngredienteDAO();
+//        IProductoDAO productoDAO = new ProductoDAO();
+//        IngredienteMapeo ingrediento1 = new IngredienteMapeo();
+//        ingrediento1.setNombre("Azucar");
+//
+//        ingrediento1.setNombre("Azucar");
+//        ingrediento1.setCantidad(2);
+//        ingrediento1.setPrecio(123F);
+//        ingrediento1.setUnidadDeMedida("gramos");
+//
+//        IngredienteMapeo ingrediento2 = new IngredienteMapeo();
+//        ingrediento2.setNombre("Az");
+//        ingrediento2.setCantidad(2);
+//        ingrediento2.setPrecio(123F);
+//        ingrediento2.setUnidadDeMedida("gramos");
+//        ingredienteDAO.agregar(ingrediento1);
+//        ingredienteDAO.agregar(ingrediento2);
+//        ProductoMapeo producto = new ProductoMapeo();
+//        producto.setNombre("Pastelongo");
+//        producto.setPrecio(100F);
+//
+//        Ingrediente ingredienteConsultado1 = ingredienteDAO.consultarPorNombre(ingrediento1.getNombre());
+//        Ingrediente ingredienteConsultado2 = ingredienteDAO.consultarPorNombre(ingrediento1.getNombre());
+//
+//        IngredienteDetalleMapeo ingredienteDetalle1 = new IngredienteDetalleMapeo();
+//        ingredienteDetalle1.setIngredienteId(new ObjectId(ingredienteConsultado1.getId()));
+//        ingredienteDetalle1.setCantidad(ingredienteConsultado1.getCantidad());
+//        ingredienteDetalle1.setNombre(ingredienteConsultado1.getNombre());
+//
+//        IngredienteDetalleMapeo ingredienteDetalle2 = new IngredienteDetalleMapeo();
+//        ingredienteDetalle2.setIngredienteId(new ObjectId(ingredienteConsultado1.getId()));
+//        ingredienteDetalle2.setCantidad(ingredienteConsultado2.getCantidad());
+//        ingredienteDetalle2.setNombre(ingredienteConsultado2.getNombre());
+//
+//        producto.addIngredienteDetalle(ingredienteDetalle1);
+//        producto.addIngredienteDetalle(ingredienteDetalle2);
+//
+//        productoDAO.agregarProducto(producto);
 
-   /*    ingrediento1.setNombre("Azucar");
-        ingrediento1.setCantidad(2);
-        ingrediento1.setPrecio(123F);
-        ingrediento1.setUnidadDeMedida("gramos");
-
-        IngredienteMapeo ingrediento2 = new IngredienteMapeo();
-        ingrediento2.setNombre("Az");
-        ingrediento2.setCantidad(2);
-        ingrediento2.setPrecio(123F);
-        ingrediento2.setUnidadDeMedida("gramos");
-        ingredienteDAO.agregar(ingrediento1);
-        ingredienteDAO.agregar(ingrediento2);
-        ProductoMapeo producto = new ProductoMapeo();
-        producto.setNombre("Pastelongo");
-        producto.setPrecio(100F);
-
-        DTO_Ingrediente ingredienteConsultado1 = ingredienteDAO.consultarPorNombre(ingrediento1.getNombre());
-        DTO_Ingrediente ingredienteConsultado2 = ingredienteDAO.consultarPorNombre(ingrediento1.getNombre());
-
-        IngredienteDetalleMapeo ingredienteDetalle1 = new IngredienteDetalleMapeo();
-        ingredienteDetalle1.setIngredienteId(new ObjectId(ingredienteConsultado1.getId()));
-        ingredienteDetalle1.setCantidad(ingredienteConsultado1.getCantidad());
-        ingredienteDetalle1.setNombre(ingredienteConsultado1.getNombre());
-
-        IngredienteDetalleMapeo ingredienteDetalle2 = new IngredienteDetalleMapeo();
-        ingredienteDetalle2.setIngredienteId(new ObjectId(ingredienteConsultado1.getId()));
-        ingredienteDetalle2.setCantidad(ingredienteConsultado2.getCantidad());
-        ingredienteDetalle2.setNombre(ingredienteConsultado2.getNombre());
-
-        producto.addIngredienteDetalle(ingredienteDetalle1);
-        producto.addIngredienteDetalle(ingredienteDetalle2);
-
-        productoDAO.agregarProducto(producto);
-
-        /*
-       List<DTO_Producto> listaproductos=productoDAO.consultarProductos();
-        System.out.println(listaproductos);*/
-    }
-
-       
-//       List<DTO_Producto> listaproductos=productoDAO.consultarProductos();
+//        List<Producto> listaproductos = productoDAO.consultarProductos();
 //        System.out.println(listaproductos);
+//
+//        List<Producto> listaproductos = productoDAO.consultarProductos();
+//
+//        System.out.println(listaproductos);
+    }
 }
-
