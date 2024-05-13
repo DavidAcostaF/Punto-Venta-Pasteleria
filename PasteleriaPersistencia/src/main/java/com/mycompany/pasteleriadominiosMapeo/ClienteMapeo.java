@@ -12,7 +12,7 @@ import org.bson.types.ObjectId;
  * @author f_aco
  */
 public class ClienteMapeo {
-   private ObjectId id;
+    private ObjectId id;
     private String nombre;
     private String apellidoP;
     private String apellidoM;

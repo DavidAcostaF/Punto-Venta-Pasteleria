@@ -18,7 +18,6 @@ import com.mycompany.pasteleriadominioentidades.Producto;
 import com.mycompany.pasteleriadominioentidades.Venta;
 import com.mycompany.pasteleriadominiosMapeo.VentaMapeo;
 import conversionesPersistencia.VentasConversiones;
-import dto.DTO_Venta;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -35,12 +34,10 @@ import org.bson.types.ObjectId;
 public class VentaDAO implements IVentaDAO {
 
     private IConexion conexion;
-    private DTO_Venta ventadto;
     private VentasConversiones conversor;
 
     public VentaDAO() {
         conexion = new Conexion("ventas", VentaMapeo.class);
-        ventadto = new DTO_Venta();
         conversor = new VentasConversiones();
 
     }

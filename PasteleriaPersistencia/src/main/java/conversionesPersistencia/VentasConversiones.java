@@ -9,11 +9,7 @@ import com.mycompany.pasteleriadominioentidades.Direccion;
 import com.mycompany.pasteleriadominioentidades.Venta;
 import com.mycompany.pasteleriadominiosMapeo.DetalleVentaMapeo;
 import com.mycompany.pasteleriadominiosMapeo.DireccionMapeo;
-
 import com.mycompany.pasteleriadominiosMapeo.VentaMapeo;
-import dto.DTO_DetalleVenta;
-import dto.DTO_Direccion;
-import dto.DTO_Venta;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.types.ObjectId;

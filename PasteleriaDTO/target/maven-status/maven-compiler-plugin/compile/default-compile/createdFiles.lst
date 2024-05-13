@@ -8,4 +8,5 @@ dto\DTO_Cliente.class
 dto\DTO_DetallesVentaReporte.class
 dto\DTO_DetalleVenta.class
 dto\DTO_Producto.class
+dto\DTO_Reporte.class
 dto\DTO_Venta.class

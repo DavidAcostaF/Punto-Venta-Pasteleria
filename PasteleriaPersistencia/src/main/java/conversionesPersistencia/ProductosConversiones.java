@@ -8,7 +8,6 @@ import com.mycompany.pasteleriadocumentosanidadosmapeo.IngredienteDetalleMapeo;
 import com.mycompany.pasteleriadominiodocumentosanidados.IngredienteDetalle;
 import com.mycompany.pasteleriadominioentidades.Producto;
 import com.mycompany.pasteleriadominiosMapeo.ProductoMapeo;
-import dto.DTO_Producto;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.types.ObjectId;

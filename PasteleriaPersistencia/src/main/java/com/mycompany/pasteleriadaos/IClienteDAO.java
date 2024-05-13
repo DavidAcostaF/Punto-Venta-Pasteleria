@@ -6,7 +6,6 @@ package com.mycompany.pasteleriadaos;
 
 import Exceptions.PersistenciaException;
 import com.mycompany.pasteleriadominioentidades.Cliente;
-import dto.DTO_Cliente;
 import java.util.List;
 
 /**

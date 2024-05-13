@@ -8,8 +8,6 @@ import com.mycompany.pasteleriadominioentidades.Cliente;
 import com.mycompany.pasteleriadominiosMapeo.DireccionMapeo;
 import com.mycompany.pasteleriadominiosMapeo.ClienteMapeo;
 import com.mycompany.pasteleriadominioentidades.Direccion;
-import dto.DTO_Cliente;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.types.ObjectId;

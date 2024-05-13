@@ -13,7 +13,7 @@ import com.mongodb.client.result.UpdateResult;
 import com.mycompany.pasteleriadominioentidades.Cliente;
 import com.mycompany.pasteleriadominiosMapeo.ClienteMapeo;
 import conversionesPersistencia.ClientesConversiones;
-import dto.DTO_Cliente;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,11 +26,9 @@ import org.bson.types.ObjectId;
 public class ClienteDAO implements IClienteDAO {
 
     private IConexion conexion;
-    private DTO_Cliente clientedto;
     private ClientesConversiones conversor;
 
     public ClienteDAO() {
-        clientedto = new DTO_Cliente();
         conexion = new Conexion("clientes", ClienteMapeo.class);
         conversor = new ClientesConversiones();
 

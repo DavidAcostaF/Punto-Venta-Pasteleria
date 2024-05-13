@@ -6,7 +6,6 @@ package conversionesPersistencia;
 
 import com.mycompany.pasteleriadominioentidades.Ingrediente;
 import com.mycompany.pasteleriadominiosMapeo.IngredienteMapeo;
-import dto.DTO_Ingrediente;
 import java.util.ArrayList;
 import java.util.List;
 

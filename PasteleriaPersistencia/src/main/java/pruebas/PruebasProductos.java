@@ -13,8 +13,6 @@ import com.mycompany.pasteleriadominioentidades.Ingrediente;
 import com.mycompany.pasteleriadominioentidades.Producto;
 import com.mycompany.pasteleriadominiosMapeo.IngredienteMapeo;
 import com.mycompany.pasteleriadominiosMapeo.ProductoMapeo;
-import dto.DTO_Ingrediente;
-import dto.DTO_Producto;
 import java.util.List;
 import org.bson.types.ObjectId;
 

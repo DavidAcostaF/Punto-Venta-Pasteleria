@@ -10,7 +10,6 @@ import com.mycompany.pasteleriadominioentidades.Cliente;
 import com.mycompany.pasteleriadominioentidades.Direccion;
 import com.mycompany.pasteleriadominiosMapeo.ClienteMapeo;
 import com.mycompany.pasteleriadominiosMapeo.DireccionMapeo;
-import dto.DTO_Cliente;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;

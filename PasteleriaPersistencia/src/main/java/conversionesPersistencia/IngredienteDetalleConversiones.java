@@ -6,7 +6,6 @@ package conversionesPersistencia;
 
 import com.mycompany.pasteleriadocumentosanidadosmapeo.IngredienteDetalleMapeo;
 import com.mycompany.pasteleriadominiodocumentosanidados.IngredienteDetalle;
-import dto.DTO_IngredienteDetalle;
 import org.bson.types.ObjectId;
 
 /**
