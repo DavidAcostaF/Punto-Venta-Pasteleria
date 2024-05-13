@@ -10,8 +10,6 @@ import com.mycompany.pasteleriadaos.ClienteDAO;
 import com.mycompany.pasteleriadaos.IClienteDAO;
 import dto.DTO_Cliente;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

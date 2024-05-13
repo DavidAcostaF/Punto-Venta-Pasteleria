@@ -67,7 +67,7 @@
             <artifactId>PasteleriaConsultarIngrediente</artifactId>
             <version>${project.version}</version>
         </dependency>
-                <dependency>
+        <dependency>
             <groupId>io.github.bweng20</groupId>
             <artifactId>jSVG</artifactId>
             <version>1.4</version>
@@ -83,17 +83,17 @@
             <artifactId>miglayout-core</artifactId>
             <version>11.3</version>
         </dependency>
-<dependency>
-    <groupId>com.formdev</groupId>
-    <artifactId>flatlaf-extras</artifactId>
-    <version>3.4.1</version>
-    <type>jar</type>
-</dependency>
-<dependency>
-    <groupId>com.formdev</groupId>
-    <artifactId>flatlaf-fonts-roboto</artifactId>
-    <version>2.137</version>
-</dependency>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf-extras</artifactId>
+            <version>3.4.1</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf-fonts-roboto</artifactId>
+            <version>2.137</version>
+        </dependency>
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
@@ -135,7 +135,7 @@
             <artifactId>PasteleriaCalcularGananciasDelDia</artifactId>
             <version>${project.version}</version>
         </dependency>
-          <dependency>
+        <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
             <version>6.21.2</version>
@@ -169,6 +169,16 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>PasteleriaEliminarReporte</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>2.0.24</version> 
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>PasteleriaGuardarReportes</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

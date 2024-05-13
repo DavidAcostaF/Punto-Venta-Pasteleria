@@ -48,6 +48,10 @@ public class PanelBotones extends javax.swing.JPanel {
         cmdView = new extras.ActionButton();
         cmdDelete = new extras.ActionButton();
 
+        cmdView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view.png"))); // NOI18N
+
+        cmdDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/delete.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(

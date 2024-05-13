@@ -1,8 +1,3 @@
-
-presentacion\gestioninventarios\Presentacion_DlgIngresarDatosDelProducto$1.class
-presentacion\casohistoriales\Presentacion_DlgHistorialReportes$3.class
-presentacion\casohistoriales\Presentacion_FrmDetallesVenta$1.class
-
 presentacion\Presentacion_DlgCobrarVenta.class
 presentacion\Presentacion_FrmHistorialFacturas$4.class
 presentacion\Presentacion_FrmSeleccionarVenta$3.class
@@ -20,6 +15,7 @@ presentacion\Presentacion_DlgVentasTotales$4.class
 presentacion\gestioninventarios\Presentacion_DlgActualizarDatosDelProducto$6.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioIngredientes$12.class
 pruebas\prueba.class
+presentacion\casohistoriales\VerPdf.class
 presentacion\gestioninventarios\Presentacion_DlgActualizarIngredientesSeleccionados$3.class
 presentacion\Presentacion_DlgConfirmacionPago$3.class
 extras\PanelBotones.class
@@ -58,6 +54,7 @@ presentacion\gestioninventarios\Presentacion_DlgActualizarDatosDelProducto$5.cla
 presentacion\gestioninventarios\Presentacion_DlgActualizarIngredientesSeleccionados$2.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioIngredientes$4.class
 extras\ButtonColumn.class
+presentacion\casohistoriales\VerPdf$1.class
 presentacion\gestioninventarios\Presentacion_DlgIngredientesSeleccionados$4.class
 presentacion\casohistoriales\Presentacion_FrmHistorialVentas$4.class
 extras\ComboBoxMultiSeleccion.class
@@ -88,6 +85,7 @@ extras\ComboBoxMultiSeleccion$IconoCheckBox.class
 extras\ComboBoxMultiSeleccion$Item.class
 presentacion\Presentacion_DlgDirecciones$1.class
 presentacion\gestioninventarios\Presentacion_DlgIngresarDatosDelProducto$1.class
+presentacion\casohistoriales\Presentacion_DlgHistorialReportes$3.class
 presentacion\casohistoriales\Presentacion_FrmDetallesVenta$1.class
 extras\ActionButton$1.class
 extras\ActionButton.class
@@ -149,10 +147,7 @@ presentacion\Presentacion_DlgListaClientes.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioProductos$6.class
 presentacion\Presentacion_DlgOpcionFactura$2.class
 presentacion\gestioninventarios\Presentacion_DlgActualizarDatosDelProducto$2.class
-
-presentacion\gestioninventarios\Presentacion_DlgInventarioIngredientes$7.class
 presentacion\casohistoriales\Presentacion_DlgHistorialReportes.class
-
 presentacion\Presentacion_FrmHistorialFacturas.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioIngredientes$11.class
 presentacion\Presentacion_DlgDatosCliente$2.class
@@ -188,10 +183,7 @@ com\mycompany\pasteleria\Pasteleria.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioProductos.class
 presentacion\Presentacion_DlgAgregarPastel$2.class
 extras\DynamicComboBoxRenderer.class
-
-presentacion\casohistoriales\Presentacion_FrmHistorialVentas$6.class
 presentacion\casohistoriales\Presentacion_DlgHistorialReportes$2.class
-
 presentacion\gestioninventarios\Presentacion_DlgActualizarDatosDelProducto$1.class
 presentacion\Presentacion_MenuPrincipal$4.class
 presentacion\Presentacion_DlgOpcionFactura.class

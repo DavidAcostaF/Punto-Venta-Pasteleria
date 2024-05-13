@@ -32,8 +32,18 @@
   </Layout>
   <SubComponents>
     <Component class="extras.ActionButton" name="cmdView">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/view.png"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="extras.ActionButton" name="cmdDelete">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/delete.png"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

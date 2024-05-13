@@ -10,6 +10,8 @@ import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.mycompany.pasteleriagenerarreporte.FuncionalidadGenerarReporte;
 import com.mycompany.pasteleriagenerarreporte.IFuncionalidadGenerarReporte;
+import com.mycompany.pasteleriaguardarreportes.FuncionalidadGuardarReportes;
+import com.mycompany.pasteleriaguardarreportes.IFuncionalidadGuardarReportes;
 import com.mycompany.pasteleriaproductosventa.FuncionalidadConsultarProductos;
 import control.ControlHistoriales;
 import dto.DTO_Cliente;
@@ -25,11 +27,22 @@ import com.mycompany.pasteleriaproductosventa.IFuncionalidadConsultarProductos;
 import dto.DTO_DetallesVentaReporte;
 import dto.DTO_GenerarReporte;
 import dto.DTO_ReciboFormato;
+import dto.DTO_Reporte;
+import java.awt.Desktop;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
@@ -45,7 +58,7 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
     private DTO_Venta venta;
     private IFuncionalidadConsultarProductos funcionalidadConsultarProducto;
     private IFuncionalidadGenerarReporte generarReporte;
-
+private IFuncionalidadGuardarReportes guardarRecibo;
     /**
      * Creates new form FrmDetallesVenta
      */
@@ -53,6 +66,7 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
         this.control = ControlHistoriales.getInstance();
         this.cliente = new DTO_Cliente();
         this.venta = control.getVenta();
+        this.guardarRecibo=new FuncionalidadGuardarReportes();
         funcionalidadConsultarProducto = new FuncionalidadConsultarProductos();
         generarReporte = new FuncionalidadGenerarReporte();
         setTitle("Detalles de la venta");
@@ -342,6 +356,7 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void generarReciboBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarReciboBtnActionPerformed
+
         try {
             SimpleDateFormat ff = new SimpleDateFormat("dd/MM/yyyy");
             DTO_ReciboFormato recibo = new DTO_ReciboFormato();
@@ -359,14 +374,49 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
             }
             recibo.setDetallesVenta(detallesVenta);
             DTO_GenerarReporte reporteGenerado = generarReporte.generarRecibo(recibo);
+
             JasperPrint jasperPrint = JasperFillManager.fillReport(reporteGenerado.getJasperReport(), reporteGenerado.getParameters(), new JREmptyDataSource());
 
-            JasperViewer.viewReport(jasperPrint, false);
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Guardar como...");
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos PDF (*.pdf)", "pdf");
+            fileChooser.setFileFilter(filter);
+            int seleccion = fileChooser.showSaveDialog(this);
+
+            if (seleccion == JFileChooser.APPROVE_OPTION) {
+                File archivoSeleccionado = fileChooser.getSelectedFile();
+                String rutaArchivo = archivoSeleccionado.getAbsolutePath();
+
+                if (!rutaArchivo.toLowerCase().endsWith(".pdf")) {
+                    rutaArchivo += ".pdf";
+                }
+
+                JasperExportManager.exportReportToPdfFile(jasperPrint, rutaArchivo);
+                JOptionPane.showMessageDialog(this, "El archivo se ha guardado correctamente en:\n" + rutaArchivo, "Archivo guardado", JOptionPane.INFORMATION_MESSAGE);
+
+                if (Desktop.isDesktopSupported()) {
+                    File archivo = new File(rutaArchivo);
+                    DTO_Reporte reporte = new DTO_Reporte();
+                    byte[] bytesArchivo = convertirArchivoABytes(archivo);
+                    reporte.setBytesContenido(bytesArchivo);
+                    reporte.setNombre(archivo.getName());
+                    reporte.setCategoria("Recibo");
+                    reporte.setTipo("application/pdf");
+                    reporte.setFechaExpedicion(new Date());
+                    guardarRecibo.guardarReporte(reporte);
+                    Desktop.getDesktop().open(new File(rutaArchivo));
+
+                }
+
+            }
         } catch (JRException ex) {
             Logger.getLogger(Presentacion_FrmDetallesVenta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Presentacion_FrmDetallesVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_generarReciboBtnActionPerformed
+
     public void mostrarDetallesVentas() {
         FlatRobotoFont.install();
         FlatLaf.registerCustomDefaultsSource("extras");
@@ -397,6 +447,20 @@ public class Presentacion_FrmDetallesVenta extends javax.swing.JFrame {
         modelo.setRowCount(0);
 
         detallesVentaTabla.setModel(modelo);
+    }
+
+    private byte[] convertirArchivoABytes(File archivo) {
+        try (FileInputStream fis = new FileInputStream(archivo); ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+            byte[] buffer = new byte[1024];
+            int longitud;
+            while ((longitud = fis.read(buffer)) != -1) {
+                bos.write(buffer, 0, longitud);
+            }
+            return bos.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

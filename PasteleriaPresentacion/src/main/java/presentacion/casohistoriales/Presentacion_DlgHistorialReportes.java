@@ -8,6 +8,8 @@ import com.mycompany.pasteleriaconsultarreportes.FuncionalidadConsultarReportes;
 import com.mycompany.pasteleriaconsultarreportes.IFuncionalidadConsultarReportes;
 import com.mycompany.pasteleriaeliminarreporte.FuncionalidadEliminarReporte;
 import com.mycompany.pasteleriaeliminarreporte.IFuncionalidadEliminarReporte;
+import com.mycompany.pasteleriaguardarreportes.FuncionalidadGuardarReportes;
+import com.mycompany.pasteleriaguardarreportes.IFuncionalidadGuardarReportes;
 import dto.DTO_Reporte;
 
 import extras.TableActionCellEditor;
@@ -30,11 +32,12 @@ import javax.swing.table.DefaultTableModel;
  * @author abelc
  */
 public class Presentacion_DlgHistorialReportes extends javax.swing.JFrame {
-    
+
     private IFuncionalidadConsultarReportes funcionalidadReportes;
     private List<DTO_Reporte> listaReporte;
     private IFuncionalidadEliminarReporte funcionalidadEliminar;
     private SimpleDateFormat ff = new SimpleDateFormat("dd/MM/yyyy");
+    
 
     /**
      * Creates new form Presentacion_DlgHistorialeReportes
@@ -42,13 +45,14 @@ public class Presentacion_DlgHistorialReportes extends javax.swing.JFrame {
     public Presentacion_DlgHistorialReportes() {
         funcionalidadReportes = new FuncionalidadConsultarReportes();
         funcionalidadEliminar = new FuncionalidadEliminarReporte();
+         
         setTitle("Historial de registros");
         initComponents();
-        
+
         listaReporte = funcionalidadReportes.consultarReportes(listaReporte);
         llenarTabla();
         TableActionEvent event = new TableActionEvent() {
-            
+
             @Override
             public void onDelete(int row) {
                 if (tablaReportes.isEditing()) {
@@ -57,23 +61,13 @@ public class Presentacion_DlgHistorialReportes extends javax.swing.JFrame {
                 System.out.println(listaReporte.get(row).getId());
                 funcionalidadEliminar.eliminarReporte(listaReporte.get(row));
                 DefaultTableModel model = (DefaultTableModel) tablaReportes.getModel();
-                
+
                 model.removeRow(row);
             }
-            
+
             @Override
             public void onView(int row) {
-                File tempFile;
-                try {
-                    tempFile = File.createTempFile("temp", ".pdf");
-                    try (FileOutputStream fos = new FileOutputStream(tempFile)) {
-                        fos.write(listaReporte.get(row).getBytesContenido());
-                    }
-                    
-                    Desktop.getDesktop().open(tempFile);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                VerPdf verPdf = new VerPdf(listaReporte.get(row).getBytesContenido());
             }
         };
         tablaReportes.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender());
@@ -86,16 +80,16 @@ public class Presentacion_DlgHistorialReportes extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void llenarTabla() {
-        
+
         DefaultTableModel modelo = (DefaultTableModel) tablaReportes.getModel();
         if (listaReporte != null) {
             listaReporte.forEach(t -> {
                 modelo.addRow(new Object[]{t.getNombre(), t.getCategoria(), ff.format(t.getFechaExpedicion()), ""});
             });
         }
-        
+
     }
 
     /**
@@ -218,7 +212,7 @@ public class Presentacion_DlgHistorialReportes extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            
+
             public void run() {
                 new Presentacion_DlgHistorialReportes().setVisible(true);
             }

@@ -12,6 +12,8 @@ import com.mycompany.pasteleriaconsultarventas.FuncionalidadConsultarVentas;
 import com.mycompany.pasteleriaconsultarventas.IFuncionalidadConsultarVentas;
 import com.mycompany.pasteleriagenerarreporte.FuncionalidadGenerarReporte;
 import com.mycompany.pasteleriagenerarreporte.IFuncionalidadGenerarReporte;
+import com.mycompany.pasteleriaguardarreportes.FuncionalidadGuardarReportes;
+import com.mycompany.pasteleriaguardarreportes.IFuncionalidadGuardarReportes;
 import com.mycompany.pasteleriaproductosventa.FuncionalidadConsultarProductos;
 import consultarClientes.FuncionalidadConsultarClientes;
 import consultarClientes.IFuncionalidadConsultarClientes;
@@ -52,8 +54,11 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
 import com.mycompany.pasteleriaproductosventa.IFuncionalidadConsultarProductos;
+import dto.DTO_Reporte;
 import java.awt.Desktop;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -76,12 +81,14 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
     private IFuncionalidadConsultarVentas funcionalidadConsultarVentas;
     private IFuncionalidadGenerarReporte funcionalidadGenerarReporte;
     private DTO_Venta venta;
+    private IFuncionalidadGuardarReportes guardarReporte;
 
     /**
      * Creates new form FrmHistorialVentas
      */
     public Presentacion_FrmHistorialVentas() {
         this.control = ControlHistoriales.getInstance();
+        this.guardarReporte = new FuncionalidadGuardarReportes();
         this.funcionalidadConsultarVentas = new FuncionalidadConsultarVentas();
         this.funcionalidadesClientes = new FuncionalidadConsultarClientes();
         this.funcionalidadConsultarProductos = new FuncionalidadConsultarProductos();
@@ -614,19 +621,27 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
             int seleccion = fileChooser.showSaveDialog(this);
 
             if (seleccion == JFileChooser.APPROVE_OPTION) {
-                // Obtener la ubicación seleccionada por el usuario
+
                 File archivoSeleccionado = fileChooser.getSelectedFile();
                 String rutaArchivo = archivoSeleccionado.getAbsolutePath();
 
-                // Si el usuario no especifica la extensión ".pdf", agregarla manualmente
                 if (!rutaArchivo.toLowerCase().endsWith(".pdf")) {
                     rutaArchivo += ".pdf";
                 }
 
                 JasperExportManager.exportReportToPdfFile(jasperPrint, rutaArchivo);
                 JOptionPane.showMessageDialog(this, "El archivo se ha guardado correctamente en:\n" + rutaArchivo, "Archivo guardado", JOptionPane.INFORMATION_MESSAGE);
-                
+
                 if (Desktop.isDesktopSupported()) {
+                    File archivo = new File(rutaArchivo);
+                    DTO_Reporte reporte = new DTO_Reporte();
+                    byte[] bytesArchivo = convertirArchivoABytes(archivo);
+                    reporte.setBytesContenido(bytesArchivo);
+                    reporte.setNombre(archivo.getName());
+                    reporte.setCategoria("Reporte de ventas");
+                    reporte.setTipo("application/pdf");
+                    reporte.setFechaExpedicion(new Date());
+                    guardarReporte.guardarReporte(reporte);
                     Desktop.getDesktop().open(new File(rutaArchivo));
                 }
             }
@@ -720,6 +735,20 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         if (filaSeleccionada != -1) {
             venta = ((VentasTableModel) tablaVentas.getModel()).getVentaAt(filaSeleccionada);
 
+        }
+    }
+
+    private byte[] convertirArchivoABytes(File archivo) {
+        try (FileInputStream fis = new FileInputStream(archivo); ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+            byte[] buffer = new byte[1024];
+            int longitud;
+            while ((longitud = fis.read(buffer)) != -1) {
+                bos.write(buffer, 0, longitud);
+            }
+            return bos.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
