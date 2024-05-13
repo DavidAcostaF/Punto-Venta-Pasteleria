@@ -10,6 +10,7 @@ import com.mycompany.pasteleriadominioentidades.Producto;
 import com.mycompany.pastelerianegocio.ProductosBO;
 import conversionesnegocio.IngredienteConversiones;
 import conversionesnegocio.IngredienteDetalleConversiones;
+import dto.DTO_IngredienteDetalle;
 import dto.DTO_Producto;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,30 +27,24 @@ public class ProductoPruebas {
     public static void main(String[] args) {
         ProductosBO p = new ProductosBO();
         ProductoDAO dao = new ProductoDAO();
-        Producto producto = new Producto();
-        IngredienteDetalleConversiones conversor = new IngredienteDetalleConversiones();
-        IngredienteConversiones conversorIngrediente = new IngredienteConversiones();
-        producto.setNombre("Si");
-        producto.setDescripcion("!@3");
-        producto.setPrecio(0F);
 
-        List<IngredienteDetalle> listaIngredientes = new ArrayList<>();
 
-        IngredienteDetalle ingredienteDetalle1 = new IngredienteDetalle();
-        ingredienteDetalle1.setNombre("Az");
+        List<DTO_IngredienteDetalle> listaIngredientes = new ArrayList<>();
+
+        DTO_IngredienteDetalle ingredienteDetalle1 = new DTO_IngredienteDetalle();
+        ingredienteDetalle1.setNombre("Azucar");
         ingredienteDetalle1.setCantidad(200);
-        ingredienteDetalle1.setIngredienteId(conversor.convertirIngredienteADetalleIngrediente(p.consultarIngredientePorNombre(ingredienteDetalle1.getNombre())).getIngredienteId());
-        IngredienteDetalle ingredienteDetalle2 = new IngredienteDetalle();
-        ingredienteDetalle2.setNombre("Azucar");
+        DTO_IngredienteDetalle ingredienteDetalle2 = new DTO_IngredienteDetalle();
+        ingredienteDetalle2.setNombre("Leche");
         ingredienteDetalle2.setCantidad(200);
         listaIngredientes.add(ingredienteDetalle1);
-        ingredienteDetalle2.setIngredienteId(conversor.convertirIngredienteADetalleIngrediente(p.consultarIngredientePorNombre(ingredienteDetalle2.getNombre())).getIngredienteId());
         listaIngredientes.add(ingredienteDetalle2);
 
-        producto.setIngredientes(listaIngredientes);
         DTO_Producto productoDTO = new DTO_Producto();
-        //producto.set
-        //p.agregarProducto(producto);
+        productoDTO.setIngredientes(listaIngredientes);
+        productoDTO.setNombre("Si");
+        productoDTO.setDescripcion("!@3");
+        p.agregarProducto(productoDTO);
     }
 
 }
