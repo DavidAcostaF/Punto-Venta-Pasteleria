@@ -3,14 +3,14 @@ C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\Pasteleri
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\extras\PastelComboBoxModel.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\control\ControlHistoriales.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgAgregarPastel.java
-C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\casohistoriales\Presentacion_FrmHistorialVentas.java
+C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\casoistoriales\Presentacion_FrmMenuHistoriales.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\gestioninventarios\Presentacion_DlgActualizarDatosDelProducto.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_DlgConfirmacionPago.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\gestioninventarios\Presentacion_DlgIngresarDatosDelProducto.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\control\ControlIngresosMensuales.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\pruebas\pruebaJasper.java
+C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\casoistoriales\Presentacion_FrmDetallesVenta.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\gestioninventarios\Presentacion_DlgSeleccionOpcionGestion.java
-C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\casohistoriales\Presentacion_FrmMenuHistoriales.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_MenuPrincipal.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\extras\Render.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\extras\TableActionCellEditor.java
@@ -43,7 +43,7 @@ C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\Pasteleri
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\Presentacion_FrmSeleccionarVenta.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\gestioninventarios\Presentacion_DlgActualizarIngredientesSeleccionados.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\extras\DynamicComboBoxRenderer.java
-C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\casohistoriales\Presentacion_FrmDetallesVenta.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\extras\ClientesComboBoxModel.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\gestioninventarios\Presentacion_DlgInventarioIngredientes.java
 C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\extras\DynamicComboBoxEditor.java
+C:\Users\af_da\OneDrive\Documentos\NetBeansProjects\PasteleriaProyecto\PasteleriaPresentacion\src\main\java\presentacion\casoistoriales\Presentacion_FrmHistorialVentas.java

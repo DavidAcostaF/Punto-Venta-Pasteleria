@@ -125,6 +125,12 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
 
         comboUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "gramos", "mililitros", "unidad" }));
 
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
+
         jLabel1.setText("Nombre:");
 
         jLabel2.setText("Cantidad:");
@@ -132,6 +138,23 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
         jLabel3.setText("Unidad:");
 
         jLabel4.setText("Precio:");
+
+        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadKeyTyped(evt);
+            }
+        });
+
+        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecioActionPerformed(evt);
+            }
+        });
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyTyped(evt);
+            }
+        });
 
         btnActualizar.setBackground(new java.awt.Color(140, 220, 254));
         btnActualizar.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
@@ -305,16 +328,21 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Todos los campos deben estar llenos.");
             return;
         }
+
         DefaultTableModel modelo = (DefaultTableModel) tableIngredientes.getModel();
 
         DTO_Ingrediente ingredienteNuevo = null;
         try {
             ingredienteNuevo = funcionalidadAgregarIngrediente.agregarIngrediente(obtenerIngredienteDTO());
+
+            if (ingredienteNuevo.getPrecio() <= 0) {
+                JOptionPane.showMessageDialog(this, "La cantidad tiene que ser mayor a 0");
+                return;
+            }
             modelo.addRow(new Object[]{ingredienteNuevo.getNombre(), ingredienteNuevo.getCantidad(), ingredienteNuevo.getUnidadDeMedida(), ingredienteNuevo.getPrecio()});
             this.limpiarCampos();
         } catch (Exception ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(this, ex.getCause());
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
 
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -374,7 +402,10 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
     }//GEN-LAST:event_tableIngredientesMouseClicked
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
-
+        char c = evt.getKeyChar();
+        if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+            evt.consume();
+        }
 
     }//GEN-LAST:event_txtBuscarKeyTyped
 
@@ -438,6 +469,32 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
 
         valoresPorDefecto();
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtCantidadKeyTyped
+
+    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c) && c != '.' || (c == '.' && txtCantidad.getText().contains("."))) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPrecioKeyTyped
+
+    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioActionPerformed
     private void valoresPorDefecto() {
         txtCantidad.setEnabled(true);
         txtNombre.setEnabled(true);
