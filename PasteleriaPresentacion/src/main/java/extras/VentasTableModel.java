@@ -53,9 +53,10 @@ public class VentasTableModel extends AbstractTableModel {
     }
 
     public void limpiarTabla() {
-    listaVentas.clear(); 
-    fireTableDataChanged();
-}
+        listaVentas.clear();
+        fireTableDataChanged();
+    }
+    
     
     @Override
     public String getColumnName(int column) {

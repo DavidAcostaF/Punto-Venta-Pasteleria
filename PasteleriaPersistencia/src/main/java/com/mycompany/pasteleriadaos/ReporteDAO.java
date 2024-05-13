@@ -19,7 +19,7 @@ import org.bson.types.ObjectId;
  *
  * @author abelc
  */
-public class ReporteDAO implements IReporte {
+public class ReporteDAO implements IReporteDAO {
 
     private IConexion conexion;
     private ReportesConversiones conversor;

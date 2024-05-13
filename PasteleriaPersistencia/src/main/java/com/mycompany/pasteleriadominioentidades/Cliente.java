@@ -7,6 +7,7 @@ import java.util.List;
  * Clase que representa a un cliente de la pastelería.
  */
 public class Cliente {
+<<<<<<< Updated upstream
 
     /**
      * Identificador único del cliente.
@@ -16,6 +17,9 @@ public class Cliente {
     /**
      * Nombre del cliente.
      */
+=======
+    private String id;
+>>>>>>> Stashed changes
     private String nombre;
 
     /**

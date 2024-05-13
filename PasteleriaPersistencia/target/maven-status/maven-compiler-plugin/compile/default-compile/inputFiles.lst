@@ -30,7 +30,6 @@ C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersi
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\conversionesPersistencia\ClientesConversiones.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\ClienteDAO.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadominioentidades\DetalleVenta.java
-C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IReporte.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\pruebas\PruebasProductos.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadominioentidades\Venta.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\ReporteDAO.java
@@ -38,6 +37,7 @@ C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersi
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadominiosMapeo\ClienteMapeo.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\pruebas\PruebasVenta.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\conversionesPersistencia\IngredienteDetalleConversiones.java
+C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IReporteDAO.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadominioentidades\Producto.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadominiosMapeo\FacturaMapeo.java
 C:\Users\abelc\OneDrive\Documentos\GitHub\Punto-Venta-Pasteleria\PasteleriaPersistencia\src\main\java\com\mycompany\pasteleriadaos\IIngredienteDAO.java

@@ -5,9 +5,8 @@
 package pruebas;
 
 import Exceptions.PersistenciaException;
-import com.mycompany.pasteleriadaos.ReporteDAO;
-import com.mycompany.pasteleriadominioentidades.Reporte;
-import com.mycompany.pasteleriadominiosMapeo.ReporteMapeo;
+import com.mycompany.pastelerianegocio.ReportesBO;
+import dto.DTO_Reporte;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,23 +14,20 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.bson.types.Binary;
 
 /**
  *
  * @author abelc
  */
-public class ReportePrueba {
+public class Reporte {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Reporte reporte = new Reporte();
-        ReporteDAO reportedao = new ReporteDAO();
-        try {
-                    String rutaDirectorio = "C:\\Users\\abelc\\OneDrive\\Escritorio";
-
+        ReportesBO rep = new ReportesBO();
+        DTO_Reporte reporte = new DTO_Reporte();
+        String rutaDirectorio = "C:\\Users\\abelc\\OneDrive\\Escritorio";
         String nombreArchivo = "hola.pdf";
         File archivo = new File(rutaDirectorio, nombreArchivo);
         byte[] bytesArchivo = convertirArchivoABytes(archivo);
@@ -40,15 +36,8 @@ public class ReportePrueba {
         reporte.setCategoria("Reporte de Ventas");
         reporte.setTipo("application/pdf");
         reporte.setFechaExpedicion(new Date());
-        try {
-            reportedao.guardarReporte(reporte);
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(ReportePrueba.class.getName()).log(Level.SEVERE, null, ex);
-        }
-System.out.println(reportedao.consultarReportes());
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(ReportePrueba.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        rep.guardarReporte(reporte);
+
     }
 
     private static byte[] convertirArchivoABytes(File archivo) {

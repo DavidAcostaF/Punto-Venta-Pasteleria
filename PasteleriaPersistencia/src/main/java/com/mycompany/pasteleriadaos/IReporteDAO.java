@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author abelc
  */
-public interface IReporte {
+public interface IReporteDAO {
    public Reporte guardarReporte(Reporte reporte) throws PersistenciaException;
    
    public List<Reporte> consultarReportes()throws PersistenciaException;

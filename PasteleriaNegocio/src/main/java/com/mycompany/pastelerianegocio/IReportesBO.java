@@ -13,9 +13,9 @@ import java.util.List;
  * @author abelc
  */
 public interface IReportesBO {
-  public DTO_Reporte guardarReporte(DTO_Reporte reporte) throws PersistenciaException;
+  public DTO_Reporte guardarReporte(DTO_Reporte reporte);
    
-   public List<DTO_Reporte> consultarReportes()throws PersistenciaException;
+   public List<DTO_Reporte> consultarReportes();
    
-   public void eliminarReporte(DTO_Reporte reporte)throws PersistenciaException;
+   public void eliminarReporte(DTO_Reporte reporte);
 }

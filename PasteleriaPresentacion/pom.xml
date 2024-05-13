@@ -156,6 +156,21 @@
             <artifactId>PasteleriaActualizarProducto</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>pasteleriaConsultarReportes</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>PasteleriaConsultarReportes</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>PasteleriaEliminarReporte</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <name>PasteleriaPresentacion</name>
 </project>

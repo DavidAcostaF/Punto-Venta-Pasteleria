@@ -1,9 +1,9 @@
 pruebas\PruebaIngredientes.class
+com\mycompany\pasteleriadaos\IReporteDAO.class
 com\mycompany\pasteleriadaos\ClienteDAO.class
 pruebas\pruebaCliente.class
 com\mycompany\pasteleriadaos\Conexion.class
 conversionesPersistencia\IngredienteConversiones.class
-com\mycompany\pasteleriadaos\IReporte.class
 com\mycompany\pasteleriadominiosMapeo\ProductoMapeo.class
 com\mycompany\pasteleriadominiosMapeo\ReporteMapeo.class
 pruebas\PruebasVenta.class
