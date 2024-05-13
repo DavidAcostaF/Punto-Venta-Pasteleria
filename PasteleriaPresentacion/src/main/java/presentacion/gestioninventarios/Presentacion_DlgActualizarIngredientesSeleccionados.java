@@ -106,8 +106,8 @@ public class Presentacion_DlgActualizarIngredientesSeleccionados extends javax.s
                     String valorCelda = textField.getText();
                     double numero = Double.parseDouble(valorCelda);
 
-                    if (numero < 0) {
-                        JOptionPane.showMessageDialog(null, "El número debe ser igual o menor que 0", "Error", JOptionPane.ERROR_MESSAGE);
+                    if (numero <= 0) {
+                        JOptionPane.showMessageDialog(null, "El número debe ser mayor que 0", "Error", JOptionPane.ERROR_MESSAGE);
                         return false; // Permite al usuario corregir el valor
                     }
                 } catch (NumberFormatException e) {

@@ -135,7 +135,7 @@ public class Presentacion_DlgDetalleProducto extends javax.swing.JFrame {
         labelPrecio.setText("Precio");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setText("Actualizar ingredientes");
+        jLabel1.setText("Detalle Producto");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel2.setText("Ingredientes del producto");
@@ -166,15 +166,8 @@ public class Presentacion_DlgDetalleProducto extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(labelNombre1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(labelNombre))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(labelPrecio1)
                                         .addGap(18, 18, 18)
@@ -182,7 +175,13 @@ public class Presentacion_DlgDetalleProducto extends javax.swing.JFrame {
                                         .addGap(69, 69, 69)
                                         .addComponent(labelDescripcion1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(labelDescripcion))))))
+                                        .addComponent(labelDescripcion))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(labelNombre1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(labelNombre)))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(btnVolver)))
