@@ -18,7 +18,7 @@ public class Cliente {
     private String telefono;
     private String rfc;
     private List<Direccion> direcciones;
-
+    
     public Cliente() {
     }
 
