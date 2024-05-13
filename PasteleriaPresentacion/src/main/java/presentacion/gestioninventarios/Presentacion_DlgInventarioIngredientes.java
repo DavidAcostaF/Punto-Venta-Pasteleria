@@ -82,7 +82,6 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
         btnActualizar = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
-        btnVolver1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         btnEliminar = new javax.swing.JButton();
         btnModificarCantidad = new javax.swing.JButton();
@@ -164,14 +163,6 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
             }
         });
 
-        btnVolver1.setBackground(new java.awt.Color(140, 220, 254));
-        btnVolver1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        btnVolver1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolver1ActionPerformed(evt);
-            }
-        });
-
         jLabel5.setText("Nombre:");
 
         btnEliminar.setBackground(new java.awt.Color(140, 220, 254));
@@ -240,12 +231,10 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
                                 .addComponent(btnModificarCantidad)))
                         .addGap(56, 56, 56)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnVolver1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
@@ -253,11 +242,9 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtBuscar)
-                        .addComponent(jLabel5))
-                    .addComponent(btnVolver1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41))
@@ -304,43 +291,6 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
             listaIngredientes.forEach(t -> modelo.addRow(new Object[]{t.getNombre(), t.getCantidad(), t.getUnidadDeMedida(), t.getPrecio()}));
         }
 
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Presentacion_DlgInventarioIngredientes().setVisible(true);
-            }
-        });
     }
 
     private void limpiarTabla() {
@@ -404,10 +354,6 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
         control.mostrarOpcionesGestion();
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
-
-    private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnVolver1ActionPerformed
 
     private void tableIngredientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableIngredientesMouseClicked
         int fila = tableIngredientes.rowAtPoint(evt.getPoint());
@@ -514,7 +460,6 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificarCantidad;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JButton btnVolver1;
     private javax.swing.JComboBox<String> comboUnidad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

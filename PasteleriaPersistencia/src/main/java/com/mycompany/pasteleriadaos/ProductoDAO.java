@@ -7,12 +7,14 @@ package com.mycompany.pasteleriadaos;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.regex;
 import com.mongodb.client.result.DeleteResult;
 import com.mycompany.pasteleriadominioentidades.Producto;
 import com.mycompany.pasteleriadominiosMapeo.IngredienteMapeo;
 import com.mycompany.pasteleriadominiosMapeo.ProductoMapeo;
 import conversionesPersistencia.ProductosConversiones;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import org.bson.types.ObjectId;
 
@@ -42,7 +44,7 @@ public class ProductoDAO implements IProductoDAO {
 
     @Override
     public Producto actualizar(Producto producto) {
-        
+
         MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
         ProductoMapeo productoActualizado = coleccion.findOneAndReplace(eq("nombre", producto.getNombre()), conversor.convertirProductoMapeo(producto));
 
@@ -76,6 +78,16 @@ public class ProductoDAO implements IProductoDAO {
             return null;
         }
         return conversor.convertirProducto(resultado);
+    }
+
+    @Override
+    public List<Producto> consultarProductosCoincidentes(String nombre) {
+        MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
+        FindIterable<ProductoMapeo> resultados = coleccion.find(regex("nombre", "^" + nombre, "i"));
+
+        List<ProductoMapeo> listaIngredientes = new LinkedList<>();
+        resultados.into(listaIngredientes);
+        return conversor.convertirProductos(listaIngredientes);
     }
 
 }

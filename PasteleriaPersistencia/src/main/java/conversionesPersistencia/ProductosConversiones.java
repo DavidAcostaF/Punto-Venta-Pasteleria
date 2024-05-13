@@ -41,6 +41,17 @@ public class ProductosConversiones {
         return productoE;
     }
 
+    public List<Producto> convertirProductos(List<ProductoMapeo> productosMapeo) {
+        List<Producto> productos = new ArrayList<>();
+
+        for (ProductoMapeo productoMapeo : productosMapeo) {
+            Producto producto = convertirProducto(productoMapeo);
+            productos.add(producto);
+        }
+
+        return productos;
+    }
+
     public ProductoMapeo convertirProductoMapeo(Producto producto) {
         ProductoMapeo productoM = new ProductoMapeo();
         productoM.setPrecio(producto.getPrecio());

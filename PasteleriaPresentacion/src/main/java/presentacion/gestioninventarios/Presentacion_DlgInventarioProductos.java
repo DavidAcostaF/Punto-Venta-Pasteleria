@@ -129,15 +129,15 @@ public class Presentacion_DlgInventarioProductos extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(110, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(123, 123, 123)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtBuscar))
                     .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45))
+                .addGap(117, 117, 117))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,7 +153,6 @@ public class Presentacion_DlgInventarioProductos extends javax.swing.JFrame {
                             .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -184,6 +183,7 @@ public class Presentacion_DlgInventarioProductos extends javax.swing.JFrame {
         controlGesionarInventario.mostrarIngresarDatosDelProducto();
         this.dispose();
     }//GEN-LAST:event_btnAgregarActionPerformed
+
     private void limpiarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel();
 
@@ -211,7 +211,19 @@ public class Presentacion_DlgInventarioProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarKeyPressed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        limpiarTabla();
 
+        if (txtBuscar.getText().isBlank()) {
+            llenarTabla();
+            return;
+        }
+
+        DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel();
+        DTO_Producto productoDTO = new DTO_Producto();
+        List<DTO_Producto> productosConsultados = funcionalidadConsultarProductos.consultarProductosCoincidentes(txtBuscar.getText());
+        if (productosConsultados != null) {
+            productosConsultados.forEach(t -> modelo.addRow(new Object[]{t.getNombre(), t.getPrecio()}));
+        }
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped

@@ -95,6 +95,7 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
         jLabel3 = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
         labelDescripcion = new javax.swing.JLabel();
+        btnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Datos del producto");
@@ -148,12 +149,23 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
         labelDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         labelDescripcion.setText("Descripcion");
 
+        btnVolver.setBackground(new java.awt.Color(140, 220, 254));
+        btnVolver.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
+                .addComponent(btnVolver)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAceptar)
                 .addGap(69, 69, 69))
             .addGroup(layout.createSequentialGroup()
@@ -187,7 +199,9 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAceptar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAceptar)
+                    .addComponent(btnVolver))
                 .addGap(22, 22, 22))
         );
 
@@ -238,9 +252,15 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
         control.mostrarIngredientesSeleccionados();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        control.mostrarInvetarioProductos();
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel labelDescripcion;

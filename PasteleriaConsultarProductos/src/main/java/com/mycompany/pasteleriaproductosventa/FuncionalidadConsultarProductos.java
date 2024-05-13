@@ -31,4 +31,10 @@ public class FuncionalidadConsultarProductos implements IFuncionalidadConsultarP
     public DTO_Producto consultarProductoPorNombre(String nombre) {
         return productoBO.consultarProductoPorNombre(nombre);
     }
+
+    @Override
+    public List<DTO_Producto> consultarProductosCoincidentes(String nombre) {
+        return productoBO.consultarProductosCoincidentes(nombre);
+
+    }
 }

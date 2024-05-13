@@ -42,5 +42,7 @@ public interface IProductosBO {
     public boolean eliminarProducto(DTO_Producto producto);
 
     public List<DTO_Ingrediente> consultarIngredientesFaltantes(DTO_Producto producto);
+    
+    public List<DTO_Producto> consultarProductosCoincidentes(String nombre);
 
 }

@@ -145,4 +145,9 @@ public class ProductosBO implements IProductosBO {
         return this.conversorIngredientes.convertir(this.ingredienteDAO.consultarIngredientesFaltantes(ids));
     }
 
+    @Override
+    public List<DTO_Producto> consultarProductosCoincidentes(String nombre) {
+        return conversor.convertirListaProductos(productoDAO.consultarProductosCoincidentes(nombre));
+    }
+
 }

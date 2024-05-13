@@ -80,7 +80,11 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
         for (int fila = 0; fila < numRows; fila++) {
             Object valorCelda = tabla.getValueAt(fila, 1);
             DTO_IngredienteDetalle ingrediente = listaIngredientes.get(fila);
+            if (valorCelda == null) {
+                return null;
+            }
             ingrediente.setCantidad(Integer.valueOf(String.valueOf(valorCelda)));
+
         }
 
         return listaIngredientes;
@@ -225,6 +229,12 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         List<DTO_IngredienteDetalle> ingredientesAgregados = obtenerListaIngredientes();
+
+        if (ingredientesAgregados == null) {
+            JOptionPane.showMessageDialog(this, "Las cantidades no pueden estar vacias.");
+
+            return;
+        }
         for (int i = 0; i < ingredientesAgregados.size(); i++) {
             System.out.println(ingredientesAgregados.get(i).getIngredienteId());
         }
