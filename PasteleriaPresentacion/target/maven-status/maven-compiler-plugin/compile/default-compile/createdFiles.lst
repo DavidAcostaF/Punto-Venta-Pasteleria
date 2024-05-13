@@ -136,6 +136,7 @@ presentacion\Presentacion_FrmConfirmarGenerarFactura$1.class
 presentacion\casohistoriales\Presentacion_FrmHistorialVentas$7.class
 extras\DynamicComboBoxEditor.class
 presentacion\gestioninventarios\Presentacion_DlgDetalleProducto$1.class
+presentacion\gestioninventarios\Presentacion_DlgIngresarDatosDelProducto$5.class
 presentacion\Presentacion_MenuPrincipal$3.class
 presentacion\gestioninventarios\Presentacion_DlgIngredientesSeleccionados$3.class
 presentacion\Presentacion_MenuPrincipal$5.class

@@ -242,7 +242,7 @@ public class Presentacion_DlgIngresarDatosDelProducto extends javax.swing.JFrame
 
         if (productoConsultado != null) {
             JOptionPane.showMessageDialog(this, "El producto ya se encuentra agregado.");
-            return;
+//            return;
         }
         productoDTO.setIngredientes(listaIngredienteDetalle);
         productoDTO.setNombre(this.txtNombre.getText());
