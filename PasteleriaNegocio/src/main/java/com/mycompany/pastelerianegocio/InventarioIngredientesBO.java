@@ -10,6 +10,7 @@ import com.mycompany.pasteleriadominioentidades.Ingrediente;
 import com.mycompany.pasteleriadominiosMapeo.IngredienteMapeo;
 import conversionesnegocio.IngredienteConversiones;
 import dto.DTO_Ingrediente;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,29 +19,29 @@ import java.util.List;
  * @author af_da
  */
 public class InventarioIngredientesBO implements IInventarioIngredientesBO {
-    
+
     private IIngredienteDAO ingredienteDAO;
     private IngredienteConversiones ingredienteConversiones;
-    
+
     public InventarioIngredientesBO() {
         ingredienteDAO = new IngredienteDAO();
         ingredienteConversiones = new IngredienteConversiones();
     }
-    
+
     @Override
     public DTO_Ingrediente agregarIngrediente(DTO_Ingrediente ingrediente) {
-        
+
         Ingrediente ingredienteNueva = ingredienteDAO.agregar(ConvertirDTOAIngrediente(ingrediente));
         return ingredienteConversiones.convertir(ingredienteNueva);
     }
-    
+
     @Override
     public List<DTO_Ingrediente> consultarIngredientes() {
         List<Ingrediente> ingredientes = ingredienteDAO.consultar();
-        
+
         return ingredienteConversiones.convertir(ingredientes);
     }
-    
+
     @Override
     public IngredienteMapeo ConvertirDTOAIngrediente(DTO_Ingrediente ingredienteDTO) {
         IngredienteMapeo ingrediente = new IngredienteMapeo();
@@ -50,11 +51,11 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
         ingrediente.setUnidadDeMedida(ingredienteDTO.getUnidadDeMedida());
         return ingrediente;
     }
-    
+
     @Override
-    public DTO_Ingrediente convertirIngredienteADTO(IngredienteMapeo ingrediente) {
+    public DTO_Ingrediente convertirIngredienteADTO(Ingrediente ingrediente) {
         DTO_Ingrediente dtoIngrediente = new DTO_Ingrediente();
-        //dtoIngrediente.setId(ingrediente.getId());
+        dtoIngrediente.setId(ingrediente.getId());
 
         dtoIngrediente.setCantidad(ingrediente.getCantidad());
         dtoIngrediente.setNombre(ingrediente.getNombre());
@@ -62,24 +63,24 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
         dtoIngrediente.setUnidadDeMedida(ingrediente.getUnidadDeMedida());
         return dtoIngrediente;
     }
-    
+
     @Override
     public List<DTO_Ingrediente> consultarIngrediente(DTO_Ingrediente ingredienteDTO) {
         List<Ingrediente> ingredientes = ingredienteDAO.consultar(ConvertirDTOAIngrediente(ingredienteDTO));
-        
+
         return ingredienteConversiones.convertir(ingredientes);
     }
-    
+
     @Override
     public DTO_Ingrediente validarExistencia(DTO_Ingrediente ingrediente) {
         Ingrediente ingredienteConsultado = ingredienteDAO.consultarPorNombre(ingrediente.getNombre());
-        
+
         if (ingredienteConsultado != null) {
             return ingredienteConversiones.convertir(ingredienteConsultado);
         }
         return null;
     }
-    
+
     @Override
     public DTO_Ingrediente actualizarIngrediente(DTO_Ingrediente ingrediente) {
         Ingrediente ingredienteConsultado = ingredienteDAO.consultarPorNombre(ingrediente.getNombre());
@@ -88,7 +89,7 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
         }
         return null;
     }
-    
+
     @Override
     public Boolean eliminarIngrediente(DTO_Ingrediente ingrediente) {
         Ingrediente ingredienteConsultado = ingredienteDAO.consultarPorNombre(ingrediente.getNombre());
@@ -97,11 +98,27 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
         }
         return false;
     }
-    
+
     @Override
     public DTO_Ingrediente consultarIngredientePorNombre(DTO_Ingrediente ingrediente) {
         Ingrediente ingredienteConsultado = ingredienteDAO.consultarPorNombre(ingrediente.getNombre());
         return ingredienteConversiones.convertir(ingredienteConsultado);
     }
-    
+
+    @Override
+    public List<DTO_Ingrediente> consultarCantidadesIngredientesInventario(List<DTO_Ingrediente> ingredientes) {
+        List<String> nombresIngredientes = new ArrayList<>();
+        List<DTO_Ingrediente> ingredientesDTO = new ArrayList<>();
+        for (DTO_Ingrediente ingrediente : ingredientes) {
+            nombresIngredientes.add(ingrediente.getNombre());
+
+        }
+
+        for (Ingrediente ingrediente : ingredienteDAO.consultarCantidadesIngredientesInventario(nombresIngredientes)) {
+
+            ingredientesDTO.add(convertirIngredienteADTO(ingrediente));
+        }
+        return ingredientesDTO;
+    }
+
 }

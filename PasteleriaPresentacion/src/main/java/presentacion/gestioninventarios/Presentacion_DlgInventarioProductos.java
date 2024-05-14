@@ -290,4 +290,5 @@ public class Presentacion_DlgInventarioProductos extends javax.swing.JFrame {
     private javax.swing.JTable tableProductos;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
+
 }
