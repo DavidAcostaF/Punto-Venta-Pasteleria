@@ -16,17 +16,20 @@ import java.util.ResourceBundle.Control;
  * @author abelc
  */
 public class Presentacion_DlgAgregarDireccion extends javax.swing.JDialog {
-  DTO_Venta venta;
-  ControlAgregarVenta control;
+
+    DTO_Venta venta;
+    ControlAgregarVenta control;
+
     /**
      * Creates new form DlgAgregarDireccion
      */
-    public Presentacion_DlgAgregarDireccion(java.awt.Frame parent, boolean modal,DTO_Venta venta) {
+    public Presentacion_DlgAgregarDireccion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.venta=venta;
-        this.control=new ControlAgregarVenta();
+        this.control = ControlAgregarVenta.getInstance();
+        this.venta = control.getVenta();
+
         initComponents();
-      ;
+        ;
         setVisible(true);
     }
 
@@ -167,10 +170,10 @@ public class Presentacion_DlgAgregarDireccion extends javax.swing.JDialog {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
         DTO_Direccion dir = new DTO_Direccion(txtCalle.getText());
-        venta.setDieccionEntrega(dir);
+        venta.setDireccionEntrega(dir);
         this.dispose();
-        control.CobrarVenta(venta);
-      
+        control.mostrarCobrarVenta();
+
     }//GEN-LAST:event_btnAgregarActionPerformed
 
 

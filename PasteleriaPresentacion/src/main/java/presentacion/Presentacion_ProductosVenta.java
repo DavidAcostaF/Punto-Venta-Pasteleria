@@ -6,12 +6,17 @@ package presentacion;
 
 //import com.mycompany.pastelerianegocio.ConsultarProductosVenta;
 //import com.mycompany.pastelerianegocio.IConsultarProductosVenta;
+import com.mycompany.pasteleriaproductosventa.FuncionalidadConsultarProductos;
+import com.mycompany.pasteleriaproductosventa.IFuncionalidadConsultarProductos;
 import dto.DTO_Producto;
 import control.ControlAgregarVenta;
 import dto.DTO_DetalleVenta;
 import dto.DTO_Venta;
 import java.awt.Component;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
@@ -29,6 +34,7 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
 
     private DTO_Venta venta;
     private ControlAgregarVenta control;
+    private IFuncionalidadConsultarProductos funcionalidadesProductos;
     float total;
 //    private IConsultarProductosVenta consultarProductosVenta;
 
@@ -36,12 +42,12 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
      * Creates new form VentanaSeleccionarProductos
      */
     public Presentacion_ProductosVenta() {
-        //this.control = ControlAgregarVenta
+        initComponents();
+        this.control = ControlAgregarVenta.getInstance();
+        this.funcionalidadesProductos = new FuncionalidadConsultarProductos();
         venta = new DTO_Venta();
         total = 0;
-        initComponents();
 //        consultarProductosVenta = new ConsultarProductosVenta();
-
         llenarTabla();
         ponerTotal();
     }
@@ -172,19 +178,20 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel4)))
-                        .addContainerGap(21, Short.MAX_VALUE))
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel4))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(16, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Siguientebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52))))
+                        .addGap(98, 98, 98))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,31 +228,83 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
 
     private void agregarPastelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPastelBtnActionPerformed
         DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel();
-        DTO_Producto p = control.agregarPastel(this);
-        modelo.addRow(new Object[]{p.getNombre(), p.getDescripcion(), 1, 100});
+        control.mostrarAgregarPastel(this);
+        DTO_Producto p = control.getProducto();
+        if (p != null) {
+            modelo.addRow(new Object[]{p.getNombre(), p.getEspecificaciones(), 1, p.getPrecio(), p.getTamanio()});
+        }
+
     }//GEN-LAST:event_agregarPastelBtnActionPerformed
 
     private void SiguientebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SiguientebtnActionPerformed
-        if (((DefaultTableModel) tableProductos.getModel()).getRowCount() <= 0) {
-            return;
+        if (validarCamposVacios()) {
+
+            if (((DefaultTableModel) tableProductos.getModel()).getRowCount() <= 0) {
+                JOptionPane.showMessageDialog(this, "No se puede continuar sin agregar algun producto.", "No hay productos en la venta", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            int rowCount = this.tableProductos.getModel().getRowCount();
+            List<DTO_DetalleVenta> listaDetalles = new ArrayList<>();
+
+            for (int i = 0; i < rowCount; i++) {
+                DTO_DetalleVenta detalleVenta = new DTO_DetalleVenta();
+                Object valueNombre = this.tableProductos.getModel().getValueAt(i, 0); // Obtener el valor en la segunda columna (índice 1)
+                Object valueEspecificaciones = this.tableProductos.getModel().getValueAt(i, 1);
+                Object valueCantidad = this.tableProductos.getModel().getValueAt(i, 2);
+                Object valuePrecio = this.tableProductos.getModel().getValueAt(i, 3);
+                Object valueTamanio = this.tableProductos.getModel().getValueAt(i, 4);
+
+                String nombre = valueNombre != null ? valueNombre.toString() : "";
+                String especificaciones = valueEspecificaciones != null ? valueEspecificaciones.toString() : "";
+
+                int cantidad = 0;
+                if (valueCantidad != null) {
+                    try {
+                        cantidad = Integer.parseInt(valueCantidad.toString());
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                float precio = 0.0f;
+                if (valuePrecio != null) {
+                    try {
+                        precio = Float.parseFloat(valuePrecio.toString());
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                String tamanio = valueTamanio != null ? valueTamanio.toString() : "";
+
+                detalleVenta.setIdproducto(this.funcionalidadesProductos.consultarProductoPorNombre(nombre).getId());
+                detalleVenta.setEspecificacion(especificaciones);
+                detalleVenta.setCantidad(cantidad);
+                detalleVenta.setPrecio(precio);
+                detalleVenta.setTamanhoProducto(tamanio);
+                listaDetalles.add(detalleVenta);
+            }
+            venta.setDetallesVenta(listaDetalles);
+            int respuesta = JOptionPane.showOptionDialog(null, "¿El cliente ya ha comprado aqui?", "Bienvenido", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
+            LocalDate localDate = fechaEntrega.getDate();
+            Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            venta.setFechaEntrega(date);
+            venta.setMontoTotal(total);
+            control.setVenta(venta);
+
+            if (respuesta == JOptionPane.YES_OPTION) {
+
+                obtenerDatosTabla();
+                dispose();
+                control.mostrarListaClientes(this);
+
+            } else {
+                obtenerDatosTabla();
+                dispose();
+                control.mostrarDatosClientes(this);
+
+            }
         }
-        int respuesta = JOptionPane.showOptionDialog(null, "¿El cliente ya ha comprado aqui?", "Bienvenido", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
-        String fechaEn = fechaEntrega.getDate().toString();
-       // venta.setFechaEntrega(fechaEn);
-        venta.setMontoTotal(total);
-        if (respuesta == JOptionPane.YES_OPTION) {
-
-            obtenerDatosTabla();
-            dispose();
-            control.listaClientes(this, venta);
-
-        } else {
-            obtenerDatosTabla();
-            dispose();
-            control.agregarCliente(this, venta);
-
-        }
-
     }//GEN-LAST:event_SiguientebtnActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -258,60 +317,21 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
         labelTotal.setText("Total a pagar " + total);
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_ProductosVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_ProductosVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_ProductosVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_ProductosVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Presentacion_ProductosVenta().setVisible(true);
-            }
-        });
-    }
-
     private void llenarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel();
 
 //        List<ProductoDTO> pasteles = this.consultarProductosVenta.consultarProductosVenta();
 //        pasteles.forEach(p -> modelo.addRow(new Object[]{p.getNombre(), p.getDescripcion(), 1, p.getPrecio()}));
-        tableProductos.getColumnModel().getColumn(4).setCellRenderer(new BotonRenderer("+"));
-        tableProductos.getColumnModel().getColumn(4).setCellEditor(new BotonEditor(new JCheckBox(), modelo, 2, 1));
+        tableProductos.getColumnModel().getColumn(5).setCellRenderer(new BotonRenderer("+"));
+        tableProductos.getColumnModel().getColumn(5).setCellEditor(new BotonEditor(new JCheckBox(), modelo, 2, 1));
 
-        tableProductos.getColumnModel().getColumn(5).setCellRenderer(new BotonRenderer("-"));
-        tableProductos.getColumnModel().getColumn(5).setCellEditor(new BotonEditor(new JCheckBox(), modelo, 2, -1));
+        tableProductos.getColumnModel().getColumn(6).setCellRenderer(new BotonRenderer("-"));
+        tableProductos.getColumnModel().getColumn(6).setCellEditor(new BotonEditor(new JCheckBox(), modelo, 2, -1));
 
     }
 
     private float calcularTotal() {
         float total = 0;
-        System.out.println(tableProductos.getRowCount());
         if (tableProductos.getRowCount() > 0) {
             for (int row = tableProductos.getRowCount() - 1; row >= 0; row--) {
                 Object cantidad = tableProductos.getValueAt(row, 2);
@@ -341,7 +361,15 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
         }
     }
 
+    private boolean validarCamposVacios() {
+        if (fechaEntrega.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una fecha de entrega.", "Fecha no seleccionada", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        return true;
+    }
 // Editor para los botones
+
     class BotonEditor extends DefaultCellEditor {
 
         private JButton button;
@@ -412,7 +440,7 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
         for (int i = 0; i < tableProductos.getRowCount(); i++) {
             DTO_DetalleVenta detalleVenta = new DTO_DetalleVenta();
             DTO_Producto producto = new DTO_Producto(tableProductos.getValueAt(i, 0).toString());
-          //  detalleVenta.setProductos(producto);
+            //  detalleVenta.setProductos(producto);
             detalleVenta.setEspecificacion(tableProductos.getValueAt(i, 1).toString());
             int cantidad = Integer.parseInt(tableProductos.getValueAt(i, 2).toString());
             detalleVenta.setCantidad(cantidad);
@@ -422,7 +450,6 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
             detallesVenta.add(detalleVenta);
 
         }
-        System.out.println(detallesVenta.toString());
         venta.setDetallesVenta(detallesVenta);
     }
 

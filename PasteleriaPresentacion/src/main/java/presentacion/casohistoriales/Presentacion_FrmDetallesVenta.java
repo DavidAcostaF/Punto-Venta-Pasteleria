@@ -79,7 +79,7 @@ private IFuncionalidadGuardarReportes guardarRecibo;
         estadoLabel.setText("Historial: " + venta.getEstado());
         clienteLabel.setText("Cliente: " + venta.getCliente().getNombre() + " " + venta.getCliente().getApellidoP() + " " + venta.getCliente().getApellidoM());
         numTelefonoLbl.setText("Numero de telefono: " + venta.getCliente().getTelefono());
-        String calle = venta.getDieccionEntrega().getCalle();
+        String calle = venta.getDireccionEntrega().getCalle();
         if ("En tienda".equals(calle)) {
             calleLbl.setText("En tienda");
             if (calle == null) {
@@ -88,13 +88,13 @@ private IFuncionalidadGuardarReportes guardarRecibo;
         } else {
             calleLbl.setText("calle: " + calle);
         }
-        String colonia = venta.getDieccionEntrega().getColonia();
+        String colonia = venta.getDireccionEntrega().getColonia();
         if (colonia != null) {
             coloniaLbl.setText("Colonia: " + colonia);
         } else {
             coloniaLbl.setText(" ");
         }
-        String numExterior = venta.getDieccionEntrega().getNumExterior();
+        String numExterior = venta.getDireccionEntrega().getNumExterior();
         if (numExterior != null) {
             jLabel8.setText("Num Exterior: #" + numExterior);
         } else {

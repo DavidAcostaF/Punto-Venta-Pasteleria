@@ -32,10 +32,10 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
     /**
      * Creates new form DlgListaClientes
      */
-    public Presentacion_DlgListaClientes(java.awt.Frame parent, boolean modal, DTO_Venta venta) {
+    public Presentacion_DlgListaClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.venta = venta;
-        control = new ControlAgregarVenta();
+        control = ControlAgregarVenta.getInstance();
+        this.venta = control.getVenta();
         this.funcionalidadesClientes = new FuncionalidadConsultarClientes();
         funcionalidadesClientes.consultarClientes();
 
@@ -43,7 +43,7 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
         System.out.println(listaClientes);
         initComponents();
         jTextField1.setVisible(false);
-        jButton1.setVisible(false);
+        buscarBtn.setVisible(false);
         llenarTabla();
         setVisible(true);
     }
@@ -66,18 +66,18 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        buscarBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaClientes = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        continuarBtn = new javax.swing.JButton();
+        regresarBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(232, 232, 232));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel1.setText("Seleccione un cliente");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,8 +85,13 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(140, 220, 254));
-        jButton1.setText("Buscar");
+        buscarBtn.setText("Buscar");
+        buscarBtn.setBackground(new java.awt.Color(140, 220, 254));
+        buscarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarBtnActionPerformed(evt);
+            }
+        });
 
         tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,19 +105,19 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
         tablaClientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tablaClientes);
 
-        jButton2.setBackground(new java.awt.Color(140, 220, 254));
-        jButton2.setText("Continuar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        continuarBtn.setText("Continuar");
+        continuarBtn.setBackground(new java.awt.Color(140, 220, 254));
+        continuarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                continuarBtnActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(140, 220, 254));
-        jButton3.setText("Regresar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        regresarBtn.setText("Regresar");
+        regresarBtn.setBackground(new java.awt.Color(140, 220, 254));
+        regresarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                regresarBtnActionPerformed(evt);
             }
         });
 
@@ -122,7 +127,7 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(59, 59, 59)
-                .addComponent(jButton1)
+                .addComponent(buscarBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
@@ -134,9 +139,9 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(regresarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(continuarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32))
         );
         jPanel1Layout.setVerticalGroup(
@@ -147,13 +152,13 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(buscarBtn))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2))
+                    .addComponent(regresarBtn)
+                    .addComponent(continuarBtn))
                 .addGap(33, 33, 33))
         );
 
@@ -176,48 +181,52 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void continuarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarBtnActionPerformed
         int respuesta = JOptionPane.showOptionDialog(null, "¿Realizara envio a domicilio?", "Tipo de envio", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
-         int filaSeleccionada = tablaClientes.getSelectedRow();
-         if (filaSeleccionada != -1) {
-             DTO_Cliente cliente = new DTO_Cliente();
-             cliente.setNombre(tablaClientes.getValueAt(filaSeleccionada, 0).toString());
-             cliente.setApellidoP(tablaClientes.getValueAt(filaSeleccionada, 1).toString());
-             cliente.setApellidoM(tablaClientes.getValueAt(filaSeleccionada, 2).toString());
-             cliente.setTelefono(tablaClientes.getValueAt(filaSeleccionada, 3).toString());
-            // venta.setCliente(cliente);
+        int filaSeleccionada = tablaClientes.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            DTO_Cliente cliente = new DTO_Cliente();
+            cliente.setNombre(tablaClientes.getValueAt(filaSeleccionada, 0).toString());
+            cliente.setApellidoP(tablaClientes.getValueAt(filaSeleccionada, 1).toString());
+            cliente.setApellidoM(tablaClientes.getValueAt(filaSeleccionada, 2).toString());
+            cliente.setTelefono(tablaClientes.getValueAt(filaSeleccionada, 3).toString());
+            venta.setCliente(cliente);
 
-        if (respuesta == JOptionPane.YES_OPTION) {
-            this.dispose();
-            control.listaDirecciones(venta);
+            if (respuesta == JOptionPane.YES_OPTION) {
+                this.dispose();
+                control.mostrarListaDirecciones();
 
-        } else {
-            DTO_Direccion direccion=new DTO_Direccion();
-            direccion.setCalle("En tienda");
-            venta.setDieccionEntrega(direccion);
-            this.dispose();
-            control.CobrarVenta(venta);
+            } else {
+                DTO_Direccion direccion = new DTO_Direccion();
+                direccion.setCalle("En tienda");
+                venta.setDireccionEntrega(direccion);
+                this.dispose();
+                control.mostrarCobrarVenta();
 
-        }  
+            }
         }
-     
 
-    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_continuarBtnActionPerformed
+
+    private void regresarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarBtnActionPerformed
         this.dispose();
         control.mostrarMenu();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_regresarBtnActionPerformed
+
+    private void buscarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscarBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton buscarBtn;
+    private javax.swing.JButton continuarBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton regresarBtn;
     private javax.swing.JTable tablaClientes;
     // End of variables declaration//GEN-END:variables
 }

@@ -17,6 +17,8 @@ public class DTO_Producto {
     private float precio;
     private String nombre;
     private String descripcion;
+    private String especificaciones;
+    private String tamanio;
     private List<DTO_IngredienteDetalle> ingredientes;
 
     public DTO_Producto() {
@@ -86,6 +88,22 @@ public class DTO_Producto {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getEspecificaciones() {
+        return especificaciones;
+    }
+
+    public void setEspecificaciones(String especificaciones) {
+        this.especificaciones = especificaciones;
+    }
+
+    public String getTamanio() {
+        return tamanio;
+    }
+
+    public void setTamanio(String tamanio) {
+        this.tamanio = tamanio;
     }
 
 

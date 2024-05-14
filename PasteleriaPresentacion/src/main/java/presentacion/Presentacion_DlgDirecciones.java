@@ -4,7 +4,6 @@
  */
 package presentacion;
 
-
 import com.mycompany.pasteleriadirecciones.IFuncionalidadConsultarDirecciones;
 import com.mycompany.pasteleriadominiosMapeo.DireccionMapeo;
 import control.ControlAgregarVenta;
@@ -18,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author abelc
  */
 public class Presentacion_DlgDirecciones extends javax.swing.JDialog {
-    
+
     private ControlAgregarVenta control;
     private IFuncionalidadConsultarDirecciones direcciones;
     private List<DTO_Direccion> direccionesLista;
@@ -27,22 +26,22 @@ public class Presentacion_DlgDirecciones extends javax.swing.JDialog {
     /**
      * Creates new form DlgDirecciones
      */
-    public Presentacion_DlgDirecciones(java.awt.Frame parent, boolean modal, DTO_Venta venta) {
+    public Presentacion_DlgDirecciones(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.venta = venta;
-        control = new ControlAgregarVenta();
-       // direcciones = new FuncionalidadConsultarDirecciones();
+        control = ControlAgregarVenta.getInstance();
+        this.venta = control.getVenta();
+
+        //direcciones = new FuncionalidadConsultarDirecciones();
         direccionesLista = direcciones.consultarDirecciones();
-        System.out.println(direccionesLista);
         initComponents();
-        
+
         llenarTabla();
         setVisible(true);
     }
-    
+
     private void llenarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tablaDirecciones.getModel();
-        
+
         direccionesLista.forEach(p -> modelo.addRow(new Object[]{p.getCalle() + "", p.getColonia() + "", p.getNumExterior()}));
     }
 
@@ -166,7 +165,7 @@ public class Presentacion_DlgDirecciones extends javax.swing.JDialog {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         this.dispose();
-        control.AgregarDireccion(venta);
+        control.mostrarAgregarDireccion();
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void btnSeleccionarDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarDireccionActionPerformed
@@ -174,11 +173,11 @@ public class Presentacion_DlgDirecciones extends javax.swing.JDialog {
         if (filaSeleccionada != -1) {
             DTO_Direccion direccion = new DTO_Direccion();
             direccion.setCalle(tablaDirecciones.getValueAt(filaSeleccionada, 0).toString());
-            venta.setDieccionEntrega(direccion);
+            venta.setDireccionEntrega(direccion);
             this.dispose();
-            control.CobrarVenta(venta);
+            control.mostrarCobrarVenta();
         }
-        
+
 
     }//GEN-LAST:event_btnSeleccionarDireccionActionPerformed
 

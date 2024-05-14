@@ -21,16 +21,16 @@ IFuncionalidadesVenta ventas;
     /**
      * Creates new form DlgPagoEfectivo
      */
-    public Presentacion_DlgConfirmacionPago(java.awt.Frame parent, boolean modal,DTO_Venta venta) {
+    public Presentacion_DlgConfirmacionPago(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-         control = new ControlAgregarVenta();
-         this.venta=venta;
+         control = ControlAgregarVenta.getInstance();
+         this.venta=control.getVenta();
          this.ventas=new FuncionalidadesVenta();
         initComponents();
         //txtCliente.setText(venta.getCliente().getNombre());
         txtCosto.setText(Float.toString(venta.getMontoTotal()));
         //txtFechaEntrega.setText(venta.getFechaEntrega());
-        txtUbicacionEntrega.setText(venta.getDieccionEntrega().getCalle());
+        txtUbicacionEntrega.setText(venta.getDireccionEntrega().getCalle());
         setVisible(true);
         
     }

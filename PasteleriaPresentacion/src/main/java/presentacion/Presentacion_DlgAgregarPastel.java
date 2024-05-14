@@ -12,29 +12,34 @@ import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import com.mycompany.pasteleriaproductosventa.IFuncionalidadConsultarProductos;
+import control.ControlAgregarVenta;
 
 /**
  *
  * @author abelc
  */
 public class Presentacion_DlgAgregarPastel extends javax.swing.JDialog {
-   private IFuncionalidadConsultarProductos funcionalidadesProductos;
+
+    private IFuncionalidadConsultarProductos funcionalidadesProductos;
+    private ControlAgregarVenta control;
     private List<DTO_Producto> pasteles;
 
     DTO_Producto producto;
-     String especificacion;
+    String especificacion;
+
     /**
      * Creates new form DlgAgregarPastel
      */
     public Presentacion_DlgAgregarPastel(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.funcionalidadesProductos=new FuncionalidadConsultarProductos();
+        this.funcionalidadesProductos = new FuncionalidadConsultarProductos();
         this.producto = producto;
-        this.especificacion=especificacion;
+        this.especificacion = especificacion;
+        this.control = ControlAgregarVenta.getInstance();
         initComponents();
-       pasteles = funcionalidadesProductos.consultarProductos();
+        pasteles = funcionalidadesProductos.consultarProductos();
         desplegarPasteles(pasteles);
-         setVisible(true);
+        setVisible(true);
     }
 
     /**
@@ -49,53 +54,58 @@ public class Presentacion_DlgAgregarPastel extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboBoxPastelito = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        comboBoxTamanio = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        txtExpecificaciones = new javax.swing.JTextField();
+        agregarBtn = new javax.swing.JButton();
+        cancelarBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(232, 232, 232));
 
-        jLabel1.setText("Seleccione un pastel");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel1.setText("Seleccione un pastel");
 
-        jLabel2.setText("Nombre del pastel:");
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Nombre del pastel:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setBackground(new java.awt.Color(232, 232, 232));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        comboBoxPastelito.setBackground(new java.awt.Color(232, 232, 232));
+        comboBoxPastelito.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxPastelito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                comboBoxPastelitoActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Tamaño:");
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("Tamaño:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chico", "Mediano", "Grande" }));
-        jComboBox2.setBackground(new java.awt.Color(232, 232, 232));
+        comboBoxTamanio.setBackground(new java.awt.Color(232, 232, 232));
+        comboBoxTamanio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chico", "Mediano", "Grande" }));
 
-        jLabel4.setText("Especificacion(opcional)");
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setText("Especificacion(opcional)");
 
-        jTextField1.setBackground(new java.awt.Color(232, 232, 232));
+        txtExpecificaciones.setBackground(new java.awt.Color(232, 232, 232));
 
-        jButton1.setText("Agregar");
-        jButton1.setBackground(new java.awt.Color(140, 220, 254));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        agregarBtn.setBackground(new java.awt.Color(140, 220, 254));
+        agregarBtn.setText("Agregar");
+        agregarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                agregarBtnActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
-        jButton2.setBackground(new java.awt.Color(140, 220, 254));
+        cancelarBtn.setBackground(new java.awt.Color(140, 220, 254));
+        cancelarBtn.setText("Cancelar");
+        cancelarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -107,18 +117,18 @@ public class Presentacion_DlgAgregarPastel extends javax.swing.JDialog {
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
                     .addComponent(jLabel4)
-                    .addComponent(jButton2))
+                    .addComponent(cancelarBtn))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(comboBoxPastelito, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(comboBoxTamanio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtExpecificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(agregarBtn)
                         .addGap(22, 22, 22)))
                 .addContainerGap(53, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -134,19 +144,19 @@ public class Presentacion_DlgAgregarPastel extends javax.swing.JDialog {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBoxPastelito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxTamanio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtExpecificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(cancelarBtn)
+                    .addComponent(agregarBtn))
                 .addGap(32, 32, 32))
         );
 
@@ -165,37 +175,49 @@ public class Presentacion_DlgAgregarPastel extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void comboBoxPastelitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxPastelitoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_comboBoxPastelitoActionPerformed
 
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        producto.setNombre((String) jComboBox1.getSelectedItem());
-     //   producto.setTamaño((String) jComboBox2.getSelectedItem());
-        producto.setDescripcion(jTextField1.getText());
+    private void agregarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarBtnActionPerformed
+        producto = funcionalidadesProductos.consultarProductoPorNombre((String) comboBoxPastelito.getSelectedItem());
+        producto.setTamanio((String) comboBoxTamanio.getSelectedItem());
+        if (producto.getTamanio().equalsIgnoreCase("Chico")) {
+            producto.setPrecio(producto.getPrecio());
+        } else if (producto.getTamanio().equalsIgnoreCase("Mediano")) {
+            producto.setPrecio(producto.getPrecio()*1.5f);
+        } else {
+            producto.setPrecio(producto.getPrecio()*1.75f);
+        }
+        producto.setEspecificaciones(txtExpecificaciones.getText());
+        control.setProducto(producto);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_agregarBtnActionPerformed
+
+    private void cancelarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBtnActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_cancelarBtnActionPerformed
 
     private void desplegarPasteles(List<DTO_Producto> lista) {
-        jComboBox1.setModel(new PastelComboBoxModel(lista));
+        comboBoxPastelito.setModel(new PastelComboBoxModel(lista));
     }
-
-  
-
-
+    
+    private void validarCampos(){
+        
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton agregarBtn;
+    private javax.swing.JButton cancelarBtn;
+    private javax.swing.JComboBox<String> comboBoxPastelito;
+    private javax.swing.JComboBox<String> comboBoxTamanio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtExpecificaciones;
     // End of variables declaration//GEN-END:variables
 }

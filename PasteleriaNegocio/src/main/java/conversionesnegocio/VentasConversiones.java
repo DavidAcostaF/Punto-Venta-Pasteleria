@@ -50,7 +50,7 @@ public class VentasConversiones {
         dtoDireccion.setCalle(venta.getDireccionEntrega().getCalle());
         dtoDireccion.setColonia(venta.getDireccionEntrega().getColonia());
         dtoDireccion.setNumExterior(venta.getDireccionEntrega().getNumExterior());
-        dtoVenta.setDieccionEntrega(dtoDireccion);
+        dtoVenta.setDireccionEntrega(dtoDireccion);
         return dtoVenta;
     }
     
@@ -80,7 +80,7 @@ public class VentasConversiones {
         dtoDireccion.setCalle(venta.getDireccionEntrega().getCalle());
         dtoDireccion.setColonia(venta.getDireccionEntrega().getColonia());
         dtoDireccion.setNumExterior(venta.getDireccionEntrega().getNumExterior());
-        dtoVenta.setDieccionEntrega(dtoDireccion);
+        dtoVenta.setDireccionEntrega(dtoDireccion);
         return dtoVenta;
     }
     

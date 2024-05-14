@@ -19,24 +19,24 @@ public class DTO_Venta {
     private String IDcliente;
     private String Estado;
     private List<DTO_DetalleVenta> detallesVenta;  
-    private DTO_Direccion dieccionEntrega;
+    private DTO_Direccion direccionEntrega;
     private DTO_Cliente cliente;
 
     public DTO_Venta() {
     }
 
-    public DTO_Venta(float montoTotal, Date fechaEntrega, Date fechaRegistro, String IDcliente, String Estado, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion dieccionEntrega, DTO_Cliente cliente) {
+    public DTO_Venta(float montoTotal, Date fechaEntrega, Date fechaRegistro, String IDcliente, String Estado, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion direccionEntrega, DTO_Cliente cliente) {
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
         this.fechaRegistro = fechaRegistro;
         this.IDcliente = IDcliente;
         this.Estado = Estado;
         this.detallesVenta = detallesVenta;
-        this.dieccionEntrega = dieccionEntrega;
+        this.direccionEntrega = direccionEntrega;
         this.cliente = cliente;
     }
 
-    public DTO_Venta(String ID, float montoTotal, Date fechaEntrega, Date fechaRegistro, String IDcliente, String Estado, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion dieccionEntrega, DTO_Cliente cliente) {
+    public DTO_Venta(String ID, float montoTotal, Date fechaEntrega, Date fechaRegistro, String IDcliente, String Estado, List<DTO_DetalleVenta> detallesVenta, DTO_Direccion direccionEntrega, DTO_Cliente cliente) {
         this.ID = ID;
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
@@ -44,7 +44,7 @@ public class DTO_Venta {
         this.IDcliente = IDcliente;
         this.Estado = Estado;
         this.detallesVenta = detallesVenta;
-        this.dieccionEntrega = dieccionEntrega;
+        this.direccionEntrega = direccionEntrega;
         this.cliente = cliente;
     }
 
@@ -110,12 +110,12 @@ public class DTO_Venta {
         this.detallesVenta = detallesVenta;
     }
 
-    public DTO_Direccion getDieccionEntrega() {
-        return dieccionEntrega;
+    public DTO_Direccion getDireccionEntrega() {
+        return direccionEntrega;
     }
 
-    public void setDieccionEntrega(DTO_Direccion dieccionEntrega) {
-        this.dieccionEntrega = dieccionEntrega;
+    public void setDireccionEntrega(DTO_Direccion direccionEntrega) {
+        this.direccionEntrega = direccionEntrega;
     }
 
     public String getEstado() {
@@ -128,7 +128,7 @@ public class DTO_Venta {
 
     @Override
     public String toString() {
-        return "DTO_Venta{" + "ID=" + ID + ", montoTotal=" + montoTotal + ", fechaEntrega=" + fechaEntrega + ", fechaRegistro=" + fechaRegistro + ", IDcliente=" + IDcliente + ", detallesVenta=" + detallesVenta + ", dieccionEntrega=" + dieccionEntrega + '}';
+        return "DTO_Venta{" + "ID=" + ID + ", montoTotal=" + montoTotal + ", fechaEntrega=" + fechaEntrega + ", fechaRegistro=" + fechaRegistro + ", IDcliente=" + IDcliente + ", detallesVenta=" + detallesVenta + ", dieccionEntrega=" + direccionEntrega + '}';
     }
 
    

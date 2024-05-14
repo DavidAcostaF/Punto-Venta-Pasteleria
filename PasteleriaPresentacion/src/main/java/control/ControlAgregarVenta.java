@@ -26,43 +26,39 @@ import javax.swing.JFrame;
 public class ControlAgregarVenta {
 
     private static ControlAgregarVenta instance;
-    DTO_Producto producto;
+    private DTO_Producto producto;
+    private DTO_Venta venta;
 
     public ControlAgregarVenta() {
+
     }
 
-
-
-    public ControlAgregarVenta getInstance() {
+    public static ControlAgregarVenta getInstance() {
         if (instance == null) {
             instance = new ControlAgregarVenta();
         }
         return instance;
     }
 
-    public DTO_Producto agregarPastel(JFrame frame) {
+    public void mostrarAgregarPastel(JFrame frame) {
         Presentacion_DlgAgregarPastel dlgpastel = new Presentacion_DlgAgregarPastel(frame, true);
-        return producto;
+
     }
 
-    public DTO_Direccion AgregarDireccion(DTO_Venta venta) {
-        DTO_Direccion direccion = new DTO_Direccion();
-        Presentacion_DlgAgregarDireccion dir = new Presentacion_DlgAgregarDireccion(null, true, venta);
-        return direccion;
+    public void mostrarAgregarDireccion() {
+        Presentacion_DlgAgregarDireccion dir = new Presentacion_DlgAgregarDireccion(null, true);
     }
 
-    public DTO_Cliente agregarCliente(JFrame frame, DTO_Venta venta) {
-        DTO_Cliente cliente = new DTO_Cliente();
-        Presentacion_DlgDatosCliente dlgcliente = new Presentacion_DlgDatosCliente(frame, true, venta);
-        return cliente;
+    public void mostrarDatosClientes(JFrame frame) {
+        Presentacion_DlgDatosCliente dlgcliente = new Presentacion_DlgDatosCliente(frame, true);
     }
 
-    public void listaClientes(JFrame frame, DTO_Venta venta) {
-        Presentacion_DlgListaClientes dlgListaClientes = new Presentacion_DlgListaClientes(frame, true, venta);
+    public void mostrarListaClientes(JFrame frame) {
+        Presentacion_DlgListaClientes dlgListaClientes = new Presentacion_DlgListaClientes(frame, true);
     }
 
-    public void listaDirecciones(DTO_Venta venta) {
-        Presentacion_DlgDirecciones dlgdireccion = new Presentacion_DlgDirecciones(null, true, venta);
+    public void mostrarListaDirecciones() {
+        Presentacion_DlgDirecciones dlgdireccion = new Presentacion_DlgDirecciones(null, true);
     }
 
     public void mostrarProductosVenta() {
@@ -75,12 +71,28 @@ public class ControlAgregarVenta {
         m.setVisible(true);
     }
 
-    public void CobrarVenta(DTO_Venta venta) {
-        Presentacion_DlgCobrarVenta dlgcobrarventa = new Presentacion_DlgCobrarVenta(null, true, venta);
+    public void mostrarCobrarVenta() {
+        Presentacion_DlgCobrarVenta dlgcobrarventa = new Presentacion_DlgCobrarVenta(null, true);
     }
 
-    public void MostrarDatosVenta(DTO_Venta venta) {
-        Presentacion_DlgConfirmacionPago dlgPagoEfectivo = new Presentacion_DlgConfirmacionPago(null, true, venta);
+    public void mostrarConfirmacionPago() {
+        Presentacion_DlgConfirmacionPago dlgPagoEfectivo = new Presentacion_DlgConfirmacionPago(null, true);
+    }
+
+    public DTO_Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(DTO_Producto producto) {
+        this.producto = producto;
+    }
+
+    public DTO_Venta getVenta() {
+        return venta;
+    }
+
+    public void setVenta(DTO_Venta venta) {
+        this.venta = venta;
     }
 
 }

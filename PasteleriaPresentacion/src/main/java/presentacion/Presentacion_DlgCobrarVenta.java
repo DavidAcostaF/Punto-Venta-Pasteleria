@@ -12,15 +12,17 @@ import dto.DTO_Venta;
  * @author af_da
  */
 public class Presentacion_DlgCobrarVenta extends javax.swing.JDialog {
- ControlAgregarVenta control;
- DTO_Venta venta;
+
+    ControlAgregarVenta control;
+    DTO_Venta venta;
+
     /**
      * Creates new form DlgCobrarVenta
      */
-    public Presentacion_DlgCobrarVenta(java.awt.Frame parent, boolean modal,DTO_Venta venta) {
+    public Presentacion_DlgCobrarVenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.venta=venta;
-        control = new ControlAgregarVenta();
+        control = ControlAgregarVenta.getInstance();
+        this.venta = control.getVenta();
         initComponents();
         setVisible(true);
     }
@@ -194,14 +196,14 @@ public class Presentacion_DlgCobrarVenta extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aceptarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarbtnActionPerformed
-        this.dispose(); 
-        control.MostrarDatosVenta(venta);
-       
+        this.dispose();
+        control.mostrarConfirmacionPago();
+
     }//GEN-LAST:event_aceptarbtnActionPerformed
 
     private void cancelarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBtnActionPerformed
-       this.dispose();
-       control.mostrarProductosVenta();
+        this.dispose();
+        control.mostrarProductosVenta();
     }//GEN-LAST:event_cancelarBtnActionPerformed
 
 

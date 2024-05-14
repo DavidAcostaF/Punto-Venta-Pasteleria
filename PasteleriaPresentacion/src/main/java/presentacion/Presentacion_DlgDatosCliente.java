@@ -22,11 +22,11 @@ public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
     /**
      * Creates new form DlgDatosCliente
      */
-    public Presentacion_DlgDatosCliente(java.awt.Frame parent, boolean modal,DTO_Venta venta) {
+    public Presentacion_DlgDatosCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.venta=venta;
-        initComponents();
-        control=new ControlAgregarVenta();
+        control= ControlAgregarVenta.getInstance();
+        this.venta=control.getVenta();
+        initComponents(); 
         setVisible(true);
         
         
@@ -53,29 +53,27 @@ public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
         campoTextoApellidoM = new javax.swing.JTextField();
         campoTextoTelefono = new javax.swing.JTextField();
         botonSiguiente = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        campoTextoCorreo = new javax.swing.JTextField();
+        regresarBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(232, 232, 232));
 
-        jLabel1.setText("Datos del cliente");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel1.setText("Datos del cliente");
 
-        jLabel2.setText("Nombres:");
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Nombres:");
 
-        jLabel3.setText("Apellido Paterno:");
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("Apellido Paterno:");
 
-        jLabel4.setText("Apellido Materno:");
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setText("Apellido Materno:");
 
-        jLabel5.setText("Telefono:");
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setText("Telefono:");
 
         botonSiguiente.setBackground(new java.awt.Color(140, 220, 254));
         botonSiguiente.setText("Siguiente");
@@ -85,54 +83,45 @@ public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setText("Regresar");
-        jButton2.setBackground(new java.awt.Color(140, 220, 254));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        regresarBtn.setBackground(new java.awt.Color(140, 220, 254));
+        regresarBtn.setText("Regresar");
+        regresarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                regresarBtnActionPerformed(evt);
             }
         });
-
-        jLabel6.setText("Correo:");
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(campoTextoCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel1)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(27, 27, 27)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(jLabel5)))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(22, 22, 22)
-                                    .addComponent(jLabel2)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(campoTextoTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(campoTextoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(campoTextoApellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(campoTextoApellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(145, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(27, 27, 27)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(jLabel5)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(jLabel2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(campoTextoTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoTextoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoTextoApellidoP, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoTextoApellidoM, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(147, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(60, 60, 60)
-                .addComponent(jButton2)
+                .addComponent(regresarBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonSiguiente)
                 .addGap(92, 92, 92))
@@ -142,7 +131,7 @@ public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoTextoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -158,14 +147,10 @@ public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoTextoTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel6)
-                    .addComponent(campoTextoCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonSiguiente)
-                    .addComponent(jButton2))
+                    .addComponent(regresarBtn))
                 .addGap(54, 54, 54))
         );
 
@@ -177,22 +162,26 @@ public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
 
     private void botonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSiguienteActionPerformed
 //        IAgregarCliente agregar = new AgregarCliente();
-        DTO_Cliente cliente = new DTO_Cliente(this.campoTextoNombre.getText());
+        DTO_Cliente cliente = new DTO_Cliente();
+        cliente.setNombre(this.campoTextoNombre.getText());
+        cliente.setApellidoP(this.campoTextoApellidoP.getText());
+        cliente.setApellidoM(this.campoTextoApellidoM.getText());
+        cliente.setTelefono(this.campoTextoTelefono.getText());
         
-        //venta.setCliente(cliente);
+        venta.setCliente(cliente);
         
           int respuesta = JOptionPane.showOptionDialog(null, "¿Realizara envio a domicilio?", "Tipo de envio", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
 
         if (respuesta == JOptionPane.YES_OPTION) {
            this.dispose(); 
-           control.AgregarDireccion(venta);
+           control.mostrarAgregarDireccion();
           
         } else {
             DTO_Direccion direccion=new DTO_Direccion();
             direccion.setCalle("En tienda");
-            venta.setDieccionEntrega(direccion);
+            venta.setDireccionEntrega(direccion);
             this.dispose();
-            control.CobrarVenta(venta);
+            control.mostrarCobrarVenta();
            
           
         }
@@ -200,9 +189,10 @@ public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
         
     }//GEN-LAST:event_botonSiguienteActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void regresarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarBtnActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+        control.mostrarProductosVenta();
+    }//GEN-LAST:event_regresarBtnActionPerformed
 
 
 
@@ -210,16 +200,14 @@ public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
     private javax.swing.JButton botonSiguiente;
     private javax.swing.JTextField campoTextoApellidoM;
     private javax.swing.JTextField campoTextoApellidoP;
-    private javax.swing.JTextField campoTextoCorreo;
     private javax.swing.JTextField campoTextoNombre;
     private javax.swing.JTextField campoTextoTelefono;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton regresarBtn;
     // End of variables declaration//GEN-END:variables
 }
