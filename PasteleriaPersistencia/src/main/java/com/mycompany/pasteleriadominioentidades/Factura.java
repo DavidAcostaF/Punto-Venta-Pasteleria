@@ -4,7 +4,6 @@
  */
 package com.mycompany.pasteleriadominioentidades;
 
-import java.io.File;
 import java.util.Date;
 
 /**
@@ -27,8 +26,8 @@ public class Factura {
     /** Identificador de la venta asociada a la factura. */
     private String ventaId;
     
-    /** Archivo PDF de la factura. */
-    private File facturaPdf;
+    /** Donde se guardará la factura */
+    private byte[] bytesContenido;
 
     /**
      * Constructor por defecto de la clase Factura.
@@ -127,19 +126,19 @@ public class Factura {
     }
 
     /**
-     * Obtiene el archivo PDF de la factura.
-     * @return Archivo PDF de la factura.
+     * Obtiene el contenido de la factura en bytes.
+     * @return Contenido de la factura en bytes.
      */
-    public File getFacturaPdf() {
-        return facturaPdf;
+    public byte[] getBytesContenido() {
+        return bytesContenido;
     }
 
     /**
-     * Establece el archivo PDF de la factura.
-     * @param facturaPdf Archivo PDF de la factura.
+     * Establece el contenido de de la factura en bytes.
+     * @param bytesContenido Contenido de la factura en bytes.
      */
-    public void setFacturaPdf(File facturaPdf) {
-        this.facturaPdf = facturaPdf;
+    public void setBytesContenido(byte[] bytesContenido) {
+        this.bytesContenido = bytesContenido;
     }
 
     /**

@@ -5,6 +5,7 @@
 package com.mycompany.pasteleriadominiosMapeo;
 
 import java.util.Date;
+import org.bson.types.Binary;
 import org.bson.types.ObjectId;
 
 /**
@@ -17,7 +18,7 @@ public class FacturaMapeo {
     private Date fechaVencimiento;
     private VentaMapeo venta;
     private ObjectId ventaId;
-    private ObjectId facturaPdf;
+    private Binary contenido;
 
     public FacturaMapeo() {
     }
@@ -77,12 +78,12 @@ public class FacturaMapeo {
         this.ventaId = ventaId;
     }
 
-    public ObjectId getFacturaPdf() {
-        return facturaPdf;
+    public Binary getContenido() {
+        return contenido;
     }
 
-    public void setFacturaPdf(ObjectId facturaPdf) {
-        this.facturaPdf = facturaPdf;
+    public void setContenido(Binary contenido) {
+        this.contenido = contenido;
     }
 
     @Override

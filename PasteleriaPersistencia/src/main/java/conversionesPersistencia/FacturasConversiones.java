@@ -4,11 +4,13 @@
  */
 package conversionesPersistencia;
 
-import com.mongodb.gridfs.GridFS;
 import com.mycompany.pasteleriadominioentidades.Factura;
 import com.mycompany.pasteleriadominiosMapeo.FacturaMapeo;
-import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import org.bson.types.Binary;
 import org.bson.types.ObjectId;
 
 /**
@@ -18,47 +20,70 @@ import org.bson.types.ObjectId;
 public class FacturasConversiones {
 
     VentasConversiones conversosrVentas;
-    ArchivosConversiones conversorArchivos;
 
     public FacturasConversiones() {
         conversosrVentas = new VentasConversiones();
-        conversorArchivos = new ArchivosConversiones();
     }
 
-    public Factura convertirAFacturaEntidad(FacturaMapeo factura, GridFS gridFS, String outputPath) throws IOException {
+    public Factura convertirAFacturaEntidad(FacturaMapeo factura){
         Factura facturaEnt = new Factura();
         facturaEnt.setId(factura.getId().toHexString());
         facturaEnt.setFechaEmision(factura.getFechaEmision());
         facturaEnt.setFechaVencimiento(factura.getFechaVencimiento());
         facturaEnt.setVentaId(factura.getVentaId().toHexString());
 
-        // Convertir GridFS a File solo si FacturaPDF no es null
-        if (factura.getFacturaPdf() != null) {
-            File facturaPdf = conversorArchivos.gridFSToFile(gridFS, factura.getFacturaPdf(), outputPath);
-            facturaEnt.setFacturaPdf(facturaPdf);
-        }
+        byte[] contenidoBytes64 = factura.getContenido().getData();
+        String contenidoBase64 = Base64.getEncoder().encodeToString(contenidoBytes64);
+        byte[] contenidoBytes = Base64.getDecoder().decode(contenidoBase64);
+        facturaEnt.setBytesContenido(contenidoBytes);
 
         return facturaEnt;
     }
-
-    public Factura convertirAFacturaEntidadObjetos(FacturaMapeo factura) {
+    
+    public Factura convertirAFacturaEntidadObjetos (FacturaMapeo factura){
         Factura facturaEnt = new Factura();
-        facturaEnt.setId(factura.getId().toString());
+        facturaEnt.setId(factura.getId().toHexString());
         facturaEnt.setFechaEmision(factura.getFechaEmision());
         facturaEnt.setFechaVencimiento(factura.getFechaVencimiento());
+        facturaEnt.setVentaId(factura.getVentaId().toHexString());
         facturaEnt.setVenta(conversosrVentas.convertirAVentaEntidad(factura.getVenta()));
-        facturaEnt.setVentaId(factura.getVentaId().toString());
+
+        byte[] contenidoBytes64 = factura.getContenido().getData();
+        String contenidoBase64 = Base64.getEncoder().encodeToString(contenidoBytes64);
+        byte[] contenidoBytes = Base64.getDecoder().decode(contenidoBase64);
+        facturaEnt.setBytesContenido(contenidoBytes);
 
         return facturaEnt;
     }
 
-    public FacturaMapeo convertirAFacturaMapeo(Factura factura) {
+    public FacturaMapeo convertirAFacturaMapeo (Factura factura){
         FacturaMapeo facturaMap = new FacturaMapeo();
-        facturaMap.setVentaId(new ObjectId(factura.getVentaId()));
+        facturaMap.setId(new ObjectId(factura.getId()));
         facturaMap.setFechaEmision(factura.getFechaEmision());
         facturaMap.setFechaVencimiento(factura.getFechaVencimiento());
-
+        facturaMap.setVenta(conversosrVentas.convertirAVentaMapeo(factura.getVenta()));
+        facturaMap.setContenido(new Binary(factura.getBytesContenido()));
+        
         return facturaMap;
+    }
+    
+    public List<Factura> listaMapeosEntidad(List<FacturaMapeo> facturas) {
+        List<Factura> facturasEnt = new ArrayList<>();
+        for (FacturaMapeo facturaMap : facturas) {
+            Factura factura = new Factura();
+            factura.setId(facturaMap.getId().toHexString());
+            factura.setFechaEmision(factura.getFechaEmision());
+            factura.setFechaVencimiento(facturaMap.getFechaVencimiento());
+            factura.setVenta(conversosrVentas.convertirAVentaEntidad(facturaMap.getVenta()));
+            byte[] contenidoBytes64 = facturaMap.getContenido().getData();
+            String contenidoBase64 = Base64.getEncoder().encodeToString(contenidoBytes64);
+            byte[] contenidoBytes = Base64.getDecoder().decode(contenidoBase64);
+            factura.setBytesContenido(contenidoBytes);
+            
+            facturasEnt.add(factura);
+        }
+        
+        return facturasEnt;
     }
 
 }
