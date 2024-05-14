@@ -29,4 +29,7 @@ public interface IIngredienteDAO {
     public List<Ingrediente> consultarIngredientesFaltantes(List<String> ingredientesIds);
 
     public List<Ingrediente> consultarCantidadesIngredientesInventario(List<String> ingredientesNombres);
+
+    public List<Ingrediente> consultarIngredientesConStock();
+
 }

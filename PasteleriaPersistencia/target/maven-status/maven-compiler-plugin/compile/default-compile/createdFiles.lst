@@ -21,7 +21,6 @@ conversionesPersistencia\IngredienteDetalleConversiones.class
 com\mycompany\pasteleriadaos\ReporteDAO.class
 com\mycompany\pasteleriadocumentosanidadosmapeo\IngredienteDetalleMapeo.class
 Exceptions\PersistenciaException.class
-.netbeans_automatic_build
 com\mycompany\pasteleriadaos\IngredienteDAO.class
 com\mycompany\pasteleriadominioentidades\Factura.class
 com\mycompany\pasteleriadominiosMapeo\VentaMapeo.class

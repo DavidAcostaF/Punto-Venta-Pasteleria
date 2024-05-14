@@ -9,6 +9,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.gt;
 import static com.mongodb.client.model.Filters.regex;
 import com.mongodb.client.model.Sorts;
 import com.mongodb.client.result.DeleteResult;
@@ -112,6 +113,12 @@ public class IngredienteDAO implements IIngredienteDAO {
         Bson filtro = Filters.in("nombre", ingredientesNombres);
 
         return ingredienteConversiones.convertir(coleccion.find(filtro).into(new ArrayList<>()));
+    }
+
+    @Override
+    public List<Ingrediente> consultarIngredientesConStock() {
+        MongoCollection<IngredienteMapeo> coleccion = conexion.obtenerColeccion();
+        return ingredienteConversiones.convertir(coleccion.find(gt("cantidad", 0)).into(new ArrayList<>()));
     }
 
 }

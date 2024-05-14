@@ -11,6 +11,7 @@ import com.mycompany.pasteleriadaos.IngredienteDAO;
 import com.mycompany.pasteleriadaos.ProductoDAO;
 import com.mycompany.pasteleriadocumentosanidadosmapeo.IngredienteDetalleMapeo;
 import com.mycompany.pasteleriadominiodocumentosanidados.IngredienteDetalle;
+import com.mycompany.pasteleriadominioentidades.Ingrediente;
 import com.mycompany.pasteleriadominioentidades.Producto;
 import com.mycompany.pasteleriadominiosMapeo.ProductoMapeo;
 import conversionesnegocio.IngredienteConversiones;
@@ -148,6 +149,45 @@ public class ProductosBO implements IProductosBO {
     @Override
     public List<DTO_Producto> consultarProductosCoincidentes(String nombre) {
         return conversor.convertirListaProductos(productoDAO.consultarProductosCoincidentes(nombre));
+    }
+
+    @Override
+    public List<DTO_Producto> consultarListaProductosConStock() {
+        List<Ingrediente> ingredientesDisponibles = ingredienteDAO.consultarIngredientesConStock();
+        List<Producto> productos = productoDAO.consultarProductos();
+        List<DTO_Producto> productosDTO = new ArrayList<>();
+
+        for (Producto producto : productos) {
+            boolean disponible = false;
+            for (IngredienteDetalle ingredienteDetalle : producto.getIngredientes()) {
+
+                for (Ingrediente ingrediente : ingredientesDisponibles) {
+                    if (ingrediente.getNombre().equalsIgnoreCase(ingredienteDetalle.getNombre())) {
+                        System.out.println(ingrediente.getNombre());
+                        System.out.println(ingredienteDetalle.getNombre());
+                        if (ingrediente.getCantidad() > ingredienteDetalle.getCantidad()) {
+                            System.out.println(ingrediente.getCantidad());
+                            System.out.println(ingredienteDetalle.getCantidad());
+                            disponible = true;
+                        }
+                    }
+                }
+                if (!disponible) {
+                    break;
+                }
+
+            }
+
+            if (!disponible) {
+                break;
+            }
+            if (disponible) {
+                productosDTO.add(conversor.convertirProducto(producto));
+            }
+            disponible = false;
+
+        }
+        return productosDTO;
     }
 
 }
