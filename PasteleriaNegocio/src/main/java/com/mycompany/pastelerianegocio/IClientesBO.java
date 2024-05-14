@@ -21,4 +21,6 @@ public interface IClientesBO {
     public DTO_Cliente encontrarCliente(String apellidoPaterno, String apellidoMaterno, String nombres, String telefono);
     
     public DTO_Cliente encontrarClienteID(String idCliente);
+    
+    public DTO_Cliente actualizarCliente(DTO_Cliente cliente);
 }

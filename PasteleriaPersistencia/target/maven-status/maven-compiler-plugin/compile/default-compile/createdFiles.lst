@@ -45,3 +45,4 @@ com\mycompany\pasteleriadaos\IVentaDAO.class
 com\mycompany\pasteleriadominioentidades\Reporte.class
 com\mycompany\pasteleriadominioentidades\Venta.class
 pruebas\ReportePrueba.class
+pruebas\PruebasFactura.class

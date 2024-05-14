@@ -41,6 +41,8 @@ public class ClientesBO implements IClientesBO {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
+    
+    @Override
     public DTO_Cliente actualizarCliente(DTO_Cliente cliente){
         try {
             clienteDAO.actualizarCliente(conversor.convertirDtoClienteAEntidadConRfc(cliente));
