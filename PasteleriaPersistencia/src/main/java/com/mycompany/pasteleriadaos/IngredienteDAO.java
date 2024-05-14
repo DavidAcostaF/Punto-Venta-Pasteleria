@@ -105,4 +105,13 @@ public class IngredienteDAO implements IIngredienteDAO {
 
     }
 
+    @Override
+    public List<Ingrediente> consultarCantidadesIngredientesInventario(List<String> ingredientesNombres) {
+        MongoCollection<IngredienteMapeo> coleccion = conexion.obtenerColeccion();
+
+        Bson filtro = Filters.in("nombre", ingredientesNombres);
+
+        return ingredienteConversiones.convertir(coleccion.find(filtro).into(new ArrayList<>()));
+    }
+
 }
