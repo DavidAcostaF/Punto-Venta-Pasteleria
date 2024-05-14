@@ -28,7 +28,7 @@ import javax.swing.table.TableCellRenderer;
 public class Presentacion_ProductosVenta extends javax.swing.JFrame {
 
     private DTO_Venta venta;
-    ControlAgregarVenta control;
+    private ControlAgregarVenta control;
     float total;
 //    private IConsultarProductosVenta consultarProductosVenta;
 
@@ -36,7 +36,7 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
      * Creates new form VentanaSeleccionarProductos
      */
     public Presentacion_ProductosVenta() {
-        control = new ControlAgregarVenta();
+        //this.control = ControlAgregarVenta
         venta = new DTO_Venta();
         total = 0;
         initComponents();
@@ -61,7 +61,7 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         fechaEntrega = new com.github.lgooddatepicker.components.DatePicker();
         jLabel2 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        agregarPastelBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProductos = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
@@ -86,12 +86,12 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
         jLabel2.setText("Detalles de la venta");
         jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
 
-        jButton3.setText("Agregar producto");
-        jButton3.setBackground(new java.awt.Color(140, 220, 254));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        agregarPastelBtn.setText("Agregar producto");
+        agregarPastelBtn.setBackground(new java.awt.Color(140, 220, 254));
+        agregarPastelBtn.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        agregarPastelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                agregarPastelBtnActionPerformed(evt);
             }
         });
 
@@ -112,8 +112,8 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
                             .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(jButton3)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(agregarPastelBtn)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +127,7 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(agregarPastelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(146, Short.MAX_VALUE))
         );
 
@@ -136,7 +136,7 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Especificacion", "Cantidad", "Precio", "+", "-"
+                "Nombre", "Especificacion", "Cantidad", "Precio", "Tamaño", "+", "-"
             }
         ));
         tableProductos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -219,11 +219,11 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void agregarPastelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPastelBtnActionPerformed
         DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel();
         DTO_Producto p = control.agregarPastel(this);
         modelo.addRow(new Object[]{p.getNombre(), p.getDescripcion(), 1, 100});
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_agregarPastelBtnActionPerformed
 
     private void SiguientebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SiguientebtnActionPerformed
         if (((DefaultTableModel) tableProductos.getModel()).getRowCount() <= 0) {
@@ -428,8 +428,8 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Siguientebtn;
+    private javax.swing.JButton agregarPastelBtn;
     private com.github.lgooddatepicker.components.DatePicker fechaEntrega;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

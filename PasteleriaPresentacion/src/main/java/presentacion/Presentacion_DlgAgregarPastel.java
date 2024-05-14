@@ -26,7 +26,7 @@ public class Presentacion_DlgAgregarPastel extends javax.swing.JDialog {
     /**
      * Creates new form DlgAgregarPastel
      */
-    public Presentacion_DlgAgregarPastel(java.awt.Frame parent, boolean modal, DTO_Producto producto) {
+    public Presentacion_DlgAgregarPastel(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         this.funcionalidadesProductos=new FuncionalidadConsultarProductos();
         this.producto = producto;

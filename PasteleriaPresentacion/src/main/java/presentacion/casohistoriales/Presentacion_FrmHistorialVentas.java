@@ -678,35 +678,27 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
     public void obtenerCliente() {
         String clienteSeleccionado = (String) clientesComboBox.getSelectedItem();
         if (clienteSeleccionado != null) {
-            // Dividir el texto en partes usando el guion como separador
-            String[] partes = clienteSeleccionado.split("-");
-
+            String[] partes = clienteSeleccionado.trim().split("\\s+");
             if (partes.length >= 2) {
-                // El último elemento del array es el número de teléfono
-                String numeroTelefono = partes[partes.length - 1].trim();
-
-                // Extraer el nombre y apellidos
-                String nombreCompleto = partes[0].trim();
-                String[] nombresApellidos = nombreCompleto.split("\\s+");
-
-                String nombre = nombresApellidos[0];
+                String nombre = "";
                 String apellidoPaterno = "";
                 String apellidoMaterno = "";
+                String numeroTelefono = "";
 
-                if (nombresApellidos.length >= 3) {
-                    // Hay dos nombres y apellidos
-                    apellidoPaterno = nombresApellidos[1];
-                    apellidoMaterno = nombresApellidos[2];
-                } else if (nombresApellidos.length == 2) {
-                    // Solo hay un nombre y apellidos
-                    String[] apellidos = nombresApellidos[1].split(" ");
-                    if (apellidos.length >= 2) {
-                        apellidoPaterno = apellidos[0];
-                        apellidoMaterno = apellidos[1];
-                    } else {
-                        apellidoPaterno = apellidos[0];
-                    }
-
+                if (partes.length == 5) {
+                    nombre = partes[0] + " " + partes[1];
+                    apellidoPaterno = partes[2];
+                    apellidoMaterno = partes[3];
+                    numeroTelefono = partes[4];
+                } else if (partes.length == 4) {
+                    nombre = partes[0];
+                    apellidoPaterno = partes[1];
+                    apellidoMaterno = partes[2];
+                    numeroTelefono = partes[3];
+                } else if (partes.length == 3) {
+                    nombre = partes[0];
+                    apellidoPaterno = partes[1];
+                    numeroTelefono = partes[2];
                 }
 
                 cliente = funcionalidadesClientes.encontrarCliente(apellidoPaterno, apellidoMaterno, nombre, numeroTelefono);

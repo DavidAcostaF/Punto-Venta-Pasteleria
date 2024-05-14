@@ -29,19 +29,19 @@ public class pruebaCliente {
             ClienteDAO clientedao=new ClienteDAO();
             Cliente cliente = new Cliente();
             
-//            cliente.setNombre("Kanye west");
-//            cliente.setApellidoP("Swift");
-//            cliente.setApellidoM("Morales");
-//            cliente.setTelefono("644412345");
-//
-//            List<Direccion> direcciones = new ArrayList<>();
-//            direcciones.add(new Direccion("Calle wallabe #42", "sydney", "1"));
-//            direcciones.add(new Direccion("Calle 2", "Colonia 2", "2"));
-//            cliente.setDirecciones(direcciones);
-//            clientedao.agregarCliente(cliente);
+            cliente.setNombre("Kanye west");
+            cliente.setApellidoP("Swift");
+            cliente.setApellidoM("Morales");
+            cliente.setTelefono("644412345");
+
+            List<Direccion> direcciones = new ArrayList<>();
+            direcciones.add(new Direccion("Calle wallabe #42", "sydney", "1"));
+            direcciones.add(new Direccion("Calle 2", "Colonia 2", "2"));
+            cliente.setDirecciones(direcciones);
+            clientedao.agregarCliente(cliente);
             
-cliente = clientedao.encontrarClienteID("66406d0293d57d3040a5bdc8");
-            System.out.println(cliente);
+//cliente = clientedao.encontrarClienteID("66406d0293d57d3040a5bdc8");
+       //     System.out.println(cliente);
             /* List<DTO_Cliente> clientes = clientedao.consultarClientes();
             
             // Imprimir la lista de clientes
