@@ -10,37 +10,62 @@ import com.mycompany.pasteleriaconsultarventas.FuncionalidadConsultarVentas;
 import com.mycompany.pasteleriaconsultarventas.IFuncionalidadConsultarVentas;
 import com.mycompany.pasteleriacontarventaspordia.FuncionalidadContarVentasPorDia;
 import com.mycompany.pasteleriacontarventaspordia.IFuncionalidadContarVentasPorDia;
+import com.mycompany.pasteleriagenerarreporte.FuncionalidadGenerarReporte;
+import com.mycompany.pasteleriagenerarreporte.IFuncionalidadGenerarReporte;
+import com.mycompany.pasteleriaguardarreportes.FuncionalidadGuardarReportes;
+import com.mycompany.pasteleriaguardarreportes.IFuncionalidadGuardarReportes;
 import control.ControlAgregarVenta;
 import control.ControlIngresosMensuales;
+import dto.DTO_GenerarReporte;
 import dto.DTO_Producto;
+import dto.DTO_Reporte;
+import dto.DTO_ReporteIngresosDetalles;
+import dto.DTO_ReporteIngresosFormato;
 import dto.DTO_Venta;
 import extras.ButtonColumn;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import net.miginfocom.layout.AC;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  *
  * @author PC
  */
 public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
-    
+
     private IFuncionalidadContarVentasPorDia funcionalidadVentasPorDia;
     private IFuncionalidadCalcularGananciasDelDia funcionalidadGananciasDelDia;
     private IFuncionalidadConsultarVentas funcionalidadConsultarVentas;
+    private IFuncionalidadGuardarReportes funcionalidadGuardarReportes;
+    private IFuncionalidadGenerarReporte generadorReportes;
     private ControlIngresosMensuales controlIngresos;
     private ControlAgregarVenta controlPrincipal;
+    private List<DTO_Venta> listaVentas;
     Date fechaInicial;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); // Formato deseado para la fecha
 
@@ -53,8 +78,11 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
         this.funcionalidadVentasPorDia = new FuncionalidadContarVentasPorDia();
         this.funcionalidadGananciasDelDia = new FuncionalidadCalcularGananciasDelDia();
         this.funcionalidadConsultarVentas = new FuncionalidadConsultarVentas();
+        this.funcionalidadGuardarReportes = new FuncionalidadGuardarReportes();
+        this.generadorReportes = new FuncionalidadGenerarReporte();
         this.controlIngresos = ControlIngresosMensuales.getInstance();
         this.fechaInicial = this.controlIngresos.getFechaSeleccionada();
+        this.listaVentas = new ArrayList<>();
         this.controlPrincipal = new ControlAgregarVenta();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(fechaInicial);
@@ -225,9 +253,87 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonExportarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonExportarPDFActionPerformed
-//        DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel();
-//        DTO_Producto p = control.agregarPastel(this);
-//        modelo.addRow(new Object[]{p.getNombre(), p.getDescripcion(), 1, 100});
+        try {
+            DTO_ReporteIngresosFormato ingresosFormato = new DTO_ReporteIngresosFormato();
+            ingresosFormato.setFechaInicial(this.txtFechaInicial.getText());
+            ingresosFormato.setFechaFinal(txtFechaFinal.getText());
+            ingresosFormato.setIngresosTotales(txtIngresosTotales.getText());
+            List<DTO_ReporteIngresosDetalles> listaDetalles = new ArrayList<>();
+            int rowCount = this.tableVentas.getModel().getRowCount();
+
+            for (int i = 0; i < rowCount; i++) {
+                DTO_ReporteIngresosDetalles ingresoDetalle = new DTO_ReporteIngresosDetalles();
+                Object value = this.tableVentas.getModel().getValueAt(i, 1);
+                ingresoDetalle.setCantidadVentas(value.toString());
+                Object value2 = this.tableVentas.getModel().getValueAt(i, 0);
+                ingresoDetalle.setFechaVenta(value2.toString());
+                Object value3 = this.tableVentas.getModel().getValueAt(i, 2);
+                ingresoDetalle.setGananciasDia(value3.toString());
+
+                String stringValue = (String) value2;
+                Date dateValue = null;
+                try {
+                    dateValue = dateFormat.parse(stringValue);
+                } catch (ParseException ex) {
+                    Logger.getLogger(Presentacion_DlgVentasTotales.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                listaVentas = this.funcionalidadConsultarVentas.consultarVentasPorFecha(dateValue);
+                for (DTO_Venta dtoVenta : listaVentas) {
+                    DTO_Venta ventaProvisional = this.funcionalidadConsultarVentas.encontrarVenta(dtoVenta.getID());
+                    String nombreCliente = ventaProvisional.getCliente().getNombre() + " " + ventaProvisional.getCliente().getApellidoP();
+
+                    ingresoDetalle.setFechaCompra(dateFormat.format(dtoVenta.getFechaRegistro()));
+
+                    ingresoDetalle.setNombreCliente(nombreCliente);
+                    ingresoDetalle.setTotalDeCompra(String.valueOf(dtoVenta.getMontoTotal()));
+
+                }
+                listaDetalles.add(ingresoDetalle);
+            }
+
+            System.out.println(listaDetalles.size());
+            ingresosFormato.setListaDetalles(listaDetalles);
+            DTO_GenerarReporte reporteGenerado = generadorReportes.generarReporteIngresosMensuales(ingresosFormato);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reporteGenerado.getJasperReport(), reporteGenerado.getParameters(), new JREmptyDataSource());
+
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Guardar como...");
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos PDF (*.pdf)", "pdf");
+            fileChooser.setFileFilter(filter);
+            int seleccion = fileChooser.showSaveDialog(this);
+
+            if (seleccion == JFileChooser.APPROVE_OPTION) {
+                File archivoSeleccionado = fileChooser.getSelectedFile();
+                String rutaArchivo = archivoSeleccionado.getAbsolutePath();
+
+                if (!rutaArchivo.toLowerCase().endsWith(".pdf")) {
+                    rutaArchivo += ".pdf";
+                }
+
+                JasperExportManager.exportReportToPdfFile(jasperPrint, rutaArchivo);
+                JOptionPane.showMessageDialog(this, "El archivo se ha guardado correctamente en:\n" + rutaArchivo, "Archivo guardado", JOptionPane.INFORMATION_MESSAGE);
+
+                if (Desktop.isDesktopSupported()) {
+                    File archivo = new File(rutaArchivo);
+                    DTO_Reporte reporte = new DTO_Reporte();
+                    byte[] bytesArchivo = funcionalidadGuardarReportes.convertirArchivoABytes(archivo);
+                    reporte.setBytesContenido(bytesArchivo);
+                    reporte.setNombre(archivo.getName());
+                    reporte.setCategoria("Reporte Ingresos Mensuales");
+                    reporte.setTipo("application/pdf");
+                    reporte.setFechaExpedicion(new Date());
+                    funcionalidadGuardarReportes.guardarReporte(reporte);
+                    Desktop.getDesktop().open(new File(rutaArchivo));
+
+                }
+
+            }
+        } catch (JRException ex) {
+            Logger.getLogger(Presentacion_DlgVentasTotales.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Presentacion_DlgVentasTotales.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonExportarPDFActionPerformed
 
     private void botonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonContinuarActionPerformed
@@ -246,18 +352,18 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
         this.tableDetallesVenta.setVisible(false);
         this.botonEsconderDetalles.setVisible(false);
     }//GEN-LAST:event_botonEsconderDetallesActionPerformed
-    
+
     private void llenarTabla() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Fecha");
         model.addColumn("Cantidad de Ventas");
         model.addColumn("Ganancias del Dia");
         model.addColumn("");
-        
+
         Date fechaInicial = controlIngresos.getFechaSeleccionada();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(fechaInicial);
-        
+
         for (int i = 0; i <= 30; i++) {
             Date fecha = calendar.getTime();
             int cantidadVentas = funcionalidadVentasPorDia.contarVentasPorDia(fecha);
@@ -265,9 +371,9 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
             // Verificar si la cantidad de ventas es al menos 1
             if (cantidadVentas >= 1) {
                 float gananciaDia = funcionalidadGananciasDelDia.CalcularGananciasDelDia(fecha);
-                
+
                 String fechaFormat = dateFormat.format(fecha);
-                
+
                 Object[] fila = {
                     fechaFormat,
                     cantidadVentas,
@@ -283,7 +389,7 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
         }
         this.tableVentas.setModel(model);
         TableColumnModel columnModel = tableVentas.getColumnModel();
-        
+
         ButtonColumn desplegarButtonColumn = new ButtonColumn("Desplegar Ventas", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -307,27 +413,27 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
         columnModel.getColumn(3).setCellRenderer(desplegarButtonColumn);
         columnModel.getColumn(3).setCellEditor(desplegarButtonColumn);
     }
-    
+
     private void mostrarNuevaTabla(Date fechaSeleccionada) {
         this.tableDetallesVenta.getTableHeader().setVisible(true);
         setSize(1200, 550);
         this.tableDetallesVenta.setVisible(true);
         this.botonEsconderDetalles.setVisible(true);
-        
+
         DefaultTableModel model = new DefaultTableModel();
         model.setRowCount(0);
         model.addColumn("Fecha");
         model.addColumn("Nombre del Cliente");
         model.addColumn("Total de la Venta");
-        
-        List<DTO_Venta> listaVentas = this.funcionalidadConsultarVentas.consultarVentasPorFecha(fechaSeleccionada);
+
+        listaVentas = this.funcionalidadConsultarVentas.consultarVentasPorFecha(fechaSeleccionada);
         for (DTO_Venta listaVenta : listaVentas) {
             float costoVenta = listaVenta.getMontoTotal();
             DTO_Venta ventaProvisional = this.funcionalidadConsultarVentas.encontrarVenta(listaVenta.getID());
             String nombreCliente = ventaProvisional.getCliente().getNombre() + " " + ventaProvisional.getCliente().getApellidoP();
-            
+
             String fechaFormat = dateFormat.format(fechaSeleccionada);
-            
+
             Object[] fila = {
                 fechaFormat,
                 nombreCliente,
@@ -342,12 +448,12 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
         revalidate();
         repaint();
     }
-    
+
     private void establecerIngresosTotales() {
         // Suponiendo que 'model' es tu DefaultTableModel
         int rowCount = this.tableVentas.getModel().getRowCount();
         float totalSum = 0.0f;
-        
+
         for (int i = 0; i < rowCount; i++) {
             Object value = this.tableVentas.getModel().getValueAt(i, 2); // Obtener el valor en la segunda columna (índice 1)
             if (value instanceof Float) {

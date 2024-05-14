@@ -6,12 +6,15 @@ package com.mycompany.pasteleriagenerarreporte;
 
 import dto.DTO_GenerarReporte;
 import dto.DTO_ReciboFormato;
+import dto.DTO_ReporteIngresosDetalles;
+import dto.DTO_ReporteIngresosFormato;
 import dto.DTO_ReporteVentasFormato;
 import dto.DTO_Venta;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,6 +85,47 @@ public class FuncionalidadGenerarReporte implements IFuncionalidadGenerarReporte
             return null;
         }
 
+    }
+
+    @Override
+    public DTO_GenerarReporte generarReporteIngresosMensuales(DTO_ReporteIngresosFormato ingresosFormato) {
+        try {
+            DTO_GenerarReporte reporteGenerado = new DTO_GenerarReporte();
+            Map<String, Object> parameters = new HashMap<String, Object>();
+
+            parameters.put("FechaInicial", ingresosFormato.getFechaInicial());
+            parameters.put("FechaFinal", ingresosFormato.getFechaFinal());
+            parameters.put("IngresosTotales", ingresosFormato.getIngresosTotales());
+
+            List<Map<String, Object>> detalles = new ArrayList<>();
+            for (DTO_ReporteIngresosDetalles ingresoDetalle : ingresosFormato.getListaDetalles()) {
+                Map<String, Object> detalle = new HashMap<>();
+                detalle.put("fechaVenta", ingresoDetalle.getFechaVenta());
+                detalle.put("cantidadVentas", ingresoDetalle.getCantidadVentas());
+                detalle.put("gananciasDia", ingresoDetalle.getGananciasDia());
+                detalle.put("fechaCompra", ingresoDetalle.getFechaCompra());
+                detalle.put("nombreCliente", ingresoDetalle.getNombreCliente());
+                detalle.put("totalDeCompra", ingresoDetalle.getTotalDeCompra());
+                detalles.add(detalle);
+            }
+
+            parameters.put("detalles", detalles);
+
+            InputStream input = new FileInputStream(new File("src\\main\\resources\\JasperIngresosMensuales\\ReporteIngresosMensualesV2.jrxml"));
+            JasperDesign jasperDesign = JRXmlLoader.load(input);
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+            reporteGenerado.setJasperReport(jasperReport);
+            reporteGenerado.setParameters(parameters);
+
+            return reporteGenerado;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FuncionalidadGenerarReporte.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } catch (JRException ex) {
+            Logger.getLogger(FuncionalidadGenerarReporte.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
 }
