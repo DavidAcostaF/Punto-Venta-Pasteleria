@@ -16,12 +16,13 @@ import java.util.List;
  * @author abelc
  */
 public class ClientesConversiones {
-     public ClientesConversiones() {
+
+    public ClientesConversiones() {
     }
 
     public DTO_Cliente convertirCliente(Cliente cliente) {
         DTO_Cliente dtoCliente = new DTO_Cliente();
-        dtoCliente.setID(cliente.getId()); 
+        dtoCliente.setID(cliente.getId());
         dtoCliente.setNombre(cliente.getNombre());
         dtoCliente.setApellidoP(cliente.getApellidoP());
         dtoCliente.setApellidoM(cliente.getApellidoM());
@@ -40,11 +41,32 @@ public class ClientesConversiones {
         return dtoCliente;
     }
 
+    public Cliente convertirDtoClienteAEntidad(DTO_Cliente dtoCliente) {
+        Cliente cliente = new Cliente();
+        cliente.setId(dtoCliente.getID());
+        cliente.setNombre(dtoCliente.getNombre());
+        cliente.setApellidoP(dtoCliente.getApellidoP());
+        cliente.setApellidoM(dtoCliente.getApellidoM());
+        cliente.setTelefono(dtoCliente.getTelefono());
+
+        List<Direccion> direcciones = new ArrayList<>();
+        for (DTO_Direccion dtoDireccion : dtoCliente.getDirecciones()) {
+            Direccion direccion = new Direccion();
+            direccion.setColonia(dtoDireccion.getColonia());
+            direccion.setCalle(dtoDireccion.getCalle());
+            direccion.setNumExterior(dtoDireccion.getNumExterior());
+            direcciones.add(direccion);
+        }
+        cliente.setDirecciones(direcciones);
+
+        return cliente;
+    }
+
     public List<DTO_Cliente> convertirDesdeClientes(List<Cliente> clientes) {
         List<DTO_Cliente> dtosClientes = new ArrayList<>();
         for (Cliente cliente : clientes) {
             dtosClientes.add(convertirCliente(cliente));
         }
         return dtosClientes;
-    } 
+    }
 }

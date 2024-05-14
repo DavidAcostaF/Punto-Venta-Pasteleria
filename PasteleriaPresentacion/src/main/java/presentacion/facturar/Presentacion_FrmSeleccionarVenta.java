@@ -56,9 +56,9 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setText("FACTURAR");
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("FACTURAR");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -89,7 +89,7 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "FECHA", "CLIENTE", "IMPORTE"
+                "ID", "FECHA", "IMPORTE", "ESTADO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -117,8 +117,8 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
         jLabel4.setText("Hasta");
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("Filtrar por nombre:");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         txtNombreCliente.setMinimumSize(new java.awt.Dimension(74, 21));
         txtNombreCliente.setPreferredSize(new java.awt.Dimension(74, 21));
@@ -126,20 +126,20 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
         jLabel1.setText("Seleccione una venta para facturar:");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
 
+        btnSeleccionar.setText("Seleccionar");
         btnSeleccionar.setBackground(new java.awt.Color(18, 111, 161));
         btnSeleccionar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSeleccionar.setForeground(new java.awt.Color(255, 255, 255));
-        btnSeleccionar.setText("Seleccionar");
         btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeleccionarActionPerformed(evt);
             }
         });
 
+        btnCancelar.setText("Cancelar");
         btnCancelar.setBackground(new java.awt.Color(18, 111, 161));
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -154,9 +154,7 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(datePickerDesde, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2)
