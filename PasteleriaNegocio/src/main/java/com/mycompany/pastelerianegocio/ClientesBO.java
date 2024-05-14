@@ -40,6 +40,16 @@ public class ClientesBO implements IClientesBO {
     public void agregarCliente(DTO_Cliente clientes) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    public DTO_Cliente actualizarCliente(DTO_Cliente cliente){
+        try {
+            clienteDAO.actualizarCliente(conversor.convertirDtoClienteAEntidadConRfc(cliente));
+            return cliente;
+        } catch (PersistenciaException e) {
+            System.out.println(e);
+            return null;
+        }  
+    }
 
     @Override
     public DTO_Cliente encontrarCliente(String apellidoPaterno, String apellidoMaterno, String nombres, String telefono) {

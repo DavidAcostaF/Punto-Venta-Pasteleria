@@ -61,6 +61,18 @@ public class ClientesConversiones {
 
         return cliente;
     }
+ 
+    public DTO_Cliente convertirClienteADtoConRfc (Cliente cliente){
+        DTO_Cliente dtoCliente = convertirCliente(cliente);
+        dtoCliente.setRfc(cliente.getRfc());
+        return dtoCliente;
+    }
+    
+    public Cliente convertirDtoClienteAEntidadConRfc(DTO_Cliente dtoCliente){
+        Cliente cliente = convertirDtoClienteAEntidad(dtoCliente);
+        cliente.setRfc(dtoCliente.getRfc());
+        return cliente;
+    }
 
     public List<DTO_Cliente> convertirDesdeClientes(List<Cliente> clientes) {
         List<DTO_Cliente> dtosClientes = new ArrayList<>();
