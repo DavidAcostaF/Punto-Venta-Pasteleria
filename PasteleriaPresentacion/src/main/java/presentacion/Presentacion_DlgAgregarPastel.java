@@ -186,9 +186,9 @@ public class Presentacion_DlgAgregarPastel extends javax.swing.JDialog {
         if (producto.getTamanio().equalsIgnoreCase("Chico")) {
             producto.setPrecio(producto.getPrecio());
         } else if (producto.getTamanio().equalsIgnoreCase("Mediano")) {
-            producto.setPrecio(producto.getPrecio()*1.5f);
+            producto.setPrecio(producto.getPrecio() * 1.5f);
         } else {
-            producto.setPrecio(producto.getPrecio()*1.75f);
+            producto.setPrecio(producto.getPrecio() * 1.75f);
         }
         producto.setEspecificaciones(txtExpecificaciones.getText());
         control.setProducto(producto);
@@ -202,9 +202,9 @@ public class Presentacion_DlgAgregarPastel extends javax.swing.JDialog {
     private void desplegarPasteles(List<DTO_Producto> lista) {
         comboBoxPastelito.setModel(new PastelComboBoxModel(lista));
     }
-    
-    private void validarCampos(){
-        
+
+    private void validarCampos() {
+
     }
 
 

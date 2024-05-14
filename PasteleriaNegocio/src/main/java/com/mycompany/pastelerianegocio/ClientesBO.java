@@ -10,6 +10,8 @@ import com.mycompany.pasteleriadaos.ClienteDAO;
 import com.mycompany.pasteleriadaos.IClienteDAO;
 import dto.DTO_Cliente;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -37,8 +39,13 @@ public class ClientesBO implements IClientesBO {
     }
 
     @Override
-    public void agregarCliente(DTO_Cliente clientes) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void agregarCliente(DTO_Cliente cliente) {
+        try {
+            clienteDAO.agregarCliente(conversor.convertirAEntidadaSinID(cliente));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(ClientesBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
     
     

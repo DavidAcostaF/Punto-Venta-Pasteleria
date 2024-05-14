@@ -4,10 +4,17 @@
  */
 package presentacion;
 
+import com.mycompany.clientes.FuncionalidadAgregarClientes;
+import com.mycompany.clientes.IFuncionalidadAgregarClientes;
 import com.mycompany.pasteleriaventa.FuncionalidadesVenta;
 import com.mycompany.pasteleriaventa.IFuncionalidadesVenta;
 import control.ControlAgregarVenta;
+import dto.DTO_Direccion;
 import dto.DTO_Venta;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,21 +22,26 @@ import javax.swing.JOptionPane;
  * @author af_da
  */
 public class Presentacion_DlgConfirmacionPago extends javax.swing.JDialog {
-ControlAgregarVenta control;
-DTO_Venta venta;
-IFuncionalidadesVenta ventas;
+    
+    ControlAgregarVenta control;
+    DTO_Venta venta;
+    IFuncionalidadesVenta ventas;
+    IFuncionalidadAgregarClientes agregarCliente;
+
     /**
      * Creates new form DlgPagoEfectivo
      */
     public Presentacion_DlgConfirmacionPago(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-         control = ControlAgregarVenta.getInstance();
-         this.venta=control.getVenta();
-         this.ventas=new FuncionalidadesVenta();
+        control = ControlAgregarVenta.getInstance();
+        this.venta = control.getVenta();
+        this.agregarCliente = new FuncionalidadAgregarClientes();
+        this.ventas = new FuncionalidadesVenta();
         initComponents();
-        //txtCliente.setText(venta.getCliente().getNombre());
+        txtCliente.setText(venta.getCliente().getNombre());
         txtCosto.setText(Float.toString(venta.getMontoTotal()));
-        //txtFechaEntrega.setText(venta.getFechaEntrega());
+        SimpleDateFormat ff = new SimpleDateFormat("dd/MM/yyyy");
+        txtFechaEntrega.setText(ff.format(venta.getFechaEntrega()));
         txtUbicacionEntrega.setText(venta.getDireccionEntrega().getCalle());
         setVisible(true);
         
@@ -202,25 +214,41 @@ IFuncionalidadesVenta ventas;
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-         ventas.agregarVenta(venta);
-        String mensaje = "¡La venta ha sido registrada exitosamente!";
-
-        // Mostrar el mensaje utilizando JOptionPane
-        JOptionPane.showMessageDialog(null, mensaje, "Registro de Venta Exitoso", JOptionPane.INFORMATION_MESSAGE);
-       this.dispose();
-        int respuesta = JOptionPane.showOptionDialog(null, "¿Quiere registrar otra venta?", "Hola", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
-
-        if (respuesta == JOptionPane.YES_OPTION) {
-           this.dispose(); 
-           control.mostrarProductosVenta();
-          
+        System.out.println(control.getVenta());
+        System.out.println(venta.getCliente());
+        if (venta.getCliente().getID().equals("")) {
+            List<DTO_Direccion> a= new ArrayList<>();
+            a.add(venta.getDireccionEntrega());
+            venta.getCliente().setDirecciones(a);
+            agregarCliente.agregarCliente(venta.getCliente());
+            ventas.agregarVenta(venta);
+            venta.setFechaRegistro(new Date());
+            
         } else {
-            this.dispose();
-          control.mostrarMenu();
-           
-          
+            System.out.println("hola");
+            System.out.println(venta.getCliente().getID());
+            venta.setIDcliente(venta.getCliente().getID());
+            System.out.println(venta.getIDcliente());
+            venta.setFechaRegistro(new Date());
+            ventas.agregarVenta(venta);
         }
         
+        String mensaje = "¡La venta ha sido registrada exitosamente!";
+        
+        JOptionPane.showMessageDialog(null, mensaje, "Registro de Venta Exitoso", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
+        int respuesta = JOptionPane.showOptionDialog(null, "¿Quiere registrar otra venta?", "Hola", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
+        
+        if (respuesta == JOptionPane.YES_OPTION) {
+            this.dispose();
+            control.mostrarProductosVenta();
+            
+        } else {
+            this.dispose();
+            control.mostrarMenu();
+            
+        }
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void txtCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoActionPerformed
@@ -239,7 +267,6 @@ IFuncionalidadesVenta ventas;
         // TODO add your handling code here:
     }//GEN-LAST:event_txtClienteActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrar;

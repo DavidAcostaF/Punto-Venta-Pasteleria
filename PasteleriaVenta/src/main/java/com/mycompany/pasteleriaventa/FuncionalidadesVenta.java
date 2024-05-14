@@ -4,6 +4,8 @@
  */
 package com.mycompany.pasteleriaventa;
 
+import com.mycompany.pastelerianegocio.IVentasBO;
+import com.mycompany.pastelerianegocio.VentasBO;
 import dto.DTO_Venta;
 
 /**
@@ -11,15 +13,16 @@ import dto.DTO_Venta;
  * @author f_aco
  */
 public class FuncionalidadesVenta implements IFuncionalidadesVenta {
-   OperacionesVenta ventas;
+
+    IVentasBO ventas;
 
     public FuncionalidadesVenta() {
-    this.ventas=new OperacionesVenta();
+        this.ventas = new VentasBO();
     }
-   
+
     @Override
     public void agregarVenta(DTO_Venta venta) {
-    ventas.agregarVenta(venta);
+        ventas.agregarVenta(venta);
     }
-    
+
 }

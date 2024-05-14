@@ -196,6 +196,7 @@ public class Presentacion_DlgCobrarVenta extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aceptarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarbtnActionPerformed
+        System.out.println(control.getVenta());
         this.dispose();
         control.mostrarConfirmacionPago();
 

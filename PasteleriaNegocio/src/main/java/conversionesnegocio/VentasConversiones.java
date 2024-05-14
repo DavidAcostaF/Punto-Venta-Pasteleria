@@ -18,7 +18,7 @@ import java.util.List;
  * @author abelc
  */
 public class VentasConversiones {
-    
+
     ClientesConversiones conversorCliente;
     ProductosConversiones conversorProductos;
 
@@ -26,7 +26,7 @@ public class VentasConversiones {
         conversorCliente = new ClientesConversiones();
         conversorProductos = new ProductosConversiones();
     }
-    
+
     public DTO_Venta convertirVentaADTO(Venta venta) {
         DTO_Venta dtoVenta = new DTO_Venta();
         dtoVenta.setID(venta.getId());
@@ -54,7 +54,39 @@ public class VentasConversiones {
         dtoVenta.setDireccionEntrega(dtoDireccion);
         return dtoVenta;
     }
-    
+
+    public Venta convertirDTOAgregar(DTO_Venta ventaDTO) {
+        Venta venta = new Venta();
+        
+        venta.setFechaEntrega(ventaDTO.getFechaEntrega());
+        venta.setFechaRegistro(ventaDTO.getFechaRegistro());
+        venta.setMontoTotal(ventaDTO.getMontoTotal());
+        venta.setEstado(ventaDTO.getEstado());
+        venta.setClienteid(ventaDTO.getIDcliente());
+
+        List<DetalleVenta> detallesVenta = new ArrayList<>();
+        for (DTO_DetalleVenta detalleVentaDTO : ventaDTO.getDetallesVenta()) {
+            DetalleVenta detalleVenta = new DetalleVenta();
+            detalleVenta.setCantidad(detalleVentaDTO.getCantidad());
+            detalleVenta.setDetallesCliente(detalleVentaDTO.getEspecificacion());
+            detalleVenta.setProductoId(detalleVentaDTO.getIdproducto());
+            detalleVenta.setImporte(detalleVentaDTO.getImporte());
+            detalleVenta.setPrecio(detalleVentaDTO.getPrecio());
+            detalleVenta.setTamanhoProducto(detalleVentaDTO.getTamanhoProducto());
+            detallesVenta.add(detalleVenta);
+        }
+        venta.setDetallesVenta(detallesVenta);
+
+        Direccion direccionEntrega = new Direccion();
+        DTO_Direccion dtoDireccion = ventaDTO.getDireccionEntrega();
+        direccionEntrega.setCalle(dtoDireccion.getCalle());
+        direccionEntrega.setColonia(dtoDireccion.getColonia());
+        direccionEntrega.setNumExterior(dtoDireccion.getNumExterior());
+        venta.setDireccionEntrega(direccionEntrega);
+
+        return venta;
+    }
+
     public DTO_Venta convertirADTO(Venta venta) {
         DTO_Venta dtoVenta = new DTO_Venta();
         dtoVenta.setID(venta.getId());
@@ -84,6 +116,7 @@ public class VentasConversiones {
         dtoVenta.setDireccionEntrega(dtoDireccion);
         return dtoVenta;
     }
+
     
     public Venta convertirDtoVentaAEntidad(DTO_Venta dtoVenta) {
     Venta venta = new Venta();
@@ -119,6 +152,13 @@ public class VentasConversiones {
     List<DTO_Venta> ventasDTO = new ArrayList<>();
         for (Venta venta:ventas) {
             DTO_Venta dtoVenta=convertirVentaADTO(venta);
+
+
+    public List<DTO_Venta> convertirListaADTO(List<Venta> ventas) {
+        List<DTO_Venta> ventasDTO = new ArrayList<>();
+        for (Venta venta : ventas) {
+            DTO_Venta dtoVenta = convertirVentaADTO(venta);
+
             ventasDTO.add(dtoVenta);
         }
         return ventasDTO;

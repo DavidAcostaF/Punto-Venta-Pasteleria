@@ -6,6 +6,8 @@ package presentacion;
 
 //import com.mycompany.pastelerianegocio.AgregarCliente;
 //import com.mycompany.pastelerianegocio.IAgregarCliente;
+import com.mycompany.pasteleriaproductosventa.FuncionalidadConsultarProductos;
+import com.mycompany.pasteleriaproductosventa.IFuncionalidadConsultarProductos;
 import dto.DTO_Cliente;
 import control.ControlAgregarVenta;
 import dto.DTO_Direccion;
@@ -19,6 +21,7 @@ import javax.swing.JOptionPane;
 public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
     ControlAgregarVenta control;
     DTO_Venta venta;
+   
     /**
      * Creates new form DlgDatosCliente
      */
@@ -26,7 +29,9 @@ public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
         super(parent, modal);
         control= ControlAgregarVenta.getInstance();
         this.venta=control.getVenta();
-        initComponents(); 
+         System.out.println(venta); 
+        initComponents();
+      
         setVisible(true);
         
         
@@ -169,7 +174,7 @@ public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
         cliente.setTelefono(this.campoTextoTelefono.getText());
         
         venta.setCliente(cliente);
-        
+        control.setVenta(venta);
           int respuesta = JOptionPane.showOptionDialog(null, "¿Realizara envio a domicilio?", "Tipo de envio", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
 
         if (respuesta == JOptionPane.YES_OPTION) {
@@ -180,6 +185,7 @@ public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
             DTO_Direccion direccion=new DTO_Direccion();
             direccion.setCalle("En tienda");
             venta.setDireccionEntrega(direccion);
+            control.setVenta(venta);
             this.dispose();
             control.mostrarCobrarVenta();
            

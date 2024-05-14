@@ -168,9 +168,13 @@ public class Presentacion_DlgAgregarDireccion extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNumExtActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-
-        DTO_Direccion dir = new DTO_Direccion(txtCalle.getText());
+        
+        DTO_Direccion dir = new DTO_Direccion();
+        dir.setCalle(txtCalle.getText());
+        dir.setColonia(txtColonia.getText());
+        dir.setNumExterior(txtNumExt.getText());
         venta.setDireccionEntrega(dir);
+        control.setVenta(venta);
         this.dispose();
         control.mostrarCobrarVenta();
 

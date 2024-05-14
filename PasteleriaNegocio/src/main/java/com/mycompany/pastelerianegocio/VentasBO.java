@@ -15,6 +15,8 @@ import dto.DTO_Producto;
 import dto.DTO_Venta;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -34,7 +36,11 @@ public class VentasBO implements IVentasBO {
 
     @Override
     public void agregarVenta(DTO_Venta venta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            ventaDAO.agregarVenta(conversor.convertirDTOAgregar(venta));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(VentasBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

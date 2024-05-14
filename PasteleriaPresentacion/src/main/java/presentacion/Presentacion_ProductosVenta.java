@@ -47,7 +47,6 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
         this.funcionalidadesProductos = new FuncionalidadConsultarProductos();
         venta = new DTO_Venta();
         total = 0;
-//        consultarProductosVenta = new ConsultarProductosVenta();
         llenarTabla();
         ponerTotal();
     }
@@ -282,6 +281,7 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
                 detalleVenta.setCantidad(cantidad);
                 detalleVenta.setPrecio(precio);
                 detalleVenta.setTamanhoProducto(tamanio);
+                detalleVenta.setImporte(detalleVenta.getCantidad()*detalleVenta.getPrecio());
                 listaDetalles.add(detalleVenta);
             }
             venta.setDetallesVenta(listaDetalles);
@@ -291,15 +291,14 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
             venta.setFechaEntrega(date);
             venta.setMontoTotal(total);
             control.setVenta(venta);
-
+            System.out.println(control.getVenta());
             if (respuesta == JOptionPane.YES_OPTION) {
-
-                obtenerDatosTabla();
+                System.out.println(control.getVenta());
                 dispose();
                 control.mostrarListaClientes(this);
 
             } else {
-                obtenerDatosTabla();
+                System.out.println(control.getVenta());
                 dispose();
                 control.mostrarDatosClientes(this);
 

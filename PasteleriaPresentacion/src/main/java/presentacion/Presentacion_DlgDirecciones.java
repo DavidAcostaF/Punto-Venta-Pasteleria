@@ -32,7 +32,7 @@ public class Presentacion_DlgDirecciones extends javax.swing.JDialog {
         this.venta = control.getVenta();
 
         //direcciones = new FuncionalidadConsultarDirecciones();
-        direccionesLista = direcciones.consultarDirecciones();
+        direccionesLista = venta.getCliente().getDirecciones();
         initComponents();
 
         llenarTabla();
@@ -173,7 +173,11 @@ public class Presentacion_DlgDirecciones extends javax.swing.JDialog {
         if (filaSeleccionada != -1) {
             DTO_Direccion direccion = new DTO_Direccion();
             direccion.setCalle(tablaDirecciones.getValueAt(filaSeleccionada, 0).toString());
+            direccion.setColonia(tablaDirecciones.getValueAt(filaSeleccionada, 1).toString());
+            direccion.setNumExterior(tablaDirecciones.getValueAt(filaSeleccionada, 2).toString());
             venta.setDireccionEntrega(direccion);
+            control.setVenta(venta);
+            System.out.println(control.getVenta());
             this.dispose();
             control.mostrarCobrarVenta();
         }

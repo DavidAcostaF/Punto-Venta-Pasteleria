@@ -30,9 +30,9 @@ public class ControlAgregarVenta {
     private DTO_Venta venta;
 
     public ControlAgregarVenta() {
-
+        this.producto = producto;
+        this.venta = venta;
     }
-
     public static ControlAgregarVenta getInstance() {
         if (instance == null) {
             instance = new ControlAgregarVenta();
@@ -88,6 +88,7 @@ public class ControlAgregarVenta {
     }
 
     public DTO_Venta getVenta() {
+        
         return venta;
     }
 

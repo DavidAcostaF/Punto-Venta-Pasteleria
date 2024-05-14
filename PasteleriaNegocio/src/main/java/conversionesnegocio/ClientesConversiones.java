@@ -18,6 +18,28 @@ import java.util.List;
 public class ClientesConversiones {
 
     public ClientesConversiones() {
+
+    }
+
+    public Cliente convertirAEntidadaSinID(DTO_Cliente cliente) {
+        Cliente entidadCliente = new Cliente();
+        entidadCliente.setNombre(cliente.getNombre());
+        entidadCliente.setApellidoP(cliente.getApellidoP());
+        entidadCliente.setApellidoM(cliente.getApellidoM());
+        entidadCliente.setTelefono(cliente.getTelefono());
+
+        List<Direccion> direcciones = new ArrayList<>();
+        for (DTO_Direccion dtoDireccion : cliente.getDirecciones()) {
+            Direccion direccion = new Direccion();
+            direccion.setColonia(dtoDireccion.getColonia());
+            direccion.setCalle(dtoDireccion.getCalle());
+            direccion.setNumExterior(dtoDireccion.getNumExterior());
+            direcciones.add(direccion);
+        }
+        entidadCliente.setDirecciones(direcciones);
+
+        return entidadCliente;
+
     }
 
     public DTO_Cliente convertirCliente(Cliente cliente) {
