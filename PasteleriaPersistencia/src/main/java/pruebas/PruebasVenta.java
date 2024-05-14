@@ -119,21 +119,21 @@ public class PruebasVenta {
 //            
 //        }
 
-  Venta venta1 = null;
-        try {
-            venta1 = ventadao.encontrarVenta("663c5d4fa6ca7e6121d3e116");
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(PruebasVenta.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println(venta1.getFechaEntrega());
-        System.out.println(venta1.getFechaRegistro());
-        for (DetalleVenta dv1:venta1.getDetallesVenta()) {
-            System.out.println(dv1);
-            System.out.println(dv1.getProducto().getId());
-            System.out.println(venta1.getCliente());
- }
+//  Venta venta1 = null;
+//        try {
+//            venta1 = ventadao.encontrarVenta("663c5d4fa6ca7e6121d3e116");
+//        } catch (PersistenciaException ex) {
+//            Logger.getLogger(PruebasVenta.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        System.out.println(venta1.getFechaEntrega());
+//        System.out.println(venta1.getFechaRegistro());
+//        for (DetalleVenta dv1:venta1.getDetallesVenta()) {
+//            System.out.println(dv1);
+//            System.out.println(dv1.getProducto().getId());
+//            System.out.println(venta1.getCliente());
+// }
 
-        /*Producto producto1 = new Producto();
+        Producto producto1 = new Producto();
         producto1.setId("663d1f0de604fa31cd6f6b5b");
         List<Producto> listaprod = new ArrayList<>();
         listaprod.add(producto1);
@@ -146,6 +146,6 @@ public class PruebasVenta {
         } catch (PersistenciaException ex) {
             Logger.getLogger(PruebasVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
-*/
+
     }
 }

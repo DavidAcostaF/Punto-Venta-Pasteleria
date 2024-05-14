@@ -5,9 +5,8 @@
 package pruebas;
 
 import Exceptions.PersistenciaException;
-import com.mycompany.pasteleriadaos.ReporteDAO;
-import com.mycompany.pasteleriadominioentidades.Reporte;
-import com.mycompany.pasteleriadominiosMapeo.ReporteMapeo;
+import com.mycompany.pasteleriadaos.FacturaDAO;
+import com.mycompany.pasteleriadominioentidades.Factura;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,37 +14,37 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.bson.types.Binary;
+import org.bson.types.ObjectId;
 
 /**
  *
- * @author abelc
+ * @author PERSONAL
  */
-public class ReportePrueba {
+public class PruebasFactura {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Reporte reporte = new Reporte();
-        ReporteDAO reportedao = new ReporteDAO();
+        Factura factura = new Factura();
+        FacturaDAO facturadao = new FacturaDAO();
         try {
-                    String rutaDirectorio = "C:\\Users\\jonas\\Desktop";
+            String rutaDirectorio = "C:\\Users\\jonas\\Desktop";
 
-        String nombreArchivo = "hola.pdf";
-        File archivo = new File(rutaDirectorio, nombreArchivo);
-        byte[] bytesArchivo = convertirArchivoABytes(archivo);
-        reporte.setBytesContenido(bytesArchivo);
-        reporte.setNombre(nombreArchivo);
-        reporte.setCategoria("Reporte de Ventas");
-        reporte.setTipo("application/pdf");
-        reporte.setFechaExpedicion(new Date());
-        try {
-            reportedao.guardarReporte(reporte);
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(ReportePrueba.class.getName()).log(Level.SEVERE, null, ex);
-        }
-System.out.println(reportedao.consultarReportes());
+            String nombreArchivo = "hola.txt";
+            File archivo = new File(rutaDirectorio, nombreArchivo);
+            byte[] bytesArchivo = convertirArchivoABytes(archivo);
+            factura.setId(new ObjectId().toHexString());
+            factura.setBytesContenido(bytesArchivo);
+            factura.setVentaId("6643503255039232aa1ff16c");
+            factura.setFechaEmision(new Date());
+            factura.setFechaVencimiento(new Date());
+            try {
+                facturadao.guardarFactura(factura);
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(ReportePrueba.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println(facturadao.consultarFacturas());
         } catch (PersistenciaException ex) {
             Logger.getLogger(ReportePrueba.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,4 +63,5 @@ System.out.println(reportedao.consultarReportes());
             return null;
         }
     }
+    
 }

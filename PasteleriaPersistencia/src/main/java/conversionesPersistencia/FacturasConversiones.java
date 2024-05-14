@@ -61,7 +61,7 @@ public class FacturasConversiones {
         facturaMap.setId(new ObjectId(factura.getId()));
         facturaMap.setFechaEmision(factura.getFechaEmision());
         facturaMap.setFechaVencimiento(factura.getFechaVencimiento());
-        facturaMap.setVenta(conversosrVentas.convertirAVentaMapeo(factura.getVenta()));
+        facturaMap.setVentaId(new ObjectId(factura.getVentaId()));
         facturaMap.setContenido(new Binary(factura.getBytesContenido()));
         
         return facturaMap;

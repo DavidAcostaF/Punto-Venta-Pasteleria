@@ -65,7 +65,7 @@ public class FacturaDAO implements IFacturaDAO {
         FindIterable<FacturaMapeo> reportes = coleccion.find();
         List<Factura> facturasEn = new ArrayList<>();
         for (FacturaMapeo facturaMapeo : reportes) {
-            facturasEn.add(conversorFacturas.convertirAFacturaEntidadObjetos(facturaMapeo));
+            facturasEn.add(conversorFacturas.convertirAFacturaEntidad(facturaMapeo));
         }
         return facturasEn;
     }
