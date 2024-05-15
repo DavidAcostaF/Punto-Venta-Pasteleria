@@ -13,6 +13,6 @@ public class Pasteleria {
     
     public static void main(String[] args) {
         Presentacion_MenuPrincipal mp = new Presentacion_MenuPrincipal();
-        mp.setVisible(true);
+        mp.mostrarMenu();
     }
 }

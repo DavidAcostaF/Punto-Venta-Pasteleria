@@ -34,7 +34,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
         control = ControlAgregarVenta.getInstance();
         controlGesionarInventario = new ControlGestionarInventario();
         this.controlIngresos = ControlIngresosMensuales.getInstance();
-        controlHistoriales=ControlHistoriales.getInstance();
+        controlHistoriales = ControlHistoriales.getInstance();
         controlFacturas = ControlFacturar.getInstance();
     }
 
@@ -249,7 +249,14 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
         controlFacturas.mostrarDlgOpcionFactura();
         this.dispose();
     }//GEN-LAST:event_btnFacturarActionPerformed
+    public void mostrarMenu() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Presentacion_MenuPrincipal().setVisible(true);
 
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonIngresosMensuales;
