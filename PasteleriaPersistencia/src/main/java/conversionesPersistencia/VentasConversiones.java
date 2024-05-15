@@ -4,9 +4,11 @@
  */
 package conversionesPersistencia;
 
+import com.mycompany.pasteleriadominioentidades.Cliente;
 import com.mycompany.pasteleriadominioentidades.DetalleVenta;
 import com.mycompany.pasteleriadominioentidades.Direccion;
 import com.mycompany.pasteleriadominioentidades.Venta;
+import com.mycompany.pasteleriadominiosMapeo.ClienteMapeo;
 import com.mycompany.pasteleriadominiosMapeo.DetalleVentaMapeo;
 import com.mycompany.pasteleriadominiosMapeo.DireccionMapeo;
 import com.mycompany.pasteleriadominiosMapeo.VentaMapeo;
@@ -43,7 +45,17 @@ public class VentasConversiones {
         ventaE.setFechaRegistro(venta.getFechaRegistro());
         ventaE.setMontoTotal(venta.getMontoTotal());
         ventaE.setEstado(venta.getEstado());
-        ventaE.setClienteid(venta.getClienteid().toHexString());
+        if (venta.getClienteid() != null) {
+            ventaE.setClienteid(venta.getClienteid().toHexString());
+        }
+        if (venta.getCliente() != null) {
+            Cliente cliente = new Cliente();
+            cliente.setId(venta.getCliente().getId().toHexString());
+            cliente.setNombre(venta.getCliente().getNombre());
+            cliente.setApellidoP(venta.getCliente().getApellidoP());
+            cliente.setApellidoM(venta.getCliente().getApellidoM());
+            ventaE.setCliente(cliente);
+        }
         List<DetalleVenta> detallesVenta = new ArrayList<>();
         for (DetalleVentaMapeo detalleVenta : venta.getDetallesVenta()) {
             DetalleVenta detalleVentaE = new DetalleVenta();
@@ -109,7 +121,17 @@ public class VentasConversiones {
      */
     public VentaMapeo convertirAVentaMapeo(Venta venta) {
         VentaMapeo ventaMapeo = new VentaMapeo();
-        ventaMapeo.setClienteid(new ObjectId(venta.getClienteid()));
+        if (venta.getClienteid() != null) {
+            ventaMapeo.setClienteid(new ObjectId(venta.getClienteid()));
+        }
+        if (venta.getCliente()!=null) {
+             ClienteMapeo cliente = new ClienteMapeo();
+            cliente.setId(new ObjectId(venta.getCliente().getId()));
+            cliente.setNombre(venta.getCliente().getNombre());
+            cliente.setApellidoP(venta.getCliente().getApellidoP());
+            cliente.setApellidoM(venta.getCliente().getApellidoM());
+            ventaMapeo.setCliente(cliente);
+        }
         ventaMapeo.setFechaEntrega(venta.getFechaEntrega());
         ventaMapeo.setFechaRegistro(venta.getFechaRegistro());
         ventaMapeo.setMontoTotal(venta.getMontoTotal());
