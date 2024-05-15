@@ -43,6 +43,9 @@ public class VentasBO implements IVentasBO {
         ingredientesDAO = new IngredienteDAO();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void agregarVenta(DTO_Venta venta) {
         System.out.println("hola id bo" + venta.getIDcliente());
@@ -53,6 +56,9 @@ public class VentasBO implements IVentasBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DTO_Venta> consultarVentasPorRangoFecha(Date fechaInicio, Date fechaFin) {
         try {
@@ -63,6 +69,9 @@ public class VentasBO implements IVentasBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DTO_Venta> consultarVentas() {
         try {
@@ -73,6 +82,9 @@ public class VentasBO implements IVentasBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DTO_Venta encontrarVenta(String idVenta) {
         try {
@@ -83,6 +95,9 @@ public class VentasBO implements IVentasBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DTO_Venta> ventasPorCliente(String clienteId) {
         try {
@@ -93,6 +108,9 @@ public class VentasBO implements IVentasBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DTO_Venta> consultarVentasPorProductos(List<DTO_Producto> listaProductos) {
         try {
@@ -104,6 +122,9 @@ public class VentasBO implements IVentasBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DTO_Venta> consultarVentasPorRangoFechas(Date fechaInicio, Date fechaFin) {
         try {
@@ -114,6 +135,9 @@ public class VentasBO implements IVentasBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DTO_Venta> consultarVentasConFiltros(String clienteId, Date fechaInicio, Date fechaFin, List<DTO_Producto> listaProductos) {
         try {
@@ -125,6 +149,9 @@ public class VentasBO implements IVentasBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DTO_Venta> consultarVentasPorFecha(Date fecha) throws ConsultarVentasPorFechaException {
         try {
@@ -135,37 +162,43 @@ public class VentasBO implements IVentasBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean consultarExistenciaIngredientesStock(DTO_Producto producto) {
-    try {
-        List<String> ingredientesNombres = new ArrayList<>();
-        List<DTO_IngredienteDetalle> ingredientesDetalles = producto.getIngredientes();
+        try {
+            List<String> ingredientesNombres = new ArrayList<>();
+            List<DTO_IngredienteDetalle> ingredientesDetalles = producto.getIngredientes();
 
-        for (DTO_IngredienteDetalle ingredienteDetalle : ingredientesDetalles) {
-            ingredientesNombres.add(ingredienteDetalle.getNombre());
-        }
-
-        List<Ingrediente> ingredientesConsultados = ingredientesDAO.consultarCantidadesIngredientesInventario(ingredientesNombres);
-
-        for (Ingrediente ingrediente : ingredientesConsultados) {
-            Optional<DTO_IngredienteDetalle> ingredienteDetalleConsultado = ingredientesDetalles.stream().filter(p -> p.getNombre().equalsIgnoreCase(ingrediente.getNombre())).findAny();
-            if (ingredienteDetalleConsultado.isPresent()) {
-                float cantidadNecesaria = calcularCantidadIngrediente(ingredienteDetalleConsultado.get(), producto.getTamanio());
-                if (cantidadNecesaria > ingrediente.getCantidad()) {
-                    return false; 
-                }
-            } else {
-                return false; 
+            for (DTO_IngredienteDetalle ingredienteDetalle : ingredientesDetalles) {
+                ingredientesNombres.add(ingredienteDetalle.getNombre());
             }
+
+            List<Ingrediente> ingredientesConsultados = ingredientesDAO.consultarCantidadesIngredientesInventario(ingredientesNombres);
+
+            for (Ingrediente ingrediente : ingredientesConsultados) {
+                Optional<DTO_IngredienteDetalle> ingredienteDetalleConsultado = ingredientesDetalles.stream().filter(p -> p.getNombre().equalsIgnoreCase(ingrediente.getNombre())).findAny();
+                if (ingredienteDetalleConsultado.isPresent()) {
+                    float cantidadNecesaria = calcularCantidadIngrediente(ingredienteDetalleConsultado.get(), producto.getTamanio());
+                    if (cantidadNecesaria > ingrediente.getCantidad()) {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            }
+
+            return true;
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(VentasBO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
-        
-        return true;
-    } catch (PersistenciaException ex) {
-        Logger.getLogger(VentasBO.class.getName()).log(Level.SEVERE, null, ex);
-        return false; 
-    }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Float calcularCantidadIngrediente(DTO_IngredienteDetalle ingredienteDetalle, String tamanio) {
         if (tamanio.equalsIgnoreCase("Chico")) {

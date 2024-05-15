@@ -31,6 +31,9 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
         ingredienteConversiones = new IngredienteConversiones();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DTO_Ingrediente agregarIngrediente(DTO_Ingrediente ingrediente) {
 
@@ -43,6 +46,9 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DTO_Ingrediente> consultarIngredientes() {
         try {
@@ -55,6 +61,9 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public IngredienteMapeo ConvertirDTOAIngrediente(DTO_Ingrediente ingredienteDTO) {
         IngredienteMapeo ingrediente = new IngredienteMapeo();
@@ -65,6 +74,9 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
         return ingrediente;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DTO_Ingrediente convertirIngredienteADTO(Ingrediente ingrediente) {
         DTO_Ingrediente dtoIngrediente = new DTO_Ingrediente();
@@ -77,6 +89,9 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
         return dtoIngrediente;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DTO_Ingrediente> consultarIngrediente(DTO_Ingrediente ingredienteDTO) {
         try {
@@ -89,6 +104,9 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DTO_Ingrediente validarExistencia(DTO_Ingrediente ingrediente) {
         try {
@@ -104,6 +122,9 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DTO_Ingrediente actualizarIngrediente(DTO_Ingrediente ingrediente) {
         try {
@@ -118,6 +139,9 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Boolean eliminarIngrediente(DTO_Ingrediente ingrediente) {
         try {
@@ -132,6 +156,9 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DTO_Ingrediente consultarIngredientePorNombre(DTO_Ingrediente ingrediente) {
         try {
@@ -143,6 +170,9 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DTO_Ingrediente> consultarCantidadesIngredientesInventario(List<DTO_Ingrediente> ingredientes) {
         try {

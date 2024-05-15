@@ -10,11 +10,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * La clase IngredienteConversiones proporciona métodos para convertir entre
+ * objetos Ingrediente y DTOs relacionados. Permite la conversión de
+ * ingredientes entre entidades y DTOs, y viceversa. También incluye un método
+ * para la conversión de listas de ingredientes.
  *
  * @author abelc
  */
 public class IngredienteConversiones {
-    
+
+    /**
+     * Convierte un objeto Ingrediente a un DTO_Ingrediente.
+     *
+     * @param ingrediente el Ingrediente a convertir
+     * @return el DTO_Ingrediente resultante
+     */
     public DTO_Ingrediente convertir(Ingrediente ingrediente) {
         if (ingrediente == null) {
             return null;
@@ -29,6 +39,13 @@ public class IngredienteConversiones {
         return ingredienteDTO;
     }
 
+    /**
+     * Convierte una lista de objetos Ingrediente a una lista de DTOs de
+     * Ingrediente.
+     *
+     * @param ingredientes la lista de Ingredientes a convertir
+     * @return la lista de DTOs de Ingrediente resultante
+     */
     public List<DTO_Ingrediente> convertir(List<Ingrediente> ingredientes) {
         if (ingredientes == null) {
             return null;

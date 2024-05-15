@@ -28,6 +28,9 @@ public class ReportesBO implements IReportesBO {
         reporteDAO = new ReporteDAO();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DTO_Reporte guardarReporte(DTO_Reporte reporte) {
         Reporte reporteConvertido = conversor.reporteDtoAEntidad(reporte);
@@ -42,6 +45,9 @@ public class ReportesBO implements IReportesBO {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DTO_Reporte> consultarReportes() {
         List<DTO_Reporte> reportes;
@@ -55,6 +61,9 @@ public class ReportesBO implements IReportesBO {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void eliminarReporte(DTO_Reporte reporte) {
         try {

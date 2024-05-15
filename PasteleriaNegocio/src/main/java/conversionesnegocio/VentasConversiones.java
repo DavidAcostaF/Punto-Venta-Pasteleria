@@ -22,11 +22,25 @@ public class VentasConversiones {
     ClientesConversiones conversorCliente;
     ProductosConversiones conversorProductos;
 
+    /**
+     * La clase VentasConversiones proporciona métodos para convertir entre
+     * objetos Venta y DTOs relacionados. Permite la conversión de ventas entre
+     * entidades y DTOs, y viceversa. También incluye métodos para convertir
+     * listas de ventas a listas de DTOs de ventas, y viceversa.
+     *
+     * @author abelc
+     */
     public VentasConversiones() {
         conversorCliente = new ClientesConversiones();
         conversorProductos = new ProductosConversiones();
     }
 
+    /**
+     * Convierte un objeto Venta a un DTO_Venta.
+     *
+     * @param venta la Venta a convertir
+     * @return el DTO_Venta resultante
+     */
     public DTO_Venta convertirVentaADTO(Venta venta) {
         DTO_Venta dtoVenta = new DTO_Venta();
         dtoVenta.setID(venta.getId());
@@ -55,6 +69,12 @@ public class VentasConversiones {
         return dtoVenta;
     }
 
+    /**
+     * Convierte un DTO_Venta a un objeto Venta para agregar.
+     *
+     * @param ventaDTO el DTO_Venta a convertir
+     * @return la Venta resultante
+     */
     public Venta convertirDTOAgregar(DTO_Venta ventaDTO) {
         Venta venta = new Venta();
 
@@ -87,6 +107,12 @@ public class VentasConversiones {
         return venta;
     }
 
+    /**
+     * Convierte un objeto Venta a un DTO_Venta.
+     *
+     * @param venta la Venta a convertir
+     * @return el DTO_Venta resultante
+     */
     public DTO_Venta convertirADTO(Venta venta) {
         DTO_Venta dtoVenta = new DTO_Venta();
         dtoVenta.setID(venta.getId());
@@ -117,6 +143,12 @@ public class VentasConversiones {
         return dtoVenta;
     }
 
+    /**
+     * Convierte un DTO_Venta a un objeto Venta.
+     *
+     * @param dtoVenta el DTO_Venta a convertir
+     * @return la Venta resultante
+     */
     public Venta convertirDtoVentaAEntidad(DTO_Venta dtoVenta) {
         Venta venta = new Venta();
         venta.setId(dtoVenta.getID());

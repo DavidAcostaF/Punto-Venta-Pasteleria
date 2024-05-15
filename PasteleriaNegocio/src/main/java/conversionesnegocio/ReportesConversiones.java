@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * La clase ReportesConversiones proporciona métodos para convertir entre
+ * objetos Reporte y DTOs relacionados. Permite la conversión de reportes entre
+ * entidades y DTOs, y viceversa. También incluye un método para convertir
+ * listas de reportes a listas de DTOs de reportes.
  *
  * @author abelc
  */
@@ -18,6 +22,12 @@ public class ReportesConversiones {
     public ReportesConversiones() {
     }
 
+    /**
+     * Convierte un objeto Reporte a un DTO_Reporte.
+     *
+     * @param reporte el Reporte a convertir
+     * @return el DTO_Reporte resultante
+     */
     public DTO_Reporte reporteEntidadADto(Reporte reporte) {
         DTO_Reporte dtoReporte = new DTO_Reporte();
         dtoReporte.setId(reporte.getId());
@@ -29,6 +39,12 @@ public class ReportesConversiones {
         return dtoReporte;
     }
 
+    /**
+     * Convierte un DTO_Reporte a un objeto Reporte.
+     *
+     * @param Dtoreporte el DTO_Reporte a convertir
+     * @return el Reporte resultante
+     */
     public Reporte reporteDtoAEntidad(DTO_Reporte Dtoreporte) {
         Reporte reporte = new Reporte();
         reporte.setId(Dtoreporte.getId());
@@ -40,6 +56,12 @@ public class ReportesConversiones {
         return reporte;
     }
 
+    /**
+     * Convierte una lista de objetos Reporte a una lista de DTO_Reporte.
+     *
+     * @param reportes la lista de Reportes a convertir
+     * @return la lista de DTO_Reporte resultante
+     */
     public List<DTO_Reporte> reportesADto(List<Reporte> reportes) {
         List<DTO_Reporte> reportesDto = new ArrayList<>();
         for (Reporte reporte : reportes) {

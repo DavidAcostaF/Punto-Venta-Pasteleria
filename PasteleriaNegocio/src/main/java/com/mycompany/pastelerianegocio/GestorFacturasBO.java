@@ -19,8 +19,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author PERSONAL
+ * Clase que representa la lógica de negocio para la gestión de facturas.
+ * Implementa la interfaz IGestorFacturasBO. Proporciona métodos para guardar,
+ * consultar y eliminar facturas. Además, permite consultar facturas por rango
+ * de fechas y por lista de ventas.
  */
 public class GestorFacturasBO implements IGestorFacturasBO {
 
@@ -28,12 +30,19 @@ public class GestorFacturasBO implements IGestorFacturasBO {
     IFacturaDAO facturaDAO;
     VentasConversiones conversorVentas;
 
+    /**
+     * Constructor por defecto que inicializa las dependencias de conversores y
+     * DAO.
+     */
     public GestorFacturasBO() {
         conversor = new FacturasConversiones();
         facturaDAO = new FacturaDAO();
         conversorVentas = new VentasConversiones();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DTO_Factura guardarFactura(DTO_Factura factura) {
         Factura facturaConv = conversor.facturaDtoAEntidad(factura);
@@ -48,6 +57,9 @@ public class GestorFacturasBO implements IGestorFacturasBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DTO_Factura> consultarFacturas() {
         List<DTO_Factura> facturas;
@@ -60,6 +72,9 @@ public class GestorFacturasBO implements IGestorFacturasBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void eliminarFactura(DTO_Factura factura) throws PersistenciaException {
         try {
@@ -69,6 +84,9 @@ public class GestorFacturasBO implements IGestorFacturasBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DTO_Factura> consultarFacturasPorRangoFechas(Date desde, Date hasta) throws PersistenciaException {
         try {
@@ -79,6 +97,9 @@ public class GestorFacturasBO implements IGestorFacturasBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DTO_Factura> facturasPorListaVentas(List<DTO_Venta> ventas) throws PersistenciaException {
         try {
@@ -90,6 +111,9 @@ public class GestorFacturasBO implements IGestorFacturasBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DTO_Factura> consultarFacturasConFiltros(List<DTO_Venta> ventas, Date desde, Date hasta) throws PersistenciaException {
         try {

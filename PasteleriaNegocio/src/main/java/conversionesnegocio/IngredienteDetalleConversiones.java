@@ -9,11 +9,22 @@ import dto.DTO_Ingrediente;
 import dto.DTO_IngredienteDetalle;
 
 /**
+ * La clase IngredienteDetalleConversiones proporciona métodos para convertir
+ * entre objetos IngredienteDetalle y DTOs relacionados. Permite la conversión
+ * de detalles de ingredientes entre entidades y DTOs, y viceversa. También
+ * incluye un método para convertir un DTO de Ingrediente a un DTO de Detalle de
+ * Ingrediente.
  *
  * @author abelc
  */
 public class IngredienteDetalleConversiones {
 
+    /**
+     * Convierte un objeto IngredienteDetalle a un DTO_IngredienteDetalle.
+     *
+     * @param detalleIngrediente el IngredienteDetalle a convertir
+     * @return el DTO_IngredienteDetalle resultante
+     */
     public DTO_IngredienteDetalle convertir(IngredienteDetalle detalleIngrediente) {
         DTO_IngredienteDetalle detalleIngredienteDTO = new DTO_IngredienteDetalle();
         detalleIngredienteDTO.setIngredienteId(detalleIngrediente.getIngredienteId());
@@ -22,6 +33,12 @@ public class IngredienteDetalleConversiones {
         return detalleIngredienteDTO;
     }
 
+    /**
+     * Convierte un DTO_IngredienteDetalle a un objeto IngredienteDetalle.
+     *
+     * @param detalleIngredienteDTO el DTO_IngredienteDetalle a convertir
+     * @return el IngredienteDetalle resultante
+     */
     public IngredienteDetalle convertir(DTO_IngredienteDetalle detalleIngredienteDTO) {
         IngredienteDetalle detalleIngrediente = new IngredienteDetalle();
         detalleIngrediente.setIngredienteId(detalleIngredienteDTO.getIngredienteId());
@@ -30,6 +47,12 @@ public class IngredienteDetalleConversiones {
         return detalleIngrediente;
     }
 
+    /**
+     * Convierte un DTO_Ingrediente a un DTO_IngredienteDetalle.
+     *
+     * @param ingredienteDTO el DTO_Ingrediente a convertir
+     * @return el DTO_IngredienteDetalle resultante
+     */
     public DTO_IngredienteDetalle convertirIngredienteADetalleIngrediente(DTO_Ingrediente ingredienteDTO) {
         DTO_IngredienteDetalle detalleIngrediente = new DTO_IngredienteDetalle();
         detalleIngrediente.setIngredienteId(ingredienteDTO.getId());

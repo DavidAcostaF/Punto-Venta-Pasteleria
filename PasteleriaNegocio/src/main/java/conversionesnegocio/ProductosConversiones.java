@@ -12,11 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * La clase ProductosConversiones proporciona métodos para convertir entre
+ * objetos Producto y DTOs relacionados. Permite la conversión de productos
+ * entre entidades y DTOs, y viceversa. También incluye métodos para convertir
+ * listas de productos y listas de DTOs de productos.
  *
  * @author abelc
  */
 public class ProductosConversiones {
 
+    /**
+     * Convierte un objeto Producto a un DTO_Producto.
+     *
+     * @param producto el Producto a convertir
+     * @return el DTO_Producto resultante
+     */
     public DTO_Producto convertirProducto(Producto producto) {
         DTO_Producto productoDTO = new DTO_Producto();
         IngredienteDetalleConversiones convertirIngredienteDetalle = new IngredienteDetalleConversiones();
@@ -33,6 +43,12 @@ public class ProductosConversiones {
         return productoDTO;
     }
 
+    /**
+     * Convierte una lista de objetos Producto a una lista de DTO_Producto.
+     *
+     * @param productos la lista de Productos a convertir
+     * @return la lista de DTO_Producto resultante
+     */
     public List<DTO_Producto> convertirListaProductos(List<Producto> productos) {
         List<DTO_Producto> listaDTOProductos = new ArrayList<>();
         IngredienteDetalleConversiones convertirIngredienteDetalle = new IngredienteDetalleConversiones();
@@ -44,6 +60,12 @@ public class ProductosConversiones {
         return listaDTOProductos;
     }
 
+    /**
+     * Convierte un DTO_Producto a un objeto Producto.
+     *
+     * @param productoDTO el DTO_Producto a convertir
+     * @return el Producto resultante
+     */
     public Producto convertirAEntidad(DTO_Producto productoDTO) {
         Producto producto = new Producto();
         IngredienteDetalleConversiones convertirIngredienteDetalle = new IngredienteDetalleConversiones();
@@ -59,6 +81,12 @@ public class ProductosConversiones {
         return producto;
     }
 
+    /**
+     * Convierte una lista de DTO_Producto a una lista de objetos Producto.
+     *
+     * @param productos la lista de DTO_Producto a convertir
+     * @return la lista de Productos resultante
+     */
     public List<Producto> convertirListaProductosEntidad(List<DTO_Producto> productos) {
         List<Producto> listaProductos = new ArrayList<>();
         IngredienteDetalleConversiones convertirIngredienteDetalle = new IngredienteDetalleConversiones();

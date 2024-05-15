@@ -21,6 +21,12 @@ public class ClientesConversiones {
 
     }
 
+    /**
+     * Convierte un DTO_Cliente a un objeto Cliente sin ID.
+     *
+     * @param cliente el DTO_Cliente a convertir
+     * @return el objeto Cliente resultante
+     */
     public Cliente convertirAEntidadaSinID(DTO_Cliente cliente) {
         Cliente entidadCliente = new Cliente();
         entidadCliente.setNombre(cliente.getNombre());
@@ -46,6 +52,12 @@ public class ClientesConversiones {
 
     }
 
+    /**
+     * Convierte un objeto Cliente a un DTO_Cliente.
+     *
+     * @param cliente el Cliente a convertir
+     * @return el DTO_Cliente resultante
+     */
     public DTO_Cliente convertirCliente(Cliente cliente) {
         DTO_Cliente dtoCliente = new DTO_Cliente();
         dtoCliente.setID(cliente.getId());
@@ -71,6 +83,12 @@ public class ClientesConversiones {
         return dtoCliente;
     }
 
+    /**
+     * Convierte un DTO_Cliente a un objeto Cliente con ID.
+     *
+     * @param dtoCliente el DTO_Cliente a convertir
+     * @return el objeto Cliente resultante
+     */
     public Cliente convertirDtoClienteAEntidad(DTO_Cliente dtoCliente) {
         Cliente cliente = new Cliente();
         cliente.setId(dtoCliente.getID());
@@ -94,18 +112,36 @@ public class ClientesConversiones {
         return cliente;
     }
 
+    /**
+     * Convierte un Cliente a un DTO_Cliente incluyendo el RFC.
+     *
+     * @param cliente el Cliente a convertir
+     * @return el DTO_Cliente resultante con el RFC
+     */
     public DTO_Cliente convertirClienteADtoConRfc(Cliente cliente) {
         DTO_Cliente dtoCliente = convertirCliente(cliente);
         dtoCliente.setRfc(cliente.getRfc());
         return dtoCliente;
     }
 
+    /**
+     * Convierte un DTO_Cliente a un objeto Cliente con RFC.
+     *
+     * @param dtoCliente el DTO_Cliente a convertir
+     * @return el objeto Cliente resultante con RFC
+     */
     public Cliente convertirDtoClienteAEntidadConRfc(DTO_Cliente dtoCliente) {
         Cliente cliente = convertirDtoClienteAEntidad(dtoCliente);
         cliente.setRfc(dtoCliente.getRfc());
         return cliente;
     }
 
+    /**
+     * Convierte una lista de objetos Cliente a una lista de DTOs de Cliente.
+     *
+     * @param clientes la lista de Clientes a convertir
+     * @return la lista de DTOs de Cliente resultante
+     */
     public List<DTO_Cliente> convertirDesdeClientes(List<Cliente> clientes) {
         List<DTO_Cliente> dtosClientes = new ArrayList<>();
         for (Cliente cliente : clientes) {

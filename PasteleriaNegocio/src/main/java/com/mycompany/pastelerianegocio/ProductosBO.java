@@ -26,8 +26,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author PC
+ * Clase de negocio que implementa la interfaz IProductosBO y gestiona las
+ * operaciones relacionadas con los productos y sus ingredientes. Proporciona
+ * métodos para agregar, actualizar, consultar y eliminar productos, así como
+ * para gestionar ingredientes y detalles de productos.
  */
 public class ProductosBO implements IProductosBO {
 
@@ -36,6 +38,11 @@ public class ProductosBO implements IProductosBO {
     private ProductosConversiones conversor;
     private IngredienteConversiones conversorIngredientes;
 
+    /**
+     * Constructor por defecto que inicializa las dependencias de DAO y
+     * conversiones. Crea instancias de ProductoDAO, IngredienteDAO,
+     * ProductosConversiones y IngredienteConversiones.
+     */
     public ProductosBO() {
         this.productoDAO = new ProductoDAO();
         this.ingredienteDAO = new IngredienteDAO();
@@ -43,6 +50,9 @@ public class ProductosBO implements IProductosBO {
         this.conversorIngredientes = new IngredienteConversiones();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DTO_Producto agregarProducto(DTO_Producto producto) {
         try {
@@ -55,6 +65,9 @@ public class ProductosBO implements IProductosBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DTO_Producto actualizarProducto(DTO_Producto producto) {
         try {
@@ -68,6 +81,9 @@ public class ProductosBO implements IProductosBO {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DTO_Producto> consultarProductos() {
         try {
@@ -79,6 +95,9 @@ public class ProductosBO implements IProductosBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DTO_Producto consultarProductoPorNombre(String nombre) {
         try {
@@ -93,6 +112,9 @@ public class ProductosBO implements IProductosBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DTO_Producto consultarProducto(String id) {
         try {
@@ -107,6 +129,9 @@ public class ProductosBO implements IProductosBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ProductoMapeo convertirDTOAProductoMapeo(DTO_Producto producto) {
         ProductoMapeo productoNuevo = new ProductoMapeo();
@@ -121,6 +146,9 @@ public class ProductosBO implements IProductosBO {
         return productoNuevo;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public IngredienteDetalleMapeo convertirDTOAIngredienteDetalleMapeo(DTO_IngredienteDetalle ingredienteDetalle) {
         IngredienteDetalleMapeo ingredienteDetalleNuevo = new IngredienteDetalleMapeo();
@@ -130,6 +158,9 @@ public class ProductosBO implements IProductosBO {
         return ingredienteDetalleNuevo;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DTO_Ingrediente consultarIngredientePorNombre(String nombre) {
         try {
@@ -140,6 +171,9 @@ public class ProductosBO implements IProductosBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Producto convertirDTOAProducto(DTO_Producto producto) {
         Float precio = 0F;
@@ -161,6 +195,9 @@ public class ProductosBO implements IProductosBO {
         return productoNuevo;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public IngredienteDetalle convertirDTOAIngredienteDetalle(DTO_IngredienteDetalle ingredienteDetalle) {
         IngredienteDetalle ingredienteDetalleNuevo = new IngredienteDetalle();
@@ -170,11 +207,17 @@ public class ProductosBO implements IProductosBO {
         return ingredienteDetalleNuevo;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Float calcularCosto(List<IngredienteDetalle> productos) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean eliminarProducto(DTO_Producto producto) {
         try {
@@ -185,6 +228,9 @@ public class ProductosBO implements IProductosBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DTO_Ingrediente> consultarIngredientesFaltantes(DTO_Producto producto) {
         try {
@@ -200,6 +246,9 @@ public class ProductosBO implements IProductosBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DTO_Producto> consultarProductosCoincidentes(String nombre) {
         try {
@@ -210,6 +259,9 @@ public class ProductosBO implements IProductosBO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<DTO_Producto> consultarListaProductosConStock() {
         try {
