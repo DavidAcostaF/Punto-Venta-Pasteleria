@@ -179,6 +179,12 @@ public class VentasConversiones {
         return venta;
     }
 
+    /**
+     * Convierte una lista de ventas a una lista de DTO_Venta.
+     *
+     * @param ventas la lista de ventas a convertir
+     * @return la lista de DTO_Venta resultante
+     */
     public List<DTO_Venta> convertirListaADTO(List<Venta> ventas) {
 
         List<DTO_Venta> ventasDTO = new ArrayList<>();
@@ -190,6 +196,12 @@ public class VentasConversiones {
         return ventasDTO;
     }
 
+    /**
+     * Convierte una lista de DTO_Venta a una lista de ventas.
+     *
+     * @param ventas la lista de DTO_Venta a convertir
+     * @return la lista de ventas resultante
+     */
     public List<Venta> listaVentasDtoAEntidad(List<DTO_Venta> ventas) {
         List<Venta> ventasEnt = new ArrayList<>();
         for (DTO_Venta ventaDto : ventas) {
