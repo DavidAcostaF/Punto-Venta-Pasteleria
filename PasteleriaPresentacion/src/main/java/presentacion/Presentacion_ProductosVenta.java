@@ -144,7 +144,15 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
             new String [] {
                 "Nombre", "Especificacion", "Cantidad", "Precio", "Tamaño", "+", "-"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tableProductos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tableProductos);
 
@@ -227,6 +235,7 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarPastelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPastelBtnActionPerformed
+        //limpiarTabla();
         DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel();
         control.mostrarAgregarPastel(this);
         DTO_Producto p = control.getProducto();
@@ -292,11 +301,14 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
             venta.setFechaEntrega(date);
             venta.setMontoTotal(total);
             control.setVenta(venta);
+            if (respuesta == JOptionPane.CLOSED_OPTION) {
+                return;
+            }
             if (respuesta == JOptionPane.YES_OPTION) {
                 dispose();
                 control.mostrarListaClientes();
 
-            } else {
+            } else if (respuesta == JOptionPane.NO_OPTION) {
                 System.out.println(control.getVenta());
                 dispose();
                 control.mostrarDatosClientes();
@@ -429,7 +441,9 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
 
         @Override
         protected void fireEditingStopped() {
-            super.fireEditingStopped();
+            if (row >= 0 && row < tableProductos.getRowCount()) {
+                super.fireEditingStopped();
+            }
         }
 
     }
@@ -447,8 +461,8 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
             detalleVenta.setImporte(total * cantidad);
             detalleVenta.setPrecio(total);
             detallesVenta.add(detalleVenta);
-
         }
+
         venta.setDetallesVenta(detallesVenta);
     }
 

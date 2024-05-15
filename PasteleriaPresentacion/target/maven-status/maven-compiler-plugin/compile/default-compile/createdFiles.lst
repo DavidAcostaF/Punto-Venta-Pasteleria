@@ -100,6 +100,7 @@ presentacion\gestioninventarios\Presentacion_DlgIngredientesSeleccionados$2.clas
 presentacion\gestioninventarios\Presentacion_DlgIngresarDatosDelProducto.class
 presentacion\Presentacion_ProductosVenta$BotonEditor.class
 presentacion\casohistoriales\Presentacion_FrmMenuHistoriales$1.class
+presentacion\facturar\Presentacion_DlgOpcionFactura$3.class
 presentacion\Presentacion_DlgDirecciones$3.class
 presentacion\facturar\Presentacion_FrmConfirmarGenerarFactura.class
 presentacion\Presentacion_DlgDirecciones.class
@@ -137,6 +138,7 @@ presentacion\Presentacion_DlgVentasTotales$2.class
 presentacion\casohistoriales\Presentacion_FrmHistorialReportes.class
 extras\VentasTableModel.class
 presentacion\casohistoriales\Presentacion_FrmDetallesVenta$2.class
+presentacion\Presentacion_ProductosVenta$4.class
 presentacion\Presentacion_DlgConfirmacionPago$1.class
 presentacion\Presentacion_DlgSeleccionarFechaIngresos$1.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioIngredientes$3.class
