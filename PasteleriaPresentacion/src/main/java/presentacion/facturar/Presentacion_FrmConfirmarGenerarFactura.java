@@ -33,6 +33,7 @@ public class Presentacion_FrmConfirmarGenerarFactura extends javax.swing.JFrame 
      */
     public Presentacion_FrmConfirmarGenerarFactura() {
         initComponents();
+        control=ControlFacturar.getInstance();
         
     }
 
@@ -356,7 +357,7 @@ public class Presentacion_FrmConfirmarGenerarFactura extends javax.swing.JFrame 
             String total = "$" + control.getVenta().getMontoTotal();
             facturaFormato.setTotal(total);
             generar.generarReporteFactura(facturaFormato);
-            guardar.guardarFactura(control.getFactura());
+          //  guardar.guardarFactura(control.getFactura());
             control.setFactura(null);
             control.setCliente(null);
             control.setVenta(null);
