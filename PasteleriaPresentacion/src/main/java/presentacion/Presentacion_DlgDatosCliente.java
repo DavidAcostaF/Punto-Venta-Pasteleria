@@ -28,8 +28,7 @@ public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
     public Presentacion_DlgDatosCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         control= ControlAgregarVenta.getInstance();
-        this.venta=control.getVenta();
-         System.out.println(venta); 
+        this.venta=control.getVenta(); 
         initComponents();
       
         setVisible(true);
@@ -172,12 +171,13 @@ public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
         cliente.setApellidoP(this.campoTextoApellidoP.getText());
         cliente.setApellidoM(this.campoTextoApellidoM.getText());
         cliente.setTelefono(this.campoTextoTelefono.getText());
-        
+       
         venta.setCliente(cliente);
         control.setVenta(venta);
           int respuesta = JOptionPane.showOptionDialog(null, "¿Realizara envio a domicilio?", "Tipo de envio", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
 
         if (respuesta == JOptionPane.YES_OPTION) {
+            control.setVentanaAnterior("Cliente");
            this.dispose(); 
            control.mostrarAgregarDireccion();
           

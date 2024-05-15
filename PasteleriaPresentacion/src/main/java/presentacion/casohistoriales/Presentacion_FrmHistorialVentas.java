@@ -93,8 +93,6 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         this.funcionalidadesClientes = new FuncionalidadConsultarClientes();
         this.funcionalidadConsultarProductos = new FuncionalidadConsultarProductos();
         this.funcionalidadGenerarReporte = new FuncionalidadGenerarReporte();
-        this.funcionalidadConsultarProductos = new FuncionalidadConsultarProductos();
-        this.funcionalidadGenerarReporte = new FuncionalidadGenerarReporte();
         this.cliente = new DTO_Cliente();
         this.venta = new DTO_Venta();
         this.listaProductosSeleccionados = new ArrayList<>();

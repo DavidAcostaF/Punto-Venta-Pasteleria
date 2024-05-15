@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  * @author af_da
  */
 public class Presentacion_DlgConfirmacionPago extends javax.swing.JDialog {
-    
+
     ControlAgregarVenta control;
     DTO_Venta venta;
     IFuncionalidadesVenta ventas;
@@ -44,7 +44,7 @@ public class Presentacion_DlgConfirmacionPago extends javax.swing.JDialog {
         txtFechaEntrega.setText(ff.format(venta.getFechaEntrega()));
         txtUbicacionEntrega.setText(venta.getDireccionEntrega().getCalle());
         setVisible(true);
-        
+
     }
 
     /**
@@ -214,39 +214,36 @@ public class Presentacion_DlgConfirmacionPago extends javax.swing.JDialog {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        System.out.println(control.getVenta());
-        System.out.println(venta.getCliente());
-        if (venta.getCliente().getID().equals("")) {
-            List<DTO_Direccion> a= new ArrayList<>();
+
+        if (venta.getCliente().getID() == null) {
+            List<DTO_Direccion> a = new ArrayList<>();
             a.add(venta.getDireccionEntrega());
             venta.getCliente().setDirecciones(a);
-            agregarCliente.agregarCliente(venta.getCliente());
+            venta.setIDcliente(agregarCliente.agregarCliente(venta.getCliente()).getID());   
             ventas.agregarVenta(venta);
             venta.setFechaRegistro(new Date());
-            
+
         } else {
-            System.out.println("hola");
             System.out.println(venta.getCliente().getID());
             venta.setIDcliente(venta.getCliente().getID());
-            System.out.println(venta.getIDcliente());
             venta.setFechaRegistro(new Date());
             ventas.agregarVenta(venta);
         }
-        
+
         String mensaje = "¡La venta ha sido registrada exitosamente!";
-        
+
         JOptionPane.showMessageDialog(null, mensaje, "Registro de Venta Exitoso", JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
         int respuesta = JOptionPane.showOptionDialog(null, "¿Quiere registrar otra venta?", "Hola", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
-        
+
         if (respuesta == JOptionPane.YES_OPTION) {
             this.dispose();
             control.mostrarProductosVenta();
-            
+
         } else {
             this.dispose();
             control.mostrarMenu();
-            
+
         }
 
     }//GEN-LAST:event_btnRegistrarActionPerformed

@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  * @author abelc
  */
 public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
-    
+
     private ControlAgregarVenta control;
     private IFuncionalidadConsultarClientes funcionalidadesClientes;
     private List<DTO_Cliente> listaClientes;
@@ -34,11 +34,10 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
      */
     public Presentacion_DlgListaClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        
+
         this.control = ControlAgregarVenta.getInstance();
-        System.out.println(control.getVenta());
         this.venta = control.getVenta();
-        
+
         this.funcionalidadesClientes = new FuncionalidadConsultarClientes();
         funcionalidadesClientes.consultarClientes();
         listaClientes = funcionalidadesClientes.consultarClientes();
@@ -48,10 +47,10 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
         llenarTabla();
         setVisible(true);
     }
-    
+
     private void llenarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tablaClientes.getModel();
-        
+
         listaClientes.forEach(p -> modelo.addRow(new Object[]{p.getNombre(), p.getApellidoP(), p.getApellidoM(), p.getTelefono()}));
     }
 
@@ -191,26 +190,25 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
             cliente.setApellidoP(tablaClientes.getValueAt(filaSeleccionada, 1).toString());
             cliente.setApellidoM(tablaClientes.getValueAt(filaSeleccionada, 2).toString());
             cliente.setTelefono(tablaClientes.getValueAt(filaSeleccionada, 3).toString());
-            cliente=funcionalidadesClientes.encontrarCliente(cliente.getApellidoP(), cliente.getApellidoM(), cliente.getNombre(), cliente.getTelefono());
-            
+            cliente = funcionalidadesClientes.encontrarCliente(cliente.getApellidoP(), cliente.getApellidoM(), cliente.getNombre(), cliente.getTelefono());
+
             venta.setCliente(cliente);
-            System.out.println(venta.getCliente());
             control.setVenta(venta);
-            
+
             if (respuesta == JOptionPane.YES_OPTION) {
                 this.dispose();
                 control.mostrarListaDirecciones();
-                
+
             } else {
                 DTO_Direccion direccion = new DTO_Direccion();
                 direccion.setCalle("En tienda");
                 venta.setDireccionEntrega(direccion);
                 this.dispose();
                 control.mostrarCobrarVenta();
-                
+
             }
         }
-        
+
 
     }//GEN-LAST:event_continuarBtnActionPerformed
 

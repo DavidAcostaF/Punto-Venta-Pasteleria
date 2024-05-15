@@ -22,6 +22,7 @@ public class FuncionalidadesVenta implements IFuncionalidadesVenta {
 
     @Override
     public void agregarVenta(DTO_Venta venta) {
+        System.out.println(venta.getIDcliente());
         ventas.agregarVenta(venta);
     }
 

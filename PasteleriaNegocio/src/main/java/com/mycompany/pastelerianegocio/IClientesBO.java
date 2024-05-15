@@ -16,7 +16,7 @@ public interface IClientesBO {
 
     public List<DTO_Cliente> consultarClientes();
 
-    public void agregarCliente(DTO_Cliente clientes);
+    public DTO_Cliente agregarCliente(DTO_Cliente clientes);
     
     public DTO_Cliente encontrarCliente(String apellidoPaterno, String apellidoMaterno, String nombres, String telefono);
     

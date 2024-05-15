@@ -6,6 +6,7 @@ package control;
 
 import dto.DTO_Venta;
 import presentacion.casohistoriales.Presentacion_FrmDetallesVenta;
+import presentacion.casohistoriales.Presentacion_FrmHistorialReportes;
 import presentacion.casohistoriales.Presentacion_FrmHistorialVentas;
 import presentacion.casohistoriales.Presentacion_FrmMenuHistoriales;
 
@@ -43,6 +44,11 @@ public class ControlHistoriales {
         Presentacion_FrmDetallesVenta detallesVenta = new Presentacion_FrmDetallesVenta();
         detallesVenta.mostrarDetallesVentas();
 
+    }
+
+    private void mostrarHistorialVenta() {
+        Presentacion_FrmHistorialReportes hReportes = new Presentacion_FrmHistorialReportes();
+        hReportes.mostrarHistorialReportes();
     }
 
     public DTO_Venta getVenta() {

@@ -8,6 +8,6 @@ import dto.DTO_Cliente;
 
 public interface IFuncionalidadAgregarClientes {
 
-    public void agregarCliente(DTO_Cliente cliente);
+    public DTO_Cliente agregarCliente(DTO_Cliente cliente);
 
 }

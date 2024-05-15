@@ -60,7 +60,7 @@ public class Presentacion_DlgDirecciones extends javax.swing.JDialog {
         tablaDirecciones = new javax.swing.JTable();
         btnSeleccionarDireccion = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        agregarDireccionBtn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -97,11 +97,11 @@ public class Presentacion_DlgDirecciones extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setForeground(new java.awt.Color(0, 153, 255));
-        jLabel2.setText("Agregar dirección");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        agregarDireccionBtn.setForeground(new java.awt.Color(0, 153, 255));
+        agregarDireccionBtn.setText("Agregar dirección");
+        agregarDireccionBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                agregarDireccionBtnMouseClicked(evt);
             }
         });
 
@@ -125,7 +125,7 @@ public class Presentacion_DlgDirecciones extends javax.swing.JDialog {
                 .addContainerGap(60, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(agregarDireccionBtn)
                 .addGap(229, 229, 229))
         );
         jPanel1Layout.setVerticalGroup(
@@ -136,7 +136,7 @@ public class Presentacion_DlgDirecciones extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addComponent(agregarDireccionBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegresar)
@@ -163,10 +163,13 @@ public class Presentacion_DlgDirecciones extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void agregarDireccionBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarDireccionBtnMouseClicked
+        boolean n = true;
+        control.setVentanaAnterior("direcciones");
+        control.setNuevaDireccion(n);
         this.dispose();
         control.mostrarAgregarDireccion();
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_agregarDireccionBtnMouseClicked
 
     private void btnSeleccionarDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarDireccionActionPerformed
         int filaSeleccionada = tablaDirecciones.getSelectedRow();
@@ -177,7 +180,6 @@ public class Presentacion_DlgDirecciones extends javax.swing.JDialog {
             direccion.setNumExterior(tablaDirecciones.getValueAt(filaSeleccionada, 2).toString());
             venta.setDireccionEntrega(direccion);
             control.setVenta(venta);
-            System.out.println(control.getVenta());
             this.dispose();
             control.mostrarCobrarVenta();
         }
@@ -186,10 +188,10 @@ public class Presentacion_DlgDirecciones extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSeleccionarDireccionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel agregarDireccionBtn;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnSeleccionarDireccion;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaDirecciones;

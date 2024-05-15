@@ -91,6 +91,11 @@ public class Presentacion_DlgAgregarDireccion extends javax.swing.JDialog {
 
         btnRegresar.setBackground(new java.awt.Color(140, 220, 254));
         btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -168,7 +173,7 @@ public class Presentacion_DlgAgregarDireccion extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNumExtActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        
+
         DTO_Direccion dir = new DTO_Direccion();
         dir.setCalle(txtCalle.getText());
         dir.setColonia(txtColonia.getText());
@@ -179,6 +184,16 @@ public class Presentacion_DlgAgregarDireccion extends javax.swing.JDialog {
         control.mostrarCobrarVenta();
 
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        if (control.getVentanaAnterior().equals("Cliente")) {
+            this.dispose();
+            control.mostrarDatosClientes();
+        } else {
+            this.dispose();
+            control.mostrarListaDirecciones();
+        }
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

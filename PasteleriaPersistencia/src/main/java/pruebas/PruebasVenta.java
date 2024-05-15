@@ -46,7 +46,7 @@ public class PruebasVenta {
 // 
         venta.setFechaEntrega(fechaEntrega);
         venta.setFechaRegistro(fechaRegistro);
-        venta.setEstado("Pagado");
+        venta.setEstado("jotoo");
         venta.setId(new ObjectId());
         venta.setClienteid(new ObjectId("66406d0293d57d3040a5bdc8"));
         List<DetalleVentaMapeo> detallesVenta = new ArrayList<>();

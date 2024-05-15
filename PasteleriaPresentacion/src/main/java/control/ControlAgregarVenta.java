@@ -28,10 +28,12 @@ public class ControlAgregarVenta {
     private static ControlAgregarVenta instance;
     private DTO_Producto producto;
     private DTO_Venta venta;
-
+    private boolean nuevaDireccion;
+    private String ventanaAnterior;
     public ControlAgregarVenta() {
         this.producto = producto;
         this.venta = venta;
+        this.nuevaDireccion=false;
     }
     public static ControlAgregarVenta getInstance() {
         if (instance == null) {
@@ -49,12 +51,12 @@ public class ControlAgregarVenta {
         Presentacion_DlgAgregarDireccion dir = new Presentacion_DlgAgregarDireccion(null, true);
     }
 
-    public void mostrarDatosClientes(JFrame frame) {
-        Presentacion_DlgDatosCliente dlgcliente = new Presentacion_DlgDatosCliente(frame, true);
+    public void mostrarDatosClientes() {
+        Presentacion_DlgDatosCliente dlgcliente = new Presentacion_DlgDatosCliente(null, true);
     }
 
-    public void mostrarListaClientes(JFrame frame) {
-        Presentacion_DlgListaClientes dlgListaClientes = new Presentacion_DlgListaClientes(frame, true);
+    public void mostrarListaClientes( ) {
+        Presentacion_DlgListaClientes dlgListaClientes = new Presentacion_DlgListaClientes(null, true);
     }
 
     public void mostrarListaDirecciones() {
@@ -96,4 +98,20 @@ public class ControlAgregarVenta {
         this.venta = venta;
     }
 
+    public boolean isNuevaDireccion() {
+        return nuevaDireccion;
+    }
+
+    public void setNuevaDireccion(boolean nuevaDireccion) {
+        this.nuevaDireccion = nuevaDireccion;
+    }
+
+    public String getVentanaAnterior() {
+        return ventanaAnterior;
+    }
+
+    public void setVentanaAnterior(String ventanaAnterior) {
+        this.ventanaAnterior = ventanaAnterior;
+    }
+ 
 }

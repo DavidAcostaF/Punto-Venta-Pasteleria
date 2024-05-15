@@ -57,7 +57,7 @@ public class VentasConversiones {
 
     public Venta convertirDTOAgregar(DTO_Venta ventaDTO) {
         Venta venta = new Venta();
-        
+
         venta.setFechaEntrega(ventaDTO.getFechaEntrega());
         venta.setFechaRegistro(ventaDTO.getFechaRegistro());
         venta.setMontoTotal(ventaDTO.getMontoTotal());
@@ -117,44 +117,38 @@ public class VentasConversiones {
         return dtoVenta;
     }
 
-    
     public Venta convertirDtoVentaAEntidad(DTO_Venta dtoVenta) {
-    Venta venta = new Venta();
-    venta.setId(dtoVenta.getID());
-    venta.setFechaEntrega(dtoVenta.getFechaEntrega());
-    venta.setFechaRegistro(dtoVenta.getFechaRegistro());
-    venta.setMontoTotal(dtoVenta.getMontoTotal());
-    venta.setEstado(dtoVenta.getEstado());
-    venta.setClienteid(dtoVenta.getIDcliente());
-    venta.setCliente(conversorCliente.convertirDtoClienteAEntidad(dtoVenta.getCliente()));
-    List<DetalleVenta> detallesVenta = new ArrayList<>();
-    for (DTO_DetalleVenta detalleVentaDTO : dtoVenta.getDetallesVenta()) {
-        DetalleVenta detalleVenta = new DetalleVenta();
-        detalleVenta.setCantidad(detalleVentaDTO.getCantidad());
-        detalleVenta.setDetallesCliente(detalleVentaDTO.getEspecificacion());
-        detalleVenta.setProductoId(detalleVentaDTO.getIdproducto());
-        detalleVenta.setImporte(detalleVentaDTO.getImporte());
-        detalleVenta.setPrecio(detalleVentaDTO.getPrecio());
-        detalleVenta.setTamanhoProducto(detalleVentaDTO.getTamanhoProducto()); // Asumiendo que este método existe en la clase DetalleVenta
-        detalleVenta.setProducto(conversorProductos.convertirAEntidad(detalleVentaDTO.getProducto()));
-        detallesVenta.add(detalleVenta);
+        Venta venta = new Venta();
+        venta.setId(dtoVenta.getID());
+        venta.setFechaEntrega(dtoVenta.getFechaEntrega());
+        venta.setFechaRegistro(dtoVenta.getFechaRegistro());
+        venta.setMontoTotal(dtoVenta.getMontoTotal());
+        venta.setEstado(dtoVenta.getEstado());
+        venta.setClienteid(dtoVenta.getIDcliente());
+        venta.setCliente(conversorCliente.convertirDtoClienteAEntidad(dtoVenta.getCliente()));
+        List<DetalleVenta> detallesVenta = new ArrayList<>();
+        for (DTO_DetalleVenta detalleVentaDTO : dtoVenta.getDetallesVenta()) {
+            DetalleVenta detalleVenta = new DetalleVenta();
+            detalleVenta.setCantidad(detalleVentaDTO.getCantidad());
+            detalleVenta.setDetallesCliente(detalleVentaDTO.getEspecificacion());
+            detalleVenta.setProductoId(detalleVentaDTO.getIdproducto());
+            detalleVenta.setImporte(detalleVentaDTO.getImporte());
+            detalleVenta.setPrecio(detalleVentaDTO.getPrecio());
+            detalleVenta.setTamanhoProducto(detalleVentaDTO.getTamanhoProducto()); // Asumiendo que este método existe en la clase DetalleVenta
+            detalleVenta.setProducto(conversorProductos.convertirAEntidad(detalleVentaDTO.getProducto()));
+            detallesVenta.add(detalleVenta);
+        }
+        venta.setDetallesVenta(detallesVenta);
+        Direccion direccionEntrega = new Direccion();
+        direccionEntrega.setCalle(dtoVenta.getDireccionEntrega().getCalle());
+        direccionEntrega.setColonia(dtoVenta.getDireccionEntrega().getColonia());
+        direccionEntrega.setNumExterior(dtoVenta.getDireccionEntrega().getNumExterior());
+        venta.setDireccionEntrega(direccionEntrega);
+        return venta;
     }
-    venta.setDetallesVenta(detallesVenta);
-    Direccion direccionEntrega = new Direccion();
-    direccionEntrega.setCalle(dtoVenta.getDireccionEntrega().getCalle());
-    direccionEntrega.setColonia(dtoVenta.getDireccionEntrega().getColonia());
-    direccionEntrega.setNumExterior(dtoVenta.getDireccionEntrega().getNumExterior());
-    venta.setDireccionEntrega(direccionEntrega);
-    return venta;
-}
-    
-    public List<DTO_Venta> convertirListaADTO(List<Venta> ventas){
-    List<DTO_Venta> ventasDTO = new ArrayList<>();
-        for (Venta venta:ventas) {
-            DTO_Venta dtoVenta=convertirVentaADTO(venta);
-
 
     public List<DTO_Venta> convertirListaADTO(List<Venta> ventas) {
+
         List<DTO_Venta> ventasDTO = new ArrayList<>();
         for (Venta venta : ventas) {
             DTO_Venta dtoVenta = convertirVentaADTO(venta);
@@ -163,10 +157,10 @@ public class VentasConversiones {
         }
         return ventasDTO;
     }
-    
-    public List<Venta> listaVentasDtoAEntidad(List<DTO_Venta> ventas){
+
+    public List<Venta> listaVentasDtoAEntidad(List<DTO_Venta> ventas) {
         List<Venta> ventasEnt = new ArrayList<>();
-        for (DTO_Venta ventaDto:ventas) {
+        for (DTO_Venta ventaDto : ventas) {
             Venta venta = convertirDtoVentaAEntidad(ventaDto);
             ventasEnt.add(venta);
         }

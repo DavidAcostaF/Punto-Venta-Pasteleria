@@ -48,7 +48,9 @@ public class ClienteDAO implements IClienteDAO {
     public Cliente agregarCliente(Cliente cliente) throws PersistenciaException {
         try {
             MongoCollection<ClienteMapeo> coleccion = conexion.obtenerColeccion();
-            coleccion.insertOne(conversor.convertirClienteAMapeoAgregar(cliente));
+            ClienteMapeo clienteMapeo = conversor.convertirClienteAMapeoAgregar(cliente);
+            coleccion.insertOne(clienteMapeo);
+            cliente.setId(clienteMapeo.getId().toString());
             return cliente;
         } catch (Exception e) {
             throw new PersistenciaException("Error al agregar cliente: " + e.getMessage());

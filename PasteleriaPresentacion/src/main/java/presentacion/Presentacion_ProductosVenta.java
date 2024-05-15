@@ -281,7 +281,7 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
                 detalleVenta.setCantidad(cantidad);
                 detalleVenta.setPrecio(precio);
                 detalleVenta.setTamanhoProducto(tamanio);
-                detalleVenta.setImporte(detalleVenta.getCantidad()*detalleVenta.getPrecio());
+                detalleVenta.setImporte(detalleVenta.getCantidad() * detalleVenta.getPrecio());
                 listaDetalles.add(detalleVenta);
             }
             venta.setDetallesVenta(listaDetalles);
@@ -291,16 +291,14 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
             venta.setFechaEntrega(date);
             venta.setMontoTotal(total);
             control.setVenta(venta);
-            System.out.println(control.getVenta());
             if (respuesta == JOptionPane.YES_OPTION) {
-                System.out.println(control.getVenta());
                 dispose();
-                control.mostrarListaClientes(this);
+                control.mostrarListaClientes();
 
             } else {
                 System.out.println(control.getVenta());
                 dispose();
-                control.mostrarDatosClientes(this);
+                control.mostrarDatosClientes();
 
             }
         }

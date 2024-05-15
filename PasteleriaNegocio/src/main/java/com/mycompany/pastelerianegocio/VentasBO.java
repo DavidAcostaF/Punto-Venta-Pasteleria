@@ -36,6 +36,7 @@ public class VentasBO implements IVentasBO {
 
     @Override
     public void agregarVenta(DTO_Venta venta) {
+        System.out.println("hola id bo" + venta.getIDcliente());
         try {
             ventaDAO.agregarVenta(conversor.convertirDTOAgregar(venta));
         } catch (PersistenciaException ex) {

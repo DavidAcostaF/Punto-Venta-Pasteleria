@@ -29,8 +29,8 @@ public class pruebaCliente {
             ClienteDAO clientedao=new ClienteDAO();
             Cliente cliente = new Cliente();
             
-            cliente.setNombre("Kanye west");
-            cliente.setApellidoP("Swift");
+            cliente.setNombre("Putisco");
+            cliente.setApellidoP("hola");
             cliente.setApellidoM("Morales");
             cliente.setTelefono("644412345");
 
@@ -38,7 +38,8 @@ public class pruebaCliente {
             direcciones.add(new Direccion("Calle wallabe #42", "sydney", "1"));
             direcciones.add(new Direccion("Calle 2", "Colonia 2", "2"));
             cliente.setDirecciones(direcciones);
-            clientedao.agregarCliente(cliente);
+            
+            System.out.println(clientedao.agregarCliente(cliente).getId());
             
 //cliente = clientedao.encontrarClienteID("66406d0293d57d3040a5bdc8");
        //     System.out.println(cliente);

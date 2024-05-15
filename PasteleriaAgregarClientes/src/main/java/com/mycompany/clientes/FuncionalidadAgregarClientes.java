@@ -21,8 +21,9 @@ public class FuncionalidadAgregarClientes implements IFuncionalidadAgregarClient
     }
 
     @Override
-    public void agregarCliente(DTO_Cliente cliente) {
-        clientesBO.agregarCliente(cliente);
+    public DTO_Cliente agregarCliente(DTO_Cliente cliente) {
+        return clientesBO.agregarCliente(clientesBO.agregarCliente(cliente));
+
     }
 
 }

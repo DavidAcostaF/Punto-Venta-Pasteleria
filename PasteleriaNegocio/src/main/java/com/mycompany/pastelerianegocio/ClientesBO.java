@@ -39,25 +39,25 @@ public class ClientesBO implements IClientesBO {
     }
 
     @Override
-    public void agregarCliente(DTO_Cliente cliente) {
+    public DTO_Cliente agregarCliente(DTO_Cliente cliente) {
         try {
-            clienteDAO.agregarCliente(conversor.convertirAEntidadaSinID(cliente));
+            return conversor.convertirCliente(clienteDAO.agregarCliente(conversor.convertirAEntidadaSinID(cliente)));
         } catch (PersistenciaException ex) {
             Logger.getLogger(ClientesBO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
 
     }
-    
-    
+
     @Override
-    public DTO_Cliente actualizarCliente(DTO_Cliente cliente){
+    public DTO_Cliente actualizarCliente(DTO_Cliente cliente) {
         try {
             clienteDAO.actualizarCliente(conversor.convertirDtoClienteAEntidadConRfc(cliente));
             return cliente;
         } catch (PersistenciaException e) {
             System.out.println(e);
             return null;
-        }  
+        }
     }
 
     @Override
