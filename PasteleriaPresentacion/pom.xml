@@ -63,11 +63,6 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>PasteleriaConsultarIngrediente</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>io.github.bweng20</groupId>
             <artifactId>jSVG</artifactId>
             <version>1.4</version>

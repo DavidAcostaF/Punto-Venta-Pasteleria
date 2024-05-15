@@ -8,9 +8,8 @@ import com.mycompany.pasteleriaactualizarproducto.FuncionalidadActualizarProduct
 import com.mycompany.pasteleriaactualizarproducto.IFuncionalidadActualizarProducto;
 import com.mycompany.pasteleriaagregarproducto.FuncionalidadAgregarProducto;
 import com.mycompany.pasteleriaagregarproducto.IFuncionalidadAgregarProducto;
-import com.mycompany.pasteleriaconsultaringrediente.FuncionalidadConsultarIngrediente;
-import com.mycompany.pasteleriaconsultaringrediente.FuncionalidadConsultarIngrediente;
-import com.mycompany.pasteleriaconsultaringrediente.IFuncionalidadConsultarIngrediente;
+import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
+import com.mycompany.pasteleriaconsultaringredientes.IFuncionalidadConsultarIngredientes;
 import control.ControlGestionarInventario;
 import dto.DTO_Ingrediente;
 import dto.DTO_IngredienteDetalle;
@@ -29,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Presentacion_DlgActualizarIngredientesSeleccionados extends javax.swing.JFrame {
 
-    private IFuncionalidadConsultarIngrediente funcionalidadConsultarIngrediente;
+    private IFuncionalidadConsultarIngredientes funcionalidadConsultarIngrediente;
     private IFuncionalidadActualizarProducto funcionalidadActualizarProducto;
     private ControlGestionarInventario control;
 
@@ -38,7 +37,7 @@ public class Presentacion_DlgActualizarIngredientesSeleccionados extends javax.s
      */
     public Presentacion_DlgActualizarIngredientesSeleccionados() {
         initComponents();
-        funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngrediente();
+        funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngredientes();
         funcionalidadActualizarProducto = new FuncionalidadActualizarProducto();
         control = ControlGestionarInventario.getInstance();
         llenarTabla();

@@ -163,11 +163,7 @@ public class ProductosBO implements IProductosBO {
 
                 for (Ingrediente ingrediente : ingredientesDisponibles) {
                     if (ingrediente.getNombre().equalsIgnoreCase(ingredienteDetalle.getNombre())) {
-                        System.out.println(ingrediente.getNombre());
-                        System.out.println(ingredienteDetalle.getNombre());
                         if (ingrediente.getCantidad() > ingredienteDetalle.getCantidad()) {
-                            System.out.println(ingrediente.getCantidad());
-                            System.out.println(ingredienteDetalle.getCantidad());
                             disponible = true;
                         }
                     }

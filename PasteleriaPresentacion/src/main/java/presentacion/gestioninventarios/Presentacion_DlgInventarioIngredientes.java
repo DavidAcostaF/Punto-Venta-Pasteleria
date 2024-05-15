@@ -4,27 +4,19 @@
  */
 package presentacion.gestioninventarios;
 
-//import com.mycompany.pasteleriaactualizaringrediente.FuncionalidadActualizarIngrediente;
 import com.mycompany.pasteleriaactualizaringrediente.FuncionalidadActualizarIngrediente;
 import com.mycompany.pasteleriaactualizaringrediente.IFuncionalidadActualizarIngrediente;
 import com.mycompany.pasteleriaagregaringrediente.FuncionalidadAgregarIngrediente;
-//import com.mycompany.pasteleriaagregaringrediente.FuncionalidadAgregarIngrediente;
 import com.mycompany.pasteleriaagregaringrediente.IFuncionalidadAgregarIngrediente;
-import com.mycompany.pasteleriaconsultaringrediente.FuncionalidadConsultarIngrediente;
-//import com.mycompany.pasteleriaconsultaringrediente.FuncionalidadConsultarIngrediente;
-import com.mycompany.pasteleriaconsultaringrediente.IFuncionalidadConsultarIngrediente;
 import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
-//import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
 import com.mycompany.pasteleriaconsultaringredientes.IFuncionalidadConsultarIngredientes;
 import com.mycompany.pasteleriaeliminaringrediente.FuncionalidadEliminarIngrediente;
-//import com.mycompany.pasteleriaeliminaringrediente.FuncionalidadEliminarIngrediente;
 import com.mycompany.pasteleriaeliminaringrediente.IFuncionalidadEliminarIngrediente;
 import control.ControlGestionarInventario;
 import dto.DTO_Ingrediente;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import presentacion.Presentacion_MenuPrincipal;
 
 /**
  *
@@ -34,7 +26,7 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
 
     private IFuncionalidadConsultarIngredientes funcionalidadConsultarIngredientes;
     private IFuncionalidadAgregarIngrediente funcionalidadAgregarIngrediente;
-    private IFuncionalidadConsultarIngrediente funcionalidadConsultarIngrediente;
+    private IFuncionalidadConsultarIngredientes funcionalidadConsultarIngrediente;
     private IFuncionalidadActualizarIngrediente funcionalidadActualizarIngrediente;
     private IFuncionalidadEliminarIngrediente funcionalidadEliminarIngrediente;
     private ControlGestionarInventario control;
@@ -47,7 +39,7 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
         initComponents();
         funcionalidadConsultarIngredientes = new FuncionalidadConsultarIngredientes();
         funcionalidadAgregarIngrediente = new FuncionalidadAgregarIngrediente();
-        funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngrediente();
+        funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngredientes();
         funcionalidadActualizarIngrediente = new FuncionalidadActualizarIngrediente();
         funcionalidadEliminarIngrediente = new FuncionalidadEliminarIngrediente();
         listaIngredientes = funcionalidadConsultarIngredientes.consultarIngredientes();

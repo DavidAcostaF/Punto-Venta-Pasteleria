@@ -6,9 +6,8 @@ package presentacion.gestioninventarios;
 
 import com.mycompany.pasteleriaagregarproducto.FuncionalidadAgregarProducto;
 import com.mycompany.pasteleriaagregarproducto.IFuncionalidadAgregarProducto;
-import com.mycompany.pasteleriaconsultaringrediente.FuncionalidadConsultarIngrediente;
-import com.mycompany.pasteleriaconsultaringrediente.FuncionalidadConsultarIngrediente;
-import com.mycompany.pasteleriaconsultaringrediente.IFuncionalidadConsultarIngrediente;
+import com.mycompany.pasteleriaconsultaringredientes.FuncionalidadConsultarIngredientes;
+import com.mycompany.pasteleriaconsultaringredientes.IFuncionalidadConsultarIngredientes;
 import control.ControlGestionarInventario;
 import dto.DTO_Ingrediente;
 import dto.DTO_IngredienteDetalle;
@@ -27,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFrame {
 
-    private IFuncionalidadConsultarIngrediente funcionalidadConsultarIngrediente;
+    private IFuncionalidadConsultarIngredientes funcionalidadConsultarIngrediente;
     private IFuncionalidadAgregarProducto funcionalidadAgregarProducto;
     private ControlGestionarInventario control;
 
@@ -36,7 +35,7 @@ public class Presentacion_DlgIngredientesSeleccionados extends javax.swing.JFram
      */
     public Presentacion_DlgIngredientesSeleccionados() {
         initComponents();
-        funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngrediente();
+        funcionalidadConsultarIngrediente = new FuncionalidadConsultarIngredientes();
         funcionalidadAgregarProducto = new FuncionalidadAgregarProducto();
         control = ControlGestionarInventario.getInstance();
         llenarTabla();
