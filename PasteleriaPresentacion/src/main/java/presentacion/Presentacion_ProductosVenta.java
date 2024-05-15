@@ -317,15 +317,16 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
 
     private void llenarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel();
+        DTO_Venta venta = control.getVenta();
+        if (venta != null && venta.getDetallesVenta() != null) {
+            venta.getDetallesVenta().forEach(p -> modelo.addRow(new Object[]{p.getProducto().getNombre(), p.getEspecificacion(), Integer.valueOf(p.getCantidad()), Float.valueOf(p.getPrecio()), p.getTamanhoProducto()}));
+        }
 
-//        List<ProductoDTO> pasteles = this.consultarProductosVenta.consultarProductosVenta();
-//        pasteles.forEach(p -> modelo.addRow(new Object[]{p.getNombre(), p.getDescripcion(), 1, p.getPrecio()}));
         tableProductos.getColumnModel().getColumn(5).setCellRenderer(new BotonRenderer("+"));
         tableProductos.getColumnModel().getColumn(5).setCellEditor(new BotonEditor(new JCheckBox(), modelo, 2, 1));
 
         tableProductos.getColumnModel().getColumn(6).setCellRenderer(new BotonRenderer("-"));
         tableProductos.getColumnModel().getColumn(6).setCellEditor(new BotonEditor(new JCheckBox(), modelo, 2, -1));
-
     }
 
     private float calcularTotal() {
@@ -438,7 +439,7 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
         for (int i = 0; i < tableProductos.getRowCount(); i++) {
             DTO_DetalleVenta detalleVenta = new DTO_DetalleVenta();
             DTO_Producto producto = new DTO_Producto(tableProductos.getValueAt(i, 0).toString());
-            //  detalleVenta.setProductos(producto);
+            detalleVenta.setProducto(producto);
             detalleVenta.setEspecificacion(tableProductos.getValueAt(i, 1).toString());
             int cantidad = Integer.parseInt(tableProductos.getValueAt(i, 2).toString());
             detalleVenta.setCantidad(cantidad);
@@ -450,6 +451,7 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
         }
         venta.setDetallesVenta(detallesVenta);
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Siguientebtn;

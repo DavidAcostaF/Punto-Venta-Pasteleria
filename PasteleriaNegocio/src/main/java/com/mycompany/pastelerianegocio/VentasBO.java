@@ -137,30 +137,33 @@ public class VentasBO implements IVentasBO {
 
     @Override
     public boolean consultarExistenciaIngredientesStock(DTO_Producto producto) {
+    try {
         List<String> ingredientesNombres = new ArrayList<>();
         List<DTO_IngredienteDetalle> ingredientesDetalles = producto.getIngredientes();
 
         for (DTO_IngredienteDetalle ingredienteDetalle : ingredientesDetalles) {
             ingredientesNombres.add(ingredienteDetalle.getNombre());
         }
+
         List<Ingrediente> ingredientesConsultados = ingredientesDAO.consultarCantidadesIngredientesInventario(ingredientesNombres);
-        boolean disponible = false;
 
         for (Ingrediente ingrediente : ingredientesConsultados) {
-
             Optional<DTO_IngredienteDetalle> ingredienteDetalleConsultado = ingredientesDetalles.stream().filter(p -> p.getNombre().equalsIgnoreCase(ingrediente.getNombre())).findAny();
             if (ingredienteDetalleConsultado.isPresent()) {
                 float cantidadNecesaria = calcularCantidadIngrediente(ingredienteDetalleConsultado.get(), producto.getTamanio());
-                if (cantidadNecesaria < ingrediente.getCantidad()) {
-                    disponible = true;
+                if (cantidadNecesaria > ingrediente.getCantidad()) {
+                    return false; 
                 }
+            } else {
+                return false; 
             }
-            if (!disponible) {
-                break;
-            }
-            disponible = false;
         }
-        return disponible;
+        
+        return true;
+    } catch (PersistenciaException ex) {
+        Logger.getLogger(VentasBO.class.getName()).log(Level.SEVERE, null, ex);
+        return false; 
+    }
     }
 
     @Override

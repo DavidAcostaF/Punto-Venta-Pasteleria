@@ -4,6 +4,7 @@
  */
 package com.mycompany.pastelerianegocio;
 
+import Exceptions.PersistenciaException;
 import com.mycompany.pasteleriadaos.IIngredienteDAO;
 import com.mycompany.pasteleriadaos.IngredienteDAO;
 import com.mycompany.pasteleriadominioentidades.Ingrediente;
@@ -13,6 +14,8 @@ import dto.DTO_Ingrediente;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,15 +34,25 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
     @Override
     public DTO_Ingrediente agregarIngrediente(DTO_Ingrediente ingrediente) {
 
-        Ingrediente ingredienteNueva = ingredienteDAO.agregar(ConvertirDTOAIngrediente(ingrediente));
-        return ingredienteConversiones.convertir(ingredienteNueva);
+        try {
+            Ingrediente ingredienteNueva = ingredienteDAO.agregar(ConvertirDTOAIngrediente(ingrediente));
+            return ingredienteConversiones.convertir(ingredienteNueva);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(InventarioIngredientesBO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
     public List<DTO_Ingrediente> consultarIngredientes() {
-        List<Ingrediente> ingredientes = ingredienteDAO.consultar();
+        try {
+            List<Ingrediente> ingredientes = ingredienteDAO.consultar();
 
-        return ingredienteConversiones.convertir(ingredientes);
+            return ingredienteConversiones.convertir(ingredientes);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(InventarioIngredientesBO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
@@ -66,59 +79,89 @@ public class InventarioIngredientesBO implements IInventarioIngredientesBO {
 
     @Override
     public List<DTO_Ingrediente> consultarIngrediente(DTO_Ingrediente ingredienteDTO) {
-        List<Ingrediente> ingredientes = ingredienteDAO.consultar(ConvertirDTOAIngrediente(ingredienteDTO));
+        try {
+            List<Ingrediente> ingredientes = ingredienteDAO.consultar(ConvertirDTOAIngrediente(ingredienteDTO));
 
-        return ingredienteConversiones.convertir(ingredientes);
+            return ingredienteConversiones.convertir(ingredientes);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(InventarioIngredientesBO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
     public DTO_Ingrediente validarExistencia(DTO_Ingrediente ingrediente) {
-        Ingrediente ingredienteConsultado = ingredienteDAO.consultarPorNombre(ingrediente.getNombre());
+        try {
+            Ingrediente ingredienteConsultado = ingredienteDAO.consultarPorNombre(ingrediente.getNombre());
 
-        if (ingredienteConsultado != null) {
-            return ingredienteConversiones.convertir(ingredienteConsultado);
+            if (ingredienteConsultado != null) {
+                return ingredienteConversiones.convertir(ingredienteConsultado);
+            }
+            return null;
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(InventarioIngredientesBO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        return null;
     }
 
     @Override
     public DTO_Ingrediente actualizarIngrediente(DTO_Ingrediente ingrediente) {
-        Ingrediente ingredienteConsultado = ingredienteDAO.consultarPorNombre(ingrediente.getNombre());
-        if (ingredienteConsultado != null) {
-            return ingredienteConversiones.convertir(ingredienteDAO.actualizar(ConvertirDTOAIngrediente(ingrediente)));
+        try {
+            Ingrediente ingredienteConsultado = ingredienteDAO.consultarPorNombre(ingrediente.getNombre());
+            if (ingredienteConsultado != null) {
+                return ingredienteConversiones.convertir(ingredienteDAO.actualizar(ConvertirDTOAIngrediente(ingrediente)));
+            }
+            return null;
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(InventarioIngredientesBO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        return null;
     }
 
     @Override
     public Boolean eliminarIngrediente(DTO_Ingrediente ingrediente) {
-        Ingrediente ingredienteConsultado = ingredienteDAO.consultarPorNombre(ingrediente.getNombre());
-        if (ingredienteConsultado != null) {
-            return ingredienteDAO.eliminar(ConvertirDTOAIngrediente(ingrediente));
+        try {
+            Ingrediente ingredienteConsultado = ingredienteDAO.consultarPorNombre(ingrediente.getNombre());
+            if (ingredienteConsultado != null) {
+                return ingredienteDAO.eliminar(ConvertirDTOAIngrediente(ingrediente));
+            }
+            return false;
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(InventarioIngredientesBO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        return false;
     }
 
     @Override
     public DTO_Ingrediente consultarIngredientePorNombre(DTO_Ingrediente ingrediente) {
-        Ingrediente ingredienteConsultado = ingredienteDAO.consultarPorNombre(ingrediente.getNombre());
-        return ingredienteConversiones.convertir(ingredienteConsultado);
+        try {
+            Ingrediente ingredienteConsultado = ingredienteDAO.consultarPorNombre(ingrediente.getNombre());
+            return ingredienteConversiones.convertir(ingredienteConsultado);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(InventarioIngredientesBO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
     public List<DTO_Ingrediente> consultarCantidadesIngredientesInventario(List<DTO_Ingrediente> ingredientes) {
-        List<String> nombresIngredientes = new ArrayList<>();
-        List<DTO_Ingrediente> ingredientesDTO = new ArrayList<>();
-        for (DTO_Ingrediente ingrediente : ingredientes) {
-            nombresIngredientes.add(ingrediente.getNombre());
+        try {
+            List<String> nombresIngredientes = new ArrayList<>();
+            List<DTO_Ingrediente> ingredientesDTO = new ArrayList<>();
+            for (DTO_Ingrediente ingrediente : ingredientes) {
+                nombresIngredientes.add(ingrediente.getNombre());
 
+            }
+
+            for (Ingrediente ingrediente : ingredienteDAO.consultarCantidadesIngredientesInventario(nombresIngredientes)) {
+
+                ingredientesDTO.add(convertirIngredienteADTO(ingrediente));
+            }
+            return ingredientesDTO;
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(InventarioIngredientesBO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-
-        for (Ingrediente ingrediente : ingredienteDAO.consultarCantidadesIngredientesInventario(nombresIngredientes)) {
-
-            ingredientesDTO.add(convertirIngredienteADTO(ingrediente));
-        }
-        return ingredientesDTO;
     }
 
 }

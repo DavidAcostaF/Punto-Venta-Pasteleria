@@ -8,6 +8,7 @@ import conversionesnegocio.ClientesConversiones;
 import Exceptions.PersistenciaException;
 import com.mycompany.pasteleriadaos.ClienteDAO;
 import com.mycompany.pasteleriadaos.IClienteDAO;
+import com.mycompany.pasteleriadominioentidades.Cliente;
 import dto.DTO_Cliente;
 import java.util.List;
 import java.util.logging.Level;
@@ -41,7 +42,8 @@ public class ClientesBO implements IClientesBO {
     @Override
     public DTO_Cliente agregarCliente(DTO_Cliente cliente) {
         try {
-            return conversor.convertirCliente(clienteDAO.agregarCliente(conversor.convertirAEntidadaSinID(cliente)));
+            Cliente clienteA=clienteDAO.agregarCliente(conversor.convertirAEntidadaSinID(cliente));
+            return conversor.convertirCliente(clienteA);
         } catch (PersistenciaException ex) {
             Logger.getLogger(ClientesBO.class.getName()).log(Level.SEVERE, null, ex);
             return null;

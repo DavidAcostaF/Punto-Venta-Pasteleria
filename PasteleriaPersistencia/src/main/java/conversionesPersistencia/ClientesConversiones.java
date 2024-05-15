@@ -39,6 +39,8 @@ public class ClientesConversiones {
             }
 
             Cliente.setDirecciones(direcciones);
+        }else {
+            Cliente.setDirecciones(new ArrayList<>());
         }
 
         return Cliente;
@@ -55,17 +57,19 @@ public class ClientesConversiones {
         clienteMapeo.setApellidoM(cliente.getApellidoM());
         clienteMapeo.setTelefono(cliente.getTelefono());
 
-        List<DireccionMapeo> direccionesMapeo = new ArrayList<>();
-        for (Direccion direccion : cliente.getDirecciones()) {
-            DireccionMapeo direccionMapeo = new DireccionMapeo();
-            direccionMapeo.setColonia(direccion.getColonia());
-            direccionMapeo.setCalle(direccion.getCalle());
-            direccionMapeo.setNumExterior(direccion.getNumExterior());
-            direccionesMapeo.add(direccionMapeo);
+        if (cliente.getDirecciones() != null) {
+            List<DireccionMapeo> direccionesMapeo = new ArrayList<>();
+            for (Direccion direccion : cliente.getDirecciones()) {
+                DireccionMapeo direccionMapeo = new DireccionMapeo();
+                direccionMapeo.setColonia(direccion.getColonia());
+                direccionMapeo.setCalle(direccion.getCalle());
+                direccionMapeo.setNumExterior(direccion.getNumExterior());
+                direccionesMapeo.add(direccionMapeo);
+            }
+            clienteMapeo.setDirecciones(direccionesMapeo);
+        } else {
+            clienteMapeo.setDirecciones(new ArrayList<>());
         }
-
-        clienteMapeo.setDirecciones(direccionesMapeo);
-
         return clienteMapeo;
     }
 
@@ -78,7 +82,8 @@ public class ClientesConversiones {
         clienteMapeo.setApellidoP(cliente.getApellidoP());
         clienteMapeo.setApellidoM(cliente.getApellidoM());
         clienteMapeo.setTelefono(cliente.getTelefono());
-        if (clienteMapeo.getDirecciones() != null) {
+
+        if (cliente.getDirecciones() != null) {
             List<DireccionMapeo> direccionesMapeo = new ArrayList<>();
             for (Direccion direccion : cliente.getDirecciones()) {
                 DireccionMapeo direccionMapeo = new DireccionMapeo();
@@ -87,8 +92,9 @@ public class ClientesConversiones {
                 direccionMapeo.setNumExterior(direccion.getNumExterior());
                 direccionesMapeo.add(direccionMapeo);
             }
-
             clienteMapeo.setDirecciones(direccionesMapeo);
+        } else {
+            clienteMapeo.setDirecciones(new ArrayList<>());
         }
 
         return clienteMapeo;

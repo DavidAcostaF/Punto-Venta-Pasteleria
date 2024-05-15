@@ -4,6 +4,7 @@
  */
 package com.mycompany.pastelerianegocio;
 
+import Exceptions.PersistenciaException;
 import conversionesnegocio.ProductosConversiones;
 import com.mycompany.pasteleriadaos.IIngredienteDAO;
 import com.mycompany.pasteleriadaos.IProductoDAO;
@@ -21,6 +22,8 @@ import dto.DTO_Producto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -42,41 +45,66 @@ public class ProductosBO implements IProductosBO {
 
     @Override
     public DTO_Producto agregarProducto(DTO_Producto producto) {
-        Producto productoConvertido = this.convertirDTOAProducto(producto);
-        Producto producoNuevo = productoDAO.agregarProducto(productoConvertido);
-        return conversor.convertirProducto(producoNuevo);
+        try {
+            Producto productoConvertido = this.convertirDTOAProducto(producto);
+            Producto producoNuevo = productoDAO.agregarProducto(productoConvertido);
+            return conversor.convertirProducto(producoNuevo);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(ProductosBO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
     public DTO_Producto actualizarProducto(DTO_Producto producto) {
-        Producto productoConvertido = this.convertirDTOAProducto(producto);
-        Producto producoActualizado = productoDAO.actualizar(productoConvertido);
-        return conversor.convertirProducto(producoActualizado);
+        try {
+            Producto productoConvertido = this.convertirDTOAProducto(producto);
+            Producto producoActualizado = productoDAO.actualizar(productoConvertido);
+            return conversor.convertirProducto(producoActualizado);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(ProductosBO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
 
     }
 
     @Override
     public List<DTO_Producto> consultarProductos() {
-        List<DTO_Producto> listaProductos = conversor.convertirListaProductos(productoDAO.consultarProductos());
-        return listaProductos;
+        try {
+            List<DTO_Producto> listaProductos = conversor.convertirListaProductos(productoDAO.consultarProductos());
+            return listaProductos;
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(ProductosBO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
     public DTO_Producto consultarProductoPorNombre(String nombre) {
-        Producto productoConsultado = productoDAO.consultarPorNombre(nombre);
-        if (productoConsultado == null) {
+        try {
+            Producto productoConsultado = productoDAO.consultarPorNombre(nombre);
+            if (productoConsultado == null) {
+                return null;
+            }
+            return conversor.convertirProducto(productoConsultado);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(ProductosBO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-        return conversor.convertirProducto(productoConsultado);
     }
 
     @Override
     public DTO_Producto consultarProducto(String id) {
-        Producto productoConsultado = productoDAO.consultar(id);
-        if (productoConsultado == null) {
+        try {
+            Producto productoConsultado = productoDAO.consultar(id);
+            if (productoConsultado == null) {
+                return null;
+            }
+            return conversor.convertirProducto(productoConsultado);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(ProductosBO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-        return conversor.convertirProducto(productoConsultado);
     }
 
     @Override
@@ -104,7 +132,12 @@ public class ProductosBO implements IProductosBO {
 
     @Override
     public DTO_Ingrediente consultarIngredientePorNombre(String nombre) {
-        return conversorIngredientes.convertir(ingredienteDAO.consultarPorNombre(nombre));
+        try {
+            return conversorIngredientes.convertir(ingredienteDAO.consultarPorNombre(nombre));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(ProductosBO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
@@ -144,57 +177,77 @@ public class ProductosBO implements IProductosBO {
 
     @Override
     public boolean eliminarProducto(DTO_Producto producto) {
-        return productoDAO.eliminarProducto(convertirDTOAProductoMapeo(producto));
+        try {
+            return productoDAO.eliminarProducto(convertirDTOAProductoMapeo(producto));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(ProductosBO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 
     @Override
     public List<DTO_Ingrediente> consultarIngredientesFaltantes(DTO_Producto producto) {
-        List<DTO_IngredienteDetalle> ingredientes = producto.getIngredientes();
-        List<String> ids = new ArrayList();
-        for (DTO_IngredienteDetalle ingrediente : ingredientes) {
-            ids.add(consultarIngredientePorNombre(ingrediente.getNombre()).getId());
+        try {
+            List<DTO_IngredienteDetalle> ingredientes = producto.getIngredientes();
+            List<String> ids = new ArrayList();
+            for (DTO_IngredienteDetalle ingrediente : ingredientes) {
+                ids.add(consultarIngredientePorNombre(ingrediente.getNombre()).getId());
+            }
+            return this.conversorIngredientes.convertir(this.ingredienteDAO.consultarIngredientesFaltantes(ids));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(ProductosBO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        return this.conversorIngredientes.convertir(this.ingredienteDAO.consultarIngredientesFaltantes(ids));
     }
 
     @Override
     public List<DTO_Producto> consultarProductosCoincidentes(String nombre) {
-        return conversor.convertirListaProductos(productoDAO.consultarProductosCoincidentes(nombre));
+        try {
+            return conversor.convertirListaProductos(productoDAO.consultarProductosCoincidentes(nombre));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(ProductosBO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     @Override
     public List<DTO_Producto> consultarListaProductosConStock() {
-        List<Ingrediente> ingredientesDisponibles = ingredienteDAO.consultarIngredientesConStock();
-        List<Producto> productos = productoDAO.consultarProductos();
-        List<DTO_Producto> productosDTO = new ArrayList<>();
+        try {
+            List<Ingrediente> ingredientesDisponibles = ingredienteDAO.consultarIngredientesConStock();
+            List<Producto> productos = productoDAO.consultarProductos();
+            List<DTO_Producto> productosDTO = new ArrayList<>();
 
-        for (Producto producto : productos) {
-            boolean disponible = false;
-            for (IngredienteDetalle ingredienteDetalle : producto.getIngredientes()) {
+            for (Producto producto : productos) {
+                boolean disponible = false;
+                for (IngredienteDetalle ingredienteDetalle : producto.getIngredientes()) {
 
-                for (Ingrediente ingrediente : ingredientesDisponibles) {
-                    if (ingrediente.getNombre().equalsIgnoreCase(ingredienteDetalle.getNombre())) {
-                        if (ingrediente.getCantidad() > ingredienteDetalle.getCantidad()) {
-                            disponible = true;
+                    for (Ingrediente ingrediente : ingredientesDisponibles) {
+                        if (ingrediente.getNombre().equalsIgnoreCase(ingredienteDetalle.getNombre())) {
+                            if (ingrediente.getCantidad() > ingredienteDetalle.getCantidad()) {
+                                disponible = true;
+                            }
                         }
                     }
+                    if (!disponible) {
+                        break;
+                    }
+
                 }
+
                 if (!disponible) {
                     break;
                 }
+                if (disponible) {
+                    productosDTO.add(conversor.convertirProducto(producto));
+                }
+                disponible = false;
 
             }
-
-            if (!disponible) {
-                break;
-            }
-            if (disponible) {
-                productosDTO.add(conversor.convertirProducto(producto));
-            }
-            disponible = false;
-
+            return productosDTO;
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(ProductosBO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        return productosDTO;
     }
 
 }

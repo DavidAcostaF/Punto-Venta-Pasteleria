@@ -33,7 +33,6 @@ presentacion\Presentacion_DlgConfirmacionPago$2.class
 control\ControlGestionarInventario.class
 presentacion\gestioninventarios\Presentacion_DlgActualizarIngredientesSeleccionados$4.class
 presentacion\gestioninventarios\Presentacion_DlgSeleccionOpcionGestion.class
-presentacion\facturar\Presentacion_DlgFacturarACliente$3$1.class
 presentacion\gestioninventarios\Presentacion_DlgDetalleProducto$3.class
 presentacion\Presentacion_DlgDatosCliente.class
 presentacion\Presentacion_MenuPrincipal$1.class
@@ -51,10 +50,8 @@ extras\ClientesComboBoxModel.class
 presentacion\gestioninventarios\Presentacion_DlgIngredientesSeleccionados$1.class
 presentacion\gestioninventarios\Presentacion_DlgActualizarDatosDelProducto$5.class
 presentacion\gestioninventarios\Presentacion_DlgActualizarIngredientesSeleccionados$2.class
-presentacion\facturar\Presentacion_DlgFacturarACliente$3.class
 presentacion\facturar\Presentacion_FrmConfirmarGenerarFactura$4.class
 presentacion\facturar\Presentacion_FrmHistorialFacturas$4.class
-presentacion\facturar\Presentacion_DlgOpcionFactura$2$1.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioIngredientes$4.class
 presentacion\facturar\Presentacion_FrmSeleccionarVenta$3.class
 extras\ButtonColumn.class
@@ -119,7 +116,6 @@ presentacion\facturar\Presentacion_DlgFacturarACliente$2.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioIngredientes$8.class
 control\ControlFacturar.class
 extras\PastelComboBoxModel.class
-presentacion\facturar\Presentacion_DlgOpcionFactura$2.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioProductos$1.class
 presentacion\Presentacion_ProductosVenta$BotonRenderer.class
 presentacion\gestioninventarios\Presentacion_DlgIngresarDatosDelProducto$6.class
