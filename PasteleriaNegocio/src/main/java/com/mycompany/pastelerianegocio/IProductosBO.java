@@ -46,4 +46,6 @@ public interface IProductosBO {
     public List<DTO_Producto> consultarProductosCoincidentes(String nombre);
 
     public List<DTO_Producto> consultarListaProductosConStock();
+    
+
 }
