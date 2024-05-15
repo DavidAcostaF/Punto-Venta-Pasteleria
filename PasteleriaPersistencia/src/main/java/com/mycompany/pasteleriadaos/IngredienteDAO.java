@@ -4,6 +4,7 @@
  */
 package com.mycompany.pasteleriadaos;
 
+import Exceptions.PersistenciaException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -38,63 +39,90 @@ public class IngredienteDAO implements IIngredienteDAO {
     }
 
     @Override
-    public Ingrediente agregar(IngredienteMapeo ingrediente) {
+    public Ingrediente agregar(IngredienteMapeo ingrediente) throws PersistenciaException {
         MongoCollection<IngredienteMapeo> coleccion = conexion.obtenerColeccion();
         coleccion.insertOne(ingrediente);
         IngredienteMapeo ingredienteAgregado = coleccion.find().sort(Sorts.descending("_id")).first();
         if (ingredienteAgregado != null && !ingredienteAgregado.getNombre().equals(ingrediente.getNombre())) {
-            //Arrojar una excepcion
+            throw new PersistenciaException("No se pudo agregar el ingrediente");
+
         }
 
         return ingredienteConversiones.convertir(ingredienteAgregado);
+
     }
 
     @Override
-    public Ingrediente actualizar(IngredienteMapeo ingrediente) {
+    public Ingrediente actualizar(IngredienteMapeo ingrediente) throws PersistenciaException {
         MongoCollection<IngredienteMapeo> coleccion = conexion.obtenerColeccion();
         IngredienteMapeo ingredienteActualizado = coleccion.findOneAndReplace(eq("nombre", ingrediente.getNombre()), ingrediente);
 
-        return ingredienteConversiones.convertir(ingredienteActualizado);
+        try {
+            return ingredienteConversiones.convertir(ingredienteActualizado);
+
+        } catch (Exception e) {
+            throw new PersistenciaException("No se actualizar el ingrediente");
+        }
     }
 
     @Override
-    public List<Ingrediente> consultar() {
+    public List<Ingrediente> consultar() throws PersistenciaException {
         MongoCollection<IngredienteMapeo> coleccion = conexion.obtenerColeccion();
         FindIterable<IngredienteMapeo> resultados = coleccion.find();
 
         List<IngredienteMapeo> listaIngredientes = new LinkedList<>();
         resultados.into(listaIngredientes);
-        return ingredienteConversiones.convertir(listaIngredientes);
+        try {
+            return ingredienteConversiones.convertir(listaIngredientes);
+
+        } catch (Exception e) {
+            throw new PersistenciaException("No se pudo consultar la lista");
+        }
     }
 
     @Override
-    public List<Ingrediente> consultar(IngredienteMapeo ingrediente) {
+    public List<Ingrediente> consultar(IngredienteMapeo ingrediente) throws PersistenciaException {
         MongoCollection<IngredienteMapeo> coleccion = conexion.obtenerColeccion();
         FindIterable<IngredienteMapeo> resultados = coleccion.find(regex("nombre", "^" + ingrediente.getNombre(), "i"));
 
         List<IngredienteMapeo> listaIngredientes = new LinkedList<>();
         resultados.into(listaIngredientes);
-        return ingredienteConversiones.convertir(listaIngredientes);
+        try {
+            return ingredienteConversiones.convertir(listaIngredientes);
+
+        } catch (Exception e) {
+            throw new PersistenciaException("No se pudo consultar la lista");
+        }
     }
 
     @Override
-    public Ingrediente consultarPorNombre(String nombre) {
+    public Ingrediente consultarPorNombre(String nombre) throws PersistenciaException {
         MongoCollection<IngredienteMapeo> coleccion = conexion.obtenerColeccion();
         IngredienteMapeo resultado = coleccion.find(eq("nombre", nombre)).first();
 
-        return ingredienteConversiones.convertir(resultado);
+        try {
+            return ingredienteConversiones.convertir(resultado);
+
+        } catch (Exception e) {
+            throw new PersistenciaException("No se pudo consultar");
+        }
     }
 
     @Override
-    public Boolean eliminar(IngredienteMapeo ingrediente) {
+    public Boolean eliminar(IngredienteMapeo ingrediente) throws PersistenciaException {
         MongoCollection<IngredienteMapeo> coleccion = conexion.obtenerColeccion();
         DeleteResult result = coleccion.deleteOne(eq("nombre", ingrediente.getNombre()));
 
-        return result.getDeletedCount() == 1;
+        try {
+            return result.getDeletedCount() == 1;
+
+        } catch (Exception e) {
+            throw new PersistenciaException("No se pudo eliminar");
+        }
     }
 
     @Override
-    public List<Ingrediente> consultarIngredientesFaltantes(List<String> ingredientesIds) {
+    public List<Ingrediente> consultarIngredientesFaltantes(List<String> ingredientesIds) throws PersistenciaException {
         MongoCollection<IngredienteMapeo> coleccion = conexion.obtenerColeccion();
         List<ObjectId> ids = new ArrayList<>();
         for (String id : ingredientesIds) {
@@ -102,23 +130,37 @@ public class IngredienteDAO implements IIngredienteDAO {
         }
         Bson filtro = Filters.not(Filters.in("_id", ids));
 
-        return ingredienteConversiones.convertir(coleccion.find(filtro).into(new ArrayList<>()));
+        try {
+            return ingredienteConversiones.convertir(coleccion.find(filtro).into(new ArrayList<>()));
 
+        } catch (Exception e) {
+            throw new PersistenciaException("No se pudo consultar lal lista");
+        }
     }
 
     @Override
-    public List<Ingrediente> consultarCantidadesIngredientesInventario(List<String> ingredientesNombres) {
+    public List<Ingrediente> consultarCantidadesIngredientesInventario(List<String> ingredientesNombres) throws PersistenciaException {
         MongoCollection<IngredienteMapeo> coleccion = conexion.obtenerColeccion();
 
         Bson filtro = Filters.in("nombre", ingredientesNombres);
 
-        return ingredienteConversiones.convertir(coleccion.find(filtro).into(new ArrayList<>()));
+        try {
+            return ingredienteConversiones.convertir(coleccion.find(filtro).into(new ArrayList<>()));
+
+        } catch (Exception e) {
+            throw new PersistenciaException("No se pudo consultar lal lista");
+        }
     }
 
     @Override
-    public List<Ingrediente> consultarIngredientesConStock() {
+    public List<Ingrediente> consultarIngredientesConStock() throws PersistenciaException {
         MongoCollection<IngredienteMapeo> coleccion = conexion.obtenerColeccion();
-        return ingredienteConversiones.convertir(coleccion.find(gt("cantidad", 0)).into(new ArrayList<>()));
+        try {
+            return ingredienteConversiones.convertir(coleccion.find(gt("cantidad", 0)).into(new ArrayList<>()));
+
+        } catch (Exception e) {
+            throw new PersistenciaException("No se pudo consultar lal lista");
+        }
     }
 
 }

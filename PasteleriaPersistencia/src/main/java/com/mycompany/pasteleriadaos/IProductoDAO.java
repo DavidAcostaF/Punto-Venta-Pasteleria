@@ -4,6 +4,7 @@
  */
 package com.mycompany.pasteleriadaos;
 
+import Exceptions.PersistenciaException;
 import com.mycompany.pasteleriadominioentidades.Producto;
 import com.mycompany.pasteleriadominiosMapeo.ProductoMapeo;
 import java.util.List;
@@ -14,18 +15,18 @@ import java.util.List;
  */
 public interface IProductoDAO {
 
-    public Producto agregarProducto(Producto producto);
+    public Producto agregarProducto(Producto producto)throws PersistenciaException;
 
-    public Producto actualizar(Producto producto);
+    public Producto actualizar(Producto producto)throws PersistenciaException;
 
-    public boolean eliminarProducto(ProductoMapeo producto);
+    public boolean eliminarProducto(ProductoMapeo producto)throws PersistenciaException;
 
-    public Producto consultar(String id);
+    public Producto consultar(String id)throws PersistenciaException;
 
-    public List<Producto> consultarProductos();
+    public List<Producto> consultarProductos()throws PersistenciaException;
 
-    public Producto consultarPorNombre(String nombre);
+    public Producto consultarPorNombre(String nombre)throws PersistenciaException;
 
-    public List<Producto> consultarProductosCoincidentes(String nombre);
+    public List<Producto> consultarProductosCoincidentes(String nombre)throws PersistenciaException;
 
 }

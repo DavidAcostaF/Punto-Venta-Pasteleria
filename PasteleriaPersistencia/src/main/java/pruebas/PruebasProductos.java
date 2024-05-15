@@ -26,11 +26,11 @@ public class PruebasProductos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        IIngredienteDAO ingredienteDAO = new IngredienteDAO();
-        IProductoDAO productoDAO = new ProductoDAO();
-
-        Producto producto = productoDAO.consultar("6641fd5d3711d5016e6f8a86");
-        producto.setNombre("Dzxc");
-       productoDAO.actualizar(producto);
+//        IIngredienteDAO ingredienteDAO = new IngredienteDAO();
+//        IProductoDAO productoDAO = new ProductoDAO();
+//
+//        Producto producto = productoDAO.consultar("6641fd5d3711d5016e6f8a86");
+//        producto.setNombre("Dzxc");
+//       productoDAO.actualizar(producto);
     }
 }

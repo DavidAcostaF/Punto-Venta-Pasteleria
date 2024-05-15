@@ -20,9 +20,9 @@ public class PruebaIngredientes {
     public static void main(String[] args) {
         IngredienteDAO ingredienteDAO = new IngredienteDAO();
         String[] ids = {"66408dc23190850792b1ba41", "66408dc23190850792b1ba3f"};
-        for (Ingrediente ingrediente : ingredienteDAO.consultarIngredientesFaltantes(Arrays.asList(ids))) {
-            System.out.println(ingrediente.getId());
-        }
+//        for (Ingrediente ingrediente : ingredienteDAO.consultarIngredientesFaltantes(Arrays.asList(ids))) {
+//            System.out.println(ingrediente.getId());
+//        }
     }
     
 }

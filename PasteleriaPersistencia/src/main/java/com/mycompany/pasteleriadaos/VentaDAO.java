@@ -43,14 +43,14 @@ public class VentaDAO implements IVentaDAO {
     }
 
     @Override
-    public Venta agregarVenta(Venta venta) {
+    public Venta agregarVenta(Venta venta) throws PersistenciaException {
         MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
         coleccion.insertOne(conversor.convertirAVentaMapeo(venta));
         return venta;
     }
 
     @Override
-    public void eliminarVenta(Venta venta) {
+    public void eliminarVenta(Venta venta) throws PersistenciaException {
         MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
         try {
             coleccion.deleteOne(Filters.eq("_id", new ObjectId(venta.getId())));
@@ -61,7 +61,7 @@ public class VentaDAO implements IVentaDAO {
     }
 
     @Override
-    public List<Venta> ventasPorCliente(String clienteId) {
+    public List<Venta> ventasPorCliente(String clienteId) throws PersistenciaException {
 
         MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
         Bson filtroCliente = eq("clienteid", new ObjectId(clienteId));
@@ -74,7 +74,7 @@ public class VentaDAO implements IVentaDAO {
     }
 
     @Override
-    public List<Venta> consultarVentas() {
+    public List<Venta> consultarVentas() throws PersistenciaException {
         MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
         FindIterable<VentaMapeo> ventas = coleccion.find();
         List<Venta> ventasE = new ArrayList<>();
@@ -85,7 +85,7 @@ public class VentaDAO implements IVentaDAO {
     }
 
     @Override
-    public List<Venta> consultarVentasPorRangoFechas(Date fechaInicio, Date fechaFin) {
+    public List<Venta> consultarVentasPorRangoFechas(Date fechaInicio, Date fechaFin) throws PersistenciaException {
         MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
         Bson filtroRangoFechas = Filters.and(
                 Filters.gte("fechaRegistro", fechaInicio),
@@ -101,7 +101,7 @@ public class VentaDAO implements IVentaDAO {
     }
 
     @Override
-    public List<Venta> consultarVentasPorFecha(Date fecha) {
+    public List<Venta> consultarVentasPorFecha(Date fecha) throws PersistenciaException {
         MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
         Bson filtro = Filters.eq("fechaRegistro", fecha);
 
@@ -131,7 +131,7 @@ public class VentaDAO implements IVentaDAO {
             );
             AggregateIterable<VentaMapeo> resultados = coleccion.aggregate(pipeline);
             VentaMapeo ventaEncontrada = resultados.first();
-             Venta venta=conversor.convertirAVentaEntidadObjetos(ventaEncontrada);
+            Venta venta = conversor.convertirAVentaEntidadObjetos(ventaEncontrada);
             return venta;
         } catch (IllegalArgumentException e) {
             throw new PersistenciaException("ID de venta no válido: " + idVenta);

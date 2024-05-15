@@ -4,6 +4,7 @@
  */
 package com.mycompany.pasteleriadaos;
 
+import Exceptions.PersistenciaException;
 import com.mycompany.pasteleriadominioentidades.Ingrediente;
 import com.mycompany.pasteleriadominiosMapeo.IngredienteMapeo;
 import java.util.List;
@@ -14,22 +15,22 @@ import java.util.List;
  */
 public interface IIngredienteDAO {
 
-    public Ingrediente agregar(IngredienteMapeo ingrediente);
+    public Ingrediente agregar(IngredienteMapeo ingrediente)throws PersistenciaException;
 
-    public Ingrediente actualizar(IngredienteMapeo ingrediente);
+    public Ingrediente actualizar(IngredienteMapeo ingrediente)throws PersistenciaException;
 
-    public List<Ingrediente> consultar();
+    public List<Ingrediente> consultar()throws PersistenciaException;
 
-    public List<Ingrediente> consultar(IngredienteMapeo ingrediente);
+    public List<Ingrediente> consultar(IngredienteMapeo ingrediente)throws PersistenciaException;
 
-    public Ingrediente consultarPorNombre(String nombre);
+    public Ingrediente consultarPorNombre(String nombre)throws PersistenciaException;
 
-    public Boolean eliminar(IngredienteMapeo ingrediente);
+    public Boolean eliminar(IngredienteMapeo ingrediente)throws PersistenciaException;
 
-    public List<Ingrediente> consultarIngredientesFaltantes(List<String> ingredientesIds);
+    public List<Ingrediente> consultarIngredientesFaltantes(List<String> ingredientesIds)throws PersistenciaException;
 
-    public List<Ingrediente> consultarCantidadesIngredientesInventario(List<String> ingredientesNombres);
+    public List<Ingrediente> consultarCantidadesIngredientesInventario(List<String> ingredientesNombres)throws PersistenciaException;
 
-    public List<Ingrediente> consultarIngredientesConStock();
+    public List<Ingrediente> consultarIngredientesConStock()throws PersistenciaException;
 
 }

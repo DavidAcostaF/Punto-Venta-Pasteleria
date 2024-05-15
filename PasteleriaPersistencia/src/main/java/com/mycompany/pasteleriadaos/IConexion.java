@@ -4,6 +4,7 @@
  */
 package com.mycompany.pasteleriadaos;
 
+import Exceptions.PersistenciaException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 

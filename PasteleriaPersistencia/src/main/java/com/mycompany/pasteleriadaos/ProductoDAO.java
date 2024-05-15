@@ -4,6 +4,7 @@
  */
 package com.mycompany.pasteleriadaos;
 
+import Exceptions.PersistenciaException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import static com.mongodb.client.model.Filters.eq;
@@ -35,69 +36,98 @@ public class ProductoDAO implements IProductoDAO {
     }
 
     @Override
-    public Producto agregarProducto(Producto producto) {
+    public Producto agregarProducto(Producto producto) throws PersistenciaException {
         MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
         coleccion.insertOne(conversor.convertirProductoMapeo(producto));
 
-        return producto;
+        try {
+            return producto;
+        } catch (Exception e) {
+            throw new PersistenciaException("No se pudo agregar el producto");
+        }
     }
 
     @Override
-    public Producto actualizar(Producto producto) {
+    public Producto actualizar(Producto producto) throws PersistenciaException {
 
         MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
         ProductoMapeo productoActualizado = coleccion.findOneAndReplace(eq("_id", new ObjectId(producto.getId())), conversor.convertirProductoMapeo(producto));
 
-        return conversor.convertirProducto(productoActualizado);
+        try {
+            return conversor.convertirProducto(productoActualizado);
+        } catch (Exception e) {
+            throw new PersistenciaException("No se pudo actualizar el producto");
+        }
     }
 
     @Override
-    public boolean eliminarProducto(ProductoMapeo producto) {
+    public boolean eliminarProducto(ProductoMapeo producto) throws PersistenciaException {
         MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
         DeleteResult result = coleccion.deleteOne(eq("nombre", producto.getNombre()));
 
-        return result.getDeletedCount() == 1;
+        try {
+            return result.getDeletedCount() == 1;
+        } catch (Exception e) {
+            throw new PersistenciaException("No se pudo eliminar el producto");
+        }
     }
 
     @Override
-    public Producto consultar(String id) {
+    public Producto consultar(String id) throws PersistenciaException {
         MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
         ProductoMapeo resultado = coleccion.find(eq("_id", new ObjectId(id))).first();
         if (resultado == null) {
             return null;
         }
-        return conversor.convertirProducto(resultado);
+
+        try {
+            return conversor.convertirProducto(resultado);
+        } catch (Exception e) {
+            throw new PersistenciaException("No se pudo consultar el producto");
+        }
     }
 
     @Override
-    public List<Producto> consultarProductos() {
+    public List<Producto> consultarProductos() throws PersistenciaException {
         MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
         FindIterable<ProductoMapeo> Productos = coleccion.find();
         List<Producto> listaProductos = new ArrayList<>();
         for (ProductoMapeo producto : Productos) {
             listaProductos.add(conversor.convertirProducto(producto));
         }
-        return listaProductos;
+        try {
+            return listaProductos;
+        } catch (Exception e) {
+            throw new PersistenciaException("No se pudo consultar la lista");
+        }
     }
 
     @Override
-    public Producto consultarPorNombre(String nombre) {
+    public Producto consultarPorNombre(String nombre) throws PersistenciaException {
         MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
         ProductoMapeo resultado = coleccion.find(eq("nombre", nombre)).first();
         if (resultado == null) {
             return null;
         }
-        return conversor.convertirProducto(resultado);
+        try {
+            return conversor.convertirProducto(resultado);
+        } catch (Exception e) {
+            throw new PersistenciaException("No se pudo consultar");
+        }
     }
 
     @Override
-    public List<Producto> consultarProductosCoincidentes(String nombre) {
+    public List<Producto> consultarProductosCoincidentes(String nombre) throws PersistenciaException {
         MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
         FindIterable<ProductoMapeo> resultados = coleccion.find(regex("nombre", "^" + nombre, "i"));
 
         List<ProductoMapeo> listaIngredientes = new LinkedList<>();
         resultados.into(listaIngredientes);
-        return conversor.convertirProductos(listaIngredientes);
+        try {
+            return conversor.convertirProductos(listaIngredientes);
+        } catch (Exception e) {
+            throw new PersistenciaException("No se pudo consultar la lista");
+        }
     }
 
 }

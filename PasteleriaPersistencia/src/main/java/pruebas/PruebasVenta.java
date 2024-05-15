@@ -33,39 +33,39 @@ public class PruebasVenta {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        VentaDAO ventadao = new VentaDAO();
-        VentaMapeo venta = new VentaMapeo();
-
-        venta.setMontoTotal(150.00f); // Monto total de la venta
-        VentasConversiones conversor = new VentasConversiones();
-
-// 
-        Date fechaEntrega = new GregorianCalendar(2024, Calendar.MAY, 25).getTime();// Fecha de entrega
-        Date fechaRegistro = new GregorianCalendar(2024, Calendar.MAY, 15).getTime();
-
-// 
-        venta.setFechaEntrega(fechaEntrega);
-        venta.setFechaRegistro(fechaRegistro);
-        venta.setEstado("jotoo");
-        venta.setId(new ObjectId());
-        venta.setClienteid(new ObjectId("66406d0293d57d3040a5bdc8"));
-        List<DetalleVentaMapeo> detallesVenta = new ArrayList<>();
-        DetalleVentaMapeo dv = new DetalleVentaMapeo();
-        dv.setCantidad(2);
-        dv.setDetallesCliente(" ");
-        dv.setImporte(150.00f);
-        dv.setPrecio(75);
-        dv.setProductoId(new ObjectId("66406d434d21240168dbd52a"));
-        dv.setTamanhoProducto("chico");
-        detallesVenta.add(dv);
-        venta.setDetallesVenta(detallesVenta);
-        DireccionMapeo direccionEntrega = new DireccionMapeo();
-        direccionEntrega.setCalle("Calle Principal");
-        direccionEntrega.setNumExterior("123");
-        direccionEntrega.setColonia("Ciudad Ejemplo");
-        venta.setDireccionEntrega(direccionEntrega);
-        Venta ventaEntidad = conversor.convertirAVentaEntidad(venta);
-        ventadao.agregarVenta(ventaEntidad);
+//        VentaDAO ventadao = new VentaDAO();
+//        VentaMapeo venta = new VentaMapeo();
+//
+//        venta.setMontoTotal(150.00f); // Monto total de la venta
+//        VentasConversiones conversor = new VentasConversiones();
+//
+//// 
+//        Date fechaEntrega = new GregorianCalendar(2024, Calendar.MAY, 25).getTime();// Fecha de entrega
+//        Date fechaRegistro = new GregorianCalendar(2024, Calendar.MAY, 15).getTime();
+//
+//// 
+//        venta.setFechaEntrega(fechaEntrega);
+//        venta.setFechaRegistro(fechaRegistro);
+//        venta.setEstado("jotoo");
+//        venta.setId(new ObjectId());
+//        venta.setClienteid(new ObjectId("66406d0293d57d3040a5bdc8"));
+//        List<DetalleVentaMapeo> detallesVenta = new ArrayList<>();
+//        DetalleVentaMapeo dv = new DetalleVentaMapeo();
+//        dv.setCantidad(2);
+//        dv.setDetallesCliente(" ");
+//        dv.setImporte(150.00f);
+//        dv.setPrecio(75);
+//        dv.setProductoId(new ObjectId("66406d434d21240168dbd52a"));
+//        dv.setTamanhoProducto("chico");
+//        detallesVenta.add(dv);
+//        venta.setDetallesVenta(detallesVenta);
+//        DireccionMapeo direccionEntrega = new DireccionMapeo();
+//        direccionEntrega.setCalle("Calle Principal");
+//        direccionEntrega.setNumExterior("123");
+//        direccionEntrega.setColonia("Ciudad Ejemplo");
+//        venta.setDireccionEntrega(direccionEntrega);
+//        Venta ventaEntidad = conversor.convertirAVentaEntidad(venta);
+//        ventadao.agregarVenta(ventaEntidad);
 
 //        venta.setMontoTotal(150.00f); // Monto total de la venta
 //        VentasConversiones conversor = new VentasConversiones();
@@ -140,12 +140,12 @@ public class PruebasVenta {
         Cliente c = new Cliente();
         c.setId("663b16288bcd861f9682ffa9");
 
-        try {
-            List<Venta> ventas = ventadao.consultarVentasConFiltros(c.getId(), null, null,listaprod);
-            System.out.println(ventas);
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(PruebasVenta.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            List<Venta> ventas = ventadao.consultarVentasConFiltros(c.getId(), null, null,listaprod);
+//            System.out.println(ventas);
+//        } catch (PersistenciaException ex) {
+//            Logger.getLogger(PruebasVenta.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }
 }
