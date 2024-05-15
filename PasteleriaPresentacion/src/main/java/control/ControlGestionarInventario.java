@@ -5,6 +5,7 @@
 package control;
 
 import dto.DTO_Producto;
+import presentacion.Presentacion_MenuPrincipal;
 import presentacion.gestioninventarios.Presentacion_DlgActualizarDatosDelProducto;
 import presentacion.gestioninventarios.Presentacion_DlgActualizarIngredientesSeleccionados;
 import presentacion.gestioninventarios.Presentacion_DlgDetalleProducto;
@@ -49,6 +50,11 @@ public class ControlGestionarInventario {
 
     public void setProductoAActualizar(DTO_Producto productoAActualizar) {
         this.productoAActualizar = productoAActualizar;
+    }
+
+    public void mostrarMenuPrincipal() {
+        Presentacion_MenuPrincipal p = new Presentacion_MenuPrincipal();
+        p.setVisible(true);
     }
 
     public void mostrarOpcionesGestion() {

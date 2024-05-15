@@ -232,10 +232,10 @@ public class Presentacion_DlgInventarioProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
-    char c = evt.getKeyChar();
-    if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
-        evt.consume();
-    }
+        char c = evt.getKeyChar();
+        if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtBuscarKeyTyped
 
     /**
