@@ -221,36 +221,38 @@ public class Presentacion_DlgConfirmacionPago extends javax.swing.JDialog {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
         if (venta.getCliente().getID() == null) {
+
             if (!venta.getDireccionEntrega().getCalle().equalsIgnoreCase("En tienda")) {
+                System.out.println("entro al actualiza");
                 List<DTO_Direccion> a = new ArrayList<>();
                 a.add(venta.getDireccionEntrega());
                 venta.getCliente().setDirecciones(a);
+                System.out.println(venta.getCliente().getDirecciones());
             }
             venta.setIDcliente(agregarCliente.agregarCliente(venta.getCliente()).getID());
-            ventas.agregarVenta(venta);
             venta.setFechaRegistro(new Date());
 
         } else {
-
-            System.out.println(venta.getCliente().getID());
 
             if (control.isNuevaDireccion() && !venta.getDireccionEntrega().getCalle().equalsIgnoreCase("En tienda")) {
                 venta.getCliente().getDirecciones().add(venta.getDireccionEntrega());
                 venta.setIDcliente(venta.getCliente().getID());
                 venta.setFechaRegistro(new Date());
+
                 actualizarCliente.actualizarCliente(venta.getCliente());
-                ventas.agregarVenta(venta);
+
             } else {
+                System.out.println("no");
                 venta.setIDcliente(venta.getCliente().getID());
                 venta.setFechaRegistro(new Date());
-                ventas.agregarVenta(venta);
+
             }
         }
-
+        ventas.agregarVenta(venta);
         String mensaje = "¡La venta ha sido registrada exitosamente!";
 
         JOptionPane.showMessageDialog(null, mensaje, "Registro de Venta Exitoso", JOptionPane.INFORMATION_MESSAGE);
-       
+
         int respuesta = JOptionPane.showOptionDialog(null, "¿Quiere registrar otra venta?", "Hola", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
 
         if (respuesta == JOptionPane.YES_OPTION) {
