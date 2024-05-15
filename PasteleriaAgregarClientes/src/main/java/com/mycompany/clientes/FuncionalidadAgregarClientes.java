@@ -10,9 +10,7 @@ import com.mycompany.pastelerianegocio.IVentasBO;
 import com.mycompany.pastelerianegocio.VentasBO;
 import dto.DTO_Cliente;
 
-//Esta clase funciona de que se manda la informacion al negocio o se obtiene mediante dtos y el negocio se encargara de devolver la info o mandarlas a las daos de ser necesarias
 public class FuncionalidadAgregarClientes implements IFuncionalidadAgregarClientes {
-    //esta clase tendra todas las operaciones del cliente necesarias
 
     private IClientesBO clientesBO;
 

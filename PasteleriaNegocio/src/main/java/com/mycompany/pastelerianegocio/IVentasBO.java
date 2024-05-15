@@ -5,6 +5,8 @@
 package com.mycompany.pastelerianegocio;
 
 import Excepciones.ConsultarVentasPorFechaException;
+import com.mycompany.pasteleriadominioentidades.Ingrediente;
+import com.mycompany.pasteleriadominiosMapeo.IngredienteMapeo;
 import dto.DTO_Ingrediente;
 import dto.DTO_IngredienteDetalle;
 import dto.DTO_Producto;
@@ -115,4 +117,20 @@ public interface IVentasBO {
      * @return la cantidad calculada del ingrediente
      */
     public Float calcularCantidadIngrediente(DTO_IngredienteDetalle ingredienteDetalle, String tamanio);
+
+    /**
+     * Convierte un DTO_Ingrediente a un objeto Ingrediente.
+     *
+     * @param ingrediente el DTO_Ingrediente que se desea convertir.
+     * @return el objeto Ingrediente convertido, o null si ocurre una excepción.
+     */
+    IngredienteMapeo ConvertirDTOAIngrediente(DTO_Ingrediente ingrediente);
+
+    /**
+     * Convierte un objeto Ingrediente a un DTO_Ingrediente.
+     *
+     * @param ingrediente el objeto Ingrediente que se desea convertir.
+     * @return el DTO_Ingrediente convertido, o null si ocurre una excepción.
+     */
+    public DTO_Ingrediente convertirIngredienteADTO(Ingrediente ingrediente);
 }

@@ -14,6 +14,9 @@ import com.mycompany.pasteleriadaos.IngredienteDAO;
 import com.mycompany.pasteleriadaos.VentaDAO;
 import com.mycompany.pasteleriadominioentidades.Ingrediente;
 import com.mycompany.pasteleriadominioentidades.Producto;
+import com.mycompany.pasteleriadominiosMapeo.IngredienteMapeo;
+import conversionesnegocio.IngredienteConversiones;
+import dto.DTO_DetalleVenta;
 import dto.DTO_Ingrediente;
 import dto.DTO_IngredienteDetalle;
 import dto.DTO_Producto;
@@ -30,17 +33,20 @@ import java.util.logging.Logger;
  * @author f_aco
  */
 public class VentasBO implements IVentasBO {
-
+    
     private IVentaDAO ventaDAO;
     private VentasConversiones conversor;
     private ProductosConversiones conversorp;
     private IIngredienteDAO ingredientesDAO;
-
+    private IngredienteConversiones conversorIngrediente;
+    
     public VentasBO() {
         this.ventaDAO = new VentaDAO();
         this.conversor = new VentasConversiones();
         this.conversorp = new ProductosConversiones();
         ingredientesDAO = new IngredienteDAO();
+        conversorIngrediente = new IngredienteConversiones();
+        
     }
 
     /**
@@ -48,9 +54,21 @@ public class VentasBO implements IVentasBO {
      */
     @Override
     public void agregarVenta(DTO_Venta venta) {
-        System.out.println("hola id bo" + venta.getIDcliente());
         try {
             ventaDAO.agregarVenta(conversor.convertirDTOAgregar(venta));
+//            for (DTO_DetalleVenta detalle : venta.getDetallesVenta()) {
+//                for (DTO_IngredienteDetalle ingrediente : detalle.getProducto().getIngredientes()) {
+//                    Ingrediente ingredienteConsultado = ingredientesDAO.consultarPorNombre(ingrediente.getNombre());
+//                    ingredienteConsultado.setCantidad(ingredienteConsultado.getCantidad() - ingrediente.getCantidad());
+//                    DTO_Ingrediente ingredienteDTO = new DTO_Ingrediente();
+//                    ingredienteDTO.setId(ingredienteConsultado.getId());
+//                    ingredienteDTO.setCantidad(ingredienteConsultado.getCantidad());
+//                    ingredienteDTO.setNombre(ingredienteConsultado.getNombre());
+//                    ingredienteDTO.setPrecio(ingredienteConsultado.getPrecio());
+//                    ingredienteDTO.setUnidadDeMedida(ingredienteConsultado.getUnidadDeMedida());
+//                    ingredientesDAO.actualizar(ConvertirDTOAIngrediente(ingredienteDTO));
+//                }
+//            }
         } catch (PersistenciaException ex) {
             Logger.getLogger(VentasBO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -170,13 +188,13 @@ public class VentasBO implements IVentasBO {
         try {
             List<String> ingredientesNombres = new ArrayList<>();
             List<DTO_IngredienteDetalle> ingredientesDetalles = producto.getIngredientes();
-
+            
             for (DTO_IngredienteDetalle ingredienteDetalle : ingredientesDetalles) {
                 ingredientesNombres.add(ingredienteDetalle.getNombre());
             }
-
+            
             List<Ingrediente> ingredientesConsultados = ingredientesDAO.consultarCantidadesIngredientesInventario(ingredientesNombres);
-
+            
             for (Ingrediente ingrediente : ingredientesConsultados) {
                 Optional<DTO_IngredienteDetalle> ingredienteDetalleConsultado = ingredientesDetalles.stream().filter(p -> p.getNombre().equalsIgnoreCase(ingrediente.getNombre())).findAny();
                 if (ingredienteDetalleConsultado.isPresent()) {
@@ -188,7 +206,7 @@ public class VentasBO implements IVentasBO {
                     return false;
                 }
             }
-
+            
             return true;
         } catch (PersistenciaException ex) {
             Logger.getLogger(VentasBO.class.getName()).log(Level.SEVERE, null, ex);
@@ -205,12 +223,39 @@ public class VentasBO implements IVentasBO {
             return ingredienteDetalle.getCantidad() * 1F;
         } else if (tamanio.equalsIgnoreCase("Mediano")) {
             return ingredienteDetalle.getCantidad() * 1.5F;
-
+            
         } else if (tamanio.equalsIgnoreCase("Grande")) {
             return ingredienteDetalle.getCantidad() * 1.7F;
-
+            
         }
         return 0f;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public IngredienteMapeo ConvertirDTOAIngrediente(DTO_Ingrediente ingredienteDTO) {
+        IngredienteMapeo ingrediente = new IngredienteMapeo();
+        ingrediente.setCantidad(ingredienteDTO.getCantidad());
+        ingrediente.setNombre(ingredienteDTO.getNombre());
+        ingrediente.setPrecio(ingredienteDTO.getPrecio());
+        ingrediente.setUnidadDeMedida(ingredienteDTO.getUnidadDeMedida());
+        return ingrediente;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DTO_Ingrediente convertirIngredienteADTO(Ingrediente ingrediente) {
+        DTO_Ingrediente dtoIngrediente = new DTO_Ingrediente();
+        dtoIngrediente.setId(ingrediente.getId());
+        
+        dtoIngrediente.setCantidad(ingrediente.getCantidad());
+        dtoIngrediente.setNombre(ingrediente.getNombre());
+        dtoIngrediente.setPrecio(ingrediente.getPrecio());
+        dtoIngrediente.setUnidadDeMedida(ingrediente.getUnidadDeMedida());
+        return dtoIngrediente;
+    }
 }
