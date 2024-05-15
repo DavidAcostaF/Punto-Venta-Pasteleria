@@ -20,6 +20,7 @@ public class FuncionalidadConsultarIngredientes implements IFuncionalidadConsult
 
     private IInventarioIngredientesBO inventarioIngredientesBO;
     private IProductosBO productoBO;
+
     public FuncionalidadConsultarIngredientes() {
         inventarioIngredientesBO = new InventarioIngredientesBO();
         productoBO = new ProductosBO();
@@ -35,6 +36,16 @@ public class FuncionalidadConsultarIngredientes implements IFuncionalidadConsult
         return this.productoBO.consultarIngredientesFaltantes(producto);
     }
 
+    @Override
+    public List<DTO_Ingrediente> consultarIngrediente(DTO_Ingrediente ingrediente) {
+        List<DTO_Ingrediente> ingredienteNuevo = inventarioIngredientesBO.consultarIngrediente(ingrediente);
+        return ingredienteNuevo;
+    }
 
+    @Override
+    public DTO_Ingrediente consultarIngredientePorNombre(DTO_Ingrediente ingrediente) {
+        return inventarioIngredientesBO.consultarIngredientePorNombre(ingrediente);
+
+    }
 
 }

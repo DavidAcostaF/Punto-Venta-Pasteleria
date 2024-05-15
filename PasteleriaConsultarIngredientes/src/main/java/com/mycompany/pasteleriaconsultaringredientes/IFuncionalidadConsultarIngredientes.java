@@ -13,6 +13,12 @@ import java.util.List;
  * @author af_da
  */
 public interface IFuncionalidadConsultarIngredientes {
-    List<DTO_Ingrediente>consultarIngredientes();
-    List<DTO_Ingrediente>consultarIngredientesFaltantes(DTO_Producto producto);
+
+    List<DTO_Ingrediente> consultarIngredientes();
+
+    List<DTO_Ingrediente> consultarIngredientesFaltantes(DTO_Producto producto);
+
+    public List<DTO_Ingrediente> consultarIngrediente(DTO_Ingrediente ingrediente);
+
+    public DTO_Ingrediente consultarIngredientePorNombre(DTO_Ingrediente ingrediente);
 }

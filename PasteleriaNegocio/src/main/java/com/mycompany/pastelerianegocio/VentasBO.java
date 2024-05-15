@@ -158,7 +158,7 @@ public class VentasBO implements IVentasBO {
             if (!disponible) {
                 break;
             }
-            disponible =false;
+            disponible = false;
         }
         return disponible;
     }
