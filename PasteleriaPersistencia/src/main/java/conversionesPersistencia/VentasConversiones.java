@@ -15,19 +15,27 @@ import java.util.List;
 import org.bson.types.ObjectId;
 
 /**
- *
- * @author PC
+ * Clase para realizar conversiones entre objetos Venta y VentaMapeo.
  */
 public class VentasConversiones {
 
-    ClientesConversiones conversorCliente;
-    ProductosConversiones conversorProductos;
+    private ClientesConversiones conversorCliente;
+    private ProductosConversiones conversorProductos;
 
+    /**
+     * Constructor de la clase VentasConversiones.
+     */
     public VentasConversiones() {
         conversorCliente = new ClientesConversiones();
         conversorProductos = new ProductosConversiones();
     }
 
+    /**
+     * Convierte un objeto VentaMapeo a un objeto Venta.
+     *
+     * @param venta El objeto VentaMapeo a convertir.
+     * @return El objeto Venta convertido.
+     */
     public Venta convertirAVentaEntidad(VentaMapeo venta) {
         Venta ventaE = new Venta();
         ventaE.setId(venta.getId().toHexString());
@@ -56,6 +64,13 @@ public class VentasConversiones {
         return ventaE;
     }
 
+    /**
+     * Convierte un objeto VentaMapeo a un objeto Venta, incluyendo la
+     * conversión de objetos relacionados.
+     *
+     * @param venta El objeto VentaMapeo a convertir.
+     * @return El objeto Venta convertido.
+     */
     public Venta convertirAVentaEntidadObjetos(VentaMapeo venta) {
         Venta ventaE = new Venta();
         ventaE.setId(venta.getId().toString());
@@ -85,31 +100,37 @@ public class VentasConversiones {
         ventaE.setDireccionEntrega(direccionE);
         return ventaE;
     }
-    
+
+    /**
+     * Convierte un objeto Venta a un objeto VentaMapeo.
+     *
+     * @param venta El objeto Venta a convertir.
+     * @return El objeto VentaMapeo convertido.
+     */
     public VentaMapeo convertirAVentaMapeo(Venta venta) {
-    VentaMapeo ventaMapeo = new VentaMapeo();
-    ventaMapeo.setClienteid(new ObjectId(venta.getClienteid()));
-    ventaMapeo.setFechaEntrega(venta.getFechaEntrega());
-    ventaMapeo.setFechaRegistro(venta.getFechaRegistro());
-    ventaMapeo.setMontoTotal(venta.getMontoTotal());
-    ventaMapeo.setEstado(venta.getEstado());
-    List<DetalleVentaMapeo> detallesVentaMapeo = new ArrayList<>();
-    for (DetalleVenta detalleVenta : venta.getDetallesVenta()) {
-        DetalleVentaMapeo detalleVentaMapeo = new DetalleVentaMapeo();
-        detalleVentaMapeo.setCantidad(detalleVenta.getCantidad());
-        detalleVentaMapeo.setDetallesCliente(detalleVenta.getDetallesCliente());
-        detalleVentaMapeo.setProductoId(new ObjectId(detalleVenta.getProductoId()));
-        detalleVentaMapeo.setImporte(detalleVenta.getImporte());
-        detalleVentaMapeo.setPrecio(detalleVenta.getPrecio());
-        detalleVentaMapeo.setTamanhoProducto(detalleVenta.getTamanhoProducto());
-        detallesVentaMapeo.add(detalleVentaMapeo);
+        VentaMapeo ventaMapeo = new VentaMapeo();
+        ventaMapeo.setClienteid(new ObjectId(venta.getClienteid()));
+        ventaMapeo.setFechaEntrega(venta.getFechaEntrega());
+        ventaMapeo.setFechaRegistro(venta.getFechaRegistro());
+        ventaMapeo.setMontoTotal(venta.getMontoTotal());
+        ventaMapeo.setEstado(venta.getEstado());
+        List<DetalleVentaMapeo> detallesVentaMapeo = new ArrayList<>();
+        for (DetalleVenta detalleVenta : venta.getDetallesVenta()) {
+            DetalleVentaMapeo detalleVentaMapeo = new DetalleVentaMapeo();
+            detalleVentaMapeo.setCantidad(detalleVenta.getCantidad());
+            detalleVentaMapeo.setDetallesCliente(detalleVenta.getDetallesCliente());
+            detalleVentaMapeo.setProductoId(new ObjectId(detalleVenta.getProductoId()));
+            detalleVentaMapeo.setImporte(detalleVenta.getImporte());
+            detalleVentaMapeo.setPrecio(detalleVenta.getPrecio());
+            detalleVentaMapeo.setTamanhoProducto(detalleVenta.getTamanhoProducto());
+            detallesVentaMapeo.add(detalleVentaMapeo);
+        }
+        ventaMapeo.setDetallesVenta(detallesVentaMapeo);
+        DireccionMapeo direccionMapeo = new DireccionMapeo();
+        direccionMapeo.setCalle(venta.getDireccionEntrega().getCalle());
+        direccionMapeo.setColonia(venta.getDireccionEntrega().getColonia());
+        direccionMapeo.setNumExterior(venta.getDireccionEntrega().getNumExterior());
+        ventaMapeo.setDireccionEntrega(direccionMapeo);
+        return ventaMapeo;
     }
-    ventaMapeo.setDetallesVenta(detallesVentaMapeo);
-    DireccionMapeo direccionMapeo = new DireccionMapeo();
-    direccionMapeo.setCalle(venta.getDireccionEntrega().getCalle());
-    direccionMapeo.setColonia(venta.getDireccionEntrega().getColonia());
-    direccionMapeo.setNumExterior(venta.getDireccionEntrega().getNumExterior());
-    ventaMapeo.setDireccionEntrega(direccionMapeo);
-    return ventaMapeo;
-}
 }

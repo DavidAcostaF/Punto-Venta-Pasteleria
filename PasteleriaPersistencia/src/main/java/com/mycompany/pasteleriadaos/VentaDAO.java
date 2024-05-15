@@ -28,8 +28,8 @@ import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 /**
+ * Implementa los metodos de la interfaz IVentaDAO
  *
- * @author f_aco
  */
 public class VentaDAO implements IVentaDAO {
 
@@ -42,6 +42,9 @@ public class VentaDAO implements IVentaDAO {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Venta agregarVenta(Venta venta) throws PersistenciaException {
         MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
@@ -49,6 +52,9 @@ public class VentaDAO implements IVentaDAO {
         return venta;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void eliminarVenta(Venta venta) throws PersistenciaException {
         MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
@@ -60,6 +66,9 @@ public class VentaDAO implements IVentaDAO {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Venta> ventasPorCliente(String clienteId) throws PersistenciaException {
 
@@ -73,6 +82,9 @@ public class VentaDAO implements IVentaDAO {
         return ventas;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Venta> consultarVentas() throws PersistenciaException {
         MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
@@ -84,6 +96,9 @@ public class VentaDAO implements IVentaDAO {
         return ventasE;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Venta> consultarVentasPorRangoFechas(Date fechaInicio, Date fechaFin) throws PersistenciaException {
         MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
@@ -100,6 +115,9 @@ public class VentaDAO implements IVentaDAO {
         return ventas;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Venta> consultarVentasPorFecha(Date fecha) throws PersistenciaException {
         MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
@@ -113,6 +131,9 @@ public class VentaDAO implements IVentaDAO {
         return ventas;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Venta encontrarVenta(String idVenta) throws PersistenciaException {
         try {
@@ -138,6 +159,9 @@ public class VentaDAO implements IVentaDAO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Venta> consultarVentasPorProductos(List<Producto> listaProductos) throws PersistenciaException {
         try {
@@ -168,6 +192,9 @@ public class VentaDAO implements IVentaDAO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Venta> consultarVentasConFiltros(String clienteId, Date fechaInicio, Date fechaFin, List<Producto> listaProductos) throws PersistenciaException {
         try {

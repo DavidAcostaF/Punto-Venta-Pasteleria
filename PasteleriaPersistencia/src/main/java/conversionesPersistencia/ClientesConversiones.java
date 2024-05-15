@@ -18,9 +18,18 @@ import org.bson.types.ObjectId;
  */
 public class ClientesConversiones {
 
+    /**
+     * Crea una nueva instancia de la clase ClientesConversiones.
+     */
     public ClientesConversiones() {
     }
 
+    /**
+     * Convierte un objeto ClienteMapeo a un objeto Cliente.
+     *
+     * @param cliente El objeto ClienteMapeo a convertir.
+     * @return El objeto Cliente convertido.
+     */
     public Cliente convertirCliente(ClienteMapeo cliente) {
         Cliente Cliente = new Cliente();
         Cliente.setId(cliente.getId().toString());
@@ -37,15 +46,20 @@ public class ClientesConversiones {
                 direccionE.setNumExterior(direccion.getNumExterior());
                 direcciones.add(direccionE);
             }
-
             Cliente.setDirecciones(direcciones);
-        }else {
+        } else {
             Cliente.setDirecciones(new ArrayList<>());
         }
 
         return Cliente;
     }
 
+    /**
+     * Convierte un objeto Cliente a un objeto ClienteMapeo.
+     *
+     * @param cliente El objeto Cliente a convertir.
+     * @return El objeto ClienteMapeo convertido.
+     */
     public ClienteMapeo convertirClienteAMapeo(Cliente cliente) {
         if (cliente == null) {
             return null;
@@ -70,9 +84,16 @@ public class ClientesConversiones {
         } else {
             clienteMapeo.setDirecciones(new ArrayList<>());
         }
+
         return clienteMapeo;
     }
 
+    /**
+     * Convierte un objeto Cliente a un objeto ClienteMapeo para agregar.
+     *
+     * @param cliente El objeto Cliente a convertir.
+     * @return El objeto ClienteMapeo convertido.
+     */
     public ClienteMapeo convertirClienteAMapeoAgregar(Cliente cliente) {
         if (cliente == null) {
             return null;
@@ -100,6 +121,12 @@ public class ClientesConversiones {
         return clienteMapeo;
     }
 
+    /**
+     * Convierte un objeto ClienteMapeo a un objeto Cliente, incluyendo el RFC.
+     *
+     * @param cliente El objeto ClienteMapeo a convertir.
+     * @return El objeto Cliente convertido.
+     */
     public Cliente convertirClienteConRFC(ClienteMapeo cliente) {
         Cliente Cliente = new Cliente();
         Cliente.setId(cliente.getId().toString());
@@ -123,6 +150,12 @@ public class ClientesConversiones {
         return Cliente;
     }
 
+    /**
+     * Convierte un objeto Cliente a un objeto ClienteMapeo, incluyendo el RFC.
+     *
+     * @param cliente El objeto Cliente a convertir.
+     * @return El objeto ClienteMapeo convertido.
+     */
     public ClienteMapeo convertirClienteAMapeoConRFC(Cliente cliente) {
         if (cliente == null) {
             return null;
@@ -149,6 +182,13 @@ public class ClientesConversiones {
         return clienteMapeo;
     }
 
+    /**
+     * Convierte una lista de objetos ClienteMapeo a una lista de objetos
+     * Cliente.
+     *
+     * @param clientesMapeo La lista de objetos ClienteMapeo a convertir.
+     * @return La lista de objetos Cliente convertida.
+     */
     public List<Cliente> convertirDesdeClientes(List<ClienteMapeo> clientesMapeo) {
         List<Cliente> clientes = new ArrayList<>();
         for (ClienteMapeo clienteMapeo : clientesMapeo) {

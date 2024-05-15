@@ -1,14 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.pasteleriadocumentosanidadosmapeo;
 
 import org.bson.types.ObjectId;
 
 /**
- *
- * @author af_da
+ * Clase que representa un detalle de ingrediente mapeado para documentos anidados.
  */
 public class IngredienteDetalleMapeo {
 
@@ -16,35 +11,75 @@ public class IngredienteDetalleMapeo {
     private String nombre;
     private Integer cantidad;
 
+    /**
+     * Constructor de la clase IngredienteDetalleMapeo.
+     * 
+     * @param ingredienteId El ObjectId del ingrediente.
+     * @param nombre El nombre del ingrediente.
+     * @param cantidad La cantidad del ingrediente.
+     */
     public IngredienteDetalleMapeo(ObjectId ingredienteId, String nombre, Integer cantidad) {
         this.ingredienteId = ingredienteId;
         this.nombre = nombre;
         this.cantidad = cantidad;
     }
 
+    /**
+     * Constructor vacío de la clase IngredienteDetalleMapeo.
+     */
+    public IngredienteDetalleMapeo() {
+    }
+
+    /**
+     * Obtiene el ObjectId del ingrediente.
+     * 
+     * @return El ObjectId del ingrediente.
+     */
     public ObjectId getIngredienteId() {
         return ingredienteId;
     }
 
-    public IngredienteDetalleMapeo() {
-    }
-
+    /**
+     * Establece el ObjectId del ingrediente.
+     * 
+     * @param ingredienteId El ObjectId del ingrediente.
+     */
     public void setIngredienteId(ObjectId ingredienteId) {
         this.ingredienteId = ingredienteId;
     }
 
+    /**
+     * Obtiene el nombre del ingrediente.
+     * 
+     * @return El nombre del ingrediente.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * Establece el nombre del ingrediente.
+     * 
+     * @param nombre El nombre del ingrediente.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * Obtiene la cantidad del ingrediente.
+     * 
+     * @return La cantidad del ingrediente.
+     */
     public Integer getCantidad() {
         return cantidad;
     }
 
+    /**
+     * Establece la cantidad del ingrediente.
+     * 
+     * @param cantidad La cantidad del ingrediente.
+     */
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }

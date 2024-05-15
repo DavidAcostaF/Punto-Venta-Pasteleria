@@ -9,26 +9,48 @@ import com.mycompany.pasteleriadominiodocumentosanidados.IngredienteDetalle;
 import org.bson.types.ObjectId;
 
 /**
- *
- * @author af_da
+ * Clase para realizar conversiones entre objetos IngredienteDetalle y
+ * IngredienteDetalleMapeo.
  */
 public class IngredienteDetalleConversiones {
 
+    /**
+     * Convierte un objeto IngredienteDetalleMapeo a un objeto
+     * IngredienteDetalle.
+     *
+     * @param detalleIngrediente El objeto IngredienteDetalleMapeo a convertir.
+     * @return El objeto IngredienteDetalle convertido.
+     */
     protected IngredienteDetalle convertir(IngredienteDetalleMapeo detalleIngrediente) {
+        // Crea una nueva instancia de IngredienteDetalle.
         IngredienteDetalle detalleIngredienteE = new IngredienteDetalle();
+        // Establece el ID del ingrediente del detalle.
         detalleIngredienteE.setIngredienteId(detalleIngrediente.getIngredienteId().toHexString());
+        // Establece la cantidad del ingrediente del detalle.
         detalleIngredienteE.setCantidad(detalleIngrediente.getCantidad());
+        // Establece el nombre del ingrediente del detalle.
         detalleIngredienteE.setNombre(detalleIngrediente.getNombre());
+        // Retorna el detalle de ingrediente convertido.
         return detalleIngredienteE;
     }
-    
+
+    /**
+     * Convierte un objeto IngredienteDetalle a un objeto
+     * IngredienteDetalleMapeo.
+     *
+     * @param detalleIngrediente El objeto IngredienteDetalle a convertir.
+     * @return El objeto IngredienteDetalleMapeo convertido.
+     */
     protected IngredienteDetalleMapeo convertirMapeo(IngredienteDetalle detalleIngrediente) {
-    IngredienteDetalleMapeo detalleIngredienteM = new IngredienteDetalleMapeo();
-
-    detalleIngredienteM.setIngredienteId(new ObjectId(detalleIngrediente.getIngredienteId()));
-    detalleIngredienteM.setCantidad(detalleIngrediente.getCantidad());
-    detalleIngredienteM.setNombre(detalleIngrediente.getNombre());
-
-    return detalleIngredienteM;
-}
+        // Crea una nueva instancia de IngredienteDetalleMapeo.
+        IngredienteDetalleMapeo detalleIngredienteM = new IngredienteDetalleMapeo();
+        // Establece el ID del ingrediente del detalle mapeado.
+        detalleIngredienteM.setIngredienteId(new ObjectId(detalleIngrediente.getIngredienteId()));
+        // Establece la cantidad del ingrediente del detalle mapeado.
+        detalleIngredienteM.setCantidad(detalleIngrediente.getCantidad());
+        // Establece el nombre del ingrediente del detalle mapeado.
+        detalleIngredienteM.setNombre(detalleIngrediente.getNombre());
+        // Retorna el detalle de ingrediente mapeado convertido.
+        return detalleIngredienteM;
+    }
 }

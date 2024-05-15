@@ -1,18 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.mycompany.pasteleriadaos;
 
-import Exceptions.PersistenciaException;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 
 /**
+ * Interfaz IConexion
+ * <p>
+ * Esta interfaz define un método para obtener una colección de MongoDB de un
+ * tipo genérico T. Es utilizada para abstraer la conexión a la base de datos y
+ * la obtención de las colecciones necesarias.
  *
- * @author af_da
+ * @param <T> el tipo de los documentos que se manejarán en la colección
  */
-public interface IConexion<T>{
- 
+public interface IConexion<T> {
+
+    /**
+     * Obtiene la colección de MongoDB para el tipo T.
+     * <p>
+     * Este método es responsable de devolver la colección específica de MongoDB
+     * correspondiente al tipo de documentos T.
+     *
+     * @return una colección de MongoDB de tipo T
+     */
     public MongoCollection<T> obtenerColeccion();
 }
