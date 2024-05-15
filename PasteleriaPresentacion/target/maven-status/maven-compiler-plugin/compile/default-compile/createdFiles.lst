@@ -67,7 +67,6 @@ presentacion\casohistoriales\Presentacion_FrmHistorialVentas$7.class
 extras\DynamicComboBoxEditor.class
 presentacion\gestioninventarios\Presentacion_DlgDetalleProducto$1.class
 presentacion\gestioninventarios\Presentacion_DlgIngresarDatosDelProducto$5.class
-presentacion\facturar\Presentacion_FrmSeleccionarVenta$5.class
 presentacion\gestioninventarios\Presentacion_DlgIngredientesSeleccionados$3.class
 presentacion\casohistoriales\Presentacion_FrmHistorialVentas$5.class
 presentacion\gestioninventarios\Presentacion_DlgIngresarDatosDelProducto$3.class
@@ -76,6 +75,7 @@ presentacion\Presentacion_DlgDirecciones$2.class
 presentacion\Presentacion_DlgConfirmacionPago.class
 presentacion\gestioninventarios\Presentacion_DlgActualizarIngredientesSeleccionados$1.class
 control\ControlIngresosMensuales.class
+presentacion\facturar\Presentacion_FrmHistorialFacturas$6.class
 presentacion\facturar\Presentacion_FrmSeleccionarVenta.class
 control\ControlAgregarVenta.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioIngredientes$6.class
@@ -88,7 +88,6 @@ extras\ComboBoxMultiSeleccion$IconoCheckBox.class
 extras\ComboBoxMultiSeleccion$Item.class
 presentacion\Presentacion_DlgDirecciones$1.class
 presentacion\Presentacion_DlgAgregarDireccion$4.class
-presentacion\facturar\Presentacion_FrmConfirmarGenerarFactura$5.class
 presentacion\gestioninventarios\Presentacion_DlgIngresarDatosDelProducto$1.class
 presentacion\casohistoriales\Presentacion_FrmDetallesVenta$1.class
 extras\ActionButton$1.class
@@ -96,6 +95,7 @@ extras\ActionButton.class
 presentacion\facturar\Presentacion_DlgFacturarACliente.class
 presentacion\Presentacion_ProductosVenta$3.class
 presentacion\Presentacion_DlgListaClientes$2.class
+presentacion\Presentacion_MenuPrincipal$10.class
 presentacion\gestioninventarios\Presentacion_DlgIngredientesSeleccionados$2.class
 presentacion\gestioninventarios\Presentacion_DlgIngresarDatosDelProducto.class
 presentacion\Presentacion_ProductosVenta$BotonEditor.class
@@ -114,6 +114,7 @@ presentacion\Presentacion_DlgConfirmacionPago$6.class
 presentacion\Presentacion_DlgVentasTotales$1.class
 extras\ComboBoxMultiSeleccion$RenderizadorComboMultiple.class
 presentacion\facturar\Presentacion_DlgFacturarACliente$2.class
+presentacion\facturar\Presentacion_FrmHistorialFacturas$5.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioIngredientes$8.class
 control\ControlFacturar.class
 extras\PastelComboBoxModel.class
@@ -146,7 +147,6 @@ presentacion\gestioninventarios\Presentacion_DlgActualizarDatosDelProducto$4.cla
 extras\ComboBoxMultiSeleccion$InterfazComboMultiple.class
 presentacion\Presentacion_ProductosVenta.class
 presentacion\Presentacion_DlgListaClientes.class
-presentacion\gestioninventarios\Presentacion_DlgInventarioProductos$6.class
 presentacion\gestioninventarios\Presentacion_DlgActualizarDatosDelProducto$2.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioIngredientes$11.class
 presentacion\Presentacion_DlgDatosCliente$2.class
