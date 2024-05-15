@@ -40,7 +40,6 @@ public class Presentacion_DlgActualizarDatosDelProducto extends javax.swing.JFra
         control = ControlGestionarInventario.getInstance();
         txtNombre.setText(control.getProductoDTO().getNombre());
         txtDescripcion.setText(control.getProductoDTO().getDescripcion());
-        txtNombre.setEditable(false);
         cargaTabla();
     }
 
@@ -253,7 +252,8 @@ public class Presentacion_DlgActualizarDatosDelProducto extends javax.swing.JFra
                 return;
             }
         }
-
+        System.out.println(control.getProductoDTO().getId()+"pene");
+        productoDTO.setId(control.getProductoDTO().getId());
         productoDTO.setIngredientes(listaIngredienteDetalle);
         productoDTO.setNombre(this.txtNombre.getText());
         productoDTO.setDescripcion(this.txtDescripcion.getText());

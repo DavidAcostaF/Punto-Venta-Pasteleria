@@ -71,6 +71,15 @@ public class ProductosBO implements IProductosBO {
     }
 
     @Override
+    public DTO_Producto consultarProducto(String id) {
+        Producto productoConsultado = productoDAO.consultar(id);
+        if (productoConsultado == null) {
+            return null;
+        }
+        return conversor.convertirProducto(productoConsultado);
+    }
+
+    @Override
     public ProductoMapeo convertirDTOAProductoMapeo(DTO_Producto producto) {
         ProductoMapeo productoNuevo = new ProductoMapeo();
         productoNuevo.setDescripcion(producto.getDescripcion());
@@ -103,7 +112,9 @@ public class ProductosBO implements IProductosBO {
         Float precio = 0F;
         Producto productoNuevo = new Producto();
         productoNuevo.setDescripcion(producto.getDescripcion());
-
+        if (producto.getId() != null) {
+            productoNuevo.setId(producto.getId());
+        }
         productoNuevo.setNombre(producto.getNombre());
         productoNuevo.setPrecio(producto.getPrecio());
 

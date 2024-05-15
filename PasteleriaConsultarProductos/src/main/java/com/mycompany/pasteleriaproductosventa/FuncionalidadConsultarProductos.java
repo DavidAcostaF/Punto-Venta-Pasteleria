@@ -4,13 +4,9 @@
  */
 package com.mycompany.pasteleriaproductosventa;
 
-import com.mycompany.pastelerianegocio.ClientesBO;
-import com.mycompany.pastelerianegocio.IClientesBO;
 import com.mycompany.pastelerianegocio.IProductosBO;
 import com.mycompany.pastelerianegocio.ProductosBO;
-import com.mycompany.pastelerianegocio.VentasBO;
 import dto.DTO_Producto;
-import java.util.ArrayList;
 import java.util.List;
 
 public class FuncionalidadConsultarProductos implements IFuncionalidadConsultarProductos {
@@ -36,5 +32,10 @@ public class FuncionalidadConsultarProductos implements IFuncionalidadConsultarP
     public List<DTO_Producto> consultarProductosCoincidentes(String nombre) {
         return productoBO.consultarProductosCoincidentes(nombre);
 
+    }
+
+    @Override
+    public DTO_Producto consultarProducto(String id) {
+        return productoBO.consultarProducto(id);
     }
 }

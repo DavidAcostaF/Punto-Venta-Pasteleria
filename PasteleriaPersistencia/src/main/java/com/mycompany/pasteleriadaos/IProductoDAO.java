@@ -20,6 +20,8 @@ public interface IProductoDAO {
 
     public boolean eliminarProducto(ProductoMapeo producto);
 
+    public Producto consultar(String id);
+
     public List<Producto> consultarProductos();
 
     public Producto consultarPorNombre(String nombre);

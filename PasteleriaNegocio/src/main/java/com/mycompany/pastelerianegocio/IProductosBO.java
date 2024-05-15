@@ -27,6 +27,8 @@ public interface IProductosBO {
 
     public DTO_Producto consultarProductoPorNombre(String nombre);
 
+    public DTO_Producto consultarProducto(String id);
+
     public ProductoMapeo convertirDTOAProductoMapeo(DTO_Producto producto);
 
     public Producto convertirDTOAProducto(DTO_Producto producto);
@@ -46,6 +48,5 @@ public interface IProductosBO {
     public List<DTO_Producto> consultarProductosCoincidentes(String nombre);
 
     public List<DTO_Producto> consultarListaProductosConStock();
-    
 
 }

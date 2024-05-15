@@ -233,14 +233,12 @@ public class Presentacion_DlgActualizarIngredientesSeleccionados extends javax.s
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         List<DTO_IngredienteDetalle> ingredientesAgregados = obtenerListaIngredientes();
-        for (int i = 0; i < ingredientesAgregados.size(); i++) {
-            System.out.println(ingredientesAgregados.get(i).getIngredienteId());
-        }
+
 
         control.getProductoDTO().setIngredientes(ingredientesAgregados);
 
         DTO_Producto producto = control.getProductoAActualizar();
-
+        System.out.println(producto.getId());
         DTO_Producto productoAgregado = funcionalidadActualizarProducto.actualizarProducto(producto);
 
         if (productoAgregado != null) {

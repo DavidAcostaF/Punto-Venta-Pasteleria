@@ -226,7 +226,6 @@ public class Presentacion_DlgConfirmacionPago extends javax.swing.JDialog {
                 a.add(venta.getDireccionEntrega());
                 venta.getCliente().setDirecciones(a);
             }
-
             venta.setIDcliente(agregarCliente.agregarCliente(venta.getCliente()).getID());
             ventas.agregarVenta(venta);
             venta.setFechaRegistro(new Date());

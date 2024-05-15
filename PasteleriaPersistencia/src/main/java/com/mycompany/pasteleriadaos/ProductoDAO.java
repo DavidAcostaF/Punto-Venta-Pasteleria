@@ -46,7 +46,7 @@ public class ProductoDAO implements IProductoDAO {
     public Producto actualizar(Producto producto) {
 
         MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
-        ProductoMapeo productoActualizado = coleccion.findOneAndReplace(eq("nombre", producto.getNombre()), conversor.convertirProductoMapeo(producto));
+        ProductoMapeo productoActualizado = coleccion.findOneAndReplace(eq("_id", new ObjectId(producto.getId())), conversor.convertirProductoMapeo(producto));
 
         return conversor.convertirProducto(productoActualizado);
     }
@@ -57,6 +57,16 @@ public class ProductoDAO implements IProductoDAO {
         DeleteResult result = coleccion.deleteOne(eq("nombre", producto.getNombre()));
 
         return result.getDeletedCount() == 1;
+    }
+
+    @Override
+    public Producto consultar(String id) {
+        MongoCollection<ProductoMapeo> coleccion = conexion.obtenerColeccion();
+        ProductoMapeo resultado = coleccion.find(eq("_id", new ObjectId(id))).first();
+        if (resultado == null) {
+            return null;
+        }
+        return conversor.convertirProducto(resultado);
     }
 
     @Override

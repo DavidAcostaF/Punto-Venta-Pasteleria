@@ -16,6 +16,8 @@ public interface IFuncionalidadConsultarProductos {
 
     public List<DTO_Producto> consultarProductos();
 
+    public DTO_Producto consultarProducto(String id);
+
     public DTO_Producto consultarProductoPorNombre(String nombre);
 
     public List<DTO_Producto> consultarProductosCoincidentes(String nombre);
