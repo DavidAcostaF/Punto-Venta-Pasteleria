@@ -57,10 +57,15 @@ public class Presentacion_FrmMenuHistoriales extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
 
-        jButton2.setText("Historial de reportes");
         jButton2.setBackground(new java.awt.Color(140, 220, 254));
         jButton2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
+        jButton2.setText("Historial de reportes");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -105,6 +110,11 @@ public class Presentacion_FrmMenuHistoriales extends javax.swing.JFrame {
         this.dispose();
         control.mostrarHistorialVentas();
     }//GEN-LAST:event_historialVentaBtnActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       this.dispose();
+       control.mostrarHistorialr();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public void mostrarHistorialVentas() {
         java.awt.EventQueue.invokeLater(new Runnable() {

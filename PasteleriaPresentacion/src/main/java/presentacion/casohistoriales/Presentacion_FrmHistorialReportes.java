@@ -10,6 +10,7 @@ import com.mycompany.pasteleriaeliminarreporte.FuncionalidadEliminarReporte;
 import com.mycompany.pasteleriaeliminarreporte.IFuncionalidadEliminarReporte;
 import com.mycompany.pasteleriaguardarreportes.FuncionalidadGuardarReportes;
 import com.mycompany.pasteleriaguardarreportes.IFuncionalidadGuardarReportes;
+import control.ControlHistoriales;
 import dto.DTO_Reporte;
 
 import extras.TableActionCellEditor;
@@ -37,7 +38,7 @@ public class Presentacion_FrmHistorialReportes extends javax.swing.JFrame {
     private List<DTO_Reporte> listaReporte;
     private IFuncionalidadEliminarReporte funcionalidadEliminar;
     private SimpleDateFormat ff = new SimpleDateFormat("dd/MM/yyyy");
-    
+    private ControlHistoriales control;
 
     /**
      * Creates new form Presentacion_DlgHistorialeReportes
@@ -45,7 +46,7 @@ public class Presentacion_FrmHistorialReportes extends javax.swing.JFrame {
     public Presentacion_FrmHistorialReportes() {
         funcionalidadReportes = new FuncionalidadConsultarReportes();
         funcionalidadEliminar = new FuncionalidadEliminarReporte();
-         
+         control=ControlHistoriales.getInstance();
         setTitle("Historial de registros");
         initComponents();
 
@@ -128,6 +129,11 @@ public class Presentacion_FrmHistorialReportes extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Volver");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         tablaReportes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -145,18 +151,16 @@ public class Presentacion_FrmHistorialReportes extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(188, 188, 188)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(38, Short.MAX_VALUE))
+                        .addGap(188, 188, 188)
+                        .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 414, Short.MAX_VALUE))))
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,6 +192,10 @@ public class Presentacion_FrmHistorialReportes extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+     control.mostrarMenu();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
   
 

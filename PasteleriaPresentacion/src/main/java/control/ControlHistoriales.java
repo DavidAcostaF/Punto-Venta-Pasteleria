@@ -46,7 +46,7 @@ public class ControlHistoriales {
 
     }
 
-    private void mostrarHistorialVenta() {
+    public void mostrarHistorialr() {
         Presentacion_FrmHistorialReportes hReportes = new Presentacion_FrmHistorialReportes();
         hReportes.mostrarHistorialReportes();
     }
