@@ -4,17 +4,36 @@
  */
 package presentacion.facturar;
 
+import com.mycompany.pasteleriagenerarreporte.IFuncionalidadGenerarReporte;
+import com.mycompany.pasteleriaguardarreportes.IFuncionalidadGuardarReportes;
+import consultarClientes.IFuncionalidadConsultarClientes;
+import control.ControlFacturar;
+import dto.DTO_DetalleVenta;
+import dto.DTO_DetallesVentaReporte;
+import dto.DTO_Factura;
+import dto.DTO_FacturaFormato;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import presentacion.Presentacion_MenuPrincipal;
+
 /**
  *
  * @author PERSONAL
  */
 public class Presentacion_FrmConfirmarGenerarFactura extends javax.swing.JFrame {
+    
+    IFuncionalidadGenerarReporte generar;
+    IFuncionalidadGuardarReportes guardar;
+    ControlFacturar control;
 
     /**
      * Creates new form Presentacion_FrmConfirmarGenerarFactura
      */
     public Presentacion_FrmConfirmarGenerarFactura() {
         initComponents();
+        
     }
 
     /**
@@ -31,7 +50,7 @@ public class Presentacion_FrmConfirmarGenerarFactura extends javax.swing.JFrame 
         btnVolver = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableVentas = new javax.swing.JTable();
+        tableDetalles = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
@@ -91,26 +110,33 @@ public class Presentacion_FrmConfirmarGenerarFactura extends javax.swing.JFrame 
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tableVentas.setModel(new javax.swing.table.DefaultTableModel(
+        tableDetalles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "NOMBRE", "PU", "IMPORTE"
+                "Nombre", "Especificaciones", "Cantidad", "PU", "IMPORTE"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tableVentas);
+        jScrollPane1.setViewportView(tableDetalles);
+        if (tableDetalles.getColumnModel().getColumnCount() > 0) {
+            tableDetalles.getColumnModel().getColumn(0).setResizable(false);
+            tableDetalles.getColumnModel().getColumn(1).setResizable(false);
+            tableDetalles.getColumnModel().getColumn(2).setResizable(false);
+            tableDetalles.getColumnModel().getColumn(3).setResizable(false);
+            tableDetalles.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Datos:");
@@ -301,7 +327,7 @@ public class Presentacion_FrmConfirmarGenerarFactura extends javax.swing.JFrame 
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, Short.MAX_VALUE)
         );
 
         pack();
@@ -312,45 +338,48 @@ public class Presentacion_FrmConfirmarGenerarFactura extends javax.swing.JFrame 
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnGenerarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarFacturaActionPerformed
-        // TODO add your handling code here:
+        try {
+            DTO_FacturaFormato facturaFormato = new DTO_FacturaFormato();
+            List<DTO_DetallesVentaReporte> detallesVenta = new ArrayList<>();
+            for (DTO_DetalleVenta ventaDetalle : control.getVenta().getDetallesVenta()) {
+                DTO_DetallesVentaReporte dv = new DTO_DetallesVentaReporte();
+                dv.setCantidad(Integer.toString(ventaDetalle.getCantidad()));
+                dv.setImporte(Float.toString(ventaDetalle.getImporte()));
+                dv.setProducto(ventaDetalle.getProducto().getNombre());
+                dv.setPrecio(Float.toString(ventaDetalle.getPrecio()));
+                detallesVenta.add(dv);
+            }
+            facturaFormato.setDetallesVenta(detallesVenta);
+            facturaFormato.setRfcCliente(control.getCliente().getRfc());
+            facturaFormato.setNombreCliente(control.getCliente().getNombre());
+            facturaFormato.setDireccionCliente(control.getCliente().getDirecciones().get(0).toString());
+            String total = "$" + control.getVenta().getMontoTotal();
+            facturaFormato.setTotal(total);
+            generar.generarReporteFactura(facturaFormato);
+            guardar.guardarFactura(control.getFactura());
+            control.setFactura(null);
+            control.setCliente(null);
+            control.setVenta(null);
+            JOptionPane.showMessageDialog(null, "Factura guardad y generada con éxito");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        Presentacion_MenuPrincipal menu = new Presentacion_MenuPrincipal();
+        this.dispose();
     }//GEN-LAST:event_btnGenerarFacturaActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_FrmConfirmarGenerarFactura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_FrmConfirmarGenerarFactura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_FrmConfirmarGenerarFactura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_FrmConfirmarGenerarFactura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Presentacion_FrmConfirmarGenerarFactura().setVisible(true);
-            }
+    
+    private void llenarTabla() {
+        List<DTO_DetalleVenta> detallesVenta = control.getVenta().getDetallesVenta();
+        DefaultTableModel modelo = (DefaultTableModel) tableDetalles.getModel();
+        detallesVenta.forEach(t -> {
+            modelo.addRow(new Object[]{t.getProducto().getNombre(), t.getEspecificacion(),
+                t.getCantidad(), t.getPrecio(), t.getImporte()
+            });
         });
     }
 
@@ -380,6 +409,6 @@ public class Presentacion_FrmConfirmarGenerarFactura extends javax.swing.JFrame 
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblRfc;
     private javax.swing.JLabel lblTotalVenta;
-    private javax.swing.JTable tableVentas;
+    private javax.swing.JTable tableDetalles;
     // End of variables declaration//GEN-END:variables
 }
