@@ -4,6 +4,7 @@
  */
 package com.mycompany.pasteleriaguardarreportes;
 
+import dto.DTO_Factura;
 import dto.DTO_Reporte;
 import java.io.File;
 
@@ -13,6 +14,6 @@ import java.io.File;
  */
 public interface IFuncionalidadGuardarReportes {
    public DTO_Reporte guardarReporte(DTO_Reporte reporte);    
-   
+   public DTO_Factura guardarFactura(DTO_Factura factura);
    public byte[] convertirArchivoABytes(File archivo); 
 }

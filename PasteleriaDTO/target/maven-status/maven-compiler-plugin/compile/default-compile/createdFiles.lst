@@ -11,5 +11,6 @@ dto\DTO_Factura.class
 dto\DTO_Direccion.class
 dto\DTO_ReporteIngresosFormato.class
 dto\DTO_IngredienteDetalle.class
+dto\DTO_FacturaFormato.class
 dto\DTO_ReciboFormato.class
 dto\DTO_Venta.class

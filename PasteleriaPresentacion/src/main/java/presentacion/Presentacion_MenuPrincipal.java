@@ -7,6 +7,7 @@ package presentacion;
 //import com.mycompany.pastelerianegocio.ControlRegistrarVenta;
 //import com.mycompany.pastelerianegocio.IControlRegistrarVenta;
 import control.ControlAgregarVenta;
+import control.ControlFacturar;
 import control.ControlGestionarInventario;
 import control.ControlHistoriales;
 import control.ControlIngresosMensuales;
@@ -21,6 +22,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
     private ControlGestionarInventario controlGesionarInventario;
     private ControlIngresosMensuales controlIngresos;
     private ControlHistoriales controlHistoriales;
+    private ControlFacturar controlFacturas;
 //    private IControlRegistrarVenta controlRegistrarVenta;
 
     /**
@@ -33,7 +35,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
         controlGesionarInventario = new ControlGestionarInventario();
         this.controlIngresos = ControlIngresosMensuales.getInstance();
         controlHistoriales=ControlHistoriales.getInstance();
-
+        controlFacturas = ControlFacturar.getInstance();
     }
 
     /**
@@ -54,14 +56,13 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
         botonIngresosMensuales = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        btnFacturar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(232, 232, 232));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Pasteleria Dulce Tentación");
 
         btnRegistrarVenta.setBackground(new java.awt.Color(140, 220, 254));
@@ -134,13 +135,13 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton8.setBackground(new java.awt.Color(140, 220, 254));
-        jButton8.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jButton8.setText("Facturar");
-        jButton8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btnFacturar.setBackground(new java.awt.Color(140, 220, 254));
+        btnFacturar.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnFacturar.setText("Facturar");
+        btnFacturar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnFacturar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btnFacturarActionPerformed(evt);
             }
         });
 
@@ -169,7 +170,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
                                 .addGap(86, 86, 86)
                                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(28, 28, 28)
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(btnFacturar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(184, 184, 184)
                         .addComponent(jLabel1)))
@@ -193,7 +194,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnFacturar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
@@ -244,9 +245,10 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    private void btnFacturarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturarActionPerformed
+        controlFacturas.mostrarDlgOpcionFactura();
+        this.dispose();
+    }//GEN-LAST:event_btnFacturarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,13 +288,13 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonIngresosMensuales;
+    private javax.swing.JButton btnFacturar;
     private javax.swing.JButton btnRegistrarVenta;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

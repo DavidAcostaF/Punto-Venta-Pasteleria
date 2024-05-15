@@ -4,6 +4,7 @@
  */
 package com.mycompany.pasteleriaconsultarreportes;
 
+import dto.DTO_Factura;
 import dto.DTO_Reporte;
 import java.util.List;
 
@@ -13,4 +14,5 @@ import java.util.List;
  */
 public interface IFuncionalidadConsultarReportes {
     public List<DTO_Reporte> consultarReportes(List<DTO_Reporte> reportes);
+    public List<DTO_Factura> consultarFacturas(List<DTO_Factura> facturas);
 }

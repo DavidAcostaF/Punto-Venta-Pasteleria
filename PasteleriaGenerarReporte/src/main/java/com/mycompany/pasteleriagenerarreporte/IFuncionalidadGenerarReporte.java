@@ -4,6 +4,7 @@
  */
 package com.mycompany.pasteleriagenerarreporte;
 
+import dto.DTO_FacturaFormato;
 import dto.DTO_GenerarReporte;
 import dto.DTO_ReciboFormato;
 import dto.DTO_ReporteIngresosFormato;
@@ -22,4 +23,6 @@ public interface IFuncionalidadGenerarReporte {
     public DTO_GenerarReporte generarRecibo(DTO_ReciboFormato reciboFormato);
     
     public DTO_GenerarReporte generarReporteIngresosMensuales(DTO_ReporteIngresosFormato ingresosFormato);
+    
+    public DTO_GenerarReporte generarReporteFactura (DTO_FacturaFormato formatoFactura);
 }

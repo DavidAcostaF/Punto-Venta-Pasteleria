@@ -19,7 +19,6 @@ import presentacion.facturar.Presentacion_FrmSeleccionarVenta;
  */
 public class ControlFacturar {
     
-    
     private static ControlFacturar instance;
     private DTO_Factura factura;
     private DTO_Venta venta;
@@ -40,25 +39,25 @@ public class ControlFacturar {
         return instance;
     }
     
-    private void mostrarDlgFacturarACliente(){
+    public void mostrarDlgFacturarACliente(){
         Presentacion_DlgFacturarACliente dlgFacturarACliente = new Presentacion_DlgFacturarACliente(null, true);
     }
     
-    private void mostrarDlgOpcionFactura(){
+    public void mostrarDlgOpcionFactura(){
         Presentacion_DlgOpcionFactura dlgOpcionFactura = new Presentacion_DlgOpcionFactura(null, true);
     }
     
-    private void mostrarFrmConfirmarGenerarFactura(){
+    public void mostrarFrmConfirmarGenerarFactura(){
         Presentacion_FrmConfirmarGenerarFactura frmConfirmarGenerarFactura = new Presentacion_FrmConfirmarGenerarFactura();
         frmConfirmarGenerarFactura.setVisible(true);
     }
     
-    private void mostrarFrmSeleccionarVenta(){
+    public void mostrarFrmSeleccionarVenta(){
         Presentacion_FrmSeleccionarVenta frmSeleccionarVenta = new Presentacion_FrmSeleccionarVenta();
         frmSeleccionarVenta.setVisible(true);
     }
     
-    private void mostrarFrmHistorialFacturas(){
+    public void mostrarFrmHistorialFacturas(){
         Presentacion_FrmHistorialFacturas frmHistorialFacturas = new Presentacion_FrmHistorialFacturas();
         frmHistorialFacturas.setVisible(true);
     }

@@ -4,6 +4,7 @@
  */
 package com.mycompany.pasteleriaeliminarreporte;
 
+import dto.DTO_Factura;
 import dto.DTO_Reporte;
 
 /**
@@ -12,4 +13,5 @@ import dto.DTO_Reporte;
  */
 public interface IFuncionalidadEliminarReporte {
     public void eliminarReporte(DTO_Reporte reporte);
+    public void eliminarFactura(DTO_Factura factra);
 }

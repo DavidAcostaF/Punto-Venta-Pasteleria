@@ -4,8 +4,11 @@
  */
 package com.mycompany.pasteleriaconsultarreportes;
 
+import com.mycompany.pastelerianegocio.GestorFacturasBO;
+import com.mycompany.pastelerianegocio.IGestorFacturasBO;
 import com.mycompany.pastelerianegocio.IReportesBO;
 import com.mycompany.pastelerianegocio.ReportesBO;
+import dto.DTO_Factura;
 import dto.DTO_Reporte;
 import java.util.List;
 
@@ -16,14 +19,21 @@ import java.util.List;
 public class FuncionalidadConsultarReportes implements IFuncionalidadConsultarReportes {
 
     IReportesBO reporteBo;
+    IGestorFacturasBO facturaBO;
 
     public FuncionalidadConsultarReportes() {
         reporteBo = new ReportesBO();
+        facturaBO = new GestorFacturasBO();
     }
 
     @Override
     public List<DTO_Reporte> consultarReportes(List<DTO_Reporte> reportes) {
         return reporteBo.consultarReportes();
+    }
+
+    @Override
+    public List<DTO_Factura> consultarFacturas(List<DTO_Factura> facturas) {
+        return facturaBO.consultarFacturas();
     }
 
 }

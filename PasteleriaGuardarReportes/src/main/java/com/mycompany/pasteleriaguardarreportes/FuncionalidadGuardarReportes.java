@@ -4,8 +4,11 @@
  */
 package com.mycompany.pasteleriaguardarreportes;
 
+import com.mycompany.pastelerianegocio.GestorFacturasBO;
+import com.mycompany.pastelerianegocio.IGestorFacturasBO;
 import com.mycompany.pastelerianegocio.IReportesBO;
 import com.mycompany.pastelerianegocio.ReportesBO;
+import dto.DTO_Factura;
 import dto.DTO_Reporte;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -19,14 +22,21 @@ import java.io.IOException;
 public class FuncionalidadGuardarReportes implements IFuncionalidadGuardarReportes {
 
     IReportesBO reporteBO;
+    IGestorFacturasBO facturaBO;
 
     public FuncionalidadGuardarReportes() {
         reporteBO = new ReportesBO();
+        facturaBO = new GestorFacturasBO();
     }
 
     @Override
     public DTO_Reporte guardarReporte(DTO_Reporte reporte) {
         return reporteBO.guardarReporte(reporte);
+    }
+    
+    @Override
+    public DTO_Factura guardarFactura(DTO_Factura factura) {
+        return facturaBO.guardarFactura(factura);
     }
 
     public byte[] convertirArchivoABytes(File archivo) {

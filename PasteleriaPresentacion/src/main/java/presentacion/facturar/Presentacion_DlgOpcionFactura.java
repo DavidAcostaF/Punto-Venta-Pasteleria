@@ -4,18 +4,24 @@
  */
 package presentacion.facturar;
 
+import control.ControlFacturar;
+import presentacion.Presentacion_MenuPrincipal;
+
 /**
  *
  * @author PERSONAL
  */
 public class Presentacion_DlgOpcionFactura extends javax.swing.JDialog {
 
+    ControlFacturar controlFacturar;
+    
     /**
      * Creates new form Presentacion_DlgOpcionFactura
      */
     public Presentacion_DlgOpcionFactura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        controlFacturar = ControlFacturar.getInstance();
     }
 
     /**
@@ -78,10 +84,20 @@ public class Presentacion_DlgOpcionFactura extends javax.swing.JDialog {
         btnNuevaFactura.setBackground(new java.awt.Color(18, 111, 161));
         btnNuevaFactura.setForeground(new java.awt.Color(255, 255, 255));
         btnNuevaFactura.setText("Nueva factura");
+        btnNuevaFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevaFacturaActionPerformed(evt);
+            }
+        });
 
         btnHistorialFacturas.setBackground(new java.awt.Color(18, 111, 161));
         btnHistorialFacturas.setForeground(new java.awt.Color(255, 255, 255));
         btnHistorialFacturas.setText("Historial de facturas");
+        btnHistorialFacturas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistorialFacturasActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Seleccione una acción:");
@@ -132,8 +148,20 @@ public class Presentacion_DlgOpcionFactura extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        // TODO add your handling code here:
+        Presentacion_MenuPrincipal menu = new Presentacion_MenuPrincipal();
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnNuevaFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaFacturaActionPerformed
+        controlFacturar.mostrarFrmSeleccionarVenta();
+        this.dispose();
+    }//GEN-LAST:event_btnNuevaFacturaActionPerformed
+
+    private void btnHistorialFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialFacturasActionPerformed
+        controlFacturar.mostrarFrmHistorialFacturas();
+        this.dispose();
+    }//GEN-LAST:event_btnHistorialFacturasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHistorialFacturas;
