@@ -4,7 +4,26 @@
  */
 package presentacion.facturar;
 
+import com.mycompany.pasteleriaconsultarreportes.FuncionalidadConsultarReportes;
+import com.mycompany.pasteleriaconsultarreportes.IFuncionalidadConsultarReportes;
+import com.mycompany.pasteleriaeliminarreporte.FuncionalidadEliminarReporte;
+import com.mycompany.pasteleriaeliminarreporte.IFuncionalidadEliminarReporte;
+import com.mycompany.pasteleriagenerarreporte.FuncionalidadGenerarReporte;
+import com.mycompany.pasteleriagenerarreporte.IFuncionalidadGenerarReporte;
 import control.ControlFacturar;
+import dto.DTO_DetalleVenta;
+import dto.DTO_DetallesVentaReporte;
+import dto.DTO_Factura;
+import dto.DTO_FacturaFormato;
+import extras.ButtonColumn;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,13 +32,40 @@ import control.ControlFacturar;
 public class Presentacion_FrmHistorialFacturas extends javax.swing.JFrame {
 
     private ControlFacturar controlFacturar;
-    
+    private IFuncionalidadConsultarReportes funcionalidadReportes;
+    private IFuncionalidadGenerarReporte funcionalidadGenerarReporte;
+    private List<DTO_Factura> listaFacturas;
+    private IFuncionalidadEliminarReporte funcionalidadEliminar;
+    private SimpleDateFormat ff = new SimpleDateFormat("dd/MM/yyyy");
+
     /**
      * Creates new form Presentacion_FrmHistorialFacturas
      */
     public Presentacion_FrmHistorialFacturas() {
         initComponents();
         controlFacturar = ControlFacturar.getInstance();
+        llenarTabla();
+
+        funcionalidadReportes = new FuncionalidadConsultarReportes();
+        funcionalidadGenerarReporte = new FuncionalidadGenerarReporte();
+        funcionalidadEliminar = new FuncionalidadEliminarReporte();
+
+        setTitle("Historial de registros");
+        initComponents();
+
+        listaFacturas = funcionalidadReportes.consultarFacturas(listaFacturas);
+        llenarTabla();
+    }
+
+    private void llenarTabla() {
+
+        DefaultTableModel modelo = (DefaultTableModel) tableFacturas.getModel();
+        if (listaFacturas != null) {
+            listaFacturas.forEach(t -> {
+                modelo.addRow(new Object[]{t.getId(), ff.format(t.getFechaEmision()), ff.format(t.getFechaVencimiento()), t.getVentaId()});
+            });
+        }
+
     }
 
     /**
@@ -36,7 +82,7 @@ public class Presentacion_FrmHistorialFacturas extends javax.swing.JFrame {
         btnVolver = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableVentas = new javax.swing.JTable();
+        tableFacturas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnDescargar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -79,7 +125,7 @@ public class Presentacion_FrmHistorialFacturas extends javax.swing.JFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        tableVentas.setModel(new javax.swing.table.DefaultTableModel(
+        tableFacturas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -98,7 +144,7 @@ public class Presentacion_FrmHistorialFacturas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tableVentas);
+        jScrollPane1.setViewportView(tableFacturas);
 
         jLabel1.setText("Historial de facturas:");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -174,15 +220,60 @@ public class Presentacion_FrmHistorialFacturas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        // TODO add your handling code here:
+        controlFacturar.mostrarDlgOpcionFactura();
+        this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnDescargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescargarActionPerformed
-        // TODO add your handling code here:
+        ButtonColumn desplegarButtonColumn = new ButtonColumn("Desplegar Ventas", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int filaSeleccionada = tableFacturas.getSelectedRow();
+                if (filaSeleccionada != -1) {
+                    controlFacturar.setFactura((DTO_Factura) tableFacturas.getValueAt(filaSeleccionada, 0));
+                    try {
+                        DTO_FacturaFormato facturaFormato = new DTO_FacturaFormato();
+                        List<DTO_DetallesVentaReporte> detallesVenta = new ArrayList<>();
+                        for (DTO_DetalleVenta ventaDetalle : controlFacturar.getVenta().getDetallesVenta()) {
+                            DTO_DetallesVentaReporte dv = new DTO_DetallesVentaReporte();
+                            dv.setCantidad(Integer.toString(ventaDetalle.getCantidad()));
+                            dv.setImporte(Float.toString(ventaDetalle.getImporte()));
+                            dv.setProducto(ventaDetalle.getProducto().getNombre());
+                            dv.setPrecio(Float.toString(ventaDetalle.getPrecio()));
+                            detallesVenta.add(dv);
+                        }
+                        facturaFormato.setDetallesVenta(detallesVenta);
+                        facturaFormato.setRfcCliente(controlFacturar.getCliente().getRfc());
+                        facturaFormato.setNombreCliente(controlFacturar.getCliente().getNombre());
+                        facturaFormato.setDireccionCliente(controlFacturar.getCliente().getDirecciones().get(0).toString());
+                        String total = "$" + controlFacturar.getVenta().getMontoTotal();
+                        facturaFormato.setTotal(total);
+                        funcionalidadGenerarReporte.generarReporteFactura(facturaFormato);
+                        controlFacturar.setFactura(null);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
     }//GEN-LAST:event_btnDescargarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+        ButtonColumn desplegarButtonColumn = new ButtonColumn("Desplegar Ventas", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int filaSeleccionada = tableFacturas.getSelectedRow();
+                if (filaSeleccionada != -1) {
+                    controlFacturar.setFactura((DTO_Factura) tableFacturas.getValueAt(filaSeleccionada, 0));
+                    try {
+                        funcionalidadEliminar.eliminarFactura(controlFacturar.getFactura());
+                        controlFacturar.setFactura(null);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -194,6 +285,6 @@ public class Presentacion_FrmHistorialFacturas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableVentas;
+    private javax.swing.JTable tableFacturas;
     // End of variables declaration//GEN-END:variables
 }

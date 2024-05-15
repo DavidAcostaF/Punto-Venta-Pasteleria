@@ -4,11 +4,22 @@
  */
 package presentacion.facturar;
 
+import actualizarCliente.FuncionalidadActualizarCliente;
+import actualizarCliente.IFuncionalidadActualizarCliente;
+import control.ControlFacturar;
+import dto.DTO_Cliente;
+import dto.DTO_Direccion;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author PERSONAL
  */
 public class Presentacion_DlgFacturarACliente extends javax.swing.JDialog {
+
+    ControlFacturar control;
+    IFuncionalidadActualizarCliente actualizarCliente;
 
     /**
      * Creates new form Presentacion_DlgFacturarACliente
@@ -16,6 +27,21 @@ public class Presentacion_DlgFacturarACliente extends javax.swing.JDialog {
     public Presentacion_DlgFacturarACliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        control = ControlFacturar.getInstance();
+        actualizarCliente = new FuncionalidadActualizarCliente();
+        txtNombre.setText(control.getCliente().getNombre());
+        txtApellidoPaterno.setText(control.getCliente().getApellidoP());
+        txtApellidoMaterno.setText(control.getCliente().getApellidoM());
+        if (control.getCliente().getRfc() == null) {
+
+        } else {
+            txtRFC.setText(control.getCliente().getRfc());
+            txtRFC.setEditable(false);
+        }
+        if (!control.getCliente().getDirecciones().isEmpty()) {
+            txtDireccion.setText(control.getCliente().getDirecciones().get(0).toString());
+        }
+
     }
 
     /**
@@ -89,6 +115,11 @@ public class Presentacion_DlgFacturarACliente extends javax.swing.JDialog {
         btnConfirmar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         btnConfirmar.setForeground(new java.awt.Color(255, 255, 255));
         btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setBackground(new java.awt.Color(18, 111, 161));
         btnCancelar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
@@ -203,12 +234,30 @@ public class Presentacion_DlgFacturarACliente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        // TODO add your handling code here:
+        control.mostrarFrmSeleccionarVenta();
+        control.setVenta(null);
+        control.setCliente(null);
+        this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        actualizarCliente.actualizarCliente(control.getCliente());
+        if (!control.getCliente().getDirecciones().isEmpty()) {
+            control.setCliente(new DTO_Cliente(txtNombre.getText(), txtApellidoPaterno.getText(),
+                    txtApellidoMaterno.getText(), control.getCliente().getTelefono(), control.getCliente().getDirecciones()));
+        } else {
+            List<DTO_Direccion> direcciones = new ArrayList<>();
+            direcciones.add(new DTO_Direccion("De los Alfajores", "Segoviano", "3133"));
+            control.setCliente(new DTO_Cliente(txtNombre.getText(), txtApellidoPaterno.getText(),
+                    txtApellidoMaterno.getText(), control.getCliente().getTelefono(), control.getCliente().getDirecciones()));
+        }
+        control.mostrarFrmConfirmarGenerarFactura();
+        this.dispose();
+    }//GEN-LAST:event_btnConfirmarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
