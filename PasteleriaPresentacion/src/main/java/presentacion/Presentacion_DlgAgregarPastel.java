@@ -36,6 +36,7 @@ public class Presentacion_DlgAgregarPastel extends javax.swing.JDialog {
         this.producto = producto;
         this.especificacion = especificacion;
         this.control = ControlAgregarVenta.getInstance();
+        setTitle("Agregar pastel a la venta");
         initComponents();
         this.pasteles = funcionalidadesProductos.consultarProductos();
         desplegarPasteles(pasteles);

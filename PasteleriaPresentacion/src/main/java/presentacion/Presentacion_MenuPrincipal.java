@@ -27,6 +27,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
      * Creates new form MenuPrincipal
      */
     public Presentacion_MenuPrincipal() {
+        setTitle("Menú");
         initComponents();
         control = ControlAgregarVenta.getInstance();
         controlGesionarInventario = new ControlGestionarInventario();

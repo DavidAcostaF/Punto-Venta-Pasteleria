@@ -27,9 +27,9 @@ public class Presentacion_DlgAgregarDireccion extends javax.swing.JDialog {
         super(parent, modal);
         this.control = ControlAgregarVenta.getInstance();
         this.venta = control.getVenta();
-
+        setTitle("Datos de la dirección");
         initComponents();
-        ;
+        
         setVisible(true);
     }
 

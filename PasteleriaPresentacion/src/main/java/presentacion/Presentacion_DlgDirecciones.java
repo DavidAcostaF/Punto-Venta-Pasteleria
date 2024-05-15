@@ -33,6 +33,7 @@ public class Presentacion_DlgDirecciones extends javax.swing.JDialog {
 
         //direcciones = new FuncionalidadConsultarDirecciones();
         direccionesLista = venta.getCliente().getDirecciones();
+        setTitle("Direcciones registradas");
         initComponents();
 
         llenarTabla();

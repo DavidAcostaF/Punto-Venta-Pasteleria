@@ -23,6 +23,7 @@ public class Presentacion_DlgCobrarVenta extends javax.swing.JDialog {
         super(parent, modal);
         control = ControlAgregarVenta.getInstance();
         this.venta = control.getVenta();
+        setTitle("Tipo de pago");
         initComponents();
         setVisible(true);
     }

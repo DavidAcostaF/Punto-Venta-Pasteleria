@@ -16,32 +16,33 @@ import java.util.List;
  * @author abelc
  */
 public class ClientesConversiones {
-
+    
     public ClientesConversiones() {
-
+        
     }
-
+    
     public Cliente convertirAEntidadaSinID(DTO_Cliente cliente) {
         Cliente entidadCliente = new Cliente();
         entidadCliente.setNombre(cliente.getNombre());
         entidadCliente.setApellidoP(cliente.getApellidoP());
         entidadCliente.setApellidoM(cliente.getApellidoM());
         entidadCliente.setTelefono(cliente.getTelefono());
-
-        List<Direccion> direcciones = new ArrayList<>();
-        for (DTO_Direccion dtoDireccion : cliente.getDirecciones()) {
-            Direccion direccion = new Direccion();
-            direccion.setColonia(dtoDireccion.getColonia());
-            direccion.setCalle(dtoDireccion.getCalle());
-            direccion.setNumExterior(dtoDireccion.getNumExterior());
-            direcciones.add(direccion);
+        if (cliente.getDirecciones() != null) {
+            List<Direccion> direcciones = new ArrayList<>();
+            for (DTO_Direccion dtoDireccion : cliente.getDirecciones()) {
+                Direccion direccion = new Direccion();
+                direccion.setColonia(dtoDireccion.getColonia());
+                direccion.setCalle(dtoDireccion.getCalle());
+                direccion.setNumExterior(dtoDireccion.getNumExterior());
+                direcciones.add(direccion);
+            }
+            entidadCliente.setDirecciones(direcciones);            
         }
-        entidadCliente.setDirecciones(direcciones);
-
+        
         return entidadCliente;
-
+        
     }
-
+    
     public DTO_Cliente convertirCliente(Cliente cliente) {
         DTO_Cliente dtoCliente = new DTO_Cliente();
         dtoCliente.setID(cliente.getId());
@@ -49,20 +50,21 @@ public class ClientesConversiones {
         dtoCliente.setApellidoP(cliente.getApellidoP());
         dtoCliente.setApellidoM(cliente.getApellidoM());
         dtoCliente.setTelefono(cliente.getTelefono());
-
-        List<DTO_Direccion> direcciones = new ArrayList<>();
-        for (Direccion direccion : cliente.getDirecciones()) {
-            DTO_Direccion dtoDireccion = new DTO_Direccion();
-            dtoDireccion.setColonia(direccion.getColonia());
-            dtoDireccion.setCalle(direccion.getCalle());
-            dtoDireccion.setNumExterior(direccion.getNumExterior());
-            direcciones.add(dtoDireccion);
+        if (cliente.getDirecciones() != null) {
+            List<DTO_Direccion> direcciones = new ArrayList<>();
+            for (Direccion direccion : cliente.getDirecciones()) {
+                DTO_Direccion dtoDireccion = new DTO_Direccion();
+                dtoDireccion.setColonia(direccion.getColonia());
+                dtoDireccion.setCalle(direccion.getCalle());
+                dtoDireccion.setNumExterior(direccion.getNumExterior());
+                direcciones.add(dtoDireccion);
+            }
+            dtoCliente.setDirecciones(direcciones);
         }
-        dtoCliente.setDirecciones(direcciones);
-
+        
         return dtoCliente;
     }
-
+    
     public Cliente convertirDtoClienteAEntidad(DTO_Cliente dtoCliente) {
         Cliente cliente = new Cliente();
         cliente.setId(dtoCliente.getID());
@@ -70,7 +72,7 @@ public class ClientesConversiones {
         cliente.setApellidoP(dtoCliente.getApellidoP());
         cliente.setApellidoM(dtoCliente.getApellidoM());
         cliente.setTelefono(dtoCliente.getTelefono());
-
+        
         List<Direccion> direcciones = new ArrayList<>();
         for (DTO_Direccion dtoDireccion : dtoCliente.getDirecciones()) {
             Direccion direccion = new Direccion();
@@ -80,22 +82,22 @@ public class ClientesConversiones {
             direcciones.add(direccion);
         }
         cliente.setDirecciones(direcciones);
-
+        
         return cliente;
     }
- 
-    public DTO_Cliente convertirClienteADtoConRfc (Cliente cliente){
+    
+    public DTO_Cliente convertirClienteADtoConRfc(Cliente cliente) {
         DTO_Cliente dtoCliente = convertirCliente(cliente);
         dtoCliente.setRfc(cliente.getRfc());
         return dtoCliente;
     }
     
-    public Cliente convertirDtoClienteAEntidadConRfc(DTO_Cliente dtoCliente){
+    public Cliente convertirDtoClienteAEntidadConRfc(DTO_Cliente dtoCliente) {
         Cliente cliente = convertirDtoClienteAEntidad(dtoCliente);
         cliente.setRfc(dtoCliente.getRfc());
         return cliente;
     }
-
+    
     public List<DTO_Cliente> convertirDesdeClientes(List<Cliente> clientes) {
         List<DTO_Cliente> dtosClientes = new ArrayList<>();
         for (Cliente cliente : clientes) {

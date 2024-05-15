@@ -4,6 +4,8 @@
  */
 package presentacion;
 
+import actualizarCliente.FuncionalidadActualizarCliente;
+import actualizarCliente.IFuncionalidadActualizarCliente;
 import com.mycompany.clientes.FuncionalidadAgregarClientes;
 import com.mycompany.clientes.IFuncionalidadAgregarClientes;
 import com.mycompany.pasteleriaventa.FuncionalidadesVenta;
@@ -23,10 +25,11 @@ import javax.swing.JOptionPane;
  */
 public class Presentacion_DlgConfirmacionPago extends javax.swing.JDialog {
 
-    ControlAgregarVenta control;
-    DTO_Venta venta;
-    IFuncionalidadesVenta ventas;
-    IFuncionalidadAgregarClientes agregarCliente;
+    private ControlAgregarVenta control;
+    private DTO_Venta venta;
+    private IFuncionalidadesVenta ventas;
+    private IFuncionalidadAgregarClientes agregarCliente;
+    private IFuncionalidadActualizarCliente actualizarCliente;
 
     /**
      * Creates new form DlgPagoEfectivo
@@ -34,9 +37,11 @@ public class Presentacion_DlgConfirmacionPago extends javax.swing.JDialog {
     public Presentacion_DlgConfirmacionPago(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         control = ControlAgregarVenta.getInstance();
+        this.actualizarCliente = new FuncionalidadActualizarCliente();
         this.venta = control.getVenta();
         this.agregarCliente = new FuncionalidadAgregarClientes();
         this.ventas = new FuncionalidadesVenta();
+        setTitle("Confirmación");
         initComponents();
         txtCliente.setText(venta.getCliente().getNombre());
         txtCosto.setText(Float.toString(venta.getMontoTotal()));
@@ -216,24 +221,37 @@ public class Presentacion_DlgConfirmacionPago extends javax.swing.JDialog {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
         if (venta.getCliente().getID() == null) {
-            List<DTO_Direccion> a = new ArrayList<>();
-            a.add(venta.getDireccionEntrega());
-            venta.getCliente().setDirecciones(a);
-            venta.setIDcliente(agregarCliente.agregarCliente(venta.getCliente()).getID());   
+            if (!venta.getDireccionEntrega().getCalle().equalsIgnoreCase("En tienda")) {
+                List<DTO_Direccion> a = new ArrayList<>();
+                a.add(venta.getDireccionEntrega());
+                venta.getCliente().setDirecciones(a);
+            }
+
+            venta.setIDcliente(agregarCliente.agregarCliente(venta.getCliente()).getID());
             ventas.agregarVenta(venta);
             venta.setFechaRegistro(new Date());
 
         } else {
+
             System.out.println(venta.getCliente().getID());
-            venta.setIDcliente(venta.getCliente().getID());
-            venta.setFechaRegistro(new Date());
-            ventas.agregarVenta(venta);
+
+            if (control.isNuevaDireccion() && !venta.getDireccionEntrega().getCalle().equalsIgnoreCase("En tienda")) {
+                venta.getCliente().getDirecciones().add(venta.getDireccionEntrega());
+                venta.setIDcliente(venta.getCliente().getID());
+                venta.setFechaRegistro(new Date());
+                actualizarCliente.actualizarCliente(venta.getCliente());
+                ventas.agregarVenta(venta);
+            } else {
+                venta.setIDcliente(venta.getCliente().getID());
+                venta.setFechaRegistro(new Date());
+                ventas.agregarVenta(venta);
+            }
         }
 
         String mensaje = "¡La venta ha sido registrada exitosamente!";
 
         JOptionPane.showMessageDialog(null, mensaje, "Registro de Venta Exitoso", JOptionPane.INFORMATION_MESSAGE);
-        this.dispose();
+       
         int respuesta = JOptionPane.showOptionDialog(null, "¿Quiere registrar otra venta?", "Hola", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
 
         if (respuesta == JOptionPane.YES_OPTION) {

@@ -41,6 +41,7 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
         this.funcionalidadesClientes = new FuncionalidadConsultarClientes();
         funcionalidadesClientes.consultarClientes();
         listaClientes = funcionalidadesClientes.consultarClientes();
+        setTitle("Clientes registrados");
         initComponents();
         jTextField1.setVisible(false);
         buscarBtn.setVisible(false);

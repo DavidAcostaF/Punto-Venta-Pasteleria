@@ -43,6 +43,7 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
      */
     public Presentacion_ProductosVenta() {
         initComponents();
+        setTitle("Productos de la venta");
         this.control = ControlAgregarVenta.getInstance();
         this.funcionalidadesProductos = new FuncionalidadConsultarProductos();
         venta = new DTO_Venta();

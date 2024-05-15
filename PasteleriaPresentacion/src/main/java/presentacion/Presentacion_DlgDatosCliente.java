@@ -29,6 +29,7 @@ public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
         super(parent, modal);
         control= ControlAgregarVenta.getInstance();
         this.venta=control.getVenta(); 
+        setTitle("Datos del cliente");
         initComponents();
       
         setVisible(true);
