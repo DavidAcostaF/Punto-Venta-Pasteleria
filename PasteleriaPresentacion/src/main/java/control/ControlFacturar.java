@@ -41,10 +41,12 @@ public class ControlFacturar {
     
     public void mostrarDlgFacturarACliente(){
         Presentacion_DlgFacturarACliente dlgFacturarACliente = new Presentacion_DlgFacturarACliente(null, true);
+        dlgFacturarACliente.setVisible(true);
     }
     
     public void mostrarDlgOpcionFactura(){
         Presentacion_DlgOpcionFactura dlgOpcionFactura = new Presentacion_DlgOpcionFactura(null, true);
+        dlgOpcionFactura.setVisible(true);
     }
     
     public void mostrarFrmConfirmarGenerarFactura(){
