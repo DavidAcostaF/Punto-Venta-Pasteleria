@@ -197,7 +197,13 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
             control.setVenta(venta);
 
             List<DTO_Direccion> direcciones = cliente.getDirecciones();
-            if (direcciones.isEmpty()) {
+            
+            
+            int respuesta = JOptionPane.showOptionDialog(null, "¿Realizará envío a domicilio?", "Tipo de envío", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
+            if (respuesta == JOptionPane.CLOSED_OPTION) {
+                return;
+            } else if (respuesta == JOptionPane.YES_OPTION) {
+                if (direcciones.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "El cliente no tiene direcciones registradas.", "Sin direcciones", JOptionPane.WARNING_MESSAGE);
                 control.setNuevaDireccion(true);
                 control.setVentanaAnterior("Clientes");
@@ -205,9 +211,6 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
                 control.mostrarAgregarDireccion();
                 return;
             }
-            
-            int respuesta = JOptionPane.showOptionDialog(null, "¿Realizará envío a domicilio?", "Tipo de envío", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
-            if (respuesta == JOptionPane.YES_OPTION) {
                 this.dispose();
                 // Mostrar lista de direcciones del cliente para elegir
                 control.mostrarListaDirecciones();
@@ -227,7 +230,7 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
 
     private void regresarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarBtnActionPerformed
         this.dispose();
-        control.mostrarMenu();
+        control.mostrarProductosVenta();
     }//GEN-LAST:event_regresarBtnActionPerformed
 
     private void buscarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBtnActionPerformed

@@ -6,8 +6,8 @@ package control;
 
 import dto.DTO_Venta;
 import java.util.Date;
-import presentacion.Presentacion_DlgSeleccionarFechaIngresos;
-import presentacion.Presentacion_DlgVentasTotales;
+import ingresosMensuales.Presentacion_DlgSeleccionarFechaIngresos;
+import ingresosMensuales.Presentacion_DlgVentasTotales;
 import presentacion.casohistoriales.Presentacion_FrmMenuHistoriales;
 
 /**
