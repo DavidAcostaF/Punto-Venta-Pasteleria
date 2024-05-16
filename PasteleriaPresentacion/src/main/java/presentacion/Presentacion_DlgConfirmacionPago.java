@@ -11,6 +11,7 @@ import com.mycompany.clientes.IFuncionalidadAgregarClientes;
 import com.mycompany.pasteleriaventa.FuncionalidadesVenta;
 import com.mycompany.pasteleriaventa.IFuncionalidadesVenta;
 import control.ControlAgregarVenta;
+import dto.DTO_Cliente;
 import dto.DTO_Direccion;
 import dto.DTO_Venta;
 import java.text.SimpleDateFormat;
@@ -229,21 +230,39 @@ public class Presentacion_DlgConfirmacionPago extends javax.swing.JDialog {
                 venta.getCliente().setDirecciones(a);
                 System.out.println(venta.getCliente().getDirecciones());
             }
-            venta.setIDcliente(agregarCliente.agregarCliente(venta.getCliente()).getID());
+            DTO_Cliente cliente = agregarCliente.agregarCliente(venta.getCliente());
+            DTO_Cliente clienteProvisional = new DTO_Cliente();
+            clienteProvisional.setID(cliente.getID());
+            clienteProvisional.setNombre(cliente.getNombre());
+            clienteProvisional.setApellidoP(cliente.getApellidoP());
+            clienteProvisional.setApellidoM(cliente.getApellidoM());
+            venta.setCliente(clienteProvisional);
             venta.setFechaRegistro(new Date());
 
         } else {
 
             if (control.isNuevaDireccion() && !venta.getDireccionEntrega().getCalle().equalsIgnoreCase("En tienda")) {
-                venta.getCliente().getDirecciones().add(venta.getDireccionEntrega());
-                venta.setIDcliente(venta.getCliente().getID());
+                List<DTO_Direccion> direcciones = venta.getCliente().getDirecciones();
+                direcciones.add(venta.getDireccionEntrega());
+                venta.getCliente().setDirecciones(direcciones);
+                DTO_Cliente clienteProvisional = new DTO_Cliente();
+                clienteProvisional.setID(venta.getCliente().getID());
+                clienteProvisional.setNombre(venta.getCliente().getNombre());
+                clienteProvisional.setApellidoP(venta.getCliente().getApellidoP());
+                clienteProvisional.setApellidoM(venta.getCliente().getApellidoM());
+                actualizarCliente.actualizarCliente(venta.getCliente());
+                venta.setCliente(clienteProvisional);
                 venta.setFechaRegistro(new Date());
 
-                actualizarCliente.actualizarCliente(venta.getCliente());
+                
 
             } else {
-                System.out.println("no");
-                venta.setIDcliente(venta.getCliente().getID());
+                DTO_Cliente clienteProvisional = new DTO_Cliente();
+                clienteProvisional.setID(venta.getCliente().getID());
+                clienteProvisional.setNombre(venta.getCliente().getNombre());
+                clienteProvisional.setApellidoP(venta.getCliente().getApellidoP());
+                clienteProvisional.setApellidoM(venta.getCliente().getApellidoM());
+                venta.setCliente(clienteProvisional);
                 venta.setFechaRegistro(new Date());
 
             }
