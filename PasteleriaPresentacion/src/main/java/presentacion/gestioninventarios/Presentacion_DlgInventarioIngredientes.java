@@ -379,7 +379,7 @@ public class Presentacion_DlgInventarioIngredientes extends javax.swing.JFrame {
         int fila = tableIngredientes.rowAtPoint(evt.getPoint());
         txtNombre.setText(tableIngredientes.getValueAt(fila, 0).toString());
         txtCantidad.setText(tableIngredientes.getValueAt(fila, 1).toString());
-        comboUnidad.setSelectedItem(tableIngredientes.getValueAt(fila, 0).toString());
+        comboUnidad.setSelectedItem(tableIngredientes.getValueAt(fila, 2).toString());
         txtPrecio.setText(tableIngredientes.getValueAt(fila, 3).toString());
 
         btnActualizar.setEnabled(true);
