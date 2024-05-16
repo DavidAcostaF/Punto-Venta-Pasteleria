@@ -393,15 +393,17 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_regresarBtnActionPerformed
 
     private void detallesVentaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detallesVentaBtnActionPerformed
-        obtenerDatosFilaSeleccionada();
-        if (venta == null) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar una venta.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
+        int filaSeleccionada = tablaVentas.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            venta = ((VentasTableModel) tablaVentas.getModel()).getVentaAt(filaSeleccionada);
+            venta = funcionalidadConsultarVentas.encontrarVenta(venta.getID());
+            control.setVenta(venta);
+            this.dispose();
+            control.mostrarDetallesVenta();
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione una fila.", "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
-        venta = funcionalidadConsultarVentas.encontrarVenta(venta.getID());
-        control.setVenta(venta);
-        this.dispose();
-        control.mostrarDetallesVenta();
+
     }//GEN-LAST:event_detallesVentaBtnActionPerformed
 
     private void aplicarFiltroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aplicarFiltroBtnActionPerformed

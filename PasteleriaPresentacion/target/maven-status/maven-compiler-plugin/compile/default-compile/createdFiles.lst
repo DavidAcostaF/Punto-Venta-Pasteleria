@@ -176,6 +176,7 @@ presentacion\Presentacion_DlgListaClientes$4.class
 presentacion\Presentacion_DlgCobrarVenta$1.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioIngredientes$13.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioProductos$4.class
+presentacion\casohistoriales\Presentacion_FrmMenuHistoriales$4.class
 presentacion\gestioninventarios\Presentacion_DlgDetalleProducto$5.class
 presentacion\Presentacion_ProductosVenta$1.class
 presentacion\Presentacion_DlgAgregarDireccion.class
