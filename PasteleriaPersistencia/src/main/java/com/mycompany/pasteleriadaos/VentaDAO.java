@@ -73,7 +73,9 @@ public class VentaDAO implements IVentaDAO {
     public List<Venta> ventasPorCliente(String clienteId) throws PersistenciaException {
 
         MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
-        Bson filtroCliente = eq("clienteid", new ObjectId(clienteId));
+
+        Bson filtroCliente = eq("cliente._id", new ObjectId(clienteId));
+
         FindIterable<VentaMapeo> ventasCliente = coleccion.find(filtroCliente);
         List<Venta> ventas = new ArrayList<>();
         for (VentaMapeo venta : ventasCliente) {
@@ -142,7 +144,7 @@ public class VentaDAO implements IVentaDAO {
             MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
             List<Bson> pipeline = Arrays.asList(
                     Aggregates.match(Filters.eq("_id", objectIdVenta)),
-                    Aggregates.lookup("clientes", "clienteid", "_id", "cliente"),
+                    Aggregates.lookup("clientes", "cliente._id", "_id", "cliente"),
                     Aggregates.addFields(new Field<>("cliente", new Document("$arrayElemAt", Arrays.asList("$cliente", 0)))),
                     Aggregates.lookup("productos", "detallesVenta.productoId", "_id", "producto"),
                     Aggregates.addFields(new Field<>("detallesVenta.producto", new Document("$arrayElemAt", Arrays.asList("$producto", 0)))),
@@ -152,6 +154,9 @@ public class VentaDAO implements IVentaDAO {
             );
             AggregateIterable<VentaMapeo> resultados = coleccion.aggregate(pipeline);
             VentaMapeo ventaEncontrada = resultados.first();
+            if (ventaEncontrada == null) {
+                return null; // La venta no fue encontrada
+            }
             Venta venta = conversor.convertirAVentaEntidadObjetos(ventaEncontrada);
             return venta;
         } catch (IllegalArgumentException e) {
@@ -174,10 +179,10 @@ public class VentaDAO implements IVentaDAO {
             MongoCollection<VentaMapeo> coleccion = conexion.obtenerColeccion();
             List<Bson> pipeline = Arrays.asList(
                     Aggregates.match(filtro),
-                    Aggregates.lookup("clientes", "clienteid", "_id", "cliente"),
+                    Aggregates.lookup("clientes", "cliente._id", "_id", "cliente"), // Lookup para obtener la información del cliente
                     Aggregates.addFields(new Field<>("cliente", new Document("$arrayElemAt", Arrays.asList("$cliente", 0)))),
                     Aggregates.project(Projections.fields(
-                            Projections.include("_id", "clienteid", "cliente", "detallesVenta", "direccionEntrega", "estado", "fechaEntrega", "fechaRegistro", "montoTotal")
+                            Projections.include("_id", "cliente", "detallesVenta", "direccionEntrega", "estado", "fechaEntrega", "fechaRegistro", "montoTotal")
                     ))
             );
 
@@ -203,7 +208,7 @@ public class VentaDAO implements IVentaDAO {
             List<Bson> filtros = new ArrayList<>();
 
             if (clienteId != null && !clienteId.isEmpty()) {
-                filtros.add(eq("clienteid", new ObjectId(clienteId)));
+                filtros.add(eq("cliente._id", new ObjectId(clienteId)));
             }
 
             if (fechaInicio != null && fechaFin != null) {

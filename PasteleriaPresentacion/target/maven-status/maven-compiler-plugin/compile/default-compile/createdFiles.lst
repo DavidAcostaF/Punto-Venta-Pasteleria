@@ -67,6 +67,7 @@ extras\ComboBoxMultiSeleccion$EditorComboMultiple.class
 presentacion\casohistoriales\Presentacion_FrmHistorialVentas$7.class
 extras\DynamicComboBoxEditor.class
 presentacion\gestioninventarios\Presentacion_DlgDetalleProducto$1.class
+pasteleria\NewMain.class
 presentacion\gestioninventarios\Presentacion_DlgIngresarDatosDelProducto$5.class
 presentacion\gestioninventarios\Presentacion_DlgIngredientesSeleccionados$3.class
 presentacion\casohistoriales\Presentacion_FrmHistorialVentas$5.class
@@ -97,7 +98,6 @@ extras\ActionButton.class
 presentacion\facturar\Presentacion_DlgFacturarACliente.class
 presentacion\Presentacion_ProductosVenta$3.class
 presentacion\Presentacion_DlgListaClientes$2.class
-presentacion\Presentacion_MenuPrincipal$10.class
 presentacion\gestioninventarios\Presentacion_DlgIngredientesSeleccionados$2.class
 presentacion\gestioninventarios\Presentacion_DlgIngresarDatosDelProducto.class
 presentacion\Presentacion_ProductosVenta$BotonEditor.class

@@ -43,12 +43,18 @@ public class VentasConversiones {
      */
     public DTO_Venta convertirVentaADTO(Venta venta) {
         DTO_Venta dtoVenta = new DTO_Venta();
-        dtoVenta.setID(venta.getId());
+        if (venta.getCliente().getId() != null) {
+            dtoVenta.setID(venta.getId());
+        }
+
         dtoVenta.setFechaEntrega(venta.getFechaEntrega());
         dtoVenta.setFechaRegistro(venta.getFechaRegistro());
         dtoVenta.setMontoTotal(venta.getMontoTotal());
         dtoVenta.setEstado(venta.getEstado());
-        dtoVenta.setCliente(conversorCliente.convertirCliente(venta.getCliente()));
+        if (venta.getCliente() != null) {
+            dtoVenta.setCliente(conversorCliente.convertirCliente(venta.getCliente()));
+        }
+
         List<DTO_DetalleVenta> detallesVenta = new ArrayList<>();
         for (DetalleVenta detalleVenta : venta.getDetallesVenta()) {
             DTO_DetalleVenta detalleVentaDTO = new DTO_DetalleVenta();
@@ -149,12 +155,16 @@ public class VentasConversiones {
      */
     public Venta convertirDtoVentaAEntidad(DTO_Venta dtoVenta) {
         Venta venta = new Venta();
-        venta.setId(dtoVenta.getID());
+        if (dtoVenta.getID() != null) {
+            venta.setId(dtoVenta.getID());
+        }
         venta.setFechaEntrega(dtoVenta.getFechaEntrega());
         venta.setFechaRegistro(dtoVenta.getFechaRegistro());
         venta.setMontoTotal(dtoVenta.getMontoTotal());
         venta.setEstado(dtoVenta.getEstado());
-        venta.setCliente(conversorCliente.convertirDtoClienteAEntidad(dtoVenta.getCliente()));
+        if (dtoVenta.getCliente() != null) {
+            venta.setCliente(conversorCliente.convertirDtoClienteAEntidad(dtoVenta.getCliente()));
+        }
         List<DetalleVenta> detallesVenta = new ArrayList<>();
         for (DTO_DetalleVenta detalleVentaDTO : dtoVenta.getDetallesVenta()) {
             DetalleVenta detalleVenta = new DetalleVenta();

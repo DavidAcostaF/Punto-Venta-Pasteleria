@@ -224,7 +224,7 @@ public class Presentacion_DlgConfirmacionPago extends javax.swing.JDialog {
         if (venta.getCliente().getID() == null) {
 
             if (!venta.getDireccionEntrega().getCalle().equalsIgnoreCase("En tienda")) {
-                System.out.println("entro al actualiza");
+
                 List<DTO_Direccion> a = new ArrayList<>();
                 a.add(venta.getDireccionEntrega());
                 venta.getCliente().setDirecciones(a);
@@ -242,6 +242,7 @@ public class Presentacion_DlgConfirmacionPago extends javax.swing.JDialog {
         } else {
 
             if (control.isNuevaDireccion() && !venta.getDireccionEntrega().getCalle().equalsIgnoreCase("En tienda")) {
+                System.out.println("entro al actualiza");
                 List<DTO_Direccion> direcciones = venta.getCliente().getDirecciones();
                 direcciones.add(venta.getDireccionEntrega());
                 venta.getCliente().setDirecciones(direcciones);
@@ -251,10 +252,9 @@ public class Presentacion_DlgConfirmacionPago extends javax.swing.JDialog {
                 clienteProvisional.setApellidoP(venta.getCliente().getApellidoP());
                 clienteProvisional.setApellidoM(venta.getCliente().getApellidoM());
                 actualizarCliente.actualizarCliente(venta.getCliente());
+                venta.getCliente().setDirecciones(direcciones);
                 venta.setCliente(clienteProvisional);
                 venta.setFechaRegistro(new Date());
-
-                
 
             } else {
                 DTO_Cliente clienteProvisional = new DTO_Cliente();

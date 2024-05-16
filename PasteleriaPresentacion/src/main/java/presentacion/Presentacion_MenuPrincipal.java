@@ -6,11 +6,16 @@ package presentacion;
 
 //import com.mycompany.pastelerianegocio.ControlRegistrarVenta;
 //import com.mycompany.pastelerianegocio.IControlRegistrarVenta;
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import control.ControlAgregarVenta;
 import control.ControlFacturar;
 import control.ControlGestionarInventario;
 import control.ControlHistoriales;
 import control.ControlIngresosMensuales;
+import java.awt.Font;
+import javax.swing.UIManager;
 
 /**
  *
@@ -36,6 +41,10 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
         this.controlIngresos = ControlIngresosMensuales.getInstance();
         controlHistoriales = ControlHistoriales.getInstance();
         controlFacturas = ControlFacturar.getInstance();
+                FlatRobotoFont.install();
+        FlatLaf.registerCustomDefaultsSource("extras");
+        UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
+        FlatLightLaf.setup();
     }
 
     /**
@@ -67,6 +76,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
 
         btnRegistrarVenta.setBackground(new java.awt.Color(140, 220, 254));
         btnRegistrarVenta.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnRegistrarVenta.setForeground(new java.awt.Color(0, 0, 0));
         btnRegistrarVenta.setText("Registrar Venta");
         btnRegistrarVenta.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnRegistrarVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -77,6 +87,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(140, 220, 254));
         jButton2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Historial de ventas");
         jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -87,6 +98,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
 
         jButton3.setBackground(new java.awt.Color(140, 220, 254));
         jButton3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Realizar cobro");
         jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +109,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
 
         jButton4.setBackground(new java.awt.Color(140, 220, 254));
         jButton4.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(0, 0, 0));
         jButton4.setText("Realizar Envio");
         jButton4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -107,6 +120,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
 
         botonIngresosMensuales.setBackground(new java.awt.Color(140, 220, 254));
         botonIngresosMensuales.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        botonIngresosMensuales.setForeground(new java.awt.Color(0, 0, 0));
         botonIngresosMensuales.setText("Ingresos mensuales");
         botonIngresosMensuales.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         botonIngresosMensuales.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +131,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
 
         jButton6.setBackground(new java.awt.Color(140, 220, 254));
         jButton6.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(0, 0, 0));
         jButton6.setText("Gestion de gastos");
         jButton6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -127,6 +142,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
 
         jButton7.setBackground(new java.awt.Color(140, 220, 254));
         jButton7.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(0, 0, 0));
         jButton7.setText("Gestionar inventario");
         jButton7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -137,6 +153,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
 
         btnFacturar.setBackground(new java.awt.Color(140, 220, 254));
         btnFacturar.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btnFacturar.setForeground(new java.awt.Color(0, 0, 0));
         btnFacturar.setText("Facturar");
         btnFacturar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnFacturar.addActionListener(new java.awt.event.ActionListener() {
@@ -250,6 +267,7 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnFacturarActionPerformed
     public void mostrarMenu() {
+       
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Presentacion_MenuPrincipal().setVisible(true);
@@ -257,47 +275,9 @@ public class Presentacion_MenuPrincipal extends javax.swing.JFrame {
             }
         });
     }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Presentacion_MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Presentacion_MenuPrincipal().setVisible(true);
-            }
-        });
-    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonIngresosMensuales;
     private javax.swing.JButton btnFacturar;

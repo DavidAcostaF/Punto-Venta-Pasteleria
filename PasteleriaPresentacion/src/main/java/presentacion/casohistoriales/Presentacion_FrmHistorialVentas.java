@@ -102,10 +102,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         setTitle("Historial de ventas");
         panelProductos.setVisible(false);
         llenarTabla();
-        FlatRobotoFont.install();
-        FlatLaf.registerCustomDefaultsSource("extras");
-        UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
-        FlatMacDarkLaf.setup();
+ 
     }
 
     /**
@@ -397,6 +394,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         if (filaSeleccionada != -1) {
             venta = ((VentasTableModel) tablaVentas.getModel()).getVentaAt(filaSeleccionada);
             venta = funcionalidadConsultarVentas.encontrarVenta(venta.getID());
+            System.out.println(venta);
             control.setVenta(venta);
             this.dispose();
             control.mostrarDetallesVenta();
