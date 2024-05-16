@@ -48,7 +48,7 @@ public class VentasConversiones {
         dtoVenta.setFechaRegistro(venta.getFechaRegistro());
         dtoVenta.setMontoTotal(venta.getMontoTotal());
         dtoVenta.setEstado(venta.getEstado());
-        dtoVenta.setIDcliente(venta.getClienteid());
+        dtoVenta.setCliente(conversorCliente.convertirCliente(venta.getCliente()));
         List<DTO_DetalleVenta> detallesVenta = new ArrayList<>();
         for (DetalleVenta detalleVenta : venta.getDetallesVenta()) {
             DTO_DetalleVenta detalleVentaDTO = new DTO_DetalleVenta();
@@ -82,8 +82,7 @@ public class VentasConversiones {
         venta.setFechaRegistro(ventaDTO.getFechaRegistro());
         venta.setMontoTotal(ventaDTO.getMontoTotal());
         venta.setEstado(ventaDTO.getEstado());
-        venta.setClienteid(ventaDTO.getIDcliente());
-
+        venta.setCliente(conversorCliente.convertirDtoClienteAEntidad(ventaDTO.getCliente()));
         List<DetalleVenta> detallesVenta = new ArrayList<>();
         for (DTO_DetalleVenta detalleVentaDTO : ventaDTO.getDetallesVenta()) {
             DetalleVenta detalleVenta = new DetalleVenta();
@@ -120,7 +119,6 @@ public class VentasConversiones {
         dtoVenta.setFechaRegistro(venta.getFechaRegistro());
         dtoVenta.setMontoTotal(venta.getMontoTotal());
         dtoVenta.setEstado(venta.getEstado());
-        dtoVenta.setIDcliente(venta.getClienteid());
         dtoVenta.setCliente(conversorCliente.convertirCliente(venta.getCliente()));
         List<DTO_DetalleVenta> detallesVenta = new ArrayList<>();
         for (DetalleVenta detalleVenta : venta.getDetallesVenta()) {
@@ -156,7 +154,6 @@ public class VentasConversiones {
         venta.setFechaRegistro(dtoVenta.getFechaRegistro());
         venta.setMontoTotal(dtoVenta.getMontoTotal());
         venta.setEstado(dtoVenta.getEstado());
-        venta.setClienteid(dtoVenta.getIDcliente());
         venta.setCliente(conversorCliente.convertirDtoClienteAEntidad(dtoVenta.getCliente()));
         List<DetalleVenta> detallesVenta = new ArrayList<>();
         for (DTO_DetalleVenta detalleVentaDTO : dtoVenta.getDetallesVenta()) {

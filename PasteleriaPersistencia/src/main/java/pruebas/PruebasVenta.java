@@ -36,15 +36,12 @@ public class PruebasVenta {
     public static void main(String[] args) {
         VentaDAO ventadao = new VentaDAO();
         VentaMapeo venta = new VentaMapeo();
-
+//
 //        venta.setMontoTotal(150.00f); // Monto total de la venta
 //        VentasConversiones conversor = new VentasConversiones();
 //
-//// 
 //        Date fechaEntrega = new GregorianCalendar(2024, Calendar.MAY, 25).getTime();// Fecha de entrega
 //        Date fechaRegistro = new GregorianCalendar(2024, Calendar.MAY, 15).getTime();
-//
-//// 
 //        venta.setFechaEntrega(fechaEntrega);
 //        venta.setFechaRegistro(fechaRegistro);
 //        venta.setEstado("jotoo");
@@ -75,9 +72,11 @@ public class PruebasVenta {
 //        Venta ventaEntidad = conversor.convertirAVentaEntidad(venta);
 //        try {
 //            ventadao.agregarVenta(ventaEntidad);
+//        try {
+//           
 //        venta.setMontoTotal(150.00f); // Monto total de la venta
 //        VentasConversiones conversor = new VentasConversiones();
-//
+
 //// 
 //        Date fechaEntrega = new Date(); // Fecha de entrega
 //        Date fechaRegistro = new Date(); // Fecha de registro
@@ -105,22 +104,22 @@ public class PruebasVenta {
 //        venta.setDireccionEntrega(direccionEntrega);
 //        Venta ventaEntidad = conversor.convertirAVentaEntidad(venta);
 //        ventadao.agregarVenta(ventaEntidad);
-        List<Venta> ventas = null;
-        try {
-            ventas = ventadao.consultarVentas();
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(PruebasVenta.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            List<Venta> ventas2 = ventadao.ventasPorCliente("663b16288bcd861f9682ffa9");
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(PruebasVenta.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        for (Venta venta1 : ventas) {
-            System.out.println(venta1);
-            System.out.println(venta.getCliente());
-        }
-
+            List<Venta> ventas = null;
+            try {
+                ventas = ventadao.consultarVentas(); 
+                for (Venta venta1 : ventas) {
+                System.out.println(venta1);
+                System.out.println(venta1.getCliente());
+            }
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(PruebasVenta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+//        try {
+//            List<Venta> ventas2 = ventadao.ventasPorCliente("663b16288bcd861f9682ffa9");
+//        } catch (PersistenciaException ex) {
+//            Logger.getLogger(PruebasVenta.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+           
 //  Venta venta1 = null;
 //        try {
 //            venta1 = ventadao.encontrarVenta("66407078f7989940561be054");
@@ -162,5 +161,8 @@ public class PruebasVenta {
 //        } catch (PersistenciaException ex) {
 //            Logger.getLogger(PruebasVenta.class.getName()).log(Level.SEVERE, null, ex);
 //        }
+//    }
+
+        }
     }
-}
+
