@@ -19,7 +19,6 @@ public class VentaMapeo {
     private Date fechaEntrega;
     private Date fechaRegistro;
     private String estado;
-    private ObjectId clienteid;
     private List<DetalleVentaMapeo> detallesVenta;
     private DireccionMapeo direccionEntrega;
     private ClienteMapeo cliente;
@@ -38,18 +37,16 @@ public class VentaMapeo {
      * @param fechaEntrega Fecha de entrega de la venta.
      * @param fechaRegistro Fecha de registro de la venta.
      * @param estado Estado actual de la venta.
-     * @param clienteid ID del cliente que realizó la venta.
      * @param detallesVenta Lista de detalles de la venta.
      * @param direccionEntrega Dirección de entrega de la venta.
      * @param cliente Objeto Cliente que representa al cliente.
      */
-    public VentaMapeo(ObjectId id, float montoTotal, Date fechaEntrega, Date fechaRegistro, String estado, ObjectId clienteid, List<DetalleVentaMapeo> detallesVenta, DireccionMapeo direccionEntrega, ClienteMapeo cliente) {
+    public VentaMapeo(ObjectId id, float montoTotal, Date fechaEntrega, Date fechaRegistro, String estado, List<DetalleVentaMapeo> detallesVenta, DireccionMapeo direccionEntrega, ClienteMapeo cliente) {
         this.id = id;
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
         this.fechaRegistro = fechaRegistro;
         this.estado = estado;
-        this.clienteid = clienteid;
         this.detallesVenta = detallesVenta;
         this.direccionEntrega = direccionEntrega;
         this.cliente = cliente;
@@ -62,17 +59,15 @@ public class VentaMapeo {
      * @param fechaEntrega Fecha de entrega de la venta.
      * @param fechaRegistro Fecha de registro de la venta.
      * @param estado Estado actual de la venta.
-     * @param clienteid ID del cliente que realizó la venta.
      * @param detallesVenta Lista de detalles de la venta.
      * @param direccionEntrega Dirección de entrega de la venta.
      * @param cliente Objeto Cliente que representa al cliente.
      */
-    public VentaMapeo(float montoTotal, Date fechaEntrega, Date fechaRegistro, String estado, ObjectId clienteid, List<DetalleVentaMapeo> detallesVenta, DireccionMapeo direccionEntrega, ClienteMapeo cliente) {
+    public VentaMapeo(float montoTotal, Date fechaEntrega, Date fechaRegistro, String estado, List<DetalleVentaMapeo> detallesVenta, DireccionMapeo direccionEntrega, ClienteMapeo cliente) {
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
         this.fechaRegistro = fechaRegistro;
         this.estado = estado;
-        this.clienteid = clienteid;
         this.detallesVenta = detallesVenta;
         this.direccionEntrega = direccionEntrega;
         this.cliente = cliente;
@@ -187,24 +182,6 @@ public class VentaMapeo {
         this.fechaRegistro = fechaRegistro;
     }
 
-    /**
-     * Devuelve el ObjectId del cliente asociado a la venta.
-     *
-     * @return El ObjectId del cliente asociado a la venta.
-     */
-    public ObjectId getClienteid() {
-        return clienteid;
-    }
-
-    /**
-     * Establece el ObjectId del cliente asociado a la venta.
-     *
-     * @param clienteid El ObjectId del cliente asociado a la venta a
-     * establecer.
-     */
-    public void setClienteid(ObjectId clienteid) {
-        this.clienteid = clienteid;
-    }
 
     /**
      * Devuelve la lista de detalles de venta de la venta.
@@ -251,7 +228,7 @@ public class VentaMapeo {
      */
     @Override
     public String toString() {
-        return "Venta{" + "id=" + id + ", montoTotal=" + montoTotal + ", fechaEntrega=" + fechaEntrega + ", fechaRegistro=" + fechaRegistro + ", clienteid=" + clienteid + ", detallesVenta=" + detallesVenta + ", direccionEntrega=" + direccionEntrega + '}';
+        return "Venta{" + "id=" + id + ", montoTotal=" + montoTotal + ", fechaEntrega=" + fechaEntrega + ", fechaRegistro=" + fechaRegistro + ", Cliente=" +"{"+cliente.getId()+cliente.getNombre()+" "+cliente.getApellidoP()+"}"  + ", detallesVenta=" + detallesVenta + ", direccionEntrega=" + direccionEntrega + '}';
     }
 
 }

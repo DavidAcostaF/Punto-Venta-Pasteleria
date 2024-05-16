@@ -35,11 +35,6 @@ public class Venta {
     private String estado;
 
     /**
-     * ID del cliente que realizó la venta.
-     */
-    private String clienteid;
-
-    /**
      * Lista de detalles de la venta, que incluyen los productos vendidos y sus
      * cantidades.
      */
@@ -74,13 +69,12 @@ public class Venta {
      * @param direccionEntrega Dirección de entrega de la venta.
      * @param cliente Objeto Cliente que representa al cliente.
      */
-    public Venta(String id, float montoTotal, Date fechaEntrega, Date fechaRegistro, String estado, String clienteid, List<DetalleVenta> detallesVenta, Direccion direccionEntrega, Cliente cliente) {
+    public Venta(String id, float montoTotal, Date fechaEntrega, Date fechaRegistro, String estado, List<DetalleVenta> detallesVenta, Direccion direccionEntrega, Cliente cliente) {
         this.id = id;
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
         this.fechaRegistro = fechaRegistro;
         this.estado = estado;
-        this.clienteid = clienteid;
         this.detallesVenta = detallesVenta;
         this.direccionEntrega = direccionEntrega;
         this.cliente = cliente;
@@ -98,12 +92,11 @@ public class Venta {
      * @param direccionEntrega Dirección de entrega de la venta.
      * @param cliente Objeto Cliente que representa al cliente.
      */
-    public Venta(float montoTotal, Date fechaEntrega, Date fechaRegistro, String estado, String clienteid, List<DetalleVenta> detallesVenta, Direccion direccionEntrega, Cliente cliente) {
+    public Venta(float montoTotal, Date fechaEntrega, Date fechaRegistro, String estado, List<DetalleVenta> detallesVenta, Direccion direccionEntrega, Cliente cliente) {
         this.montoTotal = montoTotal;
         this.fechaEntrega = fechaEntrega;
         this.fechaRegistro = fechaRegistro;
         this.estado = estado;
-        this.clienteid = clienteid;
         this.detallesVenta = detallesVenta;
         this.direccionEntrega = direccionEntrega;
         this.cliente = cliente;
@@ -219,24 +212,6 @@ public class Venta {
     }
 
     /**
-     * Obtiene el ID del cliente que realizó la venta.
-     *
-     * @return ID del cliente que realizó la venta.
-     */
-    public String getClienteid() {
-        return clienteid;
-    }
-
-    /**
-     * Establece el ID del cliente que realizó la venta.
-     *
-     * @param clienteid ID del cliente que realizó la venta.
-     */
-    public void setClienteid(String clienteid) {
-        this.clienteid = clienteid;
-    }
-
-    /**
      * Obtiene la lista de detalles de la venta.
      *
      * @return Lista de detalles de la venta.
@@ -279,15 +254,7 @@ public class Venta {
      */
     @Override
     public String toString() {
-        return "Venta{"
-                + "id=" + id
-                + ", montoTotal=" + montoTotal
-                + ", fechaEntrega=" + fechaEntrega
-                + ", fechaRegistro=" + fechaRegistro
-                + ", estado='" + estado + '\''
-                + ", clienteid='" + clienteid + '\''
-                + ", detallesVenta=" + detallesVenta
-                + ", direccionEntrega=" + direccionEntrega
-                + '}';
+        return "Venta{" + "id=" + id + ", montoTotal=" + montoTotal + ", fechaEntrega=" + fechaEntrega + ", fechaRegistro=" + fechaRegistro + ", estado=" + estado + ", detallesVenta=" + detallesVenta + ", direccionEntrega=" + direccionEntrega + ", cliente=" + "{" + cliente.getId() + cliente.getNombre() + " " + cliente.getApellidoP() + "}";
     }
+
 }

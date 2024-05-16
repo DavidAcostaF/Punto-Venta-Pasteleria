@@ -429,8 +429,7 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
         listaVentas = this.funcionalidadConsultarVentas.consultarVentasPorFecha(fechaSeleccionada);
         for (DTO_Venta listaVenta : listaVentas) {
             float costoVenta = listaVenta.getMontoTotal();
-            DTO_Venta ventaProvisional = this.funcionalidadConsultarVentas.encontrarVenta(listaVenta.getID());
-            String nombreCliente = ventaProvisional.getCliente().getNombre() + " " + ventaProvisional.getCliente().getApellidoP();
+            String nombreCliente = listaVenta.getCliente().getNombre() + " " + listaVenta.getCliente().getApellidoP();
 
             String fechaFormat = dateFormat.format(fechaSeleccionada);
 

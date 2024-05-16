@@ -45,9 +45,6 @@ public class VentasConversiones {
         ventaE.setFechaRegistro(venta.getFechaRegistro());
         ventaE.setMontoTotal(venta.getMontoTotal());
         ventaE.setEstado(venta.getEstado());
-        if (venta.getClienteid() != null) {
-            ventaE.setClienteid(venta.getClienteid().toHexString());
-        }
         if (venta.getCliente() != null) {
             Cliente cliente = new Cliente();
             cliente.setId(venta.getCliente().getId().toHexString());
@@ -90,7 +87,6 @@ public class VentasConversiones {
         ventaE.setFechaRegistro(venta.getFechaRegistro());
         ventaE.setMontoTotal(venta.getMontoTotal());
         ventaE.setEstado(venta.getEstado());
-        ventaE.setClienteid(venta.getClienteid().toString());
         ventaE.setCliente(conversorCliente.convertirClienteConRFC(venta.getCliente()));
         List<DetalleVenta> detallesVentaE = new ArrayList<>();
         for (DetalleVentaMapeo detalleVenta : venta.getDetallesVenta()) {
@@ -121,9 +117,6 @@ public class VentasConversiones {
      */
     public VentaMapeo convertirAVentaMapeo(Venta venta) {
         VentaMapeo ventaMapeo = new VentaMapeo();
-        if (venta.getClienteid() != null) {
-            ventaMapeo.setClienteid(new ObjectId(venta.getClienteid()));
-        }
         if (venta.getCliente()!=null) {
              ClienteMapeo cliente = new ClienteMapeo();
             cliente.setId(new ObjectId(venta.getCliente().getId()));
