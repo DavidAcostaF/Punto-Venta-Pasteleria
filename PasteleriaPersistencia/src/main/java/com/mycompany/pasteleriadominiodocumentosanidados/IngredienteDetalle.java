@@ -11,7 +11,7 @@ public class IngredienteDetalle {
 
     private String ingredienteId;
     private String nombre;
-    private Integer cantidad;
+    private Float cantidad;
 
     /**
      * Constructor por defecto
@@ -26,7 +26,7 @@ public class IngredienteDetalle {
      * @param nombre El nombre del ingrediente.
      * @param cantidad La cantidad del ingrediente.
      */
-    public IngredienteDetalle(String ingredienteId, String nombre, Integer cantidad) {
+    public IngredienteDetalle(String ingredienteId, String nombre, Float cantidad) {
         this.ingredienteId = ingredienteId;
         this.nombre = nombre;
         this.cantidad = cantidad;
@@ -73,7 +73,7 @@ public class IngredienteDetalle {
      *
      * @return La cantidad del ingrediente.
      */
-    public Integer getCantidad() {
+    public Float getCantidad() {
         return cantidad;
     }
 
@@ -82,7 +82,7 @@ public class IngredienteDetalle {
      *
      * @param cantidad La cantidad del ingrediente a establecer.
      */
-    public void setCantidad(Integer cantidad) {
+    public void setCantidad(Float cantidad) {
         this.cantidad = cantidad;
     }
 

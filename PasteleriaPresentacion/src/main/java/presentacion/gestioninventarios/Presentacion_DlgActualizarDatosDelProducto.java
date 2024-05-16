@@ -252,7 +252,7 @@ public class Presentacion_DlgActualizarDatosDelProducto extends javax.swing.JFra
                 return;
             }
         }
-        System.out.println(control.getProductoDTO().getId()+"pene");
+        System.out.println(control.getProductoDTO().getId());
         productoDTO.setId(control.getProductoDTO().getId());
         productoDTO.setIngredientes(listaIngredienteDetalle);
         productoDTO.setNombre(this.txtNombre.getText());

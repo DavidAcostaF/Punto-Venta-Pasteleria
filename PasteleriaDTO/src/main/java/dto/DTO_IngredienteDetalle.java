@@ -12,9 +12,9 @@ public class DTO_IngredienteDetalle {
 
     private String ingredienteId;
     private String nombre;
-    private Integer cantidad;
+    private Float cantidad;
 
-    public DTO_IngredienteDetalle(String ingredienteId, String nombre, Integer cantidad) {
+    public DTO_IngredienteDetalle(String ingredienteId, String nombre, Float cantidad) {
         this.ingredienteId = ingredienteId;
         this.nombre = nombre;
         this.cantidad = cantidad;
@@ -39,11 +39,11 @@ public class DTO_IngredienteDetalle {
         this.nombre = nombre;
     }
 
-    public Integer getCantidad() {
+    public Float getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(Integer cantidad) {
+    public void setCantidad(Float cantidad) {
         this.cantidad = cantidad;
     }
 }

@@ -56,7 +56,7 @@ public class IngredienteDetalleConversiones {
     public DTO_IngredienteDetalle convertirIngredienteADetalleIngrediente(DTO_Ingrediente ingredienteDTO) {
         DTO_IngredienteDetalle detalleIngrediente = new DTO_IngredienteDetalle();
         detalleIngrediente.setIngredienteId(ingredienteDTO.getId());
-        detalleIngrediente.setCantidad(ingredienteDTO.getCantidad());
+        detalleIngrediente.setCantidad(Float.valueOf(ingredienteDTO.getCantidad()));
         detalleIngrediente.setNombre(ingredienteDTO.getNombre());
         return detalleIngrediente;
     }
