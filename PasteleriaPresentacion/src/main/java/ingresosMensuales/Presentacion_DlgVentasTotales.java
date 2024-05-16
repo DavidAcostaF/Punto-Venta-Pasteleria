@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package presentacion;
+package ingresosMensuales;
 
 import com.mycompany.pasteleriacalculargananciasdeldia.FuncionalidadCalcularGananciasDelDia;
 import com.mycompany.pasteleriacalculargananciasdeldia.IFuncionalidadCalcularGananciasDelDia;

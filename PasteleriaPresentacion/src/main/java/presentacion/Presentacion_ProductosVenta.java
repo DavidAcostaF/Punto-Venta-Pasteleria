@@ -243,6 +243,7 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
             modelo.addRow(new Object[]{p.getNombre(), p.getEspecificaciones(), 1, p.getPrecio(), p.getTamanio()});
         }
 
+
     }//GEN-LAST:event_agregarPastelBtnActionPerformed
 
     private void SiguientebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SiguientebtnActionPerformed
@@ -330,9 +331,6 @@ public class Presentacion_ProductosVenta extends javax.swing.JFrame {
     private void llenarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tableProductos.getModel();
         DTO_Venta venta = control.getVenta();
-        if (venta != null && venta.getDetallesVenta() != null) {
-            venta.getDetallesVenta().forEach(p -> modelo.addRow(new Object[]{p.getProducto().getNombre(), p.getEspecificacion(), Integer.valueOf(p.getCantidad()), Float.valueOf(p.getPrecio()), p.getTamanhoProducto()}));
-        }
 
         tableProductos.getColumnModel().getColumn(5).setCellRenderer(new BotonRenderer("+"));
         tableProductos.getColumnModel().getColumn(5).setCellEditor(new BotonEditor(new JCheckBox(), modelo, 2, 1));

@@ -185,9 +185,10 @@ public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
         venta.setCliente(cliente);
         control.setVenta(venta);
 
-
         int respuesta = JOptionPane.showOptionDialog(null, "¿Realizara envio a domicilio?", "Tipo de envio", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
-
+        if (respuesta == JOptionPane.CLOSED_OPTION) {
+            return;
+        }
         if (respuesta == JOptionPane.YES_OPTION) {
             control.setVentanaAnterior("Cliente");
             this.dispose();
