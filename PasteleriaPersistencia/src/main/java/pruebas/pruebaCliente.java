@@ -28,18 +28,14 @@ public class pruebaCliente {
         try {
             ClienteDAO clientedao=new ClienteDAO();
             Cliente cliente = new Cliente();
-            
-            cliente.setNombre("Putisco");
-            cliente.setApellidoP("hola");
-            cliente.setApellidoM("Morales");
-            cliente.setTelefono("644412345");
-
+            Cliente cliente1=clientedao.encontrarCliente("gsgs", "grgsgrs", "sgrsg", "43532");
             List<Direccion> direcciones = new ArrayList<>();
+            direcciones=cliente1.getDirecciones();
             direcciones.add(new Direccion("Calle wallabe #42", "sydney", "1"));
-            direcciones.add(new Direccion("Calle 2", "Colonia 2", "2"));
+            direcciones.add(new Direccion("Calle 2", "sgrgr2", "2"));
             cliente.setDirecciones(direcciones);
             
-            System.out.println(clientedao.agregarCliente(cliente).getId());
+            clientedao.actualizarCliente(cliente1);
             
 //cliente = clientedao.encontrarClienteID("66406d0293d57d3040a5bdc8");
        //     System.out.println(cliente);

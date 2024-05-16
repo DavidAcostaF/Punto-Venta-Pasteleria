@@ -19,23 +19,22 @@ import javax.swing.JOptionPane;
  * @author abelc
  */
 public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
+
     ControlAgregarVenta control;
     DTO_Venta venta;
-   
+
     /**
      * Creates new form DlgDatosCliente
      */
     public Presentacion_DlgDatosCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        control= ControlAgregarVenta.getInstance();
-        this.venta=control.getVenta(); 
+        control = ControlAgregarVenta.getInstance();
+        this.venta = control.getVenta();
         setTitle("Datos del cliente");
         initComponents();
-      
+
         setVisible(true);
-        
-        
-        
+
     }
 
     /**
@@ -166,41 +165,55 @@ public class Presentacion_DlgDatosCliente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSiguienteActionPerformed
-//        IAgregarCliente agregar = new AgregarCliente();
+        if (campoTextoNombre.getText().isEmpty() || campoTextoApellidoP.getText().isEmpty()
+                || campoTextoApellidoM.getText().isEmpty() || campoTextoTelefono.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (!esNumeroEntero(campoTextoTelefono.getText())) {
+            JOptionPane.showMessageDialog(this, "El teléfono debe ser un número entero.", "Teléfono inválido", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         DTO_Cliente cliente = new DTO_Cliente();
         cliente.setNombre(this.campoTextoNombre.getText());
         cliente.setApellidoP(this.campoTextoApellidoP.getText());
         cliente.setApellidoM(this.campoTextoApellidoM.getText());
         cliente.setTelefono(this.campoTextoTelefono.getText());
-       
+
         venta.setCliente(cliente);
         control.setVenta(venta);
-          int respuesta = JOptionPane.showOptionDialog(null, "¿Realizara envio a domicilio?", "Tipo de envio", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
+
+
+        int respuesta = JOptionPane.showOptionDialog(null, "¿Realizara envio a domicilio?", "Tipo de envio", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
 
         if (respuesta == JOptionPane.YES_OPTION) {
             control.setVentanaAnterior("Cliente");
-           this.dispose(); 
-           control.mostrarAgregarDireccion();
-          
+            this.dispose();
+            control.mostrarAgregarDireccion();
         } else {
-            DTO_Direccion direccion=new DTO_Direccion();
+            DTO_Direccion direccion = new DTO_Direccion();
             direccion.setCalle("En tienda");
             venta.setDireccionEntrega(direccion);
             control.setVenta(venta);
             this.dispose();
             control.mostrarCobrarVenta();
-           
-          
         }
-        
-        
-    }//GEN-LAST:event_botonSiguienteActionPerformed
 
+    }//GEN-LAST:event_botonSiguienteActionPerformed
+    private boolean esNumeroEntero(String texto) {
+        try {
+            Integer.parseInt(texto);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
     private void regresarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarBtnActionPerformed
         this.dispose();
         control.mostrarProductosVenta();
     }//GEN-LAST:event_regresarBtnActionPerformed
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -10,6 +10,7 @@ import dto.DTO_Direccion;
 import control.ControlAgregarVenta;
 import dto.DTO_Venta;
 import java.util.ResourceBundle.Control;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,7 +30,7 @@ public class Presentacion_DlgAgregarDireccion extends javax.swing.JDialog {
         this.venta = control.getVenta();
         setTitle("Datos de la dirección");
         initComponents();
-        
+
         setVisible(true);
     }
 
@@ -173,7 +174,17 @@ public class Presentacion_DlgAgregarDireccion extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNumExtActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        if (txtCalle.getText().isEmpty() || txtColonia.getText().isEmpty() || txtNumExt.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
+        try {
+            int numExterior = Integer.parseInt(txtNumExt.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El número exterior debe ser un valor numérico.", "Número no válido", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         DTO_Direccion dir = new DTO_Direccion();
         dir.setCalle(txtCalle.getText());
         dir.setColonia(txtColonia.getText());
@@ -189,6 +200,11 @@ public class Presentacion_DlgAgregarDireccion extends javax.swing.JDialog {
         if (control.getVentanaAnterior().equals("Cliente")) {
             this.dispose();
             control.mostrarDatosClientes();
+
+        }
+        if (control.getVentanaAnterior().equals("Clientes")) {
+            this.dispose();
+            control.mostrarListaClientes();
         } else {
             this.dispose();
             control.mostrarListaDirecciones();

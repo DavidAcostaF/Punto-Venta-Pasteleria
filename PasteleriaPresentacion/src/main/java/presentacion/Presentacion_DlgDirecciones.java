@@ -10,6 +10,7 @@ import control.ControlAgregarVenta;
 import dto.DTO_Direccion;
 import dto.DTO_Venta;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -183,8 +184,9 @@ public class Presentacion_DlgDirecciones extends javax.swing.JDialog {
             control.setVenta(venta);
             this.dispose();
             control.mostrarCobrarVenta();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se puede continuar sin seleccionar una dirección", "Seleccione una dirección", JOptionPane.WARNING_MESSAGE);
         }
-
 
     }//GEN-LAST:event_btnSeleccionarDireccionActionPerformed
 

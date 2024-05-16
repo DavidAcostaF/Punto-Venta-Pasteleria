@@ -4,6 +4,7 @@
  */
 package pruebas;
 
+import com.mycompany.pasteleriadaos.ClienteDAO;
 import com.mycompany.pasteleriadominioentidades.Direccion;
 import com.mycompany.pastelerianegocio.ClientesBO;
 import dto.DTO_Cliente;
@@ -21,20 +22,17 @@ public class Cliente {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        DTO_Cliente cliente=new DTO_Cliente();
-        ClientesBO c= new ClientesBO();
-        cliente.setNombre("Putisco");
-            cliente.setApellidoP("hola");
-            cliente.setApellidoM("Morales");
-            cliente.setTelefono("644412345");
+        DTO_Cliente cliente = new DTO_Cliente();
+        ClientesBO c = new ClientesBO();
 
-            List<DTO_Direccion> direcciones = new ArrayList<>();
-            direcciones.add(new DTO_Direccion("Calle wallabe #42", "sydney", "1"));
-            direcciones.add(new DTO_Direccion("Calle 2", "Colonia 2", "2"));
-            cliente.setDirecciones(direcciones);
-            
-            c.agregarCliente(cliente);
-            
+        cliente=c.encontrarCliente("gsgs", "grgsgrs", "sgrsg", "43532");
+        
+        List<DTO_Direccion> direcciones = new ArrayList<>();
+        direcciones=cliente.getDirecciones();
+        direcciones.add(new DTO_Direccion("Calle", "joder", "1"));
+        cliente.setDirecciones(direcciones);
+        c.actualizarCliente(cliente);
+
     }
-    
+
 }

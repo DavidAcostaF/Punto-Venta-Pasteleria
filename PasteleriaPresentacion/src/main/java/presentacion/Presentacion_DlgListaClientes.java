@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  * @author abelc
  */
 public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
-
+    
     private ControlAgregarVenta control;
     private IFuncionalidadConsultarClientes funcionalidadesClientes;
     private List<DTO_Cliente> listaClientes;
@@ -34,10 +34,10 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
      */
     public Presentacion_DlgListaClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-
+        
         this.control = ControlAgregarVenta.getInstance();
         this.venta = control.getVenta();
-
+        
         this.funcionalidadesClientes = new FuncionalidadConsultarClientes();
         funcionalidadesClientes.consultarClientes();
         listaClientes = funcionalidadesClientes.consultarClientes();
@@ -48,10 +48,10 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
         llenarTabla();
         setVisible(true);
     }
-
+    
     private void llenarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tablaClientes.getModel();
-
+        
         listaClientes.forEach(p -> modelo.addRow(new Object[]{p.getNombre(), p.getApellidoP(), p.getApellidoM(), p.getTelefono()}));
     }
 
@@ -183,7 +183,7 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void continuarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarBtnActionPerformed
-        int respuesta = JOptionPane.showOptionDialog(null, "¿Realizara envio a domicilio?", "Tipo de envio", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
+        
         int filaSeleccionada = tablaClientes.getSelectedRow();
         if (filaSeleccionada != -1) {
             DTO_Cliente cliente = new DTO_Cliente();
@@ -192,24 +192,36 @@ public class Presentacion_DlgListaClientes extends javax.swing.JDialog {
             cliente.setApellidoM(tablaClientes.getValueAt(filaSeleccionada, 2).toString());
             cliente.setTelefono(tablaClientes.getValueAt(filaSeleccionada, 3).toString());
             cliente = funcionalidadesClientes.encontrarCliente(cliente.getApellidoP(), cliente.getApellidoM(), cliente.getNombre(), cliente.getTelefono());
-
+            
             venta.setCliente(cliente);
             control.setVenta(venta);
 
+            List<DTO_Direccion> direcciones = cliente.getDirecciones();
+            if (direcciones.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "El cliente no tiene direcciones registradas.", "Sin direcciones", JOptionPane.WARNING_MESSAGE);
+                control.setNuevaDireccion(true);
+                control.setVentanaAnterior("Clientes");
+                this.dispose();
+                control.mostrarAgregarDireccion();
+                return;
+            }
+            
+            int respuesta = JOptionPane.showOptionDialog(null, "¿Realizará envío a domicilio?", "Tipo de envío", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");
             if (respuesta == JOptionPane.YES_OPTION) {
                 this.dispose();
+                // Mostrar lista de direcciones del cliente para elegir
                 control.mostrarListaDirecciones();
-
             } else {
                 DTO_Direccion direccion = new DTO_Direccion();
                 direccion.setCalle("En tienda");
                 venta.setDireccionEntrega(direccion);
                 this.dispose();
                 control.mostrarCobrarVenta();
-
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "No se puede continuar sin seleccionar un cliente.", "Seleccionar un cliente", JOptionPane.WARNING_MESSAGE);
         }
-
+        
 
     }//GEN-LAST:event_continuarBtnActionPerformed
 

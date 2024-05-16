@@ -56,4 +56,12 @@ public interface IClientesBO {
      * @return el DTO_Cliente actualizado, o null si ocurre una excepción.
      */
     public DTO_Cliente actualizarCliente(DTO_Cliente cliente);
+
+    /**
+     * actusliza el cliente cuando viene de la venta
+     *
+     * @param cliente el DTO_Cliente con los datos actualizados.
+     * @return el DTO_Cliente actualizado, o null si ocurre una excepción.
+     */
+    public DTO_Cliente actualizarClienteEnVentas(DTO_Cliente cliente);
 }

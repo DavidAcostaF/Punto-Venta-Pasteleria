@@ -199,9 +199,8 @@ public class Presentacion_DlgCobrarVenta extends javax.swing.JDialog {
     private void aceptarbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarbtnActionPerformed
         if (comboBoxPago.getSelectedItem().toString().equals("Anticipo del 50%")) {
             venta.setEstado("Pendiente");
-        }
-        else{
-        venta.setEstado("Pagado");
+        } else {
+            venta.setEstado("Pagado");
         }
         control.setVenta(venta);
         this.dispose();

@@ -22,7 +22,7 @@ public class FuncionalidadActualizarCliente implements IFuncionalidadActualizarC
     
     @Override
     public DTO_Cliente actualizarCliente(DTO_Cliente cliente) {
-        DTO_Cliente dtoCliente = clientesBO.actualizarCliente(cliente);
+        DTO_Cliente dtoCliente = clientesBO.actualizarClienteEnVentas(cliente);
         return dtoCliente;
     }
     

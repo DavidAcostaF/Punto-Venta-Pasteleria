@@ -269,7 +269,7 @@ public class Presentacion_DlgConfirmacionPago extends javax.swing.JDialog {
         }
         ventas.agregarVenta(venta);
         String mensaje = "¡La venta ha sido registrada exitosamente!";
-
+        control.setNuevaDireccion(false);
         JOptionPane.showMessageDialog(null, mensaje, "Registro de Venta Exitoso", JOptionPane.INFORMATION_MESSAGE);
 
         int respuesta = JOptionPane.showOptionDialog(null, "¿Quiere registrar otra venta?", "Hola", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sí", "No"}, "Sí");

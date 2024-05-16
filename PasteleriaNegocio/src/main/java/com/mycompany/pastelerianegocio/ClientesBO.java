@@ -122,4 +122,16 @@ public class ClientesBO implements IClientesBO {
         }
     }
 
+    @Override
+    public DTO_Cliente actualizarClienteEnVentas(DTO_Cliente cliente) {
+
+        try {
+            return conversor.convertirCliente(clienteDAO.actualizarCliente(conversor.convertirDtoClienteAEntidad(cliente)));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(ClientesBO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+
 }

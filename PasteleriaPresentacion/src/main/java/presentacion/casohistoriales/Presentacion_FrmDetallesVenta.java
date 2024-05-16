@@ -71,7 +71,6 @@ private IFuncionalidadGuardarReportes guardarRecibo;
         generarReporte = new FuncionalidadGenerarReporte();
         setTitle("Detalles de la venta");
         initComponents();
-        System.out.println(venta.getFechaEntrega());
         SimpleDateFormat ff = new SimpleDateFormat("dd/MM/yyyy");
         detallesVentaLabel.setText("Fecha de compra: " + ff.format(venta.getFechaRegistro()));
         fechaEntregalabel.setText("Fecha de entrega: " + ff.format(venta.getFechaEntrega()));
