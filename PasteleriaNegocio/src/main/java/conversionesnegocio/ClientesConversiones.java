@@ -96,7 +96,7 @@ public class ClientesConversiones {
         cliente.setApellidoP(dtoCliente.getApellidoP());
         cliente.setApellidoM(dtoCliente.getApellidoM());
         cliente.setTelefono(dtoCliente.getTelefono());
-        if (cliente.getDirecciones() != null) {
+        if (dtoCliente.getDirecciones() != null) {
             List<Direccion> direcciones = new ArrayList<>();
             for (DTO_Direccion dtoDireccion : dtoCliente.getDirecciones()) {
                 Direccion direccion = new Direccion();
@@ -106,10 +106,12 @@ public class ClientesConversiones {
                 direcciones.add(direccion);
             }
             cliente.setDirecciones(direcciones);
+
         } else {
             cliente.setDirecciones(new ArrayList<>());
         }
         return cliente;
+
     }
 
     /**

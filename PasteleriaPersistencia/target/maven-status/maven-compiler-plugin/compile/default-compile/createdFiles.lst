@@ -1,19 +1,14 @@
-pruebas\PruebaIngredientes.class
 com\mycompany\pasteleriadaos\IReporteDAO.class
 com\mycompany\pasteleriadaos\ClienteDAO.class
-pruebas\pruebaCliente.class
 com\mycompany\pasteleriadaos\Conexion.class
 conversionesPersistencia\IngredienteConversiones.class
 com\mycompany\pasteleriadominiosMapeo\ProductoMapeo.class
 com\mycompany\pasteleriadominiosMapeo\ReporteMapeo.class
-pruebas\PruebasVenta.class
-pruebas\Pruebas.class
 com\mycompany\pasteleriadaos\FacturaDAO.class
 com\mycompany\pasteleriadaos\IIngredienteDAO.class
 com\mycompany\pasteleriadominioentidades\DetalleVenta.class
 com\mycompany\pasteleriadominiosMapeo\DetalleVentaMapeo.class
 conversionesPersistencia\VentasConversiones.class
-pruebas\PruebasProductos.class
 com\mycompany\pasteleriadominiosMapeo\ClienteMapeo.class
 com\mycompany\pasteleriadominioentidades\Direccion.class
 com\mycompany\pasteleriadaos\IConexion.class
@@ -36,7 +31,6 @@ com\mycompany\pasteleriadaos\ProductoDAO.class
 com\mycompany\pasteleriadaos\IClienteDAO.class
 com\mycompany\pasteleriadaos\IFacturaDAO.class
 conversionesPersistencia\ReportesConversiones.class
-pruebas\NewMain.class
 com\mycompany\pasteleriadominioentidades\Cliente.class
 com\mycompany\pasteleriadominiodocumentosanidados\IngredienteDetalle.class
 com\mycompany\pasteleriadominiosMapeo\FacturaMapeo.class
@@ -44,5 +38,3 @@ com\mycompany\pasteleriadaos\VentaDAO.class
 com\mycompany\pasteleriadaos\IVentaDAO.class
 com\mycompany\pasteleriadominioentidades\Reporte.class
 com\mycompany\pasteleriadominioentidades\Venta.class
-pruebas\ReportePrueba.class
-pruebas\PruebasFactura.class

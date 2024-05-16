@@ -126,7 +126,8 @@ public class ClientesBO implements IClientesBO {
     public DTO_Cliente actualizarClienteEnVentas(DTO_Cliente cliente) {
 
         try {
-            return conversor.convertirCliente(clienteDAO.actualizarCliente(conversor.convertirDtoClienteAEntidad(cliente)));
+            clienteDAO.actualizarCliente(conversor.convertirDtoClienteAEntidad(cliente));
+            return cliente;
         } catch (PersistenciaException ex) {
             Logger.getLogger(ClientesBO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
