@@ -17,7 +17,6 @@ public class FacturaMapeo {
     private Date fechaEmision;
     private Date fechaVencimiento;
     private VentaMapeo venta;
-    private ObjectId ventaId;
     private Binary contenido;
 
     /**
@@ -38,7 +37,6 @@ public class FacturaMapeo {
         this.fechaEmision = fechaEmision;
         this.fechaVencimiento = fechaVencimiento;
         this.venta = venta;
-        this.ventaId = ventaId;
     }
 
     /**
@@ -55,7 +53,6 @@ public class FacturaMapeo {
         this.fechaEmision = fechaEmision;
         this.fechaVencimiento = fechaVencimiento;
         this.venta = venta;
-        this.ventaId = ventaId;
     }
 
     /**
@@ -131,24 +128,6 @@ public class FacturaMapeo {
     }
 
     /**
-     * Obtiene el identificador de la venta asociada a la factura.
-     *
-     * @return Identificador de la venta asociada.
-     */
-    public ObjectId getVentaId() {
-        return ventaId;
-    }
-
-    /**
-     * Establece el identificador de la venta asociada a la factura.
-     *
-     * @param ventaId Identificador de la venta asociada.
-     */
-    public void setVentaId(ObjectId ventaId) {
-        this.ventaId = ventaId;
-    }
-
-    /**
      * Obtiene el contenido de la factura.
      *
      * @return Contenido de la factura.
@@ -173,7 +152,7 @@ public class FacturaMapeo {
      */
     @Override
     public String toString() {
-        return "FacturaMapeo{" + "id=" + id + ", fechaEmision=" + fechaEmision + ", fechaVencimiento=" + fechaVencimiento + ", venta=" + venta + ", ventaId=" + ventaId + '}';
+        return "FacturaMapeo{" + "id=" + id + ", fechaEmision=" + fechaEmision + ", fechaVencimiento=" + fechaVencimiento + ", venta=" + venta +  '}';
     }
 
 }

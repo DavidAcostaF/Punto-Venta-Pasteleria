@@ -22,6 +22,7 @@ import dto.DTO_Venta;
 import extras.VentasTableModel;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -160,18 +161,12 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
         jLabel3.setText("Desde");
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        datePickerDesde.setEnabled(false);
-
         jLabel4.setText("Hasta");
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        datePickerHasta.setEnabled(false);
-
         jLabel5.setText("Filtrar por nombre:");
-        jLabel5.setEnabled(false);
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        txtNombreCliente.setEnabled(false);
         txtNombreCliente.setMinimumSize(new java.awt.Dimension(74, 21));
         txtNombreCliente.setPreferredSize(new java.awt.Dimension(74, 21));
 
@@ -298,10 +293,18 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     public void llenarTabla() {
+        limpiarTabla();
         List<DTO_Venta> listaVentas = funcionalidadConsultarVentas.consultarVentas();
         if (listaVentas != null) {
             VentasTableModel modelo = new VentasTableModel(listaVentas);
             tableVentas.setModel(modelo);
+        }
+    }
+
+    private void limpiarTabla() {
+        TableModel modelo = tableVentas.getModel();
+        if (modelo instanceof VentasTableModel) {
+            ((VentasTableModel) modelo).limpiarTabla();
         }
     }
     
