@@ -181,6 +181,16 @@
             <artifactId>PasteleriaActualizarCliente</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>kernel</artifactId>
+            <version>7.2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>layout</artifactId>
+            <version>7.2.4</version>
+        </dependency>
     </dependencies>
     <name>PasteleriaPresentacion</name>
 </project>

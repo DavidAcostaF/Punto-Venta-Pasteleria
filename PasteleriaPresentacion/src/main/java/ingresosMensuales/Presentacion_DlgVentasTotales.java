@@ -4,6 +4,20 @@
  */
 package ingresosMensuales;
 
+import com.itextpdf.kernel.colors.ColorConstants;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.properties.TextAlignment;
+import com.itextpdf.layout.properties.UnitValue;
+import com.itextpdf.layout.renderer.DocumentRenderer;
+import java.awt.Desktop;
+import java.io.IOException;
 import com.mycompany.pasteleriacalculargananciasdeldia.FuncionalidadCalcularGananciasDelDia;
 import com.mycompany.pasteleriacalculargananciasdeldia.IFuncionalidadCalcularGananciasDelDia;
 import com.mycompany.pasteleriaconsultarventas.FuncionalidadConsultarVentas;
@@ -16,41 +30,22 @@ import com.mycompany.pasteleriaguardarreportes.FuncionalidadGuardarReportes;
 import com.mycompany.pasteleriaguardarreportes.IFuncionalidadGuardarReportes;
 import control.ControlAgregarVenta;
 import control.ControlIngresosMensuales;
-import dto.DTO_GenerarReporte;
-import dto.DTO_Producto;
-import dto.DTO_Reporte;
-import dto.DTO_ReporteIngresosDetalles;
-import dto.DTO_ReporteIngresosFormato;
 import dto.DTO_Venta;
 import extras.ButtonColumn;
-import java.awt.Color;
-import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import net.miginfocom.layout.AC;
-import net.sf.jasperreports.engine.JREmptyDataSource;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  *
@@ -253,88 +248,96 @@ public class Presentacion_DlgVentasTotales extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonExportarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonExportarPDFActionPerformed
-        try {
-            DTO_ReporteIngresosFormato ingresosFormato = new DTO_ReporteIngresosFormato();
-            ingresosFormato.setFechaInicial(this.txtFechaInicial.getText());
-            ingresosFormato.setFechaFinal(txtFechaFinal.getText());
-            ingresosFormato.setIngresosTotales(txtIngresosTotales.getText());
-            List<DTO_ReporteIngresosDetalles> listaDetalles = new ArrayList<>();
-            int rowCount = this.tableVentas.getModel().getRowCount();
+        if (this.tableVentas.getRowCount()==0) {
+            JOptionPane.showMessageDialog(this, "No hay ventas para generar un PDF.", "No hay ventas", JOptionPane.WARNING_MESSAGE); 
+            return;
+        }
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Guardar Reporte");
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos PDF", "pdf");
+        fileChooser.addChoosableFileFilter(filter);
+        int userSelection = fileChooser.showSaveDialog(this);
 
-            for (int i = 0; i < rowCount; i++) {
-                DTO_ReporteIngresosDetalles ingresoDetalle = new DTO_ReporteIngresosDetalles();
-                Object value = this.tableVentas.getModel().getValueAt(i, 1);
-                ingresoDetalle.setCantidadVentas(value.toString());
-                Object value2 = this.tableVentas.getModel().getValueAt(i, 0);
-                ingresoDetalle.setFechaVenta(value2.toString());
-                Object value3 = this.tableVentas.getModel().getValueAt(i, 2);
-                ingresoDetalle.setGananciasDia(value3.toString());
-
-                String stringValue = (String) value2;
-                Date dateValue = null;
-                try {
-                    dateValue = dateFormat.parse(stringValue);
-                } catch (ParseException ex) {
-                    Logger.getLogger(Presentacion_DlgVentasTotales.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                listaVentas = this.funcionalidadConsultarVentas.consultarVentasPorFecha(dateValue);
-                for (DTO_Venta dtoVenta : listaVentas) {
-                    DTO_Venta ventaProvisional = this.funcionalidadConsultarVentas.encontrarVenta(dtoVenta.getID());
-                    String nombreCliente = ventaProvisional.getCliente().getNombre() + " " + ventaProvisional.getCliente().getApellidoP();
-
-                    ingresoDetalle.setFechaCompra(dateFormat.format(dtoVenta.getFechaRegistro()));
-
-                    ingresoDetalle.setNombreCliente(nombreCliente);
-                    ingresoDetalle.setTotalDeCompra(String.valueOf(dtoVenta.getMontoTotal()));
-
-                }
-                listaDetalles.add(ingresoDetalle);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            String path = fileToSave.getAbsolutePath();
+            if (!path.toLowerCase().endsWith(".pdf")) {
+                path += ".pdf";
             }
 
-            System.out.println(listaDetalles.size());
-            ingresosFormato.setListaDetalles(listaDetalles);
-            DTO_GenerarReporte reporteGenerado = generadorReportes.generarReporteIngresosMensuales(ingresosFormato);
+            try (PdfWriter writer = new PdfWriter(path); PdfDocument pdfDoc = new PdfDocument(writer); Document document = new Document(pdfDoc, PageSize.A4)) {
+                // Set a custom document renderer for page event handling
+                document.setRenderer(new DocumentRenderer(document) {
+                    @Override
+                    public void close() {
+                        super.close();
+                        addPageNumbers(pdfDoc, document);
+                    }
+                });
 
-            JasperPrint jasperPrint = JasperFillManager.fillReport(reporteGenerado.getJasperReport(), reporteGenerado.getParameters(), new JREmptyDataSource());
+                document.add(new Paragraph("Reporte de Ingresos Mensuales").setFontSize(18).setTextAlignment(TextAlignment.CENTER));
+                document.add(new Paragraph("Ingresos Totales: " + this.txtIngresosTotales.getText()).setFontSize(14).setTextAlignment(TextAlignment.LEFT));
 
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Guardar como...");
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos PDF (*.pdf)", "pdf");
-            fileChooser.setFileFilter(filter);
-            int seleccion = fileChooser.showSaveDialog(this);
+                int rowCount = this.tableVentas.getModel().getRowCount();
+                for (int i = 0; i < rowCount; i++) {
+                    String fecha = this.tableVentas.getModel().getValueAt(i, 0).toString();
+                    String cantidadVentas = this.tableVentas.getModel().getValueAt(i, 1).toString();
+                    String gananciasDia = this.tableVentas.getModel().getValueAt(i, 2).toString();
 
-            if (seleccion == JFileChooser.APPROVE_OPTION) {
-                File archivoSeleccionado = fileChooser.getSelectedFile();
-                String rutaArchivo = archivoSeleccionado.getAbsolutePath();
+                    Table detalleTable = new Table(UnitValue.createPercentArray(new float[]{3, 3, 3}));
+                    detalleTable.setWidth(UnitValue.createPercentValue(100));
+                    detalleTable.addHeaderCell(new Cell(3, 1).add(new Paragraph("Fecha: " + fecha)).setBackgroundColor(ColorConstants.LIGHT_GRAY));
+                    detalleTable.addHeaderCell(new Cell(3, 1).add(new Paragraph("Cantidad de Ventas: " + cantidadVentas)).setBackgroundColor(ColorConstants.LIGHT_GRAY));
+                    detalleTable.addHeaderCell(new Cell(3, 1).add(new Paragraph("Ganancias del Día: " + gananciasDia)).setBackgroundColor(ColorConstants.LIGHT_GRAY));
 
-                if (!rutaArchivo.toLowerCase().endsWith(".pdf")) {
-                    rutaArchivo += ".pdf";
+                    detalleTable.addHeaderCell(new Cell().add(new Paragraph("Fecha")).setBackgroundColor(ColorConstants.GRAY));
+                    detalleTable.addHeaderCell(new Cell().add(new Paragraph("Nombre del Cliente")).setBackgroundColor(ColorConstants.GRAY));
+                    detalleTable.addHeaderCell(new Cell().add(new Paragraph("Total de la Venta")).setBackgroundColor(ColorConstants.GRAY));
+
+                    Date fechaSeleccionada = null;
+                    try {
+                        fechaSeleccionada = dateFormat.parse(fecha);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    List<DTO_Venta> ventasDelDia = this.funcionalidadConsultarVentas.consultarVentasPorFecha(fechaSeleccionada);
+                    for (DTO_Venta venta : ventasDelDia) {
+                        String nombreCliente = venta.getCliente().getNombre() + " " + venta.getCliente().getApellidoP();
+                        float costoVenta = venta.getMontoTotal();
+
+                        detalleTable.addCell(new Cell().add(new Paragraph(fecha)));
+                        detalleTable.addCell(new Cell().add(new Paragraph(nombreCliente)));
+                        detalleTable.addCell(new Cell().add(new Paragraph(String.valueOf(costoVenta))));
+                    }
+
+                    document.add(detalleTable);
+                    document.add(new Paragraph("\n"));
                 }
-
-                JasperExportManager.exportReportToPdfFile(jasperPrint, rutaArchivo);
-                JOptionPane.showMessageDialog(this, "El archivo se ha guardado correctamente en:\n" + rutaArchivo, "Archivo guardado", JOptionPane.INFORMATION_MESSAGE);
 
                 if (Desktop.isDesktopSupported()) {
-                    File archivo = new File(rutaArchivo);
-                    DTO_Reporte reporte = new DTO_Reporte();
-                    byte[] bytesArchivo = funcionalidadGuardarReportes.convertirArchivoABytes(archivo);
-                    reporte.setBytesContenido(bytesArchivo);
-                    reporte.setNombre(archivo.getName());
-                    reporte.setCategoria("Reporte Ingresos Mensuales");
-                    reporte.setTipo("application/pdf");
-                    reporte.setFechaExpedicion(new Date());
-                    funcionalidadGuardarReportes.guardarReporte(reporte);
-                    Desktop.getDesktop().open(new File(rutaArchivo));
-
+                    Desktop.getDesktop().open(new File(path));
                 }
 
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (JRException ex) {
-            Logger.getLogger(Presentacion_DlgVentasTotales.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Presentacion_DlgVentasTotales.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_botonExportarPDFActionPerformed
+
+    private void addPageNumbers(PdfDocument pdfDoc, Document document) {
+        int totalPages = pdfDoc.getNumberOfPages();
+        for (int i = 1; i <= totalPages; i++) {
+            PdfCanvas canvas = new PdfCanvas(pdfDoc.getPage(i));
+            canvas.beginText()
+                    .setFontAndSize(document.getPdfDocument().getDefaultFont(), 10)
+                    .moveText(520, 30)
+                    .showText(String.format("Página %d de %d", i, totalPages))
+                    .endText();
+            canvas.release();
+        }
+    }
 
     private void botonContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonContinuarActionPerformed
         this.dispose();

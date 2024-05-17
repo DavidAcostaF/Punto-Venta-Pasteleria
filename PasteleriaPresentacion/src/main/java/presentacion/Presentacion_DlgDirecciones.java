@@ -163,6 +163,7 @@ public class Presentacion_DlgDirecciones extends javax.swing.JDialog {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.dispose();
+        control.mostrarListaClientes();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void agregarDireccionBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarDireccionBtnMouseClicked
