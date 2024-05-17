@@ -36,11 +36,6 @@ public class DTO_Factura {
     private DTO_Venta venta;
 
     /**
-     * Identificador de la venta asociada a la factura.
-     */
-    private String ventaId;
-
-    /**
      * Donde se guardará la factura
      */
     private byte[] bytesContenido;
@@ -167,24 +162,6 @@ public class DTO_Factura {
      */
     public void setBytesContenido(byte[] bytesContenido) {
         this.bytesContenido = bytesContenido;
-    }
-
-    /**
-     * Obtiene el identificador de la venta asociada a la factura.
-     *
-     * @return Identificador de la venta asociada a la factura.
-     */
-    public String getVentaId() {
-        return ventaId;
-    }
-
-    /**
-     * Establece el identificador de la venta asociada a la factura.
-     *
-     * @param ventaId Identificador de la venta asociada a la factura.
-     */
-    public void setVentaId(String ventaId) {
-        this.ventaId = ventaId;
     }
 
     /**

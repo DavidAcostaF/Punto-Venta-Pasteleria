@@ -88,27 +88,38 @@ public class Presentacion_DlgActualizarIngredientesSeleccionados extends javax.s
         for (int fila = 0; fila < numRows; fila++) {
             Object valorCelda = tabla.getValueAt(fila, 1);
             DTO_IngredienteDetalle ingrediente = listaIngredientes.get(fila);
-            ingrediente.setCantidad(Integer.valueOf(String.valueOf(valorCelda)));
+            ingrediente.setCantidad(Float.valueOf(String.valueOf(valorCelda)));
         }
 
         return listaIngredientes;
     }
 
     public void agregarListenerCambioCantidad() {
-        final int columnaNumero = 1;
+        final int columnaCantidad = 1;
+        final int columnaUnidad = 2; 
 
-        tableIngredientes.getColumnModel().getColumn(columnaNumero).setCellEditor(new DefaultCellEditor(new JTextField()) {
+        tableIngredientes.getColumnModel().getColumn(columnaCantidad).setCellEditor(new DefaultCellEditor(new JTextField()) {
             @Override
             public boolean stopCellEditing() {
                 try {
                     JTextField textField = (JTextField) getComponent();
                     String valorCelda = textField.getText();
+
                     double numero = Double.parseDouble(valorCelda);
 
                     if (numero <= 0) {
                         JOptionPane.showMessageDialog(null, "El número debe ser mayor que 0", "Error", JOptionPane.ERROR_MESSAGE);
-                        return false; // Permite al usuario corregir el valor
+                        return false;
                     }
+
+                    int fila = tableIngredientes.getEditingRow();
+                    String unidad = (String) tableIngredientes.getValueAt(fila, columnaUnidad);
+
+                    if (unidad.equalsIgnoreCase("unidad") && valorCelda.contains(".")) {
+                        JOptionPane.showMessageDialog(null, "Las unidades no pueden tener decimales", "Error", JOptionPane.ERROR_MESSAGE);
+                        return false; 
+                    }
+
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(null, "Por favor ingrese un número válido", "Error", JOptionPane.ERROR_MESSAGE);
                     return false;
@@ -117,7 +128,6 @@ public class Presentacion_DlgActualizarIngredientesSeleccionados extends javax.s
                 return super.stopCellEditing();
             }
         });
-
     }
 
     /**
@@ -233,7 +243,6 @@ public class Presentacion_DlgActualizarIngredientesSeleccionados extends javax.s
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         List<DTO_IngredienteDetalle> ingredientesAgregados = obtenerListaIngredientes();
-
 
         control.getProductoDTO().setIngredientes(ingredientesAgregados);
 

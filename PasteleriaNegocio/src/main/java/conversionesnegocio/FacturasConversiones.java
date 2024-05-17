@@ -38,7 +38,7 @@ public class FacturasConversiones {
         factura.setId(factura.getId());
         facturaDto.setFechaEmision(factura.getFechaEmision());
         facturaDto.setFechaVencimiento(factura.getFechaVencimiento());
-        facturaDto.setVentaId(factura.getVentaId());
+        facturaDto.setVenta(conversorVentas.convertirADTO(factura.getVenta()));
         facturaDto.setBytesContenido(factura.getBytesContenido());
 
         return facturaDto;
@@ -57,7 +57,6 @@ public class FacturasConversiones {
         factura.setId(factura.getId());
         facturaDto.setFechaEmision(factura.getFechaEmision());
         facturaDto.setFechaVencimiento(factura.getFechaVencimiento());
-        facturaDto.setVentaId(factura.getVentaId());
         facturaDto.setBytesContenido(factura.getBytesContenido());
         facturaDto.setVenta(conversorVentas.convertirADTO(factura.getVenta()));
 
@@ -76,7 +75,7 @@ public class FacturasConversiones {
         factura.setId(factura.getId());
         facturaEnt.setFechaEmision(factura.getFechaEmision());
         facturaEnt.setFechaVencimiento(factura.getFechaVencimiento());
-        facturaEnt.setVentaId(factura.getVentaId());
+        facturaEnt.setVenta(conversorVentas.convertirDtoVentaAEntidad(factura.getVenta()));
         facturaEnt.setBytesContenido(factura.getBytesContenido());
 
         return facturaEnt;

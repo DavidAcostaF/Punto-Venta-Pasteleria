@@ -6,7 +6,6 @@ package conversionesPersistencia;
 
 import com.mycompany.pasteleriadominioentidades.Factura;
 import com.mycompany.pasteleriadominiosMapeo.FacturaMapeo;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -29,7 +28,8 @@ public class FacturasConversiones {
 
     /**
      * Convierte un objeto FacturaMapeo a un objeto Factura.
-     *
+     * Método implementado antes de la desnormalización
+     * 
      * @param factura El objeto FacturaMapeo a convertir.
      * @return El objeto Factura convertido.
      */
@@ -38,7 +38,7 @@ public class FacturasConversiones {
         facturaEnt.setId(factura.getId().toHexString());
         facturaEnt.setFechaEmision(factura.getFechaEmision());
         facturaEnt.setFechaVencimiento(factura.getFechaVencimiento());
-        facturaEnt.setVentaId(factura.getVentaId().toHexString());
+        facturaEnt.setVenta(conversosrVentas.convertirAVentaEntidad(factura.getVenta()));
 
         byte[] contenidoBytes64 = factura.getContenido().getData();
         String contenidoBase64 = Base64.getEncoder().encodeToString(contenidoBytes64);
@@ -60,7 +60,6 @@ public class FacturasConversiones {
         facturaEnt.setId(factura.getId().toHexString());
         facturaEnt.setFechaEmision(factura.getFechaEmision());
         facturaEnt.setFechaVencimiento(factura.getFechaVencimiento());
-        facturaEnt.setVentaId(factura.getVentaId().toHexString());
         facturaEnt.setVenta(conversosrVentas.convertirAVentaEntidad(factura.getVenta()));
 
         byte[] contenidoBytes64 = factura.getContenido().getData();
@@ -82,7 +81,7 @@ public class FacturasConversiones {
         facturaMap.setId(new ObjectId(factura.getId()));
         facturaMap.setFechaEmision(factura.getFechaEmision());
         facturaMap.setFechaVencimiento(factura.getFechaVencimiento());
-        facturaMap.setVentaId(new ObjectId(factura.getVentaId()));
+        facturaMap.setVenta(conversosrVentas.convertirAVentaMapeo(factura.getVenta()));
         facturaMap.setContenido(new Binary(factura.getBytesContenido()));
 
         return facturaMap;

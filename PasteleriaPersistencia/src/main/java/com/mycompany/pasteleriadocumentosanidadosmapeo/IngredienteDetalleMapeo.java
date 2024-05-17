@@ -9,7 +9,7 @@ public class IngredienteDetalleMapeo {
 
     private ObjectId ingredienteId;
     private String nombre;
-    private Integer cantidad;
+    private Float cantidad;
 
     /**
      * Constructor de la clase IngredienteDetalleMapeo.
@@ -18,7 +18,7 @@ public class IngredienteDetalleMapeo {
      * @param nombre El nombre del ingrediente.
      * @param cantidad La cantidad del ingrediente.
      */
-    public IngredienteDetalleMapeo(ObjectId ingredienteId, String nombre, Integer cantidad) {
+    public IngredienteDetalleMapeo(ObjectId ingredienteId, String nombre, Float cantidad) {
         this.ingredienteId = ingredienteId;
         this.nombre = nombre;
         this.cantidad = cantidad;
@@ -71,7 +71,7 @@ public class IngredienteDetalleMapeo {
      * 
      * @return La cantidad del ingrediente.
      */
-    public Integer getCantidad() {
+    public Float getCantidad() {
         return cantidad;
     }
 
@@ -80,7 +80,7 @@ public class IngredienteDetalleMapeo {
      * 
      * @param cantidad La cantidad del ingrediente.
      */
-    public void setCantidad(Integer cantidad) {
+    public void setCantidad(Float cantidad) {
         this.cantidad = cantidad;
     }
 
