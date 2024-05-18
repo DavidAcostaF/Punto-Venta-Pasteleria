@@ -9,6 +9,8 @@ extras\TableActionCellRender.class
 presentacion\casohistoriales\Presentacion_FrmDetallesVenta$4.class
 presentacion\gestioninventarios\Presentacion_DlgActualizarDatosDelProducto.class
 presentacion\Presentacion_MenuPrincipal$7.class
+presentacion\facturar\Presentacion_DlgFacturarACliente$11.class
+presentacion\facturar\Presentacion_DlgFacturarACliente$5.class
 presentacion\gestioninventarios\Presentacion_DlgActualizarDatosDelProducto$6.class
 presentacion\facturar\Presentacion_DlgOpcionFactura.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioIngredientes$12.class
@@ -19,9 +21,11 @@ presentacion\gestioninventarios\Presentacion_DlgActualizarIngredientesSelecciona
 presentacion\Presentacion_DlgConfirmacionPago$3.class
 extras\PanelBotones.class
 presentacion\casohistoriales\Presentacion_FrmDetallesVenta.class
+presentacion\facturar\Presentacion_DlgFacturarACliente$10.class
 presentacion\facturar\Presentacion_FrmHistorialFacturas$2.class
 presentacion\gestioninventarios\Presentacion_DlgDetalleProducto$2.class
 extras\TableActionEvent.class
+extras\DireccionesComboboxModel.class
 extras\Render.class
 presentacion\casohistoriales\Presentacion_FrmDetallesVenta$3.class
 presentacion\casohistoriales\Presentacion_FrmMenuHistoriales.class
@@ -46,6 +50,7 @@ presentacion\casohistoriales\Presentacion_FrmHistorialReportes$1.class
 presentacion\Presentacion_DlgConfirmacionPago$4.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioIngredientes$7.class
 ingresosMensuales\Presentacion_DlgVentasTotales$1.class
+presentacion\facturar\Presentacion_DlgFacturarACliente$12.class
 presentacion\gestioninventarios\Presentacion_DlgSeleccionOpcionGestion$2.class
 extras\ClientesComboBoxModel.class
 presentacion\gestioninventarios\Presentacion_DlgIngredientesSeleccionados$1.class
@@ -54,10 +59,12 @@ presentacion\gestioninventarios\Presentacion_DlgActualizarIngredientesSelecciona
 presentacion\facturar\Presentacion_DlgFacturarACliente$3.class
 presentacion\facturar\Presentacion_FrmConfirmarGenerarFactura$4.class
 presentacion\facturar\Presentacion_FrmHistorialFacturas$4.class
+presentacion\facturar\Presentacion_DlgFacturarACliente$6.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioIngredientes$4.class
 presentacion\facturar\Presentacion_FrmSeleccionarVenta$3.class
 extras\ButtonColumn.class
 presentacion\casohistoriales\VerPdf$1.class
+presentacion\facturar\Presentacion_FrmSeleccionarVenta$6.class
 presentacion\gestioninventarios\Presentacion_DlgIngredientesSeleccionados$4.class
 presentacion\casohistoriales\Presentacion_FrmHistorialReportes$3.class
 presentacion\casohistoriales\Presentacion_FrmHistorialVentas$4.class
@@ -70,12 +77,14 @@ extras\DynamicComboBoxEditor.class
 presentacion\gestioninventarios\Presentacion_DlgDetalleProducto$1.class
 pasteleria\NewMain.class
 presentacion\gestioninventarios\Presentacion_DlgIngresarDatosDelProducto$5.class
+presentacion\facturar\Presentacion_FrmSeleccionarVenta$5.class
 presentacion\gestioninventarios\Presentacion_DlgIngredientesSeleccionados$3.class
 presentacion\casohistoriales\Presentacion_FrmHistorialVentas$5.class
 presentacion\casohistoriales\Presentacion_FrmHistorialReportes$4.class
 presentacion\gestioninventarios\Presentacion_DlgIngresarDatosDelProducto$3.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioIngredientes$5.class
 presentacion\Presentacion_DlgDirecciones$2.class
+presentacion\facturar\Presentacion_DlgFacturarACliente$4.class
 presentacion\Presentacion_DlgConfirmacionPago.class
 presentacion\gestioninventarios\Presentacion_DlgActualizarIngredientesSeleccionados$1.class
 control\ControlIngresosMensuales.class
@@ -87,6 +96,7 @@ extras\PanelBotones$1.class
 presentacion\casohistoriales\Presentacion_FrmHistorialVentas$6.class
 presentacion\facturar\Presentacion_FrmSeleccionarVenta$4.class
 presentacion\Presentacion_DlgConfirmacionPago$5.class
+presentacion\facturar\Presentacion_DlgFacturarACliente$13.class
 presentacion\gestioninventarios\Presentacion_DlgSeleccionOpcionGestion$1.class
 extras\ComboBoxMultiSeleccion$IconoCheckBox.class
 extras\ComboBoxMultiSeleccion$Item.class
@@ -126,6 +136,7 @@ presentacion\gestioninventarios\Presentacion_DlgIngresarDatosDelProducto$6.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioIngredientes$2.class
 presentacion\facturar\Presentacion_FrmConfirmarGenerarFactura$3.class
 presentacion\Presentacion_DlgAgregarDireccion$1.class
+presentacion\facturar\Presentacion_DlgFacturarACliente$8.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioProductos$5.class
 presentacion\Presentacion_MenuPrincipal$9.class
 presentacion\facturar\Presentacion_DlgFacturarACliente$1.class
@@ -143,6 +154,7 @@ presentacion\casohistoriales\Presentacion_FrmDetallesVenta$2.class
 presentacion\Presentacion_ProductosVenta$4.class
 presentacion\Presentacion_DlgConfirmacionPago$1.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioIngredientes$3.class
+presentacion\facturar\Presentacion_DlgFacturarACliente$7.class
 presentacion\gestioninventarios\Presentacion_DlgActualizarDatosDelProducto$4.class
 extras\ComboBoxMultiSeleccion$InterfazComboMultiple.class
 presentacion\Presentacion_ProductosVenta.class
@@ -153,6 +165,8 @@ presentacion\Presentacion_DlgDatosCliente$2.class
 presentacion\Presentacion_DlgAgregarPastel$3.class
 presentacion\gestioninventarios\Presentacion_DlgDetalleProducto$4.class
 ingresosMensuales\Presentacion_DlgSeleccionarFechaIngresos.class
+presentacion\casohistoriales\Presentacion_FrmHistorialVentas$10.class
+presentacion\facturar\Presentacion_DlgFacturarACliente$9.class
 ingresosMensuales\Presentacion_DlgSeleccionarFechaIngresos$2.class
 presentacion\gestioninventarios\Presentacion_DlgActualizarIngredientesSeleccionados.class
 presentacion\facturar\Presentacion_FrmConfirmarGenerarFactura$1.class
@@ -170,6 +184,7 @@ presentacion\Presentacion_MenuPrincipal$3.class
 presentacion\Presentacion_MenuPrincipal$5.class
 presentacion\Presentacion_DlgAgregarPastel$1.class
 ingresosMensuales\Presentacion_DlgVentasTotales$6.class
+extras\ValidadorCampos.class
 presentacion\Presentacion_DlgListaClientes$4.class
 presentacion\Presentacion_DlgCobrarVenta$1.class
 presentacion\gestioninventarios\Presentacion_DlgInventarioIngredientes$13.class

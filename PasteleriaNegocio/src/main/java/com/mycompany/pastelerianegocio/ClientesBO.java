@@ -134,5 +134,22 @@ public class ClientesBO implements IClientesBO {
         }
 
     }
+    
+    /**
+     * actualiza el cliente cuando viene de la venta, incluye rfc
+     *
+     * @param cliente el DTO_Cliente con los datos actualizados.
+     * @return el DTO_Cliente actualizado, o null si ocurre una excepción.
+     */
+    @Override
+    public DTO_Cliente actualizarClienteEnVentasConRFC(DTO_Cliente cliente){
+        try {
+            clienteDAO.actualizarCliente(conversor.convertirDtoClienteAEntidadConRfc(cliente));
+            return cliente;
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(ClientesBO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
 
 }

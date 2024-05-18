@@ -64,4 +64,12 @@ public interface IClientesBO {
      * @return el DTO_Cliente actualizado, o null si ocurre una excepción.
      */
     public DTO_Cliente actualizarClienteEnVentas(DTO_Cliente cliente);
+    
+    /**
+     * Actualiza el cliente cuando viene de la venta, incluye rfc.
+     *
+     * @param cliente el DTO_Cliente con los datos actualizados.
+     * @return el DTO_Cliente actualizado, o null si ocurre una excepción.
+     */
+    public DTO_Cliente actualizarClienteEnVentasConRFC(DTO_Cliente cliente);
 }

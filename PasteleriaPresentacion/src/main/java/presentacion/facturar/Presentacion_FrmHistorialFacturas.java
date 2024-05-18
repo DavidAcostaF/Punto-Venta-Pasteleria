@@ -62,7 +62,7 @@ public class Presentacion_FrmHistorialFacturas extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) tableFacturas.getModel();
         if (listaFacturas != null) {
             listaFacturas.forEach(t -> {
-                modelo.addRow(new Object[]{t.getId(), ff.format(t.getFechaEmision()), ff.format(t.getFechaVencimiento()), t.getVentaId()});
+                modelo.addRow(new Object[]{t.getId(), ff.format(t.getFechaEmision()), ff.format(t.getFechaVencimiento()), t.getVenta().getID()});
             });
         }
 

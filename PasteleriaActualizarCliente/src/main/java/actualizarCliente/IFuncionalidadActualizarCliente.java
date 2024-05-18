@@ -12,4 +12,5 @@ import dto.DTO_Cliente;
  */
 public interface IFuncionalidadActualizarCliente {
     public DTO_Cliente actualizarCliente(DTO_Cliente cliente);
+    public DTO_Cliente actualizarClienteConRfc(DTO_Cliente cliente);
 }

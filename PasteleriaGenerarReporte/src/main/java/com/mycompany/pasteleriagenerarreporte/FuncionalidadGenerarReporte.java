@@ -131,33 +131,43 @@ public class FuncionalidadGenerarReporte implements IFuncionalidadGenerarReporte
 
     @Override
     public DTO_GenerarReporte generarReporteFactura(DTO_FacturaFormato formatoFactura) {
-        try {
-            DTO_GenerarReporte reporteGenerado = new DTO_GenerarReporte();
-            JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(formatoFactura.getDetallesVenta());
-            Map<String, Object> parameters = new HashMap<String, Object>();
-            parameters.put("ds", itemsJRBean);
-            parameters.put("fechaEmision", formatoFactura.getFechaEmision());
-            parameters.put("fechaVencimiento", formatoFactura.getFechaVencimiento());
-            parameters.put("nombreCliente", formatoFactura.getNombreCliente());
-            parameters.put("rfcCliente", formatoFactura.getRfcCliente());
-            parameters.put("direccionCliente", formatoFactura.getDireccionCliente());
-            parameters.put("total", formatoFactura.getTotal());
-            parameters.put("subtotal", formatoFactura.getTotal());
-            parameters.put("iva", formatoFactura.getTotal());
-            InputStream input = null;
-            input = new FileInputStream(new File("src\\main\\resources\\JasperFactura\\FacturaPasteleria_A4.jrxml"));
-            JasperDesign jasperDesign = JRXmlLoader.load(input);
-            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
-            reporteGenerado.setJasperReport(jasperReport);
-            reporteGenerado.setParameters(parameters);
-            return reporteGenerado;
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(FuncionalidadGenerarReporte.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        } catch (JRException ex) {
-            Logger.getLogger(FuncionalidadGenerarReporte.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+    try {
+        DTO_GenerarReporte reporteGenerado = new DTO_GenerarReporte();
+
+        // Fuente de datos para los detalles de la venta
+        JRBeanCollectionDataSource itemsJRBean = new JRBeanCollectionDataSource(formatoFactura.getDetallesVenta());
+
+        // Parámetros del reporte
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("ds", itemsJRBean);
+        parameters.put("fechaEmision", formatoFactura.getFechaEmision());
+        parameters.put("fechaVencimiento", formatoFactura.getFechaVencimiento());
+        parameters.put("nombreCliente", formatoFactura.getNombreCliente());
+        parameters.put("rfcCliente", formatoFactura.getRfcCliente());
+        parameters.put("direccionCliente", formatoFactura.getDireccionCliente());
+        parameters.put("total", formatoFactura.getTotal());
+        parameters.put("subtotal", formatoFactura.getTotal()); // Ajusta esto según sea necesario
+        parameters.put("iva", formatoFactura.getTotal()); // Ajusta esto según sea necesario
+
+        // Cargar y compilar el archivo JRXML
+        InputStream input = new FileInputStream(new File("src/main/resources/JasperFactura/FacturaPasteleria_A4.jrxml"));
+        JasperDesign jasperDesign = JRXmlLoader.load(input);
+        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+        // Configurar el DTO_GenerarReporte
+        reporteGenerado.setJasperReport(jasperReport);
+        reporteGenerado.setParameters(parameters);
+
+        return reporteGenerado;
+
+    } catch (FileNotFoundException ex) {
+        Logger.getLogger(FuncionalidadGenerarReporte.class.getName()).log(Level.SEVERE, "Archivo de reporte no encontrado", ex);
+        return null;
+    } catch (JRException ex) {
+        Logger.getLogger(FuncionalidadGenerarReporte.class.getName()).log(Level.SEVERE, "Error al compilar el reporte", ex);
+        return null;
     }
+}
+
 
 }

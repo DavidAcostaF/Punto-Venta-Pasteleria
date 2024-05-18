@@ -137,14 +137,11 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(232, 232, 232));
-        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setText("Historial de ventas");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
 
         filtrarClienteRadioBtn.setText("Filtrar por clientes");
-        filtrarClienteRadioBtn.setForeground(new java.awt.Color(0, 0, 0));
         filtrarClienteRadioBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtrarClienteRadioBtnActionPerformed(evt);
@@ -152,7 +149,6 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         });
 
         filtrarPorProductosRadioBtn.setText("Filtar Por Productos");
-        filtrarPorProductosRadioBtn.setForeground(new java.awt.Color(0, 0, 0));
         filtrarPorProductosRadioBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filtrarPorProductosRadioBtnActionPerformed(evt);
@@ -161,15 +157,12 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
 
         jLabel2.setText("Filtrar por periodo");
         jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel3.setText("Desde:");
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel4.setText("Hasta:");
         jLabel4.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
 
         productosComboBox.setModel((new PastelComboBoxModel(listaProductos)));
         productosComboBox.setEnabled(false);
@@ -178,7 +171,6 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         aplicarFiltroBtn.setText("Aplicar filtros");
         aplicarFiltroBtn.setBackground(new java.awt.Color(140, 220, 254));
         aplicarFiltroBtn.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        aplicarFiltroBtn.setForeground(new java.awt.Color(0, 0, 0));
         aplicarFiltroBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aplicarFiltroBtnActionPerformed(evt);
@@ -204,9 +196,7 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tablaVentas.setForeground(new java.awt.Color(0, 0, 0));
         tablaVentas.setSelectionBackground(new java.awt.Color(140, 220, 254));
-        tablaVentas.setSelectionForeground(new java.awt.Color(0, 0, 0));
         tablaVentas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaVentas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tablaVentas);
@@ -214,7 +204,6 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         detallesVentaBtn.setText("Ver detalles de la venta");
         detallesVentaBtn.setBackground(new java.awt.Color(140, 220, 254));
         detallesVentaBtn.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        detallesVentaBtn.setForeground(new java.awt.Color(0, 0, 0));
         detallesVentaBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 detallesVentaBtnActionPerformed(evt);
@@ -224,7 +213,6 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
         regresarBtn.setText("Regresar");
         regresarBtn.setBackground(new java.awt.Color(140, 220, 254));
         regresarBtn.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        regresarBtn.setForeground(new java.awt.Color(0, 0, 0));
         regresarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 regresarBtnActionPerformed(evt);
@@ -242,11 +230,15 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
 
         clientesComboBox.setModel(new ClientesComboBoxModel(listaClientes));
         clientesComboBox.setEnabled(false);
+        clientesComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientesComboBoxActionPerformed(evt);
+            }
+        });
 
         restablecerBtn.setText("Restablecer");
         restablecerBtn.setBackground(new java.awt.Color(140, 220, 254));
         restablecerBtn.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
-        restablecerBtn.setForeground(new java.awt.Color(0, 0, 0));
         restablecerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 restablecerBtnActionPerformed(evt);
@@ -649,6 +641,10 @@ public class Presentacion_FrmHistorialVentas extends javax.swing.JFrame {
             Logger.getLogger(Presentacion_FrmHistorialVentas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_generarReporteEvntMousePressed
+
+    private void clientesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clientesComboBoxActionPerformed
 
     public void tablaVentas(List<DTO_Venta> listaVentas) {
         limpiarTabla();

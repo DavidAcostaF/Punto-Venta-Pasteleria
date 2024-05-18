@@ -20,8 +20,14 @@ import dto.DTO_Cliente;
 import dto.DTO_Producto;
 import dto.DTO_Venta;
 import extras.VentasTableModel;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 
 /**
@@ -41,13 +47,11 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
     private IFuncionalidadGenerarReporte funcionalidadGenerarReporte;
     private DTO_Venta venta;
     private IFuncionalidadGuardarReportes guardarReporte;
-    
+
     /**
      * Creates new form Presentacion_FrmSeleccionarVenta
      */
     public Presentacion_FrmSeleccionarVenta() {
-        initComponents();
-        
         this.control = ControlFacturar.getInstance().getInstance();
         this.guardarReporte = new FuncionalidadGuardarReportes();
         this.funcionalidadConsultarVentas = new FuncionalidadConsultarVentas();
@@ -59,7 +63,7 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
         this.listaProductosSeleccionados = new ArrayList<>();
         listaClientes = funcionalidadesClientes.consultarClientes();
         listaProductos = funcionalidadConsultarProductos.consultarProductos();
-        
+
         initComponents();
         llenarTabla();
     }
@@ -77,18 +81,18 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnVolver = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableVentas = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         datePickerDesde = new com.github.lgooddatepicker.components.DatePicker();
         jLabel4 = new javax.swing.JLabel();
         datePickerHasta = new com.github.lgooddatepicker.components.DatePicker();
-        jLabel5 = new javax.swing.JLabel();
-        txtNombreCliente = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btnSeleccionar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaVentas = new javax.swing.JTable();
+        btnAplicarFiltros = new javax.swing.JButton();
+        btnLimpiarFiltros = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,33 +132,6 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        tableVentas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "FECHA VENTA", "FECHA ENTREGA", "ESTADO"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tableVentas);
-        if (tableVentas.getColumnModel().getColumnCount() > 0) {
-            tableVentas.getColumnModel().getColumn(0).setResizable(false);
-            tableVentas.getColumnModel().getColumn(1).setResizable(false);
-            tableVentas.getColumnModel().getColumn(2).setResizable(false);
-            tableVentas.getColumnModel().getColumn(3).setResizable(false);
-        }
-
         jLabel2.setText("Filtrar por fecha:");
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
@@ -163,12 +140,6 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
 
         jLabel4.setText("Hasta");
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        jLabel5.setText("Filtrar por nombre:");
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-
-        txtNombreCliente.setMinimumSize(new java.awt.Dimension(74, 21));
-        txtNombreCliente.setPreferredSize(new java.awt.Dimension(74, 21));
 
         jLabel1.setText("Seleccione una venta para facturar:");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -193,39 +164,84 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
             }
         });
 
+        tablaVentas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Fecha de compra", "Fecha de entrega", "Estado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tablaVentas);
+
+        btnAplicarFiltros.setText("Aplicar filtros");
+        btnAplicarFiltros.setBackground(new java.awt.Color(18, 111, 161));
+        btnAplicarFiltros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAplicarFiltros.setForeground(new java.awt.Color(255, 255, 255));
+        btnAplicarFiltros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAplicarFiltrosActionPerformed(evt);
+            }
+        });
+
+        btnLimpiarFiltros.setText("Limpiar filtros");
+        btnLimpiarFiltros.setBackground(new java.awt.Color(18, 111, 161));
+        btnLimpiarFiltros.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnLimpiarFiltros.setForeground(new java.awt.Color(255, 255, 255));
+        btnLimpiarFiltros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarFiltrosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(datePickerDesde, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel3)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(datePickerHasta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(datePickerDesde, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(datePickerHasta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel2)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnLimpiarFiltros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAplicarFiltros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(184, 184, 184)
-                        .addComponent(btnSeleccionar)
-                        .addGap(42, 42, 42)
-                        .addComponent(btnCancelar)))
+                .addGap(89, 89, 89)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(239, 239, 239)
+                .addComponent(btnSeleccionar)
+                .addGap(40, 40, 40)
+                .addComponent(btnCancelar)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,12 +249,9 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)
@@ -249,14 +262,17 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(datePickerHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(btnAplicarFiltros)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnLimpiarFiltros))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSeleccionar)
                     .addComponent(btnCancelar))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -267,58 +283,101 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        control.mostrarDlgOpcionFactura();
         this.dispose();
+        control.mostrarDlgOpcionFactura();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        control.mostrarDlgOpcionFactura();
         this.dispose();
+        control.mostrarDlgOpcionFactura();    
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
-        control.setVenta(venta);
-        control.setCliente(venta.getCliente());
-        control.mostrarDlgFacturarACliente();
         this.dispose();
+        obtenerDatosFilaSeleccionada();
+        control.setVenta(venta);
+        funcionalidadConsultarVentas.encontrarVenta(venta.getID());
+        control.getVenta().setDetallesVenta(funcionalidadConsultarVentas.encontrarVenta(venta.getID()).getDetallesVenta());
+        control.setCliente(funcionalidadesClientes.encontrarClienteID(venta.getCliente().getID()));
+        control.mostrarDlgFacturarACliente();    
     }//GEN-LAST:event_btnSeleccionarActionPerformed
+
+    private void btnAplicarFiltrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarFiltrosActionPerformed
+        if (datePickerHasta.getDate() == null || datePickerDesde.getDate() == null) {
+            JOptionPane.showInternalMessageDialog(null, "No se ha seleccionado una de las fechas.");
+        } else {
+            LocalDate localDateInicio = datePickerDesde.getDate();
+            Instant instantInicio = localDateInicio.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+            Date fechaInicio = Date.from(instantInicio);
+            Calendar calInicio = Calendar.getInstance();
+            calInicio.setTime(fechaInicio);
+            calInicio.set(Calendar.HOUR_OF_DAY, 00);
+            calInicio.set(Calendar.MINUTE, 00);
+            calInicio.set(Calendar.SECOND, 00);
+            fechaInicio = calInicio.getTime();
+            LocalDate localDateFin = datePickerHasta.getDate();
+            Instant instantFin = localDateFin.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+            Date fechaFin = Date.from(instantFin);
+            Calendar calFin = Calendar.getInstance();
+            calFin.setTime(fechaFin);
+            calFin.set(Calendar.HOUR_OF_DAY, 23);
+            calFin.set(Calendar.MINUTE, 59);
+            calFin.set(Calendar.SECOND, 59);
+            fechaFin = calFin.getTime();
+            tablaVentas(funcionalidadConsultarVentas.consultarVentasPorRangoFechas(fechaInicio, fechaFin));
+        }
+    }//GEN-LAST:event_btnAplicarFiltrosActionPerformed
+
+    private void btnLimpiarFiltrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarFiltrosActionPerformed
+        datePickerDesde.setDate(null);
+        datePickerHasta.setDate(null);
+        this.llenarTabla();
+    }//GEN-LAST:event_btnLimpiarFiltrosActionPerformed
 
     public void llenarTabla() {
         limpiarTabla();
         List<DTO_Venta> listaVentas = funcionalidadConsultarVentas.consultarVentas();
         if (listaVentas != null) {
             VentasTableModel modelo = new VentasTableModel(listaVentas);
-            tableVentas.setModel(modelo);
+            tablaVentas.setModel(modelo);
         }
     }
 
+    public void tablaVentas(List<DTO_Venta> listaVentas) {
+        limpiarTabla();
+        VentasTableModel modelo = new VentasTableModel(listaVentas);
+        tablaVentas.setModel(modelo);
+
+    }
+
     private void limpiarTabla() {
-        TableModel modelo = tableVentas.getModel();
+        TableModel modelo = tablaVentas.getModel();
         if (modelo instanceof VentasTableModel) {
             ((VentasTableModel) modelo).limpiarTabla();
         }
     }
-    
+
     private void obtenerDatosFilaSeleccionada() {
-        int filaSeleccionada = tableVentas.getSelectedRow();
+        int filaSeleccionada = tablaVentas.getSelectedRow();
         if (filaSeleccionada != -1) {
-            venta = ((VentasTableModel) tableVentas.getModel()).getVentaAt(filaSeleccionada);
+            venta = ((VentasTableModel) tablaVentas.getModel()).getVentaAt(filaSeleccionada);
 
         }
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAplicarFiltros;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnLimpiarFiltros;
     private javax.swing.JButton btnSeleccionar;
     private javax.swing.JButton btnVolver;
     private com.github.lgooddatepicker.components.DatePicker datePickerDesde;
@@ -327,12 +386,10 @@ public class Presentacion_FrmSeleccionarVenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableVentas;
-    private javax.swing.JTextField txtNombreCliente;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tablaVentas;
     // End of variables declaration//GEN-END:variables
 }

@@ -26,4 +26,9 @@ public class FuncionalidadActualizarCliente implements IFuncionalidadActualizarC
         return dtoCliente;
     }
     
+    @Override
+    public DTO_Cliente actualizarClienteConRfc(DTO_Cliente cliente){
+        DTO_Cliente dtoCliente = clientesBO.actualizarClienteEnVentasConRFC(cliente);
+        return dtoCliente;
+    }
 }

@@ -6,9 +6,12 @@ package com.mycompany.pasteleriadaos;
 
 import Exceptions.PersistenciaException;
 import com.mongodb.BasicDBObject;
+import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import static com.mongodb.client.model.Accumulators.push;
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Updates.set;
 import com.mongodb.client.result.UpdateResult;
 import com.mycompany.pasteleriadominioentidades.Cliente;
 import com.mycompany.pasteleriadominiosMapeo.ClienteMapeo;
@@ -17,6 +20,7 @@ import conversionesPersistencia.ClientesConversiones;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 /**
@@ -75,15 +79,33 @@ public class ClienteDAO implements IClienteDAO {
         try {
             MongoCollection<ClienteMapeo> coleccion = conexion.obtenerColeccion();
             ClienteMapeo clienteActualizado = conversor.convertirClienteAMapeoConRFC(cliente);
-            UpdateResult result = coleccion.replaceOne(eq("_id", clienteActualizado.getId()), clienteActualizado);
 
-            if (result.getModifiedCount() == 1) {
+            UpdateResult result;
+            Bson filter = eq("_id", clienteActualizado.getId());
+
+            // Crear y aplicar cada operación de actualización individualmente
+            coleccion.updateOne(filter, set("nombre", clienteActualizado.getNombre()));
+            coleccion.updateOne(filter, set("apellidoP", clienteActualizado.getApellidoP()));
+            coleccion.updateOne(filter, set("apellidoM", clienteActualizado.getApellidoM()));
+            coleccion.updateOne(filter, set("telefono", clienteActualizado.getTelefono()));
+            coleccion.updateOne(filter, set("direcciones", clienteActualizado.getDirecciones()));
+
+            if (cliente.getRfc() != null) {
+                result = coleccion.updateOne(filter, set("rfc", cliente.getRfc()));
+            } else {
+                // Reemplazar el documento si rfc es null
+                result = coleccion.replaceOne(filter, clienteActualizado);
+            }
+
+            if (result.getMatchedCount() == 1) {
                 return cliente;
             } else {
-                throw new PersistenciaException("No se pudo actualizar el cliente");
+                throw new PersistenciaException("No se pudo actualizar el cliente con ID: " + cliente.getId());
             }
+        } catch (MongoException e) {
+            throw new PersistenciaException("Error al actualizar cliente en la base de datos: " + e.getMessage());
         } catch (Exception e) {
-            throw new PersistenciaException("Error al actualizar cliente: " + e.getMessage());
+            throw new PersistenciaException("Error inesperado al actualizar cliente: " + e.getMessage());
         }
     }
 

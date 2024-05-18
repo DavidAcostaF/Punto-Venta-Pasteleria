@@ -148,19 +148,19 @@ public class Presentacion_DlgOpcionFactura extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        Presentacion_MenuPrincipal menu = new Presentacion_MenuPrincipal();
-        menu.setVisible(true);
         this.dispose();
+        Presentacion_MenuPrincipal menu = new Presentacion_MenuPrincipal();
+        menu.setVisible(true);    
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnNuevaFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaFacturaActionPerformed
-        controlFacturar.mostrarFrmSeleccionarVenta();
         this.dispose();
+        controlFacturar.mostrarFrmSeleccionarVenta();     
     }//GEN-LAST:event_btnNuevaFacturaActionPerformed
 
     private void btnHistorialFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialFacturasActionPerformed
-        controlFacturar.mostrarFrmHistorialFacturas();
         this.dispose();
+        controlFacturar.mostrarFrmHistorialFacturas();      
     }//GEN-LAST:event_btnHistorialFacturasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

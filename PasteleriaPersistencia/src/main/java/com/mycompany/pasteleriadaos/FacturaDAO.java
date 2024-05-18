@@ -55,6 +55,10 @@ public class FacturaDAO implements IFacturaDAO {
     @Override
     public Factura guardarFactura(Factura factura) throws PersistenciaException {
         MongoCollection<FacturaMapeo> coleccion = conexion.obtenerColeccion();
+        if (factura.getId() == null) {
+            ObjectId objectId = new ObjectId();
+            factura.setId(objectId.toHexString());
+        }
         coleccion.insertOne(conversorFacturas.convertirAFacturaMapeo(factura));
         return factura;
     }

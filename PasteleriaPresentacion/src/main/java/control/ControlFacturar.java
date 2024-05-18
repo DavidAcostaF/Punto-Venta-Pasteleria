@@ -5,8 +5,10 @@
 package control;
 
 import dto.DTO_Cliente;
+import dto.DTO_Direccion;
 import dto.DTO_Factura;
 import dto.DTO_Venta;
+import presentacion.Presentacion_MenuPrincipal;
 import presentacion.facturar.Presentacion_DlgFacturarACliente;
 import presentacion.facturar.Presentacion_DlgOpcionFactura;
 import presentacion.facturar.Presentacion_FrmConfirmarGenerarFactura;
@@ -23,6 +25,7 @@ public class ControlFacturar {
     private DTO_Factura factura;
     private DTO_Venta venta;
     private DTO_Cliente cliente;
+    private DTO_Direccion direccion;
     private String ventanaAnterior;
 
     
@@ -30,6 +33,7 @@ public class ControlFacturar {
         this.factura = factura;
         this.venta = venta;
         this.cliente = cliente;
+        this.direccion = direccion;
     }
     
     public static ControlFacturar getInstance() {
@@ -37,6 +41,11 @@ public class ControlFacturar {
             instance = new ControlFacturar();
         }
         return instance;
+    }
+    
+    public void mostrarMenuPrincipal(String opcion){
+        Presentacion_MenuPrincipal menu = new Presentacion_MenuPrincipal();
+            menu.setVisible(true);     
     }
     
     public void mostrarDlgFacturarACliente(){
@@ -95,6 +104,19 @@ public class ControlFacturar {
     public void setVentanaAnterior(String ventanaAnterior) {
         this.ventanaAnterior = ventanaAnterior;
     }
+
+    public DTO_Direccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(DTO_Direccion direccion) {
+        this.direccion = direccion;
+    }
     
-    
+    public void limpiarValores(){
+        this.factura = null;
+        this.venta = null;
+        this.cliente = null;
+        this.direccion = null;
+    }
 }
